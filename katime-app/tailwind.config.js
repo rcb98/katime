@@ -6,9 +6,6 @@ module.exports = {
         fontFamily: {
             sans: ['Lato', 'sans-serif']
         },
-        borderRadius: {
-            'xl': '25px'
-        },
         extend: {},
     },
     variants: {
