@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ModoDiarioPageRoutingModule } from './modo-diario-routing.module';
 
 import { ModoDiarioPage } from './modo-diario.page';
+import { ModulesModule } from 'src/app/modules/modules.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ModoDiarioPageRoutingModule
+    ModoDiarioPageRoutingModule,
+    ModulesModule
   ],
   declarations: [ModoDiarioPage]
 })

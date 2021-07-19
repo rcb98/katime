@@ -2,15 +2,34 @@
 
     <ion-tab-bar slot="bottom">
         <ion-tab-button tab="modo-lista">
-            <ion-icon name="triangle"></ion-icon>
-            <ion-label>Modo Lista</ion-label>
+            <ion-icon name="list-circle"></ion-icon>
+            <!-- <ion-label>Modo Lista</ion-label> -->
         </ion-tab-button>
 
         <ion-tab-button tab="modo-diario">
-            <ion-icon name="ellipse"></ion-icon>
-            <ion-label>Modo Diario</ion-label>
+            <ion-icon name="calendar"></ion-icon>
+            <!-- <ion-label>Modo Diario</ion-label> -->
         </ion-tab-button>
 
     </ion-tab-bar>
 
 </ion-tabs>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" class="mb-16 mr-2">
+
+    <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="top">
+
+        <ion-fab-button type="button" class="">
+            <ion-icon name="happy-outline"></ion-icon>
+        </ion-fab-button>
+
+        <ion-fab-button type="button" class="">
+            <ion-icon name="bus-outline"></ion-icon>
+        </ion-fab-button>
+
+    </ion-fab-list>
+</ion-fab>
