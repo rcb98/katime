@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "katime-app",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
