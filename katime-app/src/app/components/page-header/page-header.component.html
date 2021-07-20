@@ -1,11 +1,16 @@
+<ion-buttons slot="start" class="pl-4 pt-4">
+    <ng-content></ng-content>
+</ion-buttons>
+
 <div class="flex items-center px-8 pt-8">
+
     <h1 class="text-xl font-semibold text-gray-800">{{titulo}}</h1>
 
-    <svg (click)="presentPopover($event)" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dots-vertical ml-auto mt-1" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#9e9e9e" fill="none" stroke-linecap="round"
+    <svg *ngIf="!goBack" (click)="presentPopover($event)" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dots-vertical ml-auto mt-1" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#9e9e9e" fill="none" stroke-linecap="round"
         stroke-linejoin="round">
     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
     <circle cx="12" cy="12" r="1" />
     <circle cx="12" cy="19" r="1" />
     <circle cx="12" cy="5" r="1" />
-  </svg>
+    </svg>
 </div>

@@ -10,6 +10,7 @@ import { PopoverComponent } from 'src/app/components/popover/popover.component';
 export class PageHeaderComponent implements OnInit {
 
   @Input() titulo:string = '';
+  @Input() goBack:boolean = false;
 
   constructor(public popoverController: PopoverController) { }
 

@@ -9,11 +9,11 @@ import { PopoverComponent } from '../components/popover/popover.component';
   ],
   declarations: [
     PageHeaderComponent,
-    PopoverComponent
+    PopoverComponent,
   ],
   exports: [
     PageHeaderComponent,
-    PopoverComponent
+    PopoverComponent,
   ]
 })
 export class ModulesModule { }
