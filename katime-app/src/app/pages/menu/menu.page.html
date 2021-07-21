@@ -15,21 +15,21 @@
 
 </ion-tabs>
 
-<ion-fab vertical="bottom" horizontal="end" slot="fixed" class="mb-16 mr-2">
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" class="mb-16 mr-2 w-36">
 
-    <ion-fab-button>
+    <ion-fab-button class="ml-auto">
         <ion-icon name="add"></ion-icon>
     </ion-fab-button>
 
     <ion-fab-list side="top">
 
-        <ion-fab-button type="button" routerLink="/crear-evento">
-            <ion-icon name="happy-outline"></ion-icon>
-        </ion-fab-button>
-
-        <ion-fab-button type="button" routerLink="/crear-transporte">
-            <ion-icon name="bus-outline"></ion-icon>
-        </ion-fab-button>
+        <!-- Para poner un borde: border-solid border-2 border-purple-500 -->
+        <button routerLink="/crear-evento" class="bg-white text-purple rounded-lg shadow-md px-4 py-3 m-1 w-full">
+          Crear evento
+        </button>
+        <button routerLink="/crear-transporte" class="bg-white text-purple rounded-lg shadow-md px-4 py-3 m-1 w-full">
+          Añadir transporte
+        </button>
 
     </ion-fab-list>
 </ion-fab>
