@@ -10,7 +10,7 @@ import { FuenteService } from 'src/app/services/fuente.service';
 export class CrearEventoPage implements OnInit {
 
   public eventoForm:FormGroup = this.formBuilder.group({
-    tipo: 'evento',
+    tipo: ['evento'],
     nombre: ['', Validators.required],
     descripcion: [''],
     fecha: [''], // Hay que ponerlo bien
@@ -30,6 +30,10 @@ export class CrearEventoPage implements OnInit {
   }
 
   createEvento() {
-    //this.fuenteService.createFuente(this.eventoForm.value);
+    this.fuenteService.createFuente(this.eventoForm.value);
+  }
+
+  deleteEventos(){
+    this.fuenteService.deleteTable();
   }
 }

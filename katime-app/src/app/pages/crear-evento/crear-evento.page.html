@@ -5,5 +5,27 @@
 </ion-header>
 
 <div class="bg-gray-100 h-full rounded-t-xl mt-4">
-    <h1>HOLA</h1>
+    <form [formGroup]="eventoForm" (ngSubmit)="createEvento()" class="m-8 flex flex-col">
+        <!-- Nombre -->
+        <div class="m-2 flex flex-col">
+            <label for="nombre" class="text-gray-600">Nombre</label>
+            <input type="text" id="nombre" formControlName="nombre" class="rounded-lg border-none mt-0.5">
+        </div>
+
+        <!-- Descripción -->
+        <div class="m-2 flex flex-col">
+            <label for="descripcion" class="text-gray-600">Descripción</label>
+            <textarea id="descripcion" formControlName="descripcion" class="rounded-lg border-none mt-0.5"></textarea>
+        </div>
+
+        <!-- Crear evento (temporal, debe aparecer en el header) -->
+        <ion-button expand="block" type="submit" class="my-4">
+            Crear evento
+        </ion-button>
+
+        <!-- Eliminar la tabla Fuente entera, boton temporal -->
+        <ion-button color="danger" expand="block" (click)="deleteEventos()">
+            Eliminar tabla Fuente
+        </ion-button>
+    </form>
 </div>

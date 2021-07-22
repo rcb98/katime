@@ -29,7 +29,8 @@ export class FuenteService {
                 CREATE TABLE IF NOT EXISTS ${this.dbTable} (
                   id_fuente INTEGER PRIMARY KEY,
                   tipo varchar(255),
-                  nombre varchar(255)
+                  nombre varchar(255),
+                  descripcion varchar(255)
                 )`, [])
               .then((res) => {
                 // alert(JSON.stringify(res));
@@ -41,7 +42,7 @@ export class FuenteService {
   }
 
   /* GET (all) */
-  /*getFuentes() {
+  getFuentes() {
     return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable}`, []).then((res) => {
       this.FUENTES = [];
       if (res.rows.length > 0) {
@@ -52,18 +53,31 @@ export class FuenteService {
     },(e) => {
       alert(JSON.stringify(e));
     });
-  }*/
+  }
 
   /* POST */
-  /*createFuente(data:Fuente) {
+  createFuente(data:Fuente) {
     this.dbInstance
-      .executeSql(`INSERT INTO ${this.dbTable} (tipo, nombre) VALUES ('${data.tipo}', '${data.nombre}')`, [])
+      .executeSql(`INSERT INTO ${this.dbTable} (tipo, nombre, descripcion) VALUES ('${data.tipo}', '${data.nombre}', '${data.descripcion}')`, [])
       .then(() => {
         alert("Fuente creada!");
         this.getFuentes();
       }, (e) => {
         alert(JSON.stringify(e.err));
       });
-  }*/
+  }
+
+  /* DELETE (all) */
+  deleteTable() {
+    this.dbInstance
+      .executeSql(`DROP TABLE ${this.dbTable}`, [])
+        .then(() => {
+          alert(`Tabla ${this.dbTable} eliminada.`);
+          //this.getFuentes();
+        })
+        .catch(e => {
+          alert(JSON.stringify(e))
+        });
+  }
 
 }
