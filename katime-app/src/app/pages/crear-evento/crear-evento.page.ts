@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FuenteService } from 'src/app/services/fuente.service';
 
 @Component({
   selector: 'app-crear-evento',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrearEventoPage implements OnInit {
 
-  constructor() { }
+  public eventoForm:FormGroup = this.formBuilder.group({
+    tipo: 'evento',
+    nombre: ['', Validators.required],
+    descripcion: [''],
+    fecha: [''], // Hay que ponerlo bien
+    hora_ini: [''], // Hay que ponerlo bien
+    hora_fin: [''], // Hay que ponerlo bien
+    recordatorio: [''], // Hay que ponerlo bien
+    repeticion: [''],
+    dias: ['']
+  });
+
+  constructor(private fuenteService: FuenteService,
+              private formBuilder: FormBuilder) {
+                //this.fuenteService.databaseConn();
+              }
 
   ngOnInit() {
   }
 
+  createEvento() {
+    //this.fuenteService.createFuente(this.eventoForm.value);
+  }
 }
