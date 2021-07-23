@@ -1,13 +1,14 @@
 import { Time } from "@angular/common";
+import { IonDatetime } from "@ionic/angular";
 
 export interface Fuente {
   tipo:string,
   nombre:string,
   descripcion?:string,
   fecha?:Date,
-  hora_ini?:Time,
-  hora_fin?:Time,
-  recordatorio?:Time,
+  hora_ini?:Date,
+  hora_fin?:Date,
+  recordatorio?:Date,
   repeticion?:string,
   dias?:string,
   origen?:string,

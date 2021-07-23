@@ -18,6 +18,40 @@
             <textarea id="descripcion" formControlName="descripcion" class="rounded-lg border-none mt-0.5"></textarea>
         </div>
 
+        <!-- Categoría -->
+        <div class="m-2 flex flex-col">
+            <div class="flex mb-2">
+                <ion-icon name="grid" class="mr-2" color="primary"></ion-icon>
+                <label for="categoria" class="text-gray-600">Categoría</label>
+            </div>
+            <p class="text-sm text-gray-300 italic">No disponible</p>
+        </div>
+
+        <!-- Fecha -->
+        <div class="m-2 flex flex-col">
+            <div class="flex items-center mb-2">
+                <ion-icon name="time" class="mr-2" color="primary"></ion-icon>
+                <label for="fecha" class="text-gray-600">Día & Hora</label>
+                <div class="ml-auto flex items-center">
+                    <ion-label class="text-gray-600 text-sm">Todo el día</ion-label>
+                    <ion-toggle></ion-toggle>
+                </div>
+            </div>
+
+            <div>
+                <ion-item class="my-2 rounded-lg" lines="none">
+                    <ion-label color="medium">Inicio</ion-label>
+                    <ion-datetime display-format="DD MMM, YYYY HH:mm" formControlName="hora_ini"></ion-datetime>
+                </ion-item>
+
+                <ion-item class="my-2 rounded-lg" lines="none">
+                    <ion-label color="medium">Fin</ion-label>
+                    <ion-datetime display-format="DD MMM, YYYY HH:mm" formControlName="hora_fin"></ion-datetime>
+                </ion-item>
+            </div>
+
+        </div>
+
         <!-- Crear evento (temporal, debe aparecer en el header) -->
         <ion-button expand="block" type="submit" class="my-4">
             Crear evento
