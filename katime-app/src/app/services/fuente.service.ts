@@ -29,11 +29,13 @@ export class FuenteService {
             sqLite.executeSql(`
                 CREATE TABLE IF NOT EXISTS ${this.dbTable} (
                   id_fuente INTEGER PRIMARY KEY,
-                  tipo varchar(255) NOT NULL,
-                  nombre varchar(255) NOT NULL,
-                  descripcion varchar(255),
+                  tipo VARCHAR(255) NOT NULL,
+                  nombre VARCHAR(255) NOT NULL,
+                  descripcion VARCHAR(255),
                   hora_ini DATETIME,
-                  hora_fin DATETIME
+                  hora_fin DATETIME,
+                  recordatorio INT,
+                  repeticion VARCHAR(255)
                 )`, [])
               .then((res) => {
                 // alert(JSON.stringify(res));
@@ -60,12 +62,11 @@ export class FuenteService {
 
   /* POST */
   createFuente(data:Fuente):Observable<Fuente> {
-    alert(data.hora_ini);
     this.dbInstance
-      .executeSql(`INSERT INTO ${this.dbTable} (tipo, nombre, descripcion, hora_ini, hora_fin)
-      VALUES ('${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}')`, [])
+      .executeSql(`INSERT INTO ${this.dbTable} (tipo, nombre, descripcion, hora_ini, hora_fin, recordatorio, repeticion)
+      VALUES ('${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}', '${data.repeticion}')`, [])
       .then(() => {
-        alert("Fuente creada! " + data.hora_ini);
+        alert("¡Fuente creada!");
         this.getFuentes();
       }, (e) => {
         alert(JSON.stringify(e.err));

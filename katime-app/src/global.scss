@@ -36,9 +36,23 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";*/
 
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 /* Popover settings */
 
-.popover_setting .popover-content {
+* {
+    font-family: 'Lato', sans-serif;
+}
+
+.popover_setting .popover-content,
+.radio-alert {
     border-radius: 15px;
+}
+
+.capitalize {
+    text-transform: capitalize !important;
+}
+
+.alert-radio-group.sc-ion-alert-md {
+    max-height: initial !important;
 }

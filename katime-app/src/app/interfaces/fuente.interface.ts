@@ -8,7 +8,7 @@ export interface Fuente {
   fecha?:Date,
   hora_ini?:Date,
   hora_fin?:Date,
-  recordatorio?:Date,
+  recordatorio?:number,
   repeticion?:string,
   dias?:string,
   origen?:string,
