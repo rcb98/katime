@@ -38,19 +38,19 @@
                 <label for="fecha" class="text-gray-600">Día & Hora</label>
                 <div class="ml-auto flex items-center">
                     <ion-label class="text-gray-600 text-sm">Todo el día</ion-label>
-                    <ion-toggle></ion-toggle>
+                    <ion-toggle [checked]="toggleCheck" (ionChange)="toggle()"></ion-toggle>
                 </div>
             </div>
 
             <div>
                 <ion-item class="my-2 rounded-lg" lines="none">
                     <ion-label color="medium">Inicio</ion-label>
-                    <ion-datetime display-format="DD MMM, YYYY HH:mm" formControlName="hora_ini"></ion-datetime>
+                    <ion-datetime display-format="DD MMM, YYYY HH:mm" min={{minDate}} formControlName="hora_ini" (ionChange)="checkTodoElDia()"></ion-datetime>
                 </ion-item>
 
                 <ion-item class="my-2 rounded-lg" lines="none">
                     <ion-label color="medium">Fin</ion-label>
-                    <ion-datetime display-format="DD MMM, YYYY HH:mm" formControlName="hora_fin"></ion-datetime>
+                    <ion-datetime display-format="DD MMM, YYYY HH:mm" min={{minDate}} formControlName="hora_fin" (ionChange)="checkTodoElDia()"></ion-datetime>
                 </ion-item>
             </div>
 
@@ -73,9 +73,6 @@
                 <p class="ml-auto text-gray-800" (click)="alertRecordatorio()">{{recordatorioOptions[recordatorioIndex]}}</p>
             </div>
         </div>
-
-        <!-- Crear evento (temporal, debe aparecer en el header) -->
-
 
         <!-- Eliminar la tabla Fuente entera, boton temporal -->
         <!-- <ion-button color="danger" expand="block" (click)="deleteEventos()">

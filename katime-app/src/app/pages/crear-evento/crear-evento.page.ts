@@ -10,6 +10,7 @@ import { FuenteService } from 'src/app/services/fuente.service';
 })
 export class CrearEventoPage implements OnInit {
 
+  // Formulario para crear un Evento
   public eventoForm:FormGroup = this.formBuilder.group({
     tipo: ['evento'],
     nombre: ['', Validators.required],
@@ -32,6 +33,17 @@ export class CrearEventoPage implements OnInit {
   public recordatorioValues:number[] = [null, 1, 5, 10, 30, 60];
   public recordatorioIndex:number = 0;
 
+  // Toggle
+  public toggleCheck:boolean = false;
+
+  // DateTime
+  fecha = new Date();
+  public currentYear:number = this.fecha.getFullYear();
+  public currentMonth:number = this.fecha.getMonth() + 1;
+  public currentDay:number = this.fecha.getDate();
+  public currentMonthSTR:string = ("0" + this.currentMonth).slice(-2);
+  public minDate:string = this.currentYear.toString() + "-" + this.currentMonthSTR + "-" + this.currentDay.toString();
+
   constructor(private alertController: AlertController,
               private fuenteService: FuenteService,
               private formBuilder: FormBuilder) {
@@ -42,6 +54,8 @@ export class CrearEventoPage implements OnInit {
   }
 
   createEvento() {
+    this.eventoForm.value.hora_ini = new Date(this.eventoForm.value.hora_ini); // Esto se hace para cambiar el formato para que siempre sea el mismo
+    this.eventoForm.value.hora_fin = new Date(this.eventoForm.value.hora_fin);
     this.eventoForm.value.repeticion = this.repeticionValues[this.repeticionIndex];
     this.eventoForm.value.recordatorio = this.recordatorioValues[this.recordatorioIndex];
     // console.log(this.eventoForm.value);
@@ -53,6 +67,36 @@ export class CrearEventoPage implements OnInit {
 
   deleteEventos(){
     this.fuenteService.deleteTable();
+  }
+
+  toggle() {
+    this.toggleCheck = !this.toggleCheck;
+    this.checkTodoElDia();
+  }
+
+  checkTodoElDia() {
+    if(this.toggleCheck) {
+      // (!) ES POSIBLE QUE ESTO DE PROBLEMAS A NIVEL DE FORMATO DENTRO DE LA BD
+      var newHIni = new Date(),
+          newHFin = new Date();
+
+      // Controlar si existe una hora de inicio o fin introducidas, dándole prioridad siempre a la hora de inicio
+      if((this.eventoForm.value.hora_ini && !this.eventoForm.value.hora_fin) ||
+        (this.eventoForm.value.hora_ini && this.eventoForm.value.hora_fin)){
+        newHIni = new Date(this.eventoForm.value.hora_ini);
+        newHFin = new Date(this.eventoForm.value.hora_ini);
+      } else if(!this.eventoForm.value.hora_ini && this.eventoForm.value.hora_fin){
+        newHIni = new Date(this.eventoForm.value.hora_fin);
+        newHFin = new Date(this.eventoForm.value.hora_fin);
+      }
+
+      newHIni.setHours(0, 0, 0);
+      newHFin.setHours(23, 59, 59);
+
+      this.eventoForm.value.hora_ini = newHIni.toString();
+      this.eventoForm.value.hora_fin = newHFin.toString();
+      this.eventoForm.patchValue(this.eventoForm.value, {onlySelf: false, emitEvent: true}); // Rerender FormGroup
+    }
   }
 
   async alertRepeticion() {
