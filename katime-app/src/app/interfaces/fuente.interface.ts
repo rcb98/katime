@@ -1,6 +1,3 @@
-import { Time } from "@angular/common";
-import { IonDatetime } from "@ionic/angular";
-
 export interface Fuente {
   tipo:string,
   nombre:string,

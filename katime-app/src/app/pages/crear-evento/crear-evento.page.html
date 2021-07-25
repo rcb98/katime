@@ -1,11 +1,15 @@
 <ion-header class="ion-no-border bg-white">
     <app-page-header titulo="Nuevo evento" [goBack]=true>
         <ion-back-button color="primary"></ion-back-button>
+        <div class="flex items-center ml-auto mr-8" (click)="createEvento()">
+            <ion-icon name="checkmark" color="primary" class="mr-1"></ion-icon>
+            <p class="text-purple">Crear evento</p>
+        </div>
     </app-page-header>
 </ion-header>
 
 <div class="bg-gray-100 h-full rounded-t-xl mt-4">
-    <form [formGroup]="eventoForm" (ngSubmit)="createEvento()" class="m-8 flex flex-col">
+    <form [formGroup]="eventoForm" class="m-8 flex flex-col">
         <!-- Nombre -->
         <div class="m-2 flex flex-col">
             <label for="nombre" class="text-gray-600">Nombre</label>
@@ -57,7 +61,7 @@
             <div class="flex items-center mb-2">
                 <ion-icon name="reload-outline" class="mr-2" color="primary"></ion-icon>
                 <label for="repeticion" class="text-gray-600">Repetición</label>
-                <p class="ml-auto text-gray-800" (click)="alertRepeticion()">Sin repetición</p>
+                <p class="ml-auto text-gray-800" (click)="alertRepeticion()">{{repeticionOptions[repeticionIndex]}}</p>
             </div>
         </div>
 
@@ -66,18 +70,16 @@
             <div class="flex items-center mb-2">
                 <ion-icon name="alarm" class="mr-2" color="primary"></ion-icon>
                 <label for="recordatorio" class="text-gray-600">Recordatorio</label>
-                <p class="ml-auto text-gray-800" (click)="alertRecordatorio()">Sin recordatorio</p>
+                <p class="ml-auto text-gray-800" (click)="alertRecordatorio()">{{recordatorioOptions[recordatorioIndex]}}</p>
             </div>
         </div>
 
         <!-- Crear evento (temporal, debe aparecer en el header) -->
-        <ion-button expand="block" type="submit" class="my-4">
-            Crear evento
-        </ion-button>
+
 
         <!-- Eliminar la tabla Fuente entera, boton temporal -->
-        <ion-button color="danger" expand="block" (click)="deleteEventos()">
+        <!-- <ion-button color="danger" expand="block" (click)="deleteEventos()">
             Eliminar tabla Fuente
-        </ion-button>
+        </ion-button> -->
     </form>
 </div>
