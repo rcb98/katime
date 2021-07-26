@@ -35,7 +35,8 @@ export class FuenteService {
                   hora_ini DATETIME,
                   hora_fin DATETIME,
                   recordatorio INT,
-                  repeticion VARCHAR(255)
+                  repeticion VARCHAR(255),
+                  dias VARCHAR(255)
                 )`, [])
               .then((res) => {
                 // alert(JSON.stringify(res));
@@ -61,18 +62,15 @@ export class FuenteService {
   }
 
   /* POST */
-  createFuente(data:Fuente):Observable<Fuente> {
-    this.dbInstance
-      .executeSql(`INSERT INTO ${this.dbTable} (tipo, nombre, descripcion, hora_ini, hora_fin, recordatorio, repeticion)
-      VALUES ('${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}', '${data.repeticion}')`, [])
+  createFuente(data:Fuente) {
+    return this.dbInstance
+      .executeSql(`INSERT INTO ${this.dbTable} (tipo, nombre, descripcion, hora_ini, hora_fin, recordatorio, repeticion, dias)
+      VALUES ('${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}', '${data.repeticion}', '${data.dias}')`, [])
       .then(() => {
-        alert("¡Fuente creada!");
         this.getFuentes();
       }, (e) => {
         alert(JSON.stringify(e.err));
       });
-
-      return;
   }
 
   /* DELETE (all) */

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { AlertController, ToastController } from '@ionic/angular';
 import { FuenteService } from 'src/app/services/fuente.service';
 
 @Component({
@@ -15,10 +16,9 @@ export class CrearEventoPage implements OnInit {
     tipo: ['evento'],
     nombre: ['', Validators.required],
     descripcion: [''],
-    //fecha: [''], // Hay que ponerlo bien
-    hora_ini: [''], // Hay que ponerlo bien
-    hora_fin: [''], // Hay que ponerlo bien
-    recordatorio: [], // Hay que ponerlo bien
+    hora_ini: ['', Validators.required],
+    hora_fin: ['', Validators.required],
+    recordatorio: [],
     repeticion: [''],
     dias: ['']
   });
@@ -27,6 +27,8 @@ export class CrearEventoPage implements OnInit {
   public repeticionOptions:string[] = ["Sin repetición", "Diariamente", "Semanalmente", "Mensualmente", "Anualmente", "Personalizado"];
   public repeticionValues:string[] = [null, "diario", "semanal", "mensual", "anual", "personalizado"]
   public repeticionIndex:number = 0;
+  public repeticion:any = this.repeticionOptions[0];
+  public dias:string = '';
 
   // Recordatorio
   public recordatorioOptions:string[] = ["Sin recordatorio", "1 minuto antes", "5 minutos antes", "10 minutos antes", "30 minutos antes", "1 hora antes"];
@@ -46,7 +48,9 @@ export class CrearEventoPage implements OnInit {
 
   constructor(private alertController: AlertController,
               private fuenteService: FuenteService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private router: Router,
+              private toaster: ToastController) {
                 //this.fuenteService.databaseConn();
               }
 
@@ -54,14 +58,21 @@ export class CrearEventoPage implements OnInit {
   }
 
   createEvento() {
+    if(!this.eventoForm.value. nombre || !this.eventoForm.value.hora_ini || !this.eventoForm.value.hora_fin) {
+      return this.presentToast("Quedan campos por completar, revisa que el nombre y las horas de inicio y fin estén indicadas.");
+    }
+
     this.eventoForm.value.hora_ini = new Date(this.eventoForm.value.hora_ini); // Esto se hace para cambiar el formato para que siempre sea el mismo
     this.eventoForm.value.hora_fin = new Date(this.eventoForm.value.hora_fin);
     this.eventoForm.value.repeticion = this.repeticionValues[this.repeticionIndex];
     this.eventoForm.value.recordatorio = this.recordatorioValues[this.recordatorioIndex];
-    // console.log(this.eventoForm.value);
+    this.eventoForm.value.dias = this.dias;
 
-    this.fuenteService.createFuente(this.eventoForm.value).subscribe(res => {
-      alert("Se ha creado, es verdad!");
+    //console.log(this.eventoForm.value);
+
+    this.fuenteService.createFuente(this.eventoForm.value).then(res => {
+      this.presentToast("¡Evento creado!");
+      this.router.navigateByUrl("/modo-lista");
     });
   }
 
@@ -154,7 +165,95 @@ export class CrearEventoPage implements OnInit {
           text: 'Aceptar',
           cssClass: 'capitalize',
           handler: (data) => {
+            var anteriorRepeticion = this.repeticion,
+                anteriorIndex = this.repeticionIndex;
             this.repeticionIndex = data;
+            this.repeticion = this.repeticionOptions[data];
+
+            if(data === 5) {
+              this.alertPersonalizado(anteriorRepeticion, anteriorIndex);
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async alertPersonalizado(state:string, index:number) {
+    const alert = await this.alertController.create({
+      cssClass: 'radio-alert',
+      header: 'Repetición personalizada',
+      inputs: [
+        {
+          name: "Lunes",
+          type: 'checkbox',
+          label: "Lunes",
+          value: "Lun"
+        },
+        {
+          name: "Martes",
+          type: 'checkbox',
+          label: "Martes",
+          value: "Mar"
+        },
+        {
+          name: "Miércoles",
+          type: 'checkbox',
+          label: "Miércoles",
+          value: "Mier"
+        },
+        {
+          name: "Jueves",
+          type: 'checkbox',
+          label: "Jueves",
+          value: "Jue"
+        },
+        {
+          name: "Viernes",
+          type: 'checkbox',
+          label: "Viernes",
+          value: "Vie"
+        },
+        {
+          name: "Sábado",
+          type: 'checkbox',
+          label: "Sábado",
+          value: "Sab"
+        },
+        {
+          name: "Domingo",
+          type: 'checkbox',
+          label: "Domingo",
+          value: "Dom"
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'capitalize',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Aceptar',
+          cssClass: 'capitalize',
+          handler: (data) => {
+            if(data && data.length > 0) {
+              this.repeticion = '';
+              data.forEach(element => {
+                this.repeticion += element + ", "
+              });
+              // Borramos los dos últimos caracteres
+              this.repeticion = this.repeticion.slice(0, -2);
+              this.dias = this.repeticion;
+              this.repeticion += " (Semanalmente)";
+            } else {
+              this.repeticion = state;
+              this.repeticionIndex = index;
+            }
           }
         }
       ]
@@ -225,5 +324,15 @@ export class CrearEventoPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async presentToast(msg:string) {
+    const toast = await this.toaster.create({
+      message: msg,
+      duration: 2000,
+      animated: true,
+      color: "primary"
+    });
+    toast.present();
   }
 }
