@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FuenteService } from 'src/app/services/fuente.service';
 
 @Component({
   selector: 'app-modo-lista',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModoListaPage implements OnInit {
 
-  constructor() { }
+  constructor(private fuenteService: FuenteService) { }
 
   ngOnInit() {
+    this.fuenteService.getFuentes().subscribe( res => {
+      alert(JSON.stringify(res));
+    })
   }
 
 }

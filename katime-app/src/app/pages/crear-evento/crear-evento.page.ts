@@ -3,11 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { FuenteService } from 'src/app/services/fuente.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-crear-evento',
   templateUrl: './crear-evento.page.html',
   styleUrls: ['./crear-evento.page.scss'],
+  providers: [DatePipe]
 })
 export class CrearEventoPage implements OnInit {
 
@@ -47,6 +49,7 @@ export class CrearEventoPage implements OnInit {
   public minDate:string = this.currentYear.toString() + "-" + this.currentMonthSTR + "-" + this.currentDay.toString();
 
   constructor(private alertController: AlertController,
+              private datePipe: DatePipe,
               private fuenteService: FuenteService,
               private formBuilder: FormBuilder,
               private router: Router,
@@ -58,17 +61,27 @@ export class CrearEventoPage implements OnInit {
   }
 
   createEvento() {
-    if(!this.eventoForm.value. nombre || !this.eventoForm.value.hora_ini || !this.eventoForm.value.hora_fin) {
-      return this.presentToast("Quedan campos por completar, revisa que el nombre y las horas de inicio y fin estén indicadas.");
+
+    /* Validaciones */
+    if(this.eventoForm.value.hora_ini > this.eventoForm.value.hora_fin){
+      return this.presentToast("La fecha de fin debe ser más antigua que la de inicio.");
     }
 
-    this.eventoForm.value.hora_ini = new Date(this.eventoForm.value.hora_ini); // Esto se hace para cambiar el formato para que siempre sea el mismo
-    this.eventoForm.value.hora_fin = new Date(this.eventoForm.value.hora_fin);
+    if(!this.eventoForm.value. nombre || !this.eventoForm.value.hora_ini || !this.eventoForm.value.hora_fin) {
+      return this.presentToast("Los campos de nombre, fecha de inicio y fin son obligatorios.");
+    }
+
+    // Formateamos la fecha
+    let hIni = this.datePipe.transform(this.eventoForm.value.hora_ini, 'yyyy-MM-dd HH:mm');
+    let hFin = this.datePipe.transform(this.eventoForm.value.hora_fin, 'yyyy-MM-dd HH:mm');
+
+    this.eventoForm.value.hora_ini = hIni;
+    this.eventoForm.value.hora_fin = hFin;
     this.eventoForm.value.repeticion = this.repeticionValues[this.repeticionIndex];
     this.eventoForm.value.recordatorio = this.recordatorioValues[this.recordatorioIndex];
     this.eventoForm.value.dias = this.dias;
 
-    //console.log(this.eventoForm.value);
+    // console.log(this.eventoForm.value);
 
     this.fuenteService.createFuente(this.eventoForm.value).then(res => {
       this.presentToast("¡Evento creado!");
@@ -86,7 +99,7 @@ export class CrearEventoPage implements OnInit {
   }
 
   checkTodoElDia() {
-    if(this.toggleCheck) {
+    if(this.toggleCheck){
       // (!) ES POSIBLE QUE ESTO DE PROBLEMAS A NIVEL DE FORMATO DENTRO DE LA BD
       var newHIni = new Date(),
           newHFin = new Date();

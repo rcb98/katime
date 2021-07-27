@@ -1,20 +1,25 @@
-import { Injectable } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { Fuente } from '../interfaces/fuente.interface';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { DatePipe } from '@angular/common';
+
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class FuenteService {
 
   private dbInstance:SQLiteObject;
   readonly dbName:string = "katime-db";
   readonly dbTable:string = "fuenteTable";
-  FUENTES: Array<any>;
+  //FUENTES: Array<Fuente>;
+  FUENTES = new BehaviorSubject([]);
 
-  constructor(private platform: Platform,
+  constructor(private datePipe: DatePipe,
+              private platform: Platform,
               private sqlite: SQLite) {
                 this.databaseConn();
               }
@@ -48,17 +53,26 @@ export class FuenteService {
   }
 
   /* GET (all) */
-  getFuentes() {
-    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable}`, []).then((res) => {
-      this.FUENTES = [];
-      if (res.rows.length > 0) {
+  loadAllFuentes() {
+    var hoy = new Date();
+    hoy.setHours(0, 0);
+    let fechaHoy = this.datePipe.transform(hoy, 'yyyy-MM-dd HH:mm');
+
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE hora_ini >= '${fechaHoy}'`, []).then(res => {
+      let fuentes: Fuente[] = [];
+
+      if(res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++)
-          this.FUENTES.push(res.rows.item(i));
-        return this.FUENTES;
+          fuentes.push(res.rows.item(i));
       }
-    },(e) => {
-      alert(JSON.stringify(e));
-    });
+      this.FUENTES.next(fuentes);
+    }, (e) => {
+      alert(JSON.stringify("Ha habido un error: ", e.err));
+    })
+  }
+
+  getFuentes():Observable<Fuente[]> {
+    return this.FUENTES.asObservable();
   }
 
   /* POST */
@@ -67,7 +81,7 @@ export class FuenteService {
       .executeSql(`INSERT INTO ${this.dbTable} (tipo, nombre, descripcion, hora_ini, hora_fin, recordatorio, repeticion, dias)
       VALUES ('${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}', '${data.repeticion}', '${data.dias}')`, [])
       .then(() => {
-        this.getFuentes();
+        this.loadAllFuentes();
       }, (e) => {
         alert(JSON.stringify(e.err));
       });
