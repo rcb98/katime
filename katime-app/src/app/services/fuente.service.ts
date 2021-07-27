@@ -54,11 +54,31 @@ export class FuenteService {
 
   /* GET (all) */
   loadAllFuentes() {
-    var hoy = new Date();
-    hoy.setHours(0, 0);
-    let fechaHoy = this.datePipe.transform(hoy, 'yyyy-MM-dd HH:mm');
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable}`, []).then(res => {
+      let fuentes: Fuente[] = [];
 
-    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE hora_ini >= '${fechaHoy}'`, []).then(res => {
+      if(res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++)
+          fuentes.push(res.rows.item(i));
+      }
+      this.FUENTES.next(fuentes);
+    }, (e) => {
+      alert(JSON.stringify("Ha habido un error: ", e.err));
+    })
+  }
+
+  /* GET (fuentes de los próximos 7 días) */
+  loadFuentes() {
+    var hoy = new Date(),
+        fin = new Date(),
+        max = fin.setDate(fin.getDate() + 7);
+
+    hoy.setHours(0, 0);
+
+    let fechaHoy = this.datePipe.transform(hoy, 'yyyy-MM-dd HH:mm');
+    let fechaMax = this.datePipe.transform(max, 'yyyy-MM-dd HH:mm');
+
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE hora_ini >= '${fechaHoy}' AND hora_fin <= '${fechaMax}'`, []).then(res => {
       let fuentes: Fuente[] = [];
 
       if(res.rows.length > 0) {
@@ -81,7 +101,7 @@ export class FuenteService {
       .executeSql(`INSERT INTO ${this.dbTable} (tipo, nombre, descripcion, hora_ini, hora_fin, recordatorio, repeticion, dias)
       VALUES ('${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}', '${data.repeticion}', '${data.dias}')`, [])
       .then(() => {
-        this.loadAllFuentes();
+        this.loadFuentes();
       }, (e) => {
         alert(JSON.stringify(e.err));
       });

@@ -7,4 +7,11 @@
 
 <div class="bg-gray-100 h-full rounded-xl mt-4">
     <h2 class="p-8 text-gray-800">Eventos</h2>
+    <ion-button (click)="createEntradas()" expand="block" fill="clear" shape="round">
+        Crear entradas
+    </ion-button>
+
+    <div *ngFor="let entrada of entradas">
+        <p>{{entrada.nombre}}</p>
+    </div>
 </div>

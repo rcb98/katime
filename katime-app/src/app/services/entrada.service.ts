@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { Platform } from '@ionic/angular';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Entrada } from '../interfaces/entrada.interface';
 
 @Injectable({
@@ -11,15 +12,15 @@ export class EntradaService {
   private dbInstance:SQLiteObject;
   readonly dbName:string = "katime-db";
   readonly dbTable:string = "entradaTable";
-  ENTRADAS: Array<any>;
+  ENTRADAS = new BehaviorSubject([]);
 
   constructor(private platform: Platform,
               private sqlite: SQLite) {
                 this.databaseConn();
               }
 
-  databaseConn() {
-    this.platform.ready().then(() => {
+  async databaseConn() {
+    await this.platform.ready().then(() => {
       this.sqlite.create({
           name: this.dbName,
           location: 'default'
@@ -45,17 +46,22 @@ export class EntradaService {
   }
 
   /* GET (all) */
-  getEntradas() {
+  loadEntradas() {
     return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable}`, []).then((res) => {
-      this.ENTRADAS = [];
+      let entradas: Entrada[] = [];
+
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++)
-          this.ENTRADAS.push(res.rows.item(i));
-        return this.ENTRADAS;
+          entradas.push(res.rows.item(i));
       }
+      this.ENTRADAS.next(entradas);
     },(e) => {
       alert(JSON.stringify(e));
     });
+  }
+
+  getEntradas():Observable<Entrada[]> {
+    return this.ENTRADAS.asObservable();
   }
 
   /* POST */
@@ -64,16 +70,16 @@ export class EntradaService {
       .executeSql(`INSERT INTO ${this.dbTable} (tipo, nombre, descripcion, hora_ini, hora_fin, recordatorio)
       VALUES ('${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}')`, [])
       .then(() => {
-        this.getEntradas();
+        this.loadEntradas();
       }, (e) => {
-        alert(JSON.stringify(e.err));
+        alert(JSON.stringify("ESTOY DANDO PROBLEMA", e.err));
       });
   }
 
   /* DELETE (all) */
-  deleteTable() {
-    this.dbInstance
-      .executeSql(`DROP TABLE ${this.dbTable}`, [])
+  async deleteTable() {
+    await this.dbInstance
+      .executeSql(`DELETE FROM ${this.dbTable}`, [])
         .then(() => {
           alert(`Tabla ${this.dbTable} eliminada.`);
         })
