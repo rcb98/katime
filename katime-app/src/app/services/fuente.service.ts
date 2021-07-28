@@ -4,6 +4,7 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { Fuente } from '../interfaces/fuente.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { EntradaService } from './entrada.service';
 
 
 @Injectable({
@@ -19,9 +20,10 @@ export class FuenteService {
   FUENTES = new BehaviorSubject([]);
 
   constructor(private datePipe: DatePipe,
+              private entradaService: EntradaService,
               private platform: Platform,
               private sqlite: SQLite) {
-                this.databaseConn();
+                //this.databaseConn();
               }
 
   databaseConn() {
@@ -44,6 +46,7 @@ export class FuenteService {
                   dias VARCHAR(255)
                 )`, [])
               .then((res) => {
+                this.loadAllFuentes();
                 // alert(JSON.stringify(res));
               })
               .catch((error) => alert(JSON.stringify(error)));
@@ -101,7 +104,8 @@ export class FuenteService {
       .executeSql(`INSERT INTO ${this.dbTable} (tipo, nombre, descripcion, hora_ini, hora_fin, recordatorio, repeticion, dias)
       VALUES ('${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}', '${data.repeticion}', '${data.dias}')`, [])
       .then(() => {
-        this.loadFuentes();
+        this.loadAllFuentes();
+        this.entradaService.deleteTable(); // Puede que de problemas
       }, (e) => {
         alert(JSON.stringify(e.err));
       });

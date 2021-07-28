@@ -16,7 +16,7 @@ export class EntradaService {
 
   constructor(private platform: Platform,
               private sqlite: SQLite) {
-                this.databaseConn();
+                //this.databaseConn();
               }
 
   async databaseConn() {
@@ -37,6 +37,7 @@ export class EntradaService {
                 recordatorio INT
               )`, [])
             .then((res) => {
+              this.deleteTable(); // Puede que de problemas
               // alert(JSON.stringify(res));
             })
             .catch((error) => alert(JSON.stringify(error)));
@@ -77,8 +78,8 @@ export class EntradaService {
   }
 
   /* DELETE (all) */
-  async deleteTable() {
-    await this.dbInstance
+  deleteTable() {
+    this.dbInstance
       .executeSql(`DELETE FROM ${this.dbTable}`, [])
         .then(() => {
           alert(`Tabla ${this.dbTable} eliminada.`);

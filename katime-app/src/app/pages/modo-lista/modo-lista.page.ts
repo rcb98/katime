@@ -14,17 +14,28 @@ export class ModoListaPage implements OnInit {
 
   constructor(private fuenteService: FuenteService,
               private entradaService: EntradaService) {
+                this.fuenteService.databaseConn();
+                this.entradaService.databaseConn();
   }
 
-  async ngOnInit() {
-    await this.createEntradas();
+  ngOnInit() {
+    this.createEntradas();
+    //this.fuenteService.loadAllFuentes();
+    /*this.fuenteService.getFuentes().subscribe( res => {
+      alert("Tengo los datos:");
+      alert(JSON.stringify(res));
+    });*/
+
   }
 
-  async createEntradas() {
+  createEntradas() {
 
-    await this.entradaService.deleteTable();
+    //this.entradaService.deleteTable();
 
     this.fuenteService.getFuentes().subscribe( res => {
+      //this.entradaService.deleteTable();
+      /*alert("Tengo los datos:");
+      alert(JSON.stringify(res));*/
         res.forEach(data => {
         let entrada:Entrada = null;
 
