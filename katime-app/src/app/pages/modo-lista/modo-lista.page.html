@@ -6,12 +6,10 @@
 </div>
 
 <div class="bg-gray-100 h-full rounded-xl mt-4">
-    <h2 class="p-8 text-gray-800">Eventos</h2>
-    <ion-button (click)="createEntradas()" expand="block" fill="clear" shape="round">
-        Crear entradas
-    </ion-button>
-
-    <div *ngFor="let entrada of entradas">
-        <p>{{entrada.nombre}}</p>
-    </div>
+    <h2 class="p-8 text-gray-800 font-semibold">Eventos</h2>
+    <ion-content [scrollEvents]="true">
+        <ul class="p-8 ml-4 list-disc">
+            <li class="my-2" *ngFor="let entrada of entradas">{{entrada.nombre}}</li>
+        </ul>
+    </ion-content>
 </div>

@@ -33,9 +33,6 @@ export class ModoListaPage implements OnInit {
     //this.entradaService.deleteTable();
 
     this.fuenteService.getFuentes().subscribe( res => {
-      //this.entradaService.deleteTable();
-      /*alert("Tengo los datos:");
-      alert(JSON.stringify(res));*/
         res.forEach(data => {
         let entrada:Entrada = null;
 
@@ -47,12 +44,8 @@ export class ModoListaPage implements OnInit {
           "hora_fin": data.hora_fin,
           "recordatorio": data.recordatorio
         }
-        this.entradaService.createEntrada(entrada).then(res => {
-
-        });
-
+        this.entradaService.createEntrada(entrada);
       });
-
       this.getEntradas();
     })
   }

@@ -82,7 +82,7 @@ export class EntradaService {
     this.dbInstance
       .executeSql(`DELETE FROM ${this.dbTable}`, [])
         .then(() => {
-          alert(`Tabla ${this.dbTable} eliminada.`);
+          //alert(`Tabla ${this.dbTable} eliminada.`);
         })
         .catch(e => {
           alert(JSON.stringify(e))

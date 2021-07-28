@@ -116,7 +116,7 @@ export class FuenteService {
     this.dbInstance
       .executeSql(`DROP TABLE ${this.dbTable}`, [])
         .then(() => {
-          alert(`Tabla ${this.dbTable} eliminada.`);
+          //alert(`Tabla ${this.dbTable} eliminada.`);
           //this.getFuentes();
         })
         .catch(e => {
