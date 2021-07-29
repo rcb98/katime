@@ -48,7 +48,7 @@ export class EntradaService {
 
   /* GET (all) */
   loadEntradas() {
-    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable}`, []).then((res) => {
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} ORDER BY hora_ini ASC`, []).then((res) => {
       let entradas: Entrada[] = [];
 
       if (res.rows.length > 0) {
