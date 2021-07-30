@@ -22,12 +22,10 @@ export class EventosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.createEntradas();
+    this.filtrarEntradas();
   }
 
-  createEntradas() {
-    //this.entradaService.deleteTable();
-
+  filtrarEntradas() {
     this.fuenteService.getFuentes().subscribe( res => {
         res.forEach(data => {
         let entrada:Entrada = null;
@@ -35,27 +33,8 @@ export class EventosComponent implements OnInit {
         if(data.dias){
           let i = 0;
           while(data.dias.split(", ")[i]){
-            var dia;
-
-            switch(data.dias.split(", ")[i]){
-              case 'Lun': dia = 1;
-                break;
-              case 'Mar': dia = 2;
-                break;
-              case 'Mie': dia = 3;
-                break;
-              case 'Jue': dia = 4;
-                break;
-              case 'Vie': dia = 5;
-                break;
-              case 'Sab': dia = 6;
-                break;
-              case 'Dom': dia = 0;
-                break;
-            }
-
-            let fechaActual = new Date();
-            let dias = this.daysInMonth(dia, fechaActual.getMonth(), fechaActual.getFullYear(), data.hora_ini, data.hora_fin);
+            var dia = this.getDia(data.dias.split(", ")[i]);
+            let dias = this.getProximosDias(dia, new Date(), data.hora_ini, data.hora_fin);
 
             dias.forEach(fecha => {
               entrada = {
@@ -66,9 +45,7 @@ export class EventosComponent implements OnInit {
                 "hora_fin": fecha.fechaFormateadaFin,
                 "recordatorio": data.recordatorio
               }
-              //alert("Entrada: " + JSON.stringify(entrada));
-              this.entradaService.createEntrada(entrada);
-            });
+          });
 
             i++;
           }
@@ -81,11 +58,20 @@ export class EventosComponent implements OnInit {
             "hora_fin": data.hora_fin,
             "recordatorio": data.recordatorio
           }
-          this.entradaService.createEntrada(entrada);
         }
+        // alert("Entrada: " + JSON.stringify(entrada));
+        this.createEntradas(entrada);
       });
       this.getEntradas();
     })
+  }
+
+  createEntradas(entrada: Entrada) {
+    let hoy = new Date();
+    let fecha = new Date(entrada.hora_ini);
+    let maxDate = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate() + 7);
+    if((fecha > hoy) && (fecha <= maxDate))
+      return this.entradaService.createEntrada(entrada);
   }
 
   getEntradas() {
@@ -97,20 +83,31 @@ export class EventosComponent implements OnInit {
     })
   }
 
-  daysInMonth(d, m, y, hini:Date, hfin:Date) {
-    let numDays = new Date(y, m , 0).getDate(); // Cuántos días tiene el mes
-    var dias:any[] = [];
-    for(let i = 2; i <= numDays + 2; i++){
-      let dia = new Date(y, m, i);
-      let hoy = new Date();
+  getDia(diaSTR:string) {
+    switch(diaSTR){
+      case 'Lun': return 1;
+      case 'Mar': return 2;
+      case 'Mie': return 3;
+      case 'Jue': return 4;
+      case 'Vie': return 5;
+      case 'Sab': return 6;
+      case 'Dom': return 0;
+    }
+  }
 
-      if((dia >= hoy) && dia.getDay() == d){
-        let horaIni = new Date(y, m, i);
+  getProximosDias(d:number, fecha:Date, hini:Date, hfin:Date) {
+    let numDays = 7;
+    var dias:any[] = [];
+
+    for(let i = -1; i < numDays - 1; i++) {
+      let dia = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i);
+      if(dia.getDay() == d){
+        let horaIni = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i);
         let tiempoIni = new Date(hini);
         horaIni.setHours(tiempoIni.getHours());
         horaIni.setMinutes(tiempoIni.getMinutes());
 
-        let horaFin = new Date(y, m, i);
+        let horaFin = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i);
         let tiempoFin = new Date(hfin);
         horaFin.setHours(tiempoFin.getHours());
         horaFin.setMinutes(tiempoFin.getMinutes());
