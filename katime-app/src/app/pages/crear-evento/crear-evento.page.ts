@@ -47,6 +47,7 @@ export class CrearEventoPage implements OnInit {
   public currentDay:number = this.fecha.getDate();
   public currentMonthSTR:string = ("0" + this.currentMonth).slice(-2);
   public minDate:string = this.currentYear.toString() + "-" + this.currentMonthSTR + "-" + this.currentDay.toString();
+  public maxDate:string = (this.currentYear + 10).toString() + "-" + this.currentMonthSTR + "-" + this.currentDay.toString();
 
   constructor(private alertController: AlertController,
               private datePipe: DatePipe,
