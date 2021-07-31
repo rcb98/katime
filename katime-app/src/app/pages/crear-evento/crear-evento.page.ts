@@ -215,7 +215,7 @@ export class CrearEventoPage implements OnInit {
           name: "Miércoles",
           type: 'checkbox',
           label: "Miércoles",
-          value: "Mier"
+          value: "Mie"
         },
         {
           name: "Jueves",

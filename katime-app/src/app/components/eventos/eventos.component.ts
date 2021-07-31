@@ -30,11 +30,11 @@ export class EventosComponent implements OnInit {
         res.forEach(data => {
         let entrada:Entrada = null;
 
-        if(data.dias){
+        if(data.dias){ // Repetición personalizada
           let i = 0;
           while(data.dias.split(", ")[i]){
             var dia = this.getDia(data.dias.split(", ")[i]);
-            let dias = this.getProximosDias(dia, new Date(), data.hora_ini, data.hora_fin);
+            let dias = this.getDiasRepeticion(data.repeticion, new Date(), data.hora_ini, data.hora_fin, dia);
 
             dias.forEach(fecha => {
               entrada = {
@@ -45,11 +45,26 @@ export class EventosComponent implements OnInit {
                 "hora_fin": fecha.fechaFormateadaFin,
                 "recordatorio": data.recordatorio
               }
-          });
+              this.createEntrada(entrada);
+            });
 
             i++;
           }
-        } else{
+        } else if(data.repeticion && data.repeticion != 'personalizado') { // Resto de repeticiones
+          let dias = this.getDiasRepeticion(data.repeticion, new Date(), data.hora_ini, data.hora_fin);
+
+          dias.forEach(fecha => {
+            entrada = {
+              "tipo": data.tipo,
+              "nombre": data.nombre,
+              "descripcion": data.descripcion,
+              "hora_ini": fecha.fechaFormateadaIni,
+              "hora_fin": fecha.fechaFormateadaFin,
+              "recordatorio": data.recordatorio
+            }
+            this.createEntrada(entrada);
+          });
+        } else{ // Sin repetición
           entrada = {
             "tipo": data.tipo,
             "nombre": data.nombre,
@@ -58,19 +73,19 @@ export class EventosComponent implements OnInit {
             "hora_fin": data.hora_fin,
             "recordatorio": data.recordatorio
           }
+          this.createEntrada(entrada);
         }
-        // alert("Entrada: " + JSON.stringify(entrada));
-        this.createEntradas(entrada);
+        //alert("Entrada: " + JSON.stringify(entrada));
       });
       this.getEntradas();
     })
   }
 
-  createEntradas(entrada: Entrada) {
+  createEntrada(entrada: Entrada) {
     let hoy = new Date();
-    let fecha = new Date(entrada.hora_ini);
-    let maxDate = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate() + 7);
-    if((fecha > hoy) && (fecha <= maxDate))
+    let fecha = new Date(entrada.hora_fin);
+    let maxDate = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate() + 14); // Tiene que ser 7
+    if((fecha >= hoy) && (fecha <= maxDate))
       return this.entradaService.createEntrada(entrada);
   }
 
@@ -95,30 +110,87 @@ export class EventosComponent implements OnInit {
     }
   }
 
-  getProximosDias(d:number, fecha:Date, hini:Date, hfin:Date) {
-    let numDays = 7;
-    var dias:any[] = [];
+  getDiasRepeticion(tipo:string, fecha:Date, hini:Date, hfin:Date, numDia?:number) {
+    var fechaIni:Date = new Date(hini),
+        fechaFin:Date = new Date(hfin),
+        diaIniReal = new Date(hini),
+        diaIni:Date = new Date(fechaIni),
+        diaFin: Date = new Date(fechaFin),
+        numDias:number = 14,
+        dias:any[] = [];
 
-    for(let i = -1; i < numDays - 1; i++) {
-      let dia = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i);
-      if(dia.getDay() == d){
-        let horaIni = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i);
-        let tiempoIni = new Date(hini);
-        horaIni.setHours(tiempoIni.getHours());
-        horaIni.setMinutes(tiempoIni.getMinutes());
-
-        let horaFin = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i);
-        let tiempoFin = new Date(hfin);
-        horaFin.setHours(tiempoFin.getHours());
-        horaFin.setMinutes(tiempoFin.getMinutes());
-
-        dias.push({
-          "fechaFormateadaIni": this.datePipe.transform(horaIni, 'yyyy-MM-dd HH:mm'),
-          "fechaFormateadaFin": this.datePipe.transform(horaFin, 'yyyy-MM-dd HH:mm')
-        });
-      }
+    switch(tipo) {
+      case 'diario':
+        for(let i = 0; i < numDias; i++) {
+          diaIni = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i, fechaIni.getHours(), fechaIni.getMinutes());
+          diaFin = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i, fechaFin.getHours(), fechaFin.getMinutes());
+          dias.push({
+            "fechaFormateadaIni": this.datePipe.transform(diaIni, 'yyyy-MM-dd HH:mm'),
+            "fechaFormateadaFin": this.datePipe.transform(diaFin, 'yyyy-MM-dd HH:mm')
+          });
+        }
+        // alert("DIAS: " + JSON.stringify(dias));
+        break;
+      case 'semanal':
+        for(let i = 0; i < numDias; i++) {
+          diaIni = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i, fechaIni.getHours(), fechaIni.getMinutes());
+          diaFin = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i, fechaFin.getHours(), fechaFin.getMinutes());
+          if(diaIni.getDay() == diaIniReal.getDay()){
+            dias.push({
+              "fechaFormateadaIni": this.datePipe.transform(diaIni, 'yyyy-MM-dd HH:mm'),
+              "fechaFormateadaFin": this.datePipe.transform(diaFin, 'yyyy-MM-dd HH:mm')
+            });
+          }
+        }
+        break;
+      case 'mensual':
+        for(let i = 0; i < numDias; i++) {
+          diaIni = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i, fechaIni.getHours(), fechaIni.getMinutes());
+          diaFin = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i, fechaFin.getHours(), fechaFin.getMinutes());
+          if(diaIni.getDate() == diaIniReal.getDate()){
+            dias.push({
+              "fechaFormateadaIni": this.datePipe.transform(diaIni, 'yyyy-MM-dd HH:mm'),
+              "fechaFormateadaFin": this.datePipe.transform(diaFin, 'yyyy-MM-dd HH:mm')
+            });
+          }
+        }
+        break;
+      case 'anual':
+        /*for(let i = 0; i < 12; i++) {
+          diaIni.setFullYear(fechaIni.getFullYear() + i);
+          diaFin.setFullYear(fechaFin.getFullYear() + i);
+          dias.push({
+            "fechaFormateadaIni": this.datePipe.transform(diaIni, 'yyyy-MM-dd HH:mm'),
+            "fechaFormateadaFin": this.datePipe.transform(diaFin, 'yyyy-MM-dd HH:mm')
+          });
+        }*/
+        for(let i = 0; i < numDias; i++) {
+          diaIni = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i, fechaIni.getHours(), fechaIni.getMinutes());
+          diaFin = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i, fechaFin.getHours(), fechaFin.getMinutes());
+          if(diaIni.getDate() == diaIniReal.getDate() && diaIni.getMonth() == diaIniReal.getMonth()){
+            dias.push({
+              "fechaFormateadaIni": this.datePipe.transform(diaIni, 'yyyy-MM-dd HH:mm'),
+              "fechaFormateadaFin": this.datePipe.transform(diaFin, 'yyyy-MM-dd HH:mm')
+            });
+          }
+        }
+        break;
+      case 'personalizado':
+        for(let i = 0; i < numDias; i++) {
+          diaIni = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i, fechaIni.getHours(), fechaIni.getMinutes());
+          diaFin = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i, fechaFin.getHours(), fechaFin.getMinutes());
+          if(diaIni.getDay() == numDia) {
+            dias.push({
+              "fechaFormateadaIni": this.datePipe.transform(diaIni, 'yyyy-MM-dd HH:mm'),
+              "fechaFormateadaFin": this.datePipe.transform(diaFin, 'yyyy-MM-dd HH:mm')
+            });
+          }
+        }
+        break;
+      default:
+        break;
     }
-    return dias;
+    return dias
   }
 
 }
