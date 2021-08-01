@@ -30,6 +30,7 @@ export class EventosComponent implements OnInit {
         res.forEach(data => {
         let entrada:Entrada = null;
 
+
         if(data.dias){ // Repetición personalizada
           let i = 0;
           while(data.dias.split(", ")[i]){
@@ -116,8 +117,8 @@ export class EventosComponent implements OnInit {
         dias:any[] = [];
 
     for(let i = 0; i < numDias; i++) {
-      var diaIni = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i, fechaIni.getHours(), fechaIni.getMinutes()),
-          diaFin = new Date(fecha.getFullYear(), fecha.getMonth() + 1, i, fechaFin.getHours(), fechaFin.getMinutes());
+      var diaIni = new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate() + i, fechaIni.getHours(), fechaIni.getMinutes()),
+          diaFin = new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate() + i, fechaFin.getHours(), fechaFin.getMinutes());
 
       switch(tipo) {
         case 'diario':
