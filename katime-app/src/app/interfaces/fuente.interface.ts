@@ -1,4 +1,5 @@
 export interface Fuente {
+  id_fuente:number,
   tipo:string,
   nombre:string,
   descripcion?:string,

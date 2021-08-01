@@ -2,3 +2,11 @@ input:focus,
 textarea:focus {
     --tw-ring-color: #9889C2 !important;
 }
+
+.modal {
+    background: rgba(0, 0, 0, 0.32) !important;
+}
+
+.circle {
+    border-radius: 50%;
+}

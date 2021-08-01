@@ -1,4 +1,6 @@
 export interface Entrada {
+  // id_entrada:number,
+  id_fuente:number,
   tipo:string,
   nombre:string,
   descripcion?:string,

@@ -25,6 +25,9 @@ export class CrearEventoPage implements OnInit {
     dias: ['']
   });
 
+  // Categoría
+  public modalCategoria:boolean = false;
+
   // Repetición
   public repeticionOptions:string[] = ["Sin repetición", "Diariamente", "Semanalmente", "Mensualmente", "Anualmente", "Personalizado"];
   public repeticionValues:string[] = [null, "diario", "semanal", "mensual", "anual", "personalizado"]
@@ -122,6 +125,14 @@ export class CrearEventoPage implements OnInit {
       this.eventoForm.value.hora_fin = newHFin.toString();
       this.eventoForm.patchValue(this.eventoForm.value, {onlySelf: false, emitEvent: true}); // Rerender FormGroup
     }
+  }
+
+  toggleModalCategoria() {
+    this.modalCategoria = !this.modalCategoria;
+  }
+
+  exitModalCategoria() {
+    this.modalCategoria = false;
   }
 
   async alertRepeticion() {

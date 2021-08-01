@@ -30,7 +30,6 @@ export class EventosComponent implements OnInit {
         res.forEach(data => {
         let entrada:Entrada = null;
 
-
         if(data.dias){ // Repetición personalizada
           let i = 0;
           while(data.dias.split(", ")[i]){
@@ -39,6 +38,7 @@ export class EventosComponent implements OnInit {
 
             dias.forEach(fecha => {
               entrada = {
+                "id_fuente": data.id_fuente,
                 "tipo": data.tipo,
                 "nombre": data.nombre,
                 "descripcion": data.descripcion,
@@ -55,6 +55,7 @@ export class EventosComponent implements OnInit {
           let dias = this.getDiasRepeticion(data.repeticion, new Date(), data.hora_ini, data.hora_fin);
           dias.forEach(fecha => {
             entrada = {
+              "id_fuente": data.id_fuente,
               "tipo": data.tipo,
               "nombre": data.nombre,
               "descripcion": data.descripcion,
@@ -66,6 +67,7 @@ export class EventosComponent implements OnInit {
           });
         } else { // Sin repetición
           entrada = {
+            "id_fuente": data.id_fuente,
             "tipo": data.tipo,
             "nombre": data.nombre,
             "descripcion": data.descripcion,

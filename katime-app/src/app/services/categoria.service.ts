@@ -2,22 +2,20 @@ import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { Platform } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Entrada } from '../interfaces/entrada.interface';
+import { Categoria } from '../interfaces/categoria.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EntradaService {
+export class CategoriaService {
 
   private dbInstance:SQLiteObject;
   readonly dbName:string = "katime-db";
-  readonly dbTable:string = "entradaTable";
-  ENTRADAS = new BehaviorSubject([]);
+  readonly dbTable:string = "categoriaTable";
+  CATEGORIAS = new BehaviorSubject([]);
 
   constructor(private platform: Platform,
-              private sqlite: SQLite) {
-                //this.databaseConn();
-              }
+              private sqlite: SQLite) { }
 
   async databaseConn() {
     await this.platform.ready().then(() => {
@@ -28,18 +26,12 @@ export class EntradaService {
           this.dbInstance = sqLite;
           sqLite.executeSql(`
               CREATE TABLE IF NOT EXISTS ${this.dbTable} (
-                id_entrada INTEGER PRIMARY KEY,
-                id_fuente INTEGER,
-                tipo VARCHAR(255) NOT NULL,
+                id_categoria INTEGER PRIMARY KEY,
                 nombre VARCHAR(255) NOT NULL,
-                descripcion VARCHAR(255),
-                hora_ini DATETIME,
-                hora_fin DATETIME,
-                recordatorio INT
+                color VARCHAR(255) NOT NULL
               )`, [])
             .then((res) => {
-              this.deleteTable(); // Puede que de problemas
-              // alert(JSON.stringify(res));
+              this.loadCategorias();
             })
             .catch((error) => alert(JSON.stringify(error)));
         })
@@ -48,31 +40,31 @@ export class EntradaService {
   }
 
   /* GET (all) */
-  loadEntradas() {
-    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} ORDER BY hora_ini ASC`, []).then((res) => {
-      let entradas: Entrada[] = [];
+  loadCategorias() {
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable}`, []).then((res) => {
+      let categorias: Categoria[] = [];
 
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++)
-          entradas.push(res.rows.item(i));
+          categorias.push(res.rows.item(i));
       }
-      this.ENTRADAS.next(entradas);
+      this.CATEGORIAS.next(categorias);
     },(e) => {
       alert(JSON.stringify(e));
     });
   }
 
-  getEntradas():Observable<Entrada[]> {
-    return this.ENTRADAS.asObservable();
+  getCategorias():Observable<Categoria[]> {
+    return this.CATEGORIAS.asObservable();
   }
 
   /* POST */
-  createEntrada(data:Entrada) {
+  createCategoria(data:Categoria) {
     return this.dbInstance
-      .executeSql(`INSERT INTO ${this.dbTable} (id_fuente, tipo, nombre, descripcion, hora_ini, hora_fin, recordatorio)
-      VALUES ('${data.id_fuente}', '${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}')`, [])
+      .executeSql(`INSERT INTO ${this.dbTable} (nombre, color)
+      VALUES ('${data.nombre}', '${data.color}')`, [])
       .then(() => {
-        this.loadEntradas();
+        this.loadCategorias();
       }, (e) => {
         alert(JSON.stringify("ESTOY DANDO PROBLEMA", e.err));
       });

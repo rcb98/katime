@@ -11,7 +11,8 @@ module.exports = {
         },
         borderRadius: {
             'lg': '15px', // button
-            'xl': '25px' // gray background
+            'xl': '25px', // gray background
+            'full': 'border-radius: 50%'
         },
         colors: {
             transparent: 'transparent',
@@ -19,11 +20,29 @@ module.exports = {
             black: colors.black,
             white: colors.white,
             gray: colors.gray,
-            indigo: colors.indigo,
-            red: colors.red,
-            yellow: colors.yellow,
             purple: {
                 DEFAULT: '#9889C2'
+            },
+            pink: {
+                DEFAULT: '#F6838A'
+            },
+            red: {
+                DEFAULT: '#F27D63'
+            },
+            orange: {
+                DEFAULT: '#F2A463'
+            },
+            yellow: {
+                DEFAULT: '#F2CA63'
+            },
+            green: {
+                DEFAULT: '#8BC898'
+            },
+            blue: {
+                DEFAULT: '#8EA1D1'
+            },
+            indigo: {
+                DEFAULT: '#9395CA'
             }
         },
         extend: {},

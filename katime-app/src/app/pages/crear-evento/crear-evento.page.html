@@ -1,3 +1,33 @@
+<div class="modal flex fixed h-screen w-screen z-50" *ngIf="modalCategoria">
+    <div class="bg-gray-100 fixed bottom-0 w-full h-auto rounded-t-xl p-8">
+        <div class="flex">
+            <ion-icon color="primary" class="text-2xl" name="arrow-back" (click)="exitModalCategoria()"></ion-icon>
+            <p class="text-purple ml-auto">Crear categoría</p>
+        </div>
+        <h3 class="my-4 text-lg font-semibold">Nueva categoría</h3>
+
+        <!-- <div class="bg-red-500 h-6 w-6 circle">
+            <span>&#x200b;</span>
+        </div> -->
+        <div class="flex">
+            <input type="radio" name="categoria" id="" class="bg-pink h-7 w-7 mr-1 border-none">
+            <input type="radio" name="categoria" id="" class="bg-red h-7 w-7 mx-1 border-none">
+            <input type="radio" name="categoria" id="" class="bg-orange h-7 w-7 mx-1 border-none">
+            <input type="radio" name="categoria" id="" class="bg-yellow h-7 w-7 mx-1 border-none">
+            <input type="radio" name="categoria" id="" class="bg-green h-7 w-7 mx-1 border-none">
+            <input type="radio" name="categoria" id="" class="bg-blue h-7 w-7 mx-1 border-none">
+            <input type="radio" name="categoria" id="" class="bg-indigo h-7 w-7 mx-1 border-none">
+        </div>
+
+        <!-- Nombre -->
+        <div class="my-4 flex flex-col">
+            <label for="nombreCategoria" class="text-gray-600">Nombre</label>
+            <input type="text" id="nombreCategoria" class="rounded-lg border-none mt-0.5">
+        </div>
+    </div>
+</div>
+
+
 <ion-header class="ion-no-border bg-white">
     <app-page-header titulo="Nuevo evento" [goBack]=true>
         <ion-back-button color="primary"></ion-back-button>
@@ -24,9 +54,10 @@
 
         <!-- Categoría -->
         <div class="m-2 flex flex-col">
-            <div class="flex mb-2">
+            <div class="flex items-center mb-2">
                 <ion-icon name="grid" class="mr-2" color="primary"></ion-icon>
                 <label for="categoria" class="text-gray-600">Categoría</label>
+                <p class="ml-auto text-purple text-right w-4/6" (click)="toggleModalCategoria()">+ Nueva categoría</p>
             </div>
             <p class="text-sm text-gray-300 italic">No disponible</p>
         </div>
@@ -75,8 +106,8 @@
         </div>
 
         <!-- Eliminar la tabla Fuente entera, boton temporal -->
-        <!-- <ion-button color="danger" expand="block" (click)="deleteEventos()">
+        <ion-button color="danger" expand="block" (click)="deleteEventos()">
             Eliminar tabla Fuente
-        </ion-button> -->
+        </ion-button>
     </form>
 </div>
