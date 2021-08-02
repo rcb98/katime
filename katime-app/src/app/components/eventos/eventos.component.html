@@ -1,12 +1,27 @@
 <ion-content [scrollEvents]="true">
-    <div *ngFor="let entrada of entradas" class="flex mx-8 my-2">
+    <h2 class="mx-8 my-2 font-medium">Hoy, <span class="font-light">{{hoy | date:'dd/MM'}}</span></h2>
+    <div *ngFor="let entrada of entradasHoy" class="flex mx-8 my-2">
         <div class="bg-purple flex h-auto rounded-l-lg px-4 py-3">
             <span>&#x200b;</span>
         </div>
         <div class="bg-white flex items-center w-full rounded-r-lg px-4 py-3">
             <div class="flex flex-col">
                 <h3 class="font-semibold">{{entrada.nombre}}</h3>
-                <p>{{entrada.hora_ini}} - {{entrada.hora_fin | date:'HH:mm'}}</p>
+                <p>{{entrada.hora_ini | date:'HH:mm'}} - {{entrada.hora_fin | date:'HH:mm'}}</p>
+            </div>
+            <p class="ml-auto font-semibold">14 min</p>
+        </div>
+    </div>
+
+    <h2 class="mx-8 my-2 mt-4 font-medium">Próximos eventos</h2>
+    <div *ngFor="let entrada of entradasProximas" class="flex mx-8 my-2">
+        <div class="bg-purple flex h-auto rounded-l-lg px-4 py-3">
+            <span>&#x200b;</span>
+        </div>
+        <div class="bg-white flex items-center w-full rounded-r-lg px-4 py-3">
+            <div class="flex flex-col">
+                <h3 class="font-semibold">{{entrada.nombre}}</h3>
+                <p>{{entrada.hora_ini | date:'dd/MM'}} {{entrada.hora_ini | date:'HH:mm'}} - {{entrada.hora_fin | date:'HH:mm'}}</p>
             </div>
             <p class="ml-auto font-semibold">14 min</p>
         </div>

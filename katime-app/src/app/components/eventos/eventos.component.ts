@@ -12,7 +12,9 @@ import { FuenteService } from 'src/app/services/fuente.service';
 })
 export class EventosComponent implements OnInit {
 
-  public entradas: Entrada[] = [];
+  public entradasHoy: Entrada[] = [];
+  public entradasProximas: Entrada[] = [];
+  public hoy:Date = new Date();
 
   constructor(private datePipe: DatePipe,
               private entradaService: EntradaService,
@@ -23,6 +25,7 @@ export class EventosComponent implements OnInit {
 
   ngOnInit() {
     this.filtrarEntradas();
+    this.getEntradas();
   }
 
   filtrarEntradas() {
@@ -79,7 +82,7 @@ export class EventosComponent implements OnInit {
         }
         //alert("Entrada: " + JSON.stringify(entrada));
       });
-      this.getEntradas();
+      //this.getEntradas();
     })
   }
 
@@ -93,11 +96,18 @@ export class EventosComponent implements OnInit {
 
   getEntradas() {
     this.entradaService.getEntradas().subscribe( res => {
-      this.entradas = [];
+      this.entradasHoy = [];
+      this.entradasProximas = [];
+      var hoy:Date = new Date();
       res.forEach(entrada => {
-        this.entradas.push(entrada);
+        var fecha = new Date(entrada.hora_ini);
+        if(fecha.getDate() == hoy.getDate() && fecha.getMonth() == hoy.getMonth() && fecha.getFullYear() == hoy.getFullYear()){
+          this.entradasHoy.push(entrada);
+        } else {
+          this.entradasProximas.push(entrada);
+        }
       });
-    })
+    });
   }
 
   getDia(diaSTR:string) {
