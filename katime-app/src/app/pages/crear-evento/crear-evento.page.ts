@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { FuenteService } from 'src/app/services/fuente.service';
 import { DatePipe } from '@angular/common';
+import { CategoriaService } from 'src/app/services/categoria.service';
+import { Categoria } from 'src/app/interfaces/categoria.interface';
 
 @Component({
   selector: 'app-crear-evento',
@@ -15,6 +17,7 @@ export class CrearEventoPage implements OnInit {
 
   // Formulario para crear un Evento
   public eventoForm:FormGroup = this.formBuilder.group({
+    id_categoria: ['', Validators.required],
     tipo: ['evento'],
     nombre: ['', Validators.required],
     descripcion: [''],
@@ -25,7 +28,14 @@ export class CrearEventoPage implements OnInit {
     dias: ['']
   });
 
+  // Formulario para crear una Categoría
+  public categoriaForm:FormGroup = this.formBuilder.group({
+    nombre: ['', Validators.required],
+    color: ['', Validators.required]
+  });
+
   // Categoría
+  public categorias:Categoria[] = [];
   public modalCategoria:boolean = false;
 
   // Repetición
@@ -53,15 +63,17 @@ export class CrearEventoPage implements OnInit {
   public maxDate:string = (this.currentYear + 10).toString() + "-" + this.currentMonthSTR + "-" + this.currentDay.toString();
 
   constructor(private alertController: AlertController,
+              private categoriaService: CategoriaService,
               private datePipe: DatePipe,
               private fuenteService: FuenteService,
               private formBuilder: FormBuilder,
               private router: Router,
               private toaster: ToastController) {
-                //this.fuenteService.databaseConn();
+                this.categoriaService.databaseConn();
               }
 
   ngOnInit() {
+    this.getCategorias();
   }
 
   createEvento() {
@@ -87,7 +99,7 @@ export class CrearEventoPage implements OnInit {
 
     // console.log(this.eventoForm.value);
 
-    this.fuenteService.createFuente(this.eventoForm.value).then(res => {
+    this.fuenteService.createFuente(this.eventoForm.value).then( res => {
       this.presentToast("¡Evento creado!");
       this.router.navigateByUrl("/modo-lista");
     });
@@ -97,7 +109,42 @@ export class CrearEventoPage implements OnInit {
     this.fuenteService.deleteTable();
   }
 
-  toggle() {
+  createCategoria() {
+    if(!this.categoriaForm.value.nombre) return this.presentToast("El campo nombre es obligatorio.");
+    if(!this.categoriaForm.value.color) return this.presentToast("Elige un color para la categoría.");
+
+    this.categoriaService.createCategoria(this.categoriaForm.value).then( res => {
+      this.exitModalCategoria();
+      this.getCategorias();
+    })
+  }
+
+  getCategorias() {
+    this.categoriaService.getCategorias().subscribe(res => {
+      this.categorias = [];
+      res.forEach(cat => {
+        let categoria:Categoria = null;
+
+        categoria = {
+          "id_categoria": cat.id_categoria,
+          "nombre": cat.nombre,
+          "color": cat.color
+        }
+
+        this.categorias.push(categoria);
+      });
+    })
+  }
+
+  toggleModalCategoria() {
+    this.modalCategoria = !this.modalCategoria;
+  }
+
+  exitModalCategoria() {
+    this.modalCategoria = false;
+  }
+
+  toggleTodoElDia() {
     this.toggleCheck = !this.toggleCheck;
     this.checkTodoElDia();
   }
@@ -125,14 +172,6 @@ export class CrearEventoPage implements OnInit {
       this.eventoForm.value.hora_fin = newHFin.toString();
       this.eventoForm.patchValue(this.eventoForm.value, {onlySelf: false, emitEvent: true}); // Rerender FormGroup
     }
-  }
-
-  toggleModalCategoria() {
-    this.modalCategoria = !this.modalCategoria;
-  }
-
-  exitModalCategoria() {
-    this.modalCategoria = false;
   }
 
   async alertRepeticion() {

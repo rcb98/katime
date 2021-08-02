@@ -31,6 +31,7 @@ export class CategoriaService {
                 color VARCHAR(255) NOT NULL
               )`, [])
             .then((res) => {
+              // this.dropTable();
               this.loadCategorias();
             })
             .catch((error) => alert(JSON.stringify(error)));

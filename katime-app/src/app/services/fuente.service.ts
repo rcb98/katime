@@ -36,6 +36,7 @@ export class FuenteService {
             sqLite.executeSql(`
                 CREATE TABLE IF NOT EXISTS ${this.dbTable} (
                   id_fuente INTEGER PRIMARY KEY,
+                  id_categoria INTEGER,
                   tipo VARCHAR(255) NOT NULL,
                   nombre VARCHAR(255) NOT NULL,
                   descripcion VARCHAR(255),
@@ -101,8 +102,8 @@ export class FuenteService {
   /* POST */
   createFuente(data:Fuente) {
     return this.dbInstance
-      .executeSql(`INSERT INTO ${this.dbTable} (tipo, nombre, descripcion, hora_ini, hora_fin, recordatorio, repeticion, dias)
-      VALUES ('${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}', '${data.repeticion}', '${data.dias}')`, [])
+      .executeSql(`INSERT INTO ${this.dbTable} (id_categoria, tipo, nombre, descripcion, hora_ini, hora_fin, recordatorio, repeticion, dias)
+      VALUES ('${data.id_categoria}', '${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}', '${data.repeticion}', '${data.dias}')`, [])
       .then(() => {
         this.loadAllFuentes();
         this.entradaService.deleteTable(); // Puede que de problemas
