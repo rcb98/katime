@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
 import { EntradaService } from 'src/app/services/entrada.service';
 import { FuenteService } from 'src/app/services/fuente.service';
@@ -80,9 +80,7 @@ export class EventosComponent implements OnInit {
           }
           this.createEntrada(entrada);
         }
-        //alert("Entrada: " + JSON.stringify(entrada));
       });
-      //this.getEntradas();
     })
   }
 
@@ -92,6 +90,19 @@ export class EventosComponent implements OnInit {
     let maxDate = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate() + 14); // Tiene que ser 7
     if((fecha >= hoy) && (fecha <= maxDate))
       return this.entradaService.createEntrada(entrada);
+  }
+
+  tiempoRestante(hIni:any) {
+    let hora = new Date(hIni),
+        diferencia = hora.getTime() - this.hoy.getTime(),
+        resultado = Math.round(diferencia / 60000),
+        horas = (resultado / 60),
+        roundHoras = Math.floor(horas),
+        minutos = Math.round((horas - roundHoras) * 60);
+
+    if(roundHoras == 0) return minutos + " min";
+    else if(roundHoras > 0 && minutos > 0) return roundHoras + "h " + minutos + "min";
+    else return "Ahora";
   }
 
   getEntradas() {

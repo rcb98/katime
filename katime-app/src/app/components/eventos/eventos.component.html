@@ -9,7 +9,10 @@
                 <h3 class="font-semibold">{{entrada.nombre}}</h3>
                 <p>{{entrada.hora_ini | date:'HH:mm'}} - {{entrada.hora_fin | date:'HH:mm'}}</p>
             </div>
-            <p class="ml-auto font-semibold">14 min</p>
+            <div class="flex items-center ml-auto">
+                <ion-icon *ngIf="entrada.recordatorio != 'null'" color="primary" name="alarm" class="mr-1"></ion-icon>
+                <p class="font-semibold">{{tiempoRestante(entrada.hora_ini)}}</p>
+            </div>
         </div>
     </div>
 
@@ -23,7 +26,7 @@
                 <h3 class="font-semibold">{{entrada.nombre}}</h3>
                 <p>{{entrada.hora_ini | date:'dd/MM'}} {{entrada.hora_ini | date:'HH:mm'}} - {{entrada.hora_fin | date:'HH:mm'}}</p>
             </div>
-            <p class="ml-auto font-semibold">14 min</p>
+            <ion-icon *ngIf="entrada.recordatorio != 'null'" color="primary" name="alarm" class="ml-auto"></ion-icon>
         </div>
     </div>
 </ion-content>
