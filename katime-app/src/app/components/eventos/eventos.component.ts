@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
+import { CategoriaService } from 'src/app/services/categoria.service';
 import { EntradaService } from 'src/app/services/entrada.service';
 import { FuenteService } from 'src/app/services/fuente.service';
 
@@ -17,11 +18,13 @@ export class EventosComponent implements OnInit {
   public hoy:Date = new Date();
 
   constructor(private datePipe: DatePipe,
+              private categoriaService: CategoriaService,
               private entradaService: EntradaService,
               private fuenteService: FuenteService) {
                 this.fuenteService.databaseConn();
                 this.entradaService.databaseConn();
-  }
+                this.categoriaService.databaseConn();
+              }
 
   ngOnInit() {
     this.filtrarEntradas();
@@ -42,6 +45,7 @@ export class EventosComponent implements OnInit {
             dias.forEach(fecha => {
               entrada = {
                 "id_fuente": data.id_fuente,
+                "id_categoria": data.id_categoria,
                 "tipo": data.tipo,
                 "nombre": data.nombre,
                 "descripcion": data.descripcion,
@@ -59,6 +63,7 @@ export class EventosComponent implements OnInit {
           dias.forEach(fecha => {
             entrada = {
               "id_fuente": data.id_fuente,
+              "id_categoria": data.id_categoria,
               "tipo": data.tipo,
               "nombre": data.nombre,
               "descripcion": data.descripcion,
@@ -71,6 +76,7 @@ export class EventosComponent implements OnInit {
         } else { // Sin repetición
           entrada = {
             "id_fuente": data.id_fuente,
+            "id_categoria": data.id_categoria,
             "tipo": data.tipo,
             "nombre": data.nombre,
             "descripcion": data.descripcion,
@@ -119,6 +125,18 @@ export class EventosComponent implements OnInit {
         }
       });
     });
+  }
+
+  getColorCategoria(id:number) {
+    var color:string = '';
+    this.categoriaService.getCategorias().subscribe( res => {
+      res.forEach(cat => {
+        if(cat.id_categoria == id) {
+          color = cat.color;
+        }
+      });
+    })
+    return color;
   }
 
   getDia(diaSTR:string) {

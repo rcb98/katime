@@ -30,6 +30,7 @@ export class EntradaService {
               CREATE TABLE IF NOT EXISTS ${this.dbTable} (
                 id_entrada INTEGER PRIMARY KEY,
                 id_fuente INTEGER,
+                id_categoria INTEGER,
                 tipo VARCHAR(255) NOT NULL,
                 nombre VARCHAR(255) NOT NULL,
                 descripcion VARCHAR(255),
@@ -69,8 +70,8 @@ export class EntradaService {
   /* POST */
   createEntrada(data:Entrada) {
     return this.dbInstance
-      .executeSql(`INSERT INTO ${this.dbTable} (id_fuente, tipo, nombre, descripcion, hora_ini, hora_fin, recordatorio)
-      VALUES ('${data.id_fuente}', '${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}')`, [])
+      .executeSql(`INSERT INTO ${this.dbTable} (id_fuente, id_categoria, tipo, nombre, descripcion, hora_ini, hora_fin, recordatorio)
+      VALUES ('${data.id_fuente}', '${data.id_categoria}', '${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}')`, [])
       .then(() => {
         this.loadEntradas();
       }, (e) => {

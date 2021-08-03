@@ -1,7 +1,8 @@
 <ion-content [scrollEvents]="true">
     <h2 class="mx-8 my-2 font-medium">Hoy, <span class="font-light">{{hoy | date:'dd/MM'}}</span></h2>
     <div *ngFor="let entrada of entradasHoy" class="flex mx-8 my-2">
-        <div class="bg-purple flex h-auto rounded-l-lg px-4 py-3">
+        <div class="flex h-auto rounded-l-lg px-4 py-3" [ngClass]="getColorCategoria(entrada.id_categoria)">
+            <!-- No me gusta el ngClass -->
             <span>&#x200b;</span>
         </div>
         <div class="bg-white flex items-center w-full rounded-r-lg px-4 py-3">
@@ -18,7 +19,7 @@
 
     <h2 class="mx-8 my-2 mt-4 font-medium">Próximos eventos</h2>
     <div *ngFor="let entrada of entradasProximas" class="flex mx-8 my-2">
-        <div class="bg-purple flex h-auto rounded-l-lg px-4 py-3">
+        <div class="flex h-auto rounded-l-lg px-4 py-3" [ngClass]="getColorCategoria(entrada.id_categoria)">
             <span>&#x200b;</span>
         </div>
         <div class="bg-white flex items-center w-full rounded-r-lg px-4 py-3">

@@ -5,6 +5,7 @@ import { Fuente } from '../interfaces/fuente.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { EntradaService } from './entrada.service';
+import { CategoriaService } from './categoria.service';
 
 
 @Injectable({
@@ -20,6 +21,7 @@ export class FuenteService {
   FUENTES = new BehaviorSubject([]);
 
   constructor(private datePipe: DatePipe,
+              private categoriaService: CategoriaService,
               private entradaService: EntradaService,
               private platform: Platform,
               private sqlite: SQLite) {
@@ -117,6 +119,8 @@ export class FuenteService {
     this.dbInstance
       .executeSql(`DROP TABLE ${this.dbTable}`, [])
         .then(() => {
+          this.entradaService.dropTable();
+          this.categoriaService.dropTable();
           //alert(`Tabla ${this.dbTable} eliminada.`);
           //this.getFuentes();
         })

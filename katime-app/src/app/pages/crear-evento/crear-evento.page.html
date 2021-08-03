@@ -36,82 +36,85 @@
 </ion-header>
 
 <div class="bg-gray-100 h-full rounded-t-xl mt-4">
-    <form [formGroup]="eventoForm" class="m-8 flex flex-col">
-        <!-- Nombre -->
-        <div class="m-2 flex flex-col">
-            <label for="nombre" class="text-gray-600">Nombre</label>
-            <input type="text" id="nombre" formControlName="nombre" class="rounded-lg border-none mt-0.5">
-        </div>
-
-        <!-- Descripción -->
-        <div class="m-2 flex flex-col">
-            <label for="descripcion" class="text-gray-600">Descripción</label>
-            <textarea id="descripcion" formControlName="descripcion" class="rounded-lg border-none mt-0.5"></textarea>
-        </div>
-
-        <!-- Categoría -->
-        <div class="m-2 flex flex-col">
-            <div class="flex items-center mb-2">
-                <ion-icon name="grid" class="mr-2" color="primary"></ion-icon>
-                <label for="categoria" class="text-gray-600">Categoría</label>
-                <p class="ml-auto text-purple text-right w-4/6" (click)="toggleModalCategoria()">+ Nueva categoría</p>
+    <ion-content [scrollEvents]="true">
+        <form [formGroup]="eventoForm" class="m-8 flex flex-col">
+            <!-- Nombre -->
+            <div class="m-2 flex flex-col">
+                <label for="nombre" class="text-gray-600">Nombre</label>
+                <input type="text" id="nombre" formControlName="nombre" class="rounded-lg border-none mt-0.5">
             </div>
-            <div class="flex flex-col">
-                <div *ngFor="let categoria of categorias" class="my-1">
-                    <label for="{{categoria.id_categoria}}">
-                      <input id="{{categoria.id_categoria}}" [value]='categoria.id_categoria' type="radio" name="id_categoria" formControlName="id_categoria" class="h-7 w-7 mr-2 border-none" [ngClass]="categoria.color">
-                      {{categoria.nombre}}
-                    </label>
+
+            <!-- Descripción -->
+            <div class="m-2 flex flex-col">
+                <label for="descripcion" class="text-gray-600">Descripción</label>
+                <textarea id="descripcion" formControlName="descripcion" class="rounded-lg border-none mt-0.5"></textarea>
+            </div>
+
+            <!-- Categoría -->
+            <div class="m-2 flex flex-col">
+                <div class="flex items-center mb-2">
+                    <ion-icon name="grid" class="mr-2" color="primary"></ion-icon>
+                    <label for="categoria" class="text-gray-600">Categoría</label>
+                    <p class="ml-auto text-purple text-right w-4/6" (click)="toggleModalCategoria()">+ Nueva categoría</p>
                 </div>
-            </div>
-        </div>
-
-        <!-- Fecha -->
-        <div class="m-2 flex flex-col">
-            <div class="flex items-center mb-2">
-                <ion-icon name="time" class="mr-2" color="primary"></ion-icon>
-                <label for="fecha" class="text-gray-600">Día & Hora</label>
-                <div class="ml-auto flex items-center">
-                    <ion-label class="text-gray-600 text-sm">Todo el día</ion-label>
-                    <ion-toggle [checked]="toggleCheck" (ionChange)="toggleTodoElDia()"></ion-toggle>
+                <div class="flex flex-col">
+                    <div *ngFor="let categoria of categorias" class="my-1">
+                        <label for="{{categoria.id_categoria}}">
+                    <input id="{{categoria.id_categoria}}" [value]='categoria.id_categoria' type="radio" name="id_categoria" formControlName="id_categoria" class="h-7 w-7 mr-2 border-none" [ngClass]="categoria.color">
+                    {{categoria.nombre}}
+                  </label>
+                    </div>
                 </div>
             </div>
 
-            <div>
-                <ion-item class="my-2 rounded-lg" lines="none">
-                    <ion-label color="medium">Inicio</ion-label>
-                    <ion-datetime display-format="DD MMM, YYYY HH:mm" formControlName="hora_ini" (ionChange)="checkTodoElDia()"></ion-datetime>
-                </ion-item>
+            <!-- Fecha -->
+            <div class="m-2 flex flex-col">
+                <div class="flex items-center mb-2">
+                    <ion-icon name="time" class="mr-2" color="primary"></ion-icon>
+                    <label for="fecha" class="text-gray-600">Día & Hora</label>
+                    <div class="ml-auto flex items-center">
+                        <ion-label class="text-gray-600 text-sm">Todo el día</ion-label>
+                        <ion-toggle [checked]="toggleCheck" (ionChange)="toggleTodoElDia()"></ion-toggle>
+                    </div>
+                </div>
 
-                <ion-item class="my-2 rounded-lg" lines="none">
-                    <ion-label color="medium">Fin</ion-label>
-                    <ion-datetime display-format="DD MMM, YYYY HH:mm" formControlName="hora_fin" (ionChange)="checkTodoElDia()"></ion-datetime>
-                </ion-item>
+                <div>
+                    <ion-item class="my-2 rounded-lg" lines="none">
+                        <ion-label color="medium">Inicio</ion-label>
+                        <ion-datetime display-format="DD MMM, YYYY HH:mm" formControlName="hora_ini" (ionChange)="checkTodoElDia()"></ion-datetime>
+                    </ion-item>
+
+                    <ion-item class="my-2 rounded-lg" lines="none">
+                        <ion-label color="medium">Fin</ion-label>
+                        <ion-datetime display-format="DD MMM, YYYY HH:mm" formControlName="hora_fin" (ionChange)="checkTodoElDia()"></ion-datetime>
+                    </ion-item>
+                </div>
+
             </div>
 
-        </div>
-
-        <!-- Repetición -->
-        <div class="m-2 flex flex-col">
-            <div class="flex items-center mb-2">
-                <ion-icon name="reload-outline" class="mr-2" color="primary"></ion-icon>
-                <label for="repeticion" class="text-gray-600">Repetición</label>
-                <p class="ml-auto text-gray-800 text-right w-4/6" (click)="alertRepeticion()">{{repeticion}}</p>
+            <!-- Repetición -->
+            <div class="m-2 flex flex-col">
+                <div class="flex items-center mb-2">
+                    <ion-icon name="reload-outline" class="mr-2" color="primary"></ion-icon>
+                    <label for="repeticion" class="text-gray-600">Repetición</label>
+                    <p class="ml-auto text-gray-800 text-right w-4/6" (click)="alertRepeticion()">{{repeticion}}</p>
+                </div>
             </div>
-        </div>
 
-        <!-- Recordatorio -->
-        <div class="m-2 flex flex-col">
-            <div class="flex items-center mb-2">
-                <ion-icon name="alarm" class="mr-2" color="primary"></ion-icon>
-                <label for="recordatorio" class="text-gray-600">Recordatorio</label>
-                <p class="ml-auto text-gray-800" (click)="alertRecordatorio()">{{recordatorioOptions[recordatorioIndex]}}</p>
+            <!-- Recordatorio -->
+            <div class="m-2 flex flex-col">
+                <div class="flex items-center mb-2">
+                    <ion-icon name="alarm" class="mr-2" color="primary"></ion-icon>
+                    <label for="recordatorio" class="text-gray-600">Recordatorio</label>
+                    <p class="ml-auto text-gray-800" (click)="alertRecordatorio()">{{recordatorioOptions[recordatorioIndex]}}</p>
+                </div>
             </div>
-        </div>
 
-        <!-- Eliminar la tabla Fuente entera, boton temporal -->
-        <!-- <ion-button color="danger" expand="block" (click)="deleteEventos()">
-            Eliminar tabla Fuente
-        </ion-button> -->
-    </form>
+            <!-- Eliminar la tabla Fuente entera, boton temporal -->
+            <ion-button color="danger" expand="block" (click)="deleteEventos()">
+                Eliminar tabla Fuente
+            </ion-button>
+        </form>
+    </ion-content>
+
 </div>

@@ -3,6 +3,12 @@ textarea:focus {
     --tw-ring-color: #9889C2 !important;
 }
 
+ion-content {
+    --background: #f4f4f5;
+    --offset-bottom: -1.5em !important; // Esto es para que se vea el border del <div>
+    --offset-top: -1.5em !important; // Esto es para que se vea el border del <div>
+}
+
 .modal {
     background: rgba(0, 0, 0, 0.32) !important;
 }

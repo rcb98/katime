@@ -83,8 +83,8 @@ export class CrearEventoPage implements OnInit {
       return this.presentToast("La fecha de fin debe ser más antigua que la de inicio.");
     }
 
-    if(!this.eventoForm.value. nombre || !this.eventoForm.value.hora_ini || !this.eventoForm.value.hora_fin) {
-      return this.presentToast("Los campos de nombre, fecha de inicio y fin son obligatorios.");
+    if(!this.eventoForm.value. nombre || !this.eventoForm.value.id_categoria || !this.eventoForm.value.hora_ini || !this.eventoForm.value.hora_fin) {
+      return this.presentToast("Los campos de nombre, categoría, fecha de inicio y fin son obligatorios.");
     }
 
     // Formateamos la fecha
@@ -97,7 +97,7 @@ export class CrearEventoPage implements OnInit {
     this.eventoForm.value.recordatorio = this.recordatorioValues[this.recordatorioIndex];
     this.eventoForm.value.dias = this.dias;
 
-    // console.log(this.eventoForm.value);
+    // alert(JSON.stringify(this.eventoForm.value));
 
     this.fuenteService.createFuente(this.eventoForm.value).then( res => {
       this.presentToast("¡Evento creado!");
