@@ -63,6 +63,20 @@ export class EntradaService {
     });
   }
 
+  loadEntradasCategoria(id:number) {
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE id_categoria = ?`, [id]).then((res) => {
+      let entradas: Entrada[] = [];
+
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++)
+          entradas.push(res.rows.item(i));
+      }
+      this.ENTRADAS.next(entradas);
+    },(e) => {
+      alert(JSON.stringify(e));
+    });
+  }
+
   getEntradas():Observable<Entrada[]> {
     return this.ENTRADAS.asObservable();
   }

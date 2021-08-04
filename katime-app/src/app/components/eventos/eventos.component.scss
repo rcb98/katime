@@ -1,5 +1,21 @@
 ion-content {
     --background: #f4f4f5;
-    --offset-bottom: -1.5em !important; // Esto es para que se vea el border del <div>
+    --offset-bottom: -6em !important; // Esto es para que se vea el border del <div>
     --offset-top: -1.5em !important; // Esto es para que se vea el border del <div>
+}
+
+.hide-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scroll {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.clicked {
+    background-color: rgba(152, 137, 194);
+    color: white !important;
 }

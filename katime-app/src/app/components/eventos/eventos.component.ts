@@ -1,5 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
+import { ToastController } from '@ionic/angular';
+import { Categoria } from 'src/app/interfaces/categoria.interface';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { EntradaService } from 'src/app/services/entrada.service';
@@ -15,12 +17,17 @@ export class EventosComponent implements OnInit {
 
   public entradasHoy: Entrada[] = [];
   public entradasProximas: Entrada[] = [];
+  public categorias: Categoria[] = [];
   public hoy:Date = new Date();
+  public idCategoriaActiva:number = 0;
+  public color:string = 'bg-pink';
+  public num:number = 1;
 
   constructor(private datePipe: DatePipe,
               private categoriaService: CategoriaService,
               private entradaService: EntradaService,
-              private fuenteService: FuenteService) {
+              private fuenteService: FuenteService,
+              private toaster: ToastController) {
                 this.fuenteService.databaseConn();
                 this.entradaService.databaseConn();
                 this.categoriaService.databaseConn();
@@ -29,6 +36,7 @@ export class EventosComponent implements OnInit {
   ngOnInit() {
     this.filtrarEntradas();
     this.getEntradas();
+    this.getCategorias();
   }
 
   filtrarEntradas() {
@@ -98,6 +106,18 @@ export class EventosComponent implements OnInit {
       return this.entradaService.createEntrada(entrada);
   }
 
+  filtrarPorCategoria(id:number) {
+    this.idCategoriaActiva = id;
+    this.entradaService.loadEntradasCategoria(id).then(() => {
+      this.entradaService.getEntradas().subscribe(res => {
+        if(res.length <= 0) {
+          //this.entradaService.loadEntradas();
+          //this.presentToast("No tienes eventos con esa categoría.");
+        }
+      })
+    })
+  }
+
   tiempoRestante(hIni:any) {
     let hora = new Date(hIni),
         diferencia = hora.getTime() - this.hoy.getTime(),
@@ -127,12 +147,47 @@ export class EventosComponent implements OnInit {
     });
   }
 
+  getAllEntradas() {
+    this.idCategoriaActiva = 0;
+    this.entradaService.loadEntradas();
+  }
+
+  getCategorias() {
+    this.categoriaService.getCategorias().subscribe( res => {
+      this.categorias = [];
+      res.forEach(cat => {
+        let categoria:Categoria = {
+          "id_categoria": cat.id_categoria,
+          "nombre": cat.nombre,
+          "color": cat.color
+        }
+        this.categorias.push(categoria);
+      });
+    })
+  }
+
+  getClasesCategoria(id:number) {
+    var clases:any;
+    this.categoriaService.getCategorias().subscribe( res => {
+      res.forEach(cat => {
+        if(cat.id_categoria == id) {
+          if(this.idCategoriaActiva == id){ // Está seleccionada
+            clases = ['bg-' + cat.color, 'border-' + cat.color, 'text-white'];
+          } else { // No está seleccionada
+            clases = ['bg-transparent', 'border-' + cat.color, 'text-' + cat.color];
+          }
+        }
+      });
+    })
+    return clases;
+  }
+
   getColorCategoria(id:number) {
     var color:string = '';
     this.categoriaService.getCategorias().subscribe( res => {
       res.forEach(cat => {
         if(cat.id_categoria == id) {
-          color = cat.color;
+          color = "bg-" + cat.color;
         }
       });
     })
@@ -204,6 +259,16 @@ export class EventosComponent implements OnInit {
       }
     }
     return dias
+  }
+
+  async presentToast(msg:string) {
+    const toast = await this.toaster.create({
+      message: msg,
+      duration: 2000,
+      animated: true,
+      color: "primary"
+    });
+    toast.present();
   }
 
 }

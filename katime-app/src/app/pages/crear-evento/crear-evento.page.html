@@ -7,13 +7,13 @@
         <h3 class="my-4 text-lg font-semibold">Nueva categoría</h3>
 
         <div class="flex">
-            <input type="radio" name="color" formControlName="color" value="bg-pink" class="bg-pink h-7 w-7 mr-1 border-none">
-            <input type="radio" name="color" formControlName="color" value="bg-red" class="bg-red h-7 w-7 mx-1 border-none">
-            <input type="radio" name="color" formControlName="color" value="bg-orange" class="bg-orange h-7 w-7 mx-1 border-none">
-            <input type="radio" name="color" formControlName="color" value="bg-yellow" class="bg-yellow h-7 w-7 mx-1 border-none">
-            <input type="radio" name="color" formControlName="color" value="bg-green" class="bg-green h-7 w-7 mx-1 border-none">
-            <input type="radio" name="color" formControlName="color" value="bg-blue" class="bg-blue h-7 w-7 mx-1 border-none">
-            <input type="radio" name="color" formControlName="color" value="bg-indigo" class="bg-indigo h-7 w-7 mx-1 border-none">
+            <input type="radio" name="color" formControlName="color" value="pink" class="bg-pink h-7 w-7 mr-1 border-none">
+            <input type="radio" name="color" formControlName="color" value="red" class="bg-red h-7 w-7 mx-1 border-none">
+            <input type="radio" name="color" formControlName="color" value="orange" class="bg-orange h-7 w-7 mx-1 border-none">
+            <input type="radio" name="color" formControlName="color" value="yellow" class="bg-yellow h-7 w-7 mx-1 border-none">
+            <input type="radio" name="color" formControlName="color" value="green" class="bg-green h-7 w-7 mx-1 border-none">
+            <input type="radio" name="color" formControlName="color" value="blue" class="bg-blue h-7 w-7 mx-1 border-none">
+            <input type="radio" name="color" formControlName="color" value="indigo" class="bg-indigo h-7 w-7 mx-1 border-none">
         </div>
 
         <!-- Nombre -->
@@ -60,7 +60,7 @@
                 <div class="flex flex-col">
                     <div *ngFor="let categoria of categorias" class="my-1">
                         <label for="{{categoria.id_categoria}}">
-                    <input id="{{categoria.id_categoria}}" [value]='categoria.id_categoria' type="radio" name="id_categoria" formControlName="id_categoria" class="h-7 w-7 mr-2 border-none" [ngClass]="categoria.color">
+                    <input id="{{categoria.id_categoria}}" [value]='categoria.id_categoria' type="radio" name="id_categoria" formControlName="id_categoria" class="h-7 w-7 mr-2 border-none" [ngClass]="'bg-' + categoria.color">
                     {{categoria.nombre}}
                   </label>
                     </div>
