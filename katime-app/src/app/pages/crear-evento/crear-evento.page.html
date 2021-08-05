@@ -7,13 +7,13 @@
         <h3 class="my-4 text-lg font-semibold">Nueva categoría</h3>
 
         <div class="flex">
-            <input type="radio" name="color" formControlName="color" value="pink" class="bg-pink h-7 w-7 mr-1 border-none">
-            <input type="radio" name="color" formControlName="color" value="red" class="bg-red h-7 w-7 mx-1 border-none">
-            <input type="radio" name="color" formControlName="color" value="orange" class="bg-orange h-7 w-7 mx-1 border-none">
-            <input type="radio" name="color" formControlName="color" value="yellow" class="bg-yellow h-7 w-7 mx-1 border-none">
-            <input type="radio" name="color" formControlName="color" value="green" class="bg-green h-7 w-7 mx-1 border-none">
-            <input type="radio" name="color" formControlName="color" value="blue" class="bg-blue h-7 w-7 mx-1 border-none">
-            <input type="radio" name="color" formControlName="color" value="indigo" class="bg-indigo h-7 w-7 mx-1 border-none">
+            <input type="radio" name="color" formControlName="color" value="pink" class="bg-pink h-7 w-7 mr-1 border-none" [ngClass]="{ 'disabled': isCategoria('pink') }">
+            <input type="radio" name="color" formControlName="color" value="red" class="bg-red h-7 w-7 mx-1 border-none" [ngClass]="{ 'disabled': isCategoria('red') }">
+            <input type="radio" name="color" formControlName="color" value="orange" class="bg-orange h-7 w-7 mx-1 border-none" [ngClass]="{ 'disabled': isCategoria('orange') }">
+            <input type="radio" name="color" formControlName="color" value="yellow" class="bg-yellow h-7 w-7 mx-1 border-none" [ngClass]="{ 'disabled': isCategoria('yellow') }">
+            <input type="radio" name="color" formControlName="color" value="green" class="bg-green h-7 w-7 mx-1 border-none" [ngClass]="{ 'disabled': isCategoria('green') }">
+            <input type="radio" name="color" formControlName="color" value="blue" class="bg-blue h-7 w-7 mx-1 border-none" [ngClass]="{ 'disabled': isCategoria('blue') }">
+            <input type="radio" name="color" formControlName="color" value="indigo" class="bg-indigo h-7 w-7 mx-1 border-none" [ngClass]="{ 'disabled': isCategoria('indigo') }">
         </div>
 
         <!-- Nombre -->
@@ -23,7 +23,6 @@
         </div>
     </form>
 </div>
-
 
 <ion-header class="ion-no-border bg-white">
     <app-page-header titulo="Nuevo evento" [goBack]=true>

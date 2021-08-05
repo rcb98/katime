@@ -37,6 +37,7 @@ export class CrearEventoPage implements OnInit {
   // Categoría
   public categorias:Categoria[] = [];
   public modalCategoria:boolean = false;
+  public disableRadio:boolean = true;
 
   // Repetición
   public repeticionOptions:string[] = ["Sin repetición", "Diariamente", "Semanalmente", "Mensualmente", "Anualmente", "Personalizado"];
@@ -76,6 +77,16 @@ export class CrearEventoPage implements OnInit {
     this.getCategorias();
   }
 
+  isCategoria(color:string){
+    let existe = false;
+    this.categorias.forEach(cat => {
+      if(cat.color == color) {
+        existe = true;
+      }
+    });
+    return existe;
+  }
+
   createEvento() {
 
     /* Validaciones */
@@ -113,10 +124,12 @@ export class CrearEventoPage implements OnInit {
     if(!this.categoriaForm.value.nombre) return this.presentToast("El campo nombre es obligatorio.");
     if(!this.categoriaForm.value.color) return this.presentToast("Elige un color para la categoría.");
 
-    this.categoriaService.createCategoria(this.categoriaForm.value).then( res => {
-      this.exitModalCategoria();
-      this.getCategorias();
-    })
+    if(this.categorias.length < 7){
+      this.categoriaService.createCategoria(this.categoriaForm.value).then( res => {
+        this.exitModalCategoria();
+        this.getCategorias();
+      });
+    }
   }
 
   getCategorias() {
@@ -137,7 +150,14 @@ export class CrearEventoPage implements OnInit {
   }
 
   toggleModalCategoria() {
-    this.modalCategoria = !this.modalCategoria;
+    if(this.categorias.length < 7) {
+      this.categoriaForm.reset(); // Vaciamos el categoriaForm al abrir el modal
+      this.categoriaForm.patchValue(this.categoriaForm.value, {onlySelf: false, emitEvent: true}); // Rerender FormGroup
+      this.modalCategoria = !this.modalCategoria;
+    } else {
+      this.exitModalCategoria();
+      this.presentToast("No puedes crear más de 7 categorías");
+    }
   }
 
   exitModalCategoria() {
