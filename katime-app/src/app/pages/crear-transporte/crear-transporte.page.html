@@ -1,9 +1,119 @@
-<ion-header class="ion-no-border bg-white">
+<!-- Modal Localidad -->
+<div class="flex fixed h-screen w-screen z-40" *ngIf="modalLocalidad" (click)="toggleModalLocalidad()">
+    <div class="bg-white fixed bottom-0 w-full h-auto rounded-t-xl z-50">
+        <div class="flex pl-8 pt-8">
+            <ion-icon color="primary" class="text-2xl" name="arrow-back" (click)="toggleModalLocalidad()"></ion-icon>
+        </div>
+
+        <h3 class="my-4 pl-8 text-lg font-semibold">Ciudad/Localidad</h3>
+
+        <ul class="h-64 overflow-y-scroll hide-scroll">
+            <li *ngFor="let localidad of localidades" class="border-b border-gray-200 p-4 pl-8" (click)="setLocalidad(localidad)">{{localidad}}</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Modal Origen -->
+<div class="flex fixed h-screen w-screen z-40" *ngIf="modalOrigen" (click)="toggleModalOrigen()">
+    <div class="bg-white fixed bottom-0 w-full h-auto rounded-t-xl z-50">
+        <div class="flex pl-8 pt-8">
+            <ion-icon color="primary" class="text-2xl" name="arrow-back" (click)="toggleModalOrigen()"></ion-icon>
+        </div>
+
+        <h3 class="my-4 pl-8 text-lg font-semibold">Origen</h3>
+
+        <ul class="h-64 overflow-y-scroll hide-scroll">
+            <!-- <li *ngFor="let localidad of localidades" class="border-b border-gray-200 p-4 pl-8" (click)="setLocalidad(localidad)">{{localidad}}</li> -->
+        </ul>
+    </div>
+</div>
+
+<!-- Modal Destino -->
+<div class="flex fixed h-screen w-screen z-40" *ngIf="modalDestino" (click)="toggleModalDestino()">
+    <div class="bg-white fixed bottom-0 w-full h-auto rounded-t-xl z-50">
+        <div class="flex pl-8 pt-8">
+            <ion-icon color="primary" class="text-2xl" name="arrow-back" (click)="toggleModalDestino()"></ion-icon>
+        </div>
+
+        <h3 class="my-4 pl-8 text-lg font-semibold">Destino</h3>
+
+        <ul class="h-64 overflow-y-scroll hide-scroll">
+            <!-- <li *ngFor="let localidad of localidades" class="border-b border-gray-200 p-4 pl-8" (click)="setLocalidad(localidad)">{{localidad}}</li> -->
+        </ul>
+    </div>
+</div>
+
+<!-- Página -->
+<ion-header class="ion-no-border bg-white pb-4">
     <app-page-header titulo="Nuevo transporte" [goBack]=true>
         <ion-back-button color="primary"></ion-back-button>
+        <div class="flex items-center ml-auto mr-8">
+            <ion-icon name="checkmark" color="primary" class="mr-1"></ion-icon>
+            <p class="text-purple">Crear transporte</p>
+        </div>
     </app-page-header>
 </ion-header>
 
-<div class="bg-gray-100 h-full rounded-t-xl mt-4">
-    <h2 class="p-8 text-gray-800">Contenido</h2>
+<div class="bg-gray-100 h-full rounded-t-xl">
+    <ion-content [scrollEvents]="true">
+        <form [formGroup]="transporteForm" class="m-8 flex flex-col">
+            <!-- Ciudad/Localidad -->
+            <div class="m-2 flex flex-col">
+                <label for="localidad" class="text-gray-600">Ciudad/Localidad</label>
+                <input (click)="toggleModalLocalidad()" type="text" name="localidad" formControlName="localidad" id="localidad" class="rounded-lg border-none mt-0.5">
+            </div>
+
+            <!-- Transporte -->
+            <div class="m-2 flex flex-col">
+                <label for="tipo_trans" class="text-gray-600">Transporte</label>
+            </div>
+
+            <!-- Origen & Destino -->
+            <div class="flex items-center justify-between" *ngIf="transporteForm.value.localidad">
+                <!-- Origen -->
+                <div class="m-2 flex flex-col w-36">
+                    <label for="origen" class="text-gray-600">Origen</label>
+                    <input (click)="toggleModalOrigen()" type="text" name="origen" formControlName="origen" id="origen" class="rounded-lg border-none mt-0.5">
+                </div>
+
+                <ion-icon name="swap-horizontal-outline" color="primary" class="text-3xl mt-4"></ion-icon>
+
+                <!-- Destino -->
+                <div class="m-2 flex flex-col w-36">
+                    <label for="destino" class="text-gray-600">Destino</label>
+                    <input (click)="toggleModalDestino()" type="text" name="destino" id="destino" formControlName="destino" class="rounded-lg border-none mt-0.5">
+                </div>
+            </div>
+
+            <!-- Día(s) -->
+            <div class="m-2 flex flex-col">
+                <label for="tipo_trans" class="text-gray-600">Días</label>
+            </div>
+
+            <!-- Franja horaria -->
+            <div class="m-2 flex flex-col">
+                <div class="flex items-center mb-2">
+                    <ion-icon name="time" class="mr-2" color="primary"></ion-icon>
+                    <label for="fecha" class="text-gray-600">Franja horaria</label>
+                    <div class="ml-auto flex items-center">
+                        <ion-label class="text-gray-600 text-sm">Todo el día</ion-label>
+                        <ion-toggle></ion-toggle>
+                    </div>
+                </div>
+
+                <div>
+                    <ion-item class="my-2 rounded-lg" lines="none">
+                        <ion-label color="medium">Inicio</ion-label>
+                        <ion-datetime display-format="HH:mm" formControlName="hora_ini"></ion-datetime>
+                    </ion-item>
+
+                    <ion-item class="my-2 rounded-lg" lines="none">
+                        <ion-label color="medium">Fin</ion-label>
+                        <ion-datetime display-format="HH:mm" formControlName="hora_fin"></ion-datetime>
+                    </ion-item>
+                </div>
+            </div>
+
+        </form>
+    </ion-content>
 </div>

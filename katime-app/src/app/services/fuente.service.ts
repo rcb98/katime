@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { EntradaService } from './entrada.service';
 import { CategoriaService } from './categoria.service';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
@@ -23,6 +24,7 @@ export class FuenteService {
   constructor(private datePipe: DatePipe,
               private categoriaService: CategoriaService,
               private entradaService: EntradaService,
+              private http: HttpClient,
               private platform: Platform,
               private sqlite: SQLite) {
                 //this.databaseConn();
@@ -99,6 +101,10 @@ export class FuenteService {
 
   getFuentes():Observable<Fuente[]> {
     return this.FUENTES.asObservable();
+  }
+
+  getOrigenes(ciudad:string):Observable<any> {
+    return this.http.get(`./assets/gtfs/${ciudad}/stops.txt`, {responseType: 'text'});
   }
 
   /* POST */

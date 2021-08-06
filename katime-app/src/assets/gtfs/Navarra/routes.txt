@@ -1,0 +1,88 @@
+﻿route_id,agency_id,route_short_name,route_long_name,route_type
+18,3,,Azagra - Logroño,3
+79,17,,Cáseda - Pamplona/Iruña,3
+80,17,,Sangüesa/Zangoza - Tafalla (hijuela),3
+47,13,,Sartaguda - Pamplona/Iruña,3
+48,13,,Los Arcos - Otiñano - Estella/Lizarra,3
+41,13,,Oteiza - Estella/Lizarra (Tierra Estella Bus),3
+24,5,,Azagra - Calahorra,3
+23,5,,Calahorra - Sartaguda,3
+52,13,,Calahorra - Donostia/San Sebastián,3
+54,12,,Pamplona/Iruña - Vitoria/Gasteiz,3
+73,14,,Madotz - Lekunberri,3
+74,14,,Aldatz - Pamplona/Iruña,3
+75,14,,Baraibar - Lekunberri,3
+26,7,,Larraona - Estella/Lizarra,3
+1,9,,Pamplona/Iruña - Zaragoza (autopista),3
+12,1,,Aguilar del Río Alhama - Tudela,3
+16,2,,Jaurrieta - Pamplona/Iruña,3
+57,12,,Clínica Ubarmin - Pamplona/Iruña,3
+35,9,,Pamplona/Iruña - Donostia/San Sebastián (autovía),3
+82,9,,Pamplona/Iruña - Donostia/San Sebastián (autovía-verano),3
+36,9,,Pamplona/Iruña - Donostia/San Sebastián (carretera),3
+28,9,,Baños de Fitero - Pamplona/Iruña,3
+7,9,,Lodosa - Pamplona/Iruña,3
+17,9,,Tudela - Tarazona,3
+21,9,,Pamplona/Iruña - Tafalla - Tudela,3
+29,9,,Tafalla - Artajona - Pamplona/Iruña,3
+38,9,,Tarazona - Tudela - Pamplona/Iruña,3
+19,9,,Falces - Tudela,3
+30,9,,Pamplona/Iruña - Ciudad del Transporte,3
+84,9,,Pamplona/Iruña - Zaragoza (verano),3
+40,9,,Donostia/San Sebastián - Pamplona/Iruña - Zaragoza (solape),3
+81,18,,Viana - Logroño,3
+32,9,,Ochagavía/Otsagabia - Pamplona/Iruña,3
+76,19,,Leitza - Areso,3
+77,19,,Pamplona/Iruña - Leitza - Doneztebe/Santesteban,3
+33,9,,Orbaitzeta - Pamplona/Iruña,3
+22,9,,Sagaseta - Pamplona/Iruña,3
+44,11,,Pamplona/Iruña - Elizondo,3
+25,6,,Calahorra - Vitoria/Gasteiz,3
+27,8,,Goizueta - Hernani,3
+50,13,,Pamplona/Iruña - Aguilar de Codés,3
+15,2,,Eugi - Pamplona/Iruña,3
+43,13,,Los Arcos - Acedo - Estella/Lizarra,3
+34,9,,Pamplona/Iruña - Aoiz/Agoitz - Lumbier,3
+42,13,,Ayegui - Estella/Lizarra (Tierra Estella Bus),3
+31,9,,Milagro - Pamplona/Iruña,3
+8,9,,Lodosa - Pamplona/Iruña (por Funes),3
+59,16,,Uztárroz/Uztarroze - Pamplona/Iruña,3
+13,9,,Lodosa - Pamplona/Iruña (por Caparroso),3
+6,9,,Pamplona/Iruña - Zaragoza (pueblos),3
+61,16,,Figarol - Pamplona/Iruña,3
+1001,22,,Belascoáin,3
+1000,22,,Yerri-Guesálaz,3
+1003,22,,Los Arcos,3
+67,15,,Pamplona/Iruña - Cendea de Olza/Oltza Zendea,3
+63,15,,Pamplona/Iruña - Ultzama (hasta Eltzaburu),3
+65,15,,Pamplona/Iruña - Bidaurreta,3
+66,15,,Pamplona/Iruña - Cendea de Olza/Oltza Zendea - Etxauri,3
+72,15,,Pamplona/Iruña - Ororbia,3
+120,8,,Goizueta - Leitza,3
+49,13,,Mendavia - Los Arcos - Estella/Lizarra,3
+51,13,,Logroño-Donostia/San Sebastián - Irun,3
+64,15,,Ultzama-Pamplona/Iruña,3
+62,16,,Lerín - Pamplona/Iruña,3
+9,1,,Urbano Tudela. Línea Amarilla,3
+45,11,,Donosti/San Sebastián - Elizondo,3
+46,11,,Pamplona/Iruña - Donostia/San Sebastián,3
+301,9,,Pamplona/Iruña-Soria (por autopista),3
+20,4,,Funes - Calahorra,3
+71,15,,Pamplona/Iruña - Etxauri,3
+78,19,,Leitza - Tolosa,3
+39,9,,Cortes - Pamplona/Iruña,3
+14,9,,Tudela - Cortes - Fustiñana,3
+60,16,,Tafalla - Ujué/Uxue,3
+55,12,,Pamplona/Iruña - Lesaka - Donostia/San Sebastián,3
+86,15,,Pamplona/Iruña - Etxauri (periodo escolar),3
+1002,22,,Ollo,3
+68,13,,Pamplona/Iruña - Logroño,3
+69,13,,Pamplona/Iruña - Estella/Lizarra,3
+70,13,,Calahorra - Estella/Lizarra - Pamplona/Iruña,3
+10,1,,Urbano Tudela. Línea Verde,3
+58,12,,Pamplona/Iruña - Zarautz,3
+37,9,,Tudela - Pamplona/Iruña (autopista),3
+11,1,,Urbano Tudela. Línea Roja,3
+300,9,,Pamplona/Iruña-Soria (por carretera),3
+2,10,,Ablitas - Tudela,3
+85,9,,Donostia/San Sebastián - Pamplona/Iruña - Zaragoza (solape-verano),3

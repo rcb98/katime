@@ -1,0 +1,982 @@
+route_id,service_id,trip_id,trip_headsign,direction_id,shape_id
+18,1,18.18.1-1,Logroño - Sartaguda,0,18.18.1_shape
+18,2,18.6.1-1,Azagra - Logroño,1,18.6.1_shape
+18,3,18.6.1-3,Azagra - Logroño,1,18.6.1_shape
+18,4,18.6.1-4,Azagra - Logroño,1,18.6.1_shape
+18,5,18.1.1-1,Sartaguda - Logroño,1,18.1.1_shape
+18,6,18.1.1-4,Sartaguda - Logroño,1,18.1.1_shape
+79,7,79.6.2-0,Pamplona - Caseda,1,79.6.2_shape
+79,8,79.9.2-1,Caseda - Pamplona,0,79.9.2_shape
+80,9,80.12.2-0,Tafalla - Sangüesa,1,80.12.2_shape
+47,10,47.96.3-3,Pamplona - Sartaguda (desde Estella),1,47.96.3_shape
+48,11,48.101.2-0,Otiñano - Estella,0,48.101.2_shape
+48,12,48.101.2-1,Otiñano - Estella,0,48.101.2_shape
+41,13,41.35.3-0,Oteiza - Estella,0,41.35.3_shape
+41,14,41.35.3-1,Oteiza - Estella,0,41.35.3_shape
+24,15,24.25.2-2,Azagra - Calahorra,0,24.25.2_shape
+24,16,24.25.2-3,Azagra - Calahorra,0,24.25.2_shape
+24,17,24.25.2-4,Azagra - Calahorra,0,24.25.2_shape
+24,18,24.26.2-0,Calahorra - Andosilla,1,24.26.2_shape
+24,19,24.27.2-0,Andosilla - Calahorra,0,24.27.2_shape
+24,20,24.16.2-0,Calahorra - San Adrián,1,24.16.2_shape
+24,21,24.16.2-1,Calahorra - San Adrián,1,24.16.2_shape
+24,22,24.17.2-1,San Adrián - Calahorra,0,24.17.2_shape
+23,23,23.1.2-0,Calahorra - San Adrián,1,23.1.2_shape
+23,24,23.7.2-0,Calahorra - Sartaguda,1,23.7.2_shape
+23,25,23.7.2-1,Calahorra - Sartaguda,1,23.7.2_shape
+23,26,23.7.2-2,Calahorra - Sartaguda,1,23.7.2_shape
+23,27,23.10.2-0,Carcar - Calahorra,0,23.10.2_shape
+52,28,52.127.4-0,San Sebastián - Calahorra,1,52.127.4_shape
+23,29,23.15.2-3,Sartaguda - Calahorra (Carcar Pueblo),0,23.15.2_shape
+23,30,23.17.1-0,Sartaguda - Calahorra (Carcar Cadena),0,23.17.1_shape
+23,31,23.18.1-0,Sartaguda - Calahorra (Andosilla Puente  Carcar Cadena),0,23.18.1_shape
+23,32,23.19.1-1,Sartaguda - Calahorra (por Azagra)),0,23.19.1_shape
+23,33,23.19.1-2,Sartaguda - Calahorra (por Azagra)),0,23.19.1_shape
+23,34,23.19.1-3,Sartaguda - Calahorra (por Azagra)),0,23.19.1_shape
+23,35,23.20.1-3,Calahorra - Carcar,1,23.20.1_shape
+23,36,23.20.1-4,Calahorra - Carcar,1,23.20.1_shape
+23,37,23.21.1-2,Calahorra - Carcar,1,23.21.1_shape
+54,38,54.60.4-0,Alsasua - Vitoria,0,54.60.4_shape
+54,39,54.27.3-2,Pamplona - Alsasua - Salvatierra - Vitoria,0,54.27.3_shape
+54,40,54.27.3-3,Pamplona - Alsasua - Salvatierra - Vitoria,0,54.27.3_shape
+73,41,73.1.1-2,Iribas/Baraibar - Lekunberri,0,73.1.1_shape
+54,42,54.72.1-8,Vitoria - Salvatierra - Alsasua - Pamplona,1,54.72.1_shape
+74,43,74.5.1-3,Pamplona - Lekunberri,1,74.5.1_shape
+74,44,74.5.1-4,Pamplona - Lekunberri,1,74.5.1_shape
+74,45,74.6.1-2,Lekunberri - Pamplona,0,74.6.1_shape
+74,46,74.8.1-3,Pamplona - Aldatz,1,74.8.1_shape
+74,47,74.8.1-4,Pamplona - Aldatz,1,74.8.1_shape
+54,48,54.73.1-0,Vitoria - Pamplona Semidirecto (por Irurtzun)(Hospitales),1,54.73.1_shape
+54,49,54.73.1-5,Vitoria - Pamplona Semidirecto (por Irurtzun)(Hospitales),1,54.73.1_shape
+54,50,54.74.1-2,Vitoria - Pamplona Semidirecto (por Irurtzun)(Hospitales+UPNA),1,54.74.1_shape
+74,51,74.9.1-2,Aldatz - Pamplona,0,74.9.1_shape
+75,52,75.10.1-3,Lekunberri - Baraibar,1,75.10.1_shape
+26,53,26.1.3-0,Larraona - Estella,0,26.1.3_shape
+26,54,26.2.3-0,Estella - Larraona,1,26.2.3_shape
+26,55,26.4.3-0,Estella - Larraona  excepto Baquedano  Gollano y Artaza,1,26.4.3_shape
+26,56,26.4.3-1,Estella - Larraona  excepto Baquedano  Gollano y Artaza,1,26.4.3_shape
+26,57,26.5.3-0,Larraona - Estella  excepto Baquedano  Gollano y Artaza,0,26.5.3_shape
+26,58,26.5.3-1,Larraona - Estella  excepto Baquedano  Gollano y Artaza,0,26.5.3_shape
+26,59,26.5.3-2,Larraona - Estella  excepto Baquedano  Gollano y Artaza,0,26.5.3_shape
+73,60,73.2.3-0,Lekunberri - Madotz,1,73.2.3_shape
+73,61,73.3.3-0,Madotz - Lekunberri,0,73.3.3_shape
+1,62,1.1.2-0,Aeropuerto Zaragoza - Pamplona,1,1.1.2_shape
+1,63,1.2.2-1,Aeropuerto Zaragoza - Pamplona (completa),1,1.2.2_shape
+12,64,12.105.2-5,Aguilar - Tudela,0,12.105.2_shape
+12,65,12.105.2-6,Aguilar - Tudela,0,12.105.2_shape
+12,66,12.105.2-7,Aguilar - Tudela,0,12.105.2_shape
+12,67,12.105.2-8,Aguilar - Tudela,0,12.105.2_shape
+12,68,12.105.2-9,Aguilar - Tudela,0,12.105.2_shape
+12,69,12.100.2-8,Puente de Linares - Tudela,0,12.100.2_shape
+12,70,12.100.2-9,Puente de Linares - Tudela,0,12.100.2_shape
+12,71,12.100.2-10,Puente de Linares - Tudela,0,12.100.2_shape
+12,72,12.100.2-11,Puente de Linares - Tudela,0,12.100.2_shape
+12,73,12.100.2-12,Puente de Linares - Tudela,0,12.100.2_shape
+12,74,12.100.2-13,Puente de Linares - Tudela,0,12.100.2_shape
+12,75,12.100.2-14,Puente de Linares - Tudela,0,12.100.2_shape
+12,76,12.100.2-15,Puente de Linares - Tudela,0,12.100.2_shape
+12,77,12.73.2-1,Tudela - Cervera,1,12.73.2_shape
+12,78,12.85.2-8,Hospital - Puente de Linares,1,12.85.2_shape
+12,79,12.85.2-9,Hospital - Puente de Linares,1,12.85.2_shape
+12,80,12.85.2-10,Hospital - Puente de Linares,1,12.85.2_shape
+12,81,12.85.2-11,Hospital - Puente de Linares,1,12.85.2_shape
+12,82,12.85.2-12,Hospital - Puente de Linares,1,12.85.2_shape
+12,83,12.85.2-13,Hospital - Puente de Linares,1,12.85.2_shape
+12,84,12.85.2-14,Hospital - Puente de Linares,1,12.85.2_shape
+12,85,12.85.2-15,Hospital - Puente de Linares,1,12.85.2_shape
+12,86,12.88.2-3,Hospital - Cervera,1,12.88.2_shape
+12,87,12.88.2-4,Hospital - Cervera,1,12.88.2_shape
+12,88,12.91.2-6,Cervera - Tudela,0,12.91.2_shape
+12,89,12.91.2-7,Cervera - Tudela,0,12.91.2_shape
+16,90,16.3.2-0,Pamplona-Roncesvalles,1,16.3.2_shape
+16,91,16.3.2-1,Pamplona-Roncesvalles,1,16.3.2_shape
+16,92,16.3.2-2,Pamplona-Roncesvalles,1,16.3.2_shape
+16,93,16.4.2-0,Roncesvalles-Pamplona,0,16.4.2_shape
+16,94,16.4.2-1,Roncesvalles-Pamplona,0,16.4.2_shape
+16,95,16.4.2-2,Roncesvalles-Pamplona,0,16.4.2_shape
+57,96,57.149.4-3,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+57,97,57.149.4-4,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+57,98,57.149.4-5,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+57,99,57.149.4-6,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+57,100,57.149.4-7,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+35,101,35.219.2-20,San Sebastián - Pamplona (Directo),1,35.219.2_shape
+35,102,35.219.2-21,San Sebastián - Pamplona (Directo),1,35.219.2_shape
+82,103,82.1.1-0,San Sebastián-Pamplona (directo),0,82.1.1_shape
+36,104,36.230.3-0,San Sebastián - Pamplona (parcial  exc. Berastegui  Leitza y Gorriti),1,36.230.3_shape
+36,105,36.230.3-1,San Sebastián - Pamplona (parcial  exc. Berastegui  Leitza y Gorriti),1,36.230.3_shape
+36,106,36.230.3-2,San Sebastián - Pamplona (parcial  exc. Berastegui  Leitza y Gorriti),1,36.230.3_shape
+36,107,36.232.4-0,Pamplona - San Sebastián (directo),0,36.232.4_shape
+28,108,28.174.3-0,Pamplona - Baños de Fitero (excepto Rada),1,28.174.3_shape
+28,109,28.175.3-0,Pamplona - Baños de Fitero,1,28.175.3_shape
+28,110,28.175.3-1,Pamplona - Baños de Fitero,1,28.175.3_shape
+57,111,57.149.4-8,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+7,112,7.45.2-0,Pamplona - Lodosa,1,7.45.2_shape
+7,113,7.45.2-1,Pamplona - Lodosa,1,7.45.2_shape
+57,114,57.149.4-9,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+57,115,57.149.4-10,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+17,116,17.145.2-0,Tarazona - Tudela,1,17.145.2_shape
+17,117,17.134.2-0,Tudela - Tarazona (por Barillas),0,17.134.2_shape
+57,118,57.149.4-11,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+17,119,17.136.2-0,Tudela - Tarazona,0,17.136.2_shape
+21,120,21.161.2-0,Pamplona - Tudela,0,21.161.2_shape
+57,121,57.149.4-12,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+29,122,29.178.3-0,Pamplona - Tafalla,1,29.178.3_shape
+29,123,29.180.2-0,Pamplona - Tafalla (excepto Añorbe),1,29.180.2_shape
+29,124,29.181.2-0,Tafalla - Pamplona,0,29.181.2_shape
+38,125,38.244.4-0,Tudela-Pamplona,0,38.244.4_shape
+19,126,19.157.2-0,Tudela - Villafranca,1,19.157.2_shape
+30,127,30.185.2-0,Ciudad del Transporte,0,30.185.2_shape
+30,128,30.185.2-1,Ciudad del Transporte,0,30.185.2_shape
+30,129,30.185.2-2,Ciudad del Transporte,0,30.185.2_shape
+30,130,30.185.2-3,Ciudad del Transporte,0,30.185.2_shape
+30,131,30.185.2-4,Ciudad del Transporte,0,30.185.2_shape
+30,132,30.185.2-5,Ciudad del Transporte,0,30.185.2_shape
+30,133,30.187.2-0,Pamplona,1,30.187.2_shape
+30,134,30.187.2-1,Pamplona,1,30.187.2_shape
+30,135,30.187.2-2,Pamplona,1,30.187.2_shape
+30,136,30.187.2-3,Pamplona,1,30.187.2_shape
+30,137,30.187.2-4,Pamplona,1,30.187.2_shape
+30,138,30.187.2-5,Pamplona,1,30.187.2_shape
+30,139,30.187.2-6,Pamplona,1,30.187.2_shape
+84,140,84.1.1-0,Pamplona-Zaragoza (Verano),0,84.1.1_shape
+40,141,40.272.3-0,San Sebastián - Zaragoza,0,40.272.3_shape
+40,142,40.256.6-0,San Sebastián-Zaragoza (completa),0,40.256.6_shape
+81,143,81.1.1-25,Logroño - Viana,1,81.1.1_shape
+81,144,81.1.1-26,Logroño - Viana,1,81.1.1_shape
+81,145,81.1.1-27,Logroño - Viana,1,81.1.1_shape
+81,146,81.1.1-28,Logroño - Viana,1,81.1.1_shape
+81,147,81.10.1-19,Viana - Logroño,0,81.10.1_shape
+81,148,81.10.1-20,Viana - Logroño,0,81.10.1_shape
+81,149,81.10.1-21,Viana - Logroño,0,81.10.1_shape
+81,150,81.10.1-22,Viana - Logroño,0,81.10.1_shape
+32,151,32.200.2-0,Pamplona - Ochagavia (completa),1,32.200.2_shape
+32,152,32.201.2-0,Pamplona - Ochagavia,1,32.201.2_shape
+32,153,32.201.2-1,Pamplona - Ochagavia,1,32.201.2_shape
+76,154,76.1.1-2,Leitza  - Areso,1,76.1.1_shape
+76,155,76.1.1-3,Leitza  - Areso,1,76.1.1_shape
+76,156,76.2.1-3,Areso - Leitza,0,76.2.1_shape
+76,157,76.2.1-4,Areso - Leitza,0,76.2.1_shape
+77,158,77.4.2-2,Pamplona - Leitza,1,77.4.2_shape
+77,159,77.6.2-2,Pamplona - Santesteban,1,77.6.2_shape
+77,160,77.5.2-1,Leitza - Pamplona,0,77.5.2_shape
+77,161,77.7.2-3,Santesteban - Pamplona,0,77.7.2_shape
+77,162,77.7.2-4,Santesteban - Pamplona,0,77.7.2_shape
+52,163,52.128.4-0,Calahorra - Pamplona - San Sebastián,0,52.128.4_shape
+33,164,33.207.2-0,Pamplona - Orbaitzeta,1,33.207.2_shape
+33,165,33.207.2-1,Pamplona - Orbaitzeta,1,33.207.2_shape
+33,166,33.207.2-2,Pamplona - Orbaitzeta,1,33.207.2_shape
+33,167,33.209.2-0,Orbaitzeta - Pamplona,0,33.209.2_shape
+22,168,22.168.2-0,Sagaseta - Pamplona,1,22.168.2_shape
+22,169,22.168.2-1,Sagaseta - Pamplona,1,22.168.2_shape
+22,170,22.168.2-2,Sagaseta - Pamplona,1,22.168.2_shape
+22,171,22.168.2-3,Sagaseta - Pamplona,1,22.168.2_shape
+32,172,32.205.2-0,Ochagavia - Pamplona (completa),0,32.205.2_shape
+40,173,40.253.2-1,San Sebastián-Zaragoza (excepto Andoain  Lekunberri  Irurzun),0,40.253.2_shape
+40,174,40.250.2-1,San Sebastián-Aeropuerto Zaragoza (excepto Andoain  Lekunberri  Irurzun),0,40.250.2_shape
+44,175,44.11.2-0,Oronoz Mugaire - Elizondo,0,44.11.2_shape
+44,176,44.11.2-1,Oronoz Mugaire - Elizondo,0,44.11.2_shape
+44,177,44.15.1-5,Elizondo - Oronoz Mugaire ,1,44.15.1_shape
+25,178,25.2.4-0,Calahorra - Vitoria,0,25.2.4_shape
+27,179,27.1.3-3,Hernani - Goizueta,1,27.1.3_shape
+27,180,27.1.3-4,Hernani - Goizueta,1,27.1.3_shape
+50,181,50.109.3-0,Estella - Aguilar de Codés,1,50.109.3_shape
+48,182,48.100.2-0,Estella - Otiñano - Mendaza,1,48.100.2_shape
+48,183,48.100.2-1,Estella - Otiñano - Mendaza,1,48.100.2_shape
+15,184,15.1.2-1,Pamplona - Eugi,1,15.1.2_shape
+15,185,15.2.1-3,Eugi - Pamplona,0,15.2.1_shape
+22,186,22.165.2-0,Pamplona - Sagaseta,0,22.165.2_shape
+22,187,22.165.2-1,Pamplona - Sagaseta,0,22.165.2_shape
+22,188,22.165.2-2,Pamplona - Sagaseta,0,22.165.2_shape
+22,189,22.165.2-3,Pamplona - Sagaseta,0,22.165.2_shape
+43,190,43.88.2-0,Estella - Mues,1,43.88.2_shape
+43,191,43.90.3-0,Mues - Estella,0,43.90.3_shape
+43,192,43.90.3-1,Mues - Estella,0,43.90.3_shape
+34,193,34.211.2-0,Pamplona - Lumbier,0,34.211.2_shape
+34,194,34.211.2-1,Pamplona - Lumbier,0,34.211.2_shape
+34,195,34.211.2-2,Pamplona - Lumbier,0,34.211.2_shape
+34,196,34.217.2-0,Pamplona - Aoiz,0,34.217.2_shape
+18,197,18.25.2-1,Logroño - Azagra,0,18.25.2_shape
+18,198,18.25.2-2,Logroño - Azagra,0,18.25.2_shape
+32,199,32.202.2-0,Ochagavia - Pamplona,0,32.202.2_shape
+40,200,40.259.6-0,San Sebastián-Aeropuerto Zaragoza (completa),0,40.259.6_shape
+40,201,40.267.3-0,San Sebastián-Zaragoza (larga),0,40.267.3_shape
+17,202,17.149.1-1,Tudela - Tarazona,0,17.149.1_shape
+17,203,17.149.1-4,Tudela - Tarazona,0,17.149.1_shape
+17,204,17.142.2-0,Tudela - Tarazona (excepto Murchante),0,17.142.2_shape
+18,205,18.1.1-5,Sartaguda - Logroño,1,18.1.1_shape
+81,206,81.10.1-23,Viana - Logroño,0,81.10.1_shape
+81,207,81.10.1-24,Viana - Logroño,0,81.10.1_shape
+81,208,81.1.1-29,Logroño - Viana,1,81.1.1_shape
+81,209,81.1.1-30,Logroño - Viana,1,81.1.1_shape
+28,210,28.173.3-0,Pamplona - Baños de Fitero,1,28.173.3_shape
+16,211,16.5.3-0,Pamplona - Jaurrieta,1,16.5.3_shape
+16,212,16.5.3-1,Pamplona - Jaurrieta,1,16.5.3_shape
+28,213,28.176.4-0,Fitero - Pamplona,0,28.176.4_shape
+16,214,16.8.3-0,Jaurrieta - Pamplona,0,16.8.3_shape
+16,215,16.8.3-1,Jaurrieta - Pamplona,0,16.8.3_shape
+41,216,41.19.4-0,Oteiza - Hospital Estella,0,41.19.4_shape
+41,217,41.19.4-1,Oteiza - Hospital Estella,0,41.19.4_shape
+41,218,41.19.4-2,Oteiza - Hospital Estella,0,41.19.4_shape
+41,219,41.19.4-3,Oteiza - Hospital Estella,0,41.19.4_shape
+41,220,41.19.4-4,Oteiza - Hospital Estella,0,41.19.4_shape
+41,221,41.19.4-5,Oteiza - Hospital Estella,0,41.19.4_shape
+41,222,41.19.4-6,Oteiza - Hospital Estella,0,41.19.4_shape
+41,223,41.19.4-7,Oteiza - Hospital Estella,0,41.19.4_shape
+41,224,41.19.4-8,Oteiza - Hospital Estella,0,41.19.4_shape
+41,225,41.19.4-9,Oteiza - Hospital Estella,0,41.19.4_shape
+41,226,41.19.4-10,Oteiza - Hospital Estella,0,41.19.4_shape
+41,227,41.19.4-11,Oteiza - Hospital Estella,0,41.19.4_shape
+41,228,41.26.4-0,Villatuerta - Hospital Estella,0,41.26.4_shape
+41,229,41.26.4-1,Villatuerta - Hospital Estella,0,41.26.4_shape
+41,230,41.26.4-2,Villatuerta - Hospital Estella,0,41.26.4_shape
+41,231,41.26.4-3,Villatuerta - Hospital Estella,0,41.26.4_shape
+41,232,41.26.4-4,Villatuerta - Hospital Estella,0,41.26.4_shape
+41,233,41.26.4-5,Villatuerta - Hospital Estella,0,41.26.4_shape
+41,234,41.26.4-6,Villatuerta - Hospital Estella,0,41.26.4_shape
+41,235,41.26.4-7,Villatuerta - Hospital Estella,0,41.26.4_shape
+41,236,41.26.4-8,Villatuerta - Hospital Estella,0,41.26.4_shape
+41,237,41.26.4-9,Villatuerta - Hospital Estella,0,41.26.4_shape
+41,238,41.26.4-10,Villatuerta - Hospital Estella,0,41.26.4_shape
+41,239,41.26.4-11,Villatuerta - Hospital Estella,0,41.26.4_shape
+41,240,41.19.4-12,Oteiza - Hospital Estella,0,41.19.4_shape
+42,241,42.46.3-0,Iratxe - Hospital Estella,0,42.46.3_shape
+42,242,42.46.3-1,Iratxe - Hospital Estella,0,42.46.3_shape
+42,243,42.46.3-2,Iratxe - Hospital Estella,0,42.46.3_shape
+42,244,42.46.3-3,Iratxe - Hospital Estella,0,42.46.3_shape
+42,245,42.46.3-4,Iratxe - Hospital Estella,0,42.46.3_shape
+42,246,42.46.3-5,Iratxe - Hospital Estella,0,42.46.3_shape
+42,247,42.46.3-6,Iratxe - Hospital Estella,0,42.46.3_shape
+42,248,42.46.3-7,Iratxe - Hospital Estella,0,42.46.3_shape
+42,249,42.46.3-8,Iratxe - Hospital Estella,0,42.46.3_shape
+42,250,42.46.3-9,Iratxe - Hospital Estella,0,42.46.3_shape
+42,251,42.46.3-10,Iratxe - Hospital Estella,0,42.46.3_shape
+42,252,42.46.3-11,Iratxe - Hospital Estella,0,42.46.3_shape
+42,253,42.53.3-2,Estella - Arroniz,1,42.53.3_shape
+42,254,42.53.3-3,Estella - Arroniz,1,42.53.3_shape
+42,255,42.55.4-0,Hospital Estella - Villamayor,1,42.55.4_shape
+42,256,42.55.4-1,Hospital Estella - Villamayor,1,42.55.4_shape
+42,257,42.61.4-0,Hospital Estella - Iratxe,1,42.61.4_shape
+42,258,42.61.4-1,Hospital Estella - Iratxe,1,42.61.4_shape
+42,259,42.61.4-2,Hospital Estella - Iratxe,1,42.61.4_shape
+42,260,42.61.4-3,Hospital Estella - Iratxe,1,42.61.4_shape
+42,261,42.61.4-4,Hospital Estella - Iratxe,1,42.61.4_shape
+42,262,42.61.4-5,Hospital Estella - Iratxe,1,42.61.4_shape
+42,263,42.61.4-6,Hospital Estella - Iratxe,1,42.61.4_shape
+42,264,42.61.4-7,Hospital Estella - Iratxe,1,42.61.4_shape
+42,265,42.61.4-8,Hospital Estella - Iratxe,1,42.61.4_shape
+42,266,42.61.4-9,Hospital Estella - Iratxe,1,42.61.4_shape
+42,267,42.61.4-10,Hospital Estella - Iratxe,1,42.61.4_shape
+42,268,42.61.4-11,Hospital Estella - Iratxe,1,42.61.4_shape
+42,269,42.61.4-12,Hospital Estella - Iratxe,1,42.61.4_shape
+42,270,42.67.4-0,Hospital Estella - Arroniz,1,42.67.4_shape
+42,271,42.67.4-1,Hospital Estella - Arroniz,1,42.67.4_shape
+42,272,42.67.4-2,Hospital Estella - Arroniz,1,42.67.4_shape
+42,273,42.67.4-3,Hospital Estella - Arroniz,1,42.67.4_shape
+42,274,42.75.3-0,Igúzquiza - Hospital Estella,0,42.75.3_shape
+42,275,42.75.3-1,Igúzquiza - Hospital Estella,0,42.75.3_shape
+42,276,42.79.3-0,Arroniz - Abarzuza,0,42.79.3_shape
+42,277,42.79.3-1,Arroniz - Abarzuza,0,42.79.3_shape
+42,278,42.79.3-2,Arroniz - Abarzuza,0,42.79.3_shape
+42,279,42.79.3-3,Arroniz - Abarzuza,0,42.79.3_shape
+42,280,42.79.3-4,Arroniz - Abarzuza,0,42.79.3_shape
+42,281,42.87.4-0,Abárzuza - Iratxe,1,42.87.4_shape
+42,282,42.87.4-1,Abárzuza - Iratxe,1,42.87.4_shape
+42,283,42.87.4-2,Abárzuza - Iratxe,1,42.87.4_shape
+42,284,42.87.4-3,Abárzuza - Iratxe,1,42.87.4_shape
+42,285,42.87.4-4,Abárzuza - Iratxe,1,42.87.4_shape
+42,286,42.87.4-5,Abárzuza - Iratxe,1,42.87.4_shape
+42,287,42.88.3-0,Arroniz - Hospital Estella,0,42.88.3_shape
+42,288,42.88.3-1,Arroniz - Hospital Estella,0,42.88.3_shape
+42,289,42.89.4-0,Abárzuza - Arroniz,1,42.89.4_shape
+42,290,42.89.4-1,Abárzuza - Arroniz,1,42.89.4_shape
+42,291,42.89.4-2,Abárzuza - Arroniz,1,42.89.4_shape
+42,292,42.89.4-3,Abárzuza - Arroniz,1,42.89.4_shape
+42,293,42.90.3-0,Abárzuza - Estella,1,42.90.3_shape
+42,294,42.71.1-6,Arroniz - Estella,0,42.71.1_shape
+31,295,31.196.3-0,Milagro - Pamplona,0,31.196.3_shape
+28,296,28.171.4-0,Pamplona - Baños de Fitero (larga),1,28.171.4_shape
+28,297,28.177.6-0,Baños de Fitero - Pamplona,0,28.177.6_shape
+8,298,8.49.4-0,Lodosa - Pamplona (excepto Falces),0,8.49.4_shape
+19,299,19.156.2-1,Falces - Tudela,0,19.156.2_shape
+19,300,19.159.3-1,Tudela - Falces,1,19.159.3_shape
+59,301,59.4.4-0,Pamplona - Uztarroz,1,59.4.4_shape
+59,302,59.1.3-0,Uztarroz - Pamplona (por Garde),0,59.1.3_shape
+59,303,59.2.4-0,Pamplona - Uztarroz (por Garde),1,59.2.4_shape
+59,304,59.4.4-2,Pamplona - Uztarroz,1,59.4.4_shape
+59,305,59.5.4-0,Uztarroz - Pamplona,0,59.5.4_shape
+13,306,13.52.2-0,Rada - Caparroso,0,13.52.2_shape
+6,307,6.33.1-5,Aeropuerto Zaragoza - Tudela,1,6.33.1_shape
+59,308,59.1.3-2,Uztarroz - Pamplona (por Garde),0,59.1.3_shape
+59,309,59.2.4-2,Pamplona - Uztarroz (por Garde),1,59.2.4_shape
+59,310,59.4.4-3,Pamplona - Uztarroz,1,59.4.4_shape
+59,311,59.5.4-3,Uztarroz - Pamplona,0,59.5.4_shape
+59,312,59.5.4-4,Uztarroz - Pamplona,0,59.5.4_shape
+59,313,59.4.4-4,Pamplona - Uztarroz,1,59.4.4_shape
+61,314,61.42.5-1,Pamplona - Carcastillo (directo hasta Tafalla) (excepto Murillo  Caparroso y Traibuenas),1,61.42.5_shape
+1001,315,1001.2.1-6,Pamplona - Belascoain,0,1001.2.1_shape
+1001,316,1001.2.1-7,Pamplona - Belascoain,0,1001.2.1_shape
+1001,317,1001.2.1-8,Pamplona - Belascoain,0,1001.2.1_shape
+1001,318,1001.1.1-4,Belascoain - Pamplona,1,1001.1.1_shape
+1001,319,1001.1.1-5,Belascoain - Pamplona,1,1001.1.1_shape
+1001,320,1001.1.1-6,Belascoain - Pamplona,1,1001.1.1_shape
+27,321,27.1.3-6,Hernani - Goizueta,1,27.1.3_shape
+1000,322,1000.1.1-0,Itinerario 1. Valle Yerri,0,1000.1.1_shape
+1000,323,1000.2.1-0,Itinerario 1. Valle Yerri,1,1000.2.1_shape
+1000,324,1000.3.1-0,Itinerario 2. Valle Yerri,0,1000.3.1_shape
+1000,325,1000.4.1-0,Itinerario 2. Valle Yerri,1,1000.4.1_shape
+1000,326,1000.5.1-0,Itinerario 3. Guesálaz,0,1000.5.1_shape
+1000,327,1000.6.1-0,Itinerario 3. Guesálaz,1,1000.6.1_shape
+1000,328,1000.7.1-0,Itinerario 4. Guesálaz,0,1000.7.1_shape
+1000,329,1000.8.1-0,Itinerario 4. Guesálaz,1,1000.8.1_shape
+1003,330,1003.1.1-0,Los Arcos - Bargota,0,1003.1.1_shape
+1003,331,1003.2.1-0,Los Arcos - Aguilar,0,1003.2.1_shape
+1003,332,1003.2.1-1,Los Arcos - Aguilar,0,1003.2.1_shape
+1003,333,1003.3.1-2,Aguilar - Los Arcos,1,1003.3.1_shape
+1003,334,1003.4.1-0,Bargota-Sansol-Aguilar,1,1003.4.1_shape
+1003,335,1003.5.1-1,Aguilar - Los Arcos,1,1003.5.1_shape
+67,336,67.16.3-9,Pamplona - Cendea de Olza (Primera Mitad),0,67.16.3_shape
+67,337,67.17.1-9,Cendea de Olza - Pamplona (Segunda Mitad),1,67.17.1_shape
+63,338,63.1.3-5,Pamplona-Ultzama Excepto Suarbe (Primera Mitad),0,63.1.3_shape
+63,339,63.4.1-5,Ultzama-Pamplona Excepto Suarbe (Segunda Mitad),1,63.4.1_shape
+65,340,65.8.3-1,Pamplona - Bidaurreta (PrimeraMitad),0,65.8.3_shape
+65,341,65.8.3-2,Pamplona - Bidaurreta (PrimeraMitad),0,65.8.3_shape
+65,342,65.9.1-0,Bidaurreta - Pamplona (Segunda Mitad),1,65.9.1_shape
+65,343,65.9.1-1,Bidaurreta - Pamplona (Segunda Mitad),1,65.9.1_shape
+65,344,65.9.1-2,Bidaurreta - Pamplona (Segunda Mitad),1,65.9.1_shape
+66,345,66.12.3-2,Pamplona - Cendea de Olza - Etxauri (Primera Mitad),0,66.12.3_shape
+66,346,66.12.3-4,Pamplona - Cendea de Olza - Etxauri (Primera Mitad),0,66.12.3_shape
+66,347,66.13.1-2,Etxauri - Pamplona (Segunda Mitad),1,66.13.1_shape
+66,348,66.13.1-4,Etxauri - Pamplona (Segunda Mitad),1,66.13.1_shape
+67,349,67.16.3-1,Pamplona - Cendea de Olza (Primera Mitad),0,67.16.3_shape
+67,350,67.17.1-1,Cendea de Olza - Pamplona (Segunda Mitad),1,67.17.1_shape
+72,351,72.31.3-0,Pamplona - Ororbia (Primera Mitad),0,72.31.3_shape
+72,352,72.31.3-1,Pamplona - Ororbia (Primera Mitad),0,72.31.3_shape
+72,353,72.31.3-2,Pamplona - Ororbia (Primera Mitad),0,72.31.3_shape
+72,354,72.32.1-0, Ororbia - Pamplona (Segunda Mitad),1,72.32.1_shape
+72,355,72.32.1-1, Ororbia - Pamplona (Segunda Mitad),1,72.32.1_shape
+72,356,72.32.1-2, Ororbia - Pamplona (Segunda Mitad),1,72.32.1_shape
+120,357,120.1.1-8,Goizueta-Leitza,0,120.1.1_shape
+120,358,120.1.1-9,Goizueta-Leitza,0,120.1.1_shape
+120,359,120.1.1-10,Goizueta-Leitza,0,120.1.1_shape
+23,360,23.22.1-1,Carcar (Cadena)- Calahorra,0,23.22.1_shape
+49,361,49.103.2-0,Estella - Mendavia,1,49.103.2_shape
+49,362,49.105.2-0,Mendavia - Estella,0,49.105.2_shape
+49,363,49.105.2-1,Mendavia - Estella,0,49.105.2_shape
+49,364,49.106.2-0,Hospital Estella - Mendavia,1,49.106.2_shape
+49,365,49.106.2-1,Hospital Estella - Mendavia,1,49.106.2_shape
+49,366,49.108.2-0,Mendavia - Hospital Estella,0,49.108.2_shape
+51,367,51.117.4-4,San Sebastián - Logroño,1,51.117.4_shape
+51,368,51.120.4-4,Logroño - San Sebastián - Irún,0,51.120.4_shape
+51,369,51.125.4-3,Logroño - San Sebastián,0,51.125.4_shape
+52,370,52.127.4-1,San Sebastián - Calahorra,1,52.127.4_shape
+52,371,52.128.4-1,Calahorra - Pamplona - San Sebastián,0,52.128.4_shape
+42,372,42.74.2-4,Iratxe - Abárzuza,0,42.74.2_shape
+42,373,42.74.2-5,Iratxe - Abárzuza,0,42.74.2_shape
+64,374,64.5.3-0,Ultzama-Pamplona (1),0,64.5.3_shape
+61,375,61.39.8-0,Pamplona - Figarol,1,61.39.8_shape
+61,376,61.26.4-0,Carcastillo-Pamplona (directo desde Tafalla),0,61.26.4_shape
+61,377,61.31.6-0,Olite-Pamplona,0,61.31.6_shape
+61,378,61.38.6-1,Pamplona - Olite,1,61.38.6_shape
+61,379,61.38.6-2,Pamplona - Olite,1,61.38.6_shape
+61,380,61.16.6-0,Carcastillo-Pamplona,0,61.16.6_shape
+61,381,61.27.7-0,Pamplona - Carcastillo (excepto Murillo  Caparroso y Traibuenas) por Unzue,1,61.27.7_shape
+61,382,61.17.5-0,Carcastillo-Pamplona,0,61.17.5_shape
+61,383,61.15.6-0,Caparroso-Pamplona,0,61.15.6_shape
+61,384,61.37.7-0,Pamplona - Olite,1,61.37.7_shape
+61,385,61.45.1-1,Figarol-Pamplona (Intercambiador),0,61.45.1_shape
+6,386,6.25.4-0,Zaragoza - Pamplona (parcial),1,6.25.4_shape
+61,387,61.32.7-0,Pamplona - Carcastillo (directo hasta Tafalla),1,61.32.7_shape
+61,388,61.37.7-1,Pamplona - Olite,1,61.37.7_shape
+28,389,28.172.4-0,Baños de Fitero - Pamplona (por Caparroso),0,28.172.4_shape
+61,390,61.13.8-0,Pamplona - Carcastillo,1,61.13.8_shape
+61,391,61.10.6-0,Carcastillo-Pamplona (por Traibuenas),0,61.10.6_shape
+62,392,62.49.4-0,Lerín - Pamplona (completa),0,62.49.4_shape
+62,393,62.43.2-0,Lerín - Pamplona,0,62.43.2_shape
+62,394,62.43.2-1,Lerín - Pamplona,0,62.43.2_shape
+62,395,62.43.2-2,Lerín - Pamplona,0,62.43.2_shape
+7,396,7.46.5-0,Lodosa - Pamplona,0,7.46.5_shape
+7,397,7.46.5-1,Lodosa - Pamplona,0,7.46.5_shape
+40,398,40.259.6-1,San Sebastián-Aeropuerto Zaragoza (completa),0,40.259.6_shape
+40,399,40.253.2-2,San Sebastián-Zaragoza (excepto Andoain  Lekunberri  Irurzun),0,40.253.2_shape
+17,400,17.140.2-0,Tudela - Tarazona,0,17.140.2_shape
+17,401,17.140.2-2,Tudela - Tarazona,0,17.140.2_shape
+17,402,17.140.2-3,Tudela - Tarazona,0,17.140.2_shape
+17,403,17.140.2-5,Tudela - Tarazona,0,17.140.2_shape
+17,404,17.140.2-6,Tudela - Tarazona,0,17.140.2_shape
+17,405,17.150.1-1,Tarazona - Tudela,1,17.150.1_shape
+17,406,17.150.1-3,Tarazona - Tudela,1,17.150.1_shape
+17,407,17.150.1-4,Tarazona - Tudela,1,17.150.1_shape
+17,408,17.150.1-7,Tarazona - Tudela,1,17.150.1_shape
+17,409,17.148.2-0,Tarazona - Tudela,1,17.148.2_shape
+17,410,17.148.2-2,Tarazona - Tudela,1,17.148.2_shape
+17,411,17.148.2-5,Tarazona - Tudela,1,17.148.2_shape
+17,412,17.148.2-6,Tarazona - Tudela,1,17.148.2_shape
+25,413,25.1.4-0,Vitoria - Calahorra,1,25.1.4_shape
+9,414,9.9.2-12,Díaz Bravo-R. Argentina,0,9.9.2_shape
+9,415,9.9.2-13,Díaz Bravo-R. Argentina,0,9.9.2_shape
+9,416,9.9.2-15,Díaz Bravo-R. Argentina,0,9.9.2_shape
+9,417,9.9.2-17,Díaz Bravo-R. Argentina,0,9.9.2_shape
+9,418,9.9.2-18,Díaz Bravo-R. Argentina,0,9.9.2_shape
+9,419,9.9.2-19,Díaz Bravo-R. Argentina,0,9.9.2_shape
+9,420,9.9.2-20,Díaz Bravo-R. Argentina,0,9.9.2_shape
+9,421,9.9.2-21,Díaz Bravo-R. Argentina,0,9.9.2_shape
+9,422,9.10.1-3,Díaz Bravo-R. Argentina (parada en Misericordia),0,9.10.1_shape
+9,423,9.10.1-5,Díaz Bravo-R. Argentina (parada en Misericordia),0,9.10.1_shape
+45,424,45.17.7-0,San Sebastián - Elizondo,0,45.17.7_shape
+44,425,44.3.7-0,Elizondo - Pamplona,1,44.3.7_shape
+44,426,44.3.7-1,Elizondo - Pamplona,1,44.3.7_shape
+44,427,44.8.8-2,Pamplona - Elizondo,0,44.8.8_shape
+44,428,44.14.3-0,Elizondo - Pamplona (sin Santesteban),1,44.14.3_shape
+44,429,44.15.1-11,Elizondo - Oronoz Mugaire ,1,44.15.1_shape
+44,430,44.15.1-12,Elizondo - Oronoz Mugaire ,1,44.15.1_shape
+44,431,44.11.2-9,Oronoz Mugaire - Elizondo,0,44.11.2_shape
+44,432,44.8.8-3,Pamplona - Elizondo,0,44.8.8_shape
+44,433,44.17.1-0,Pamplona - Elizondo (sin Santesteban Legasa y Narbarte),0,44.17.1_shape
+45,434,45.16.9-2,Elizondo - San Sebastián,1,45.16.9_shape
+45,435,45.16.9-3,Elizondo - San Sebastián,1,45.16.9_shape
+46,436,46.24.11-1,Pamplona - San Sebastián,0,46.24.11_shape
+46,437,46.21.10-1,San Sebastián - Pamplona,1,46.21.10_shape
+46,438,46.26.6-1,Pamplona - San Sebastián (8h  varía trazado Burlada),0,46.26.6_shape
+29,439,29.179.2-1,Tafalla - Pamplona (excepto Añorbe),0,29.179.2_shape
+301,440,301.9.1-3,LanzaderaTudela-Cintruénigo,0,301.9.1_shape
+301,441,301.10.1-6,Lanzadera Cintruénigo-Tudela,1,301.10.1_shape
+51,442,51.116.4-2,Irún - San Sebastián - Logroño,1,51.116.4_shape
+51,443,51.116.4-3,Irún - San Sebastián - Logroño,1,51.116.4_shape
+51,444,51.116.4-4,Irún - San Sebastián - Logroño,1,51.116.4_shape
+51,445,51.117.4-6,San Sebastián - Logroño,1,51.117.4_shape
+51,446,51.117.4-7,San Sebastián - Logroño,1,51.117.4_shape
+51,447,51.117.4-8,San Sebastián - Logroño,1,51.117.4_shape
+51,448,51.120.4-5,Logroño - San Sebastián - Irún,0,51.120.4_shape
+51,449,51.125.4-5,Logroño - San Sebastián,0,51.125.4_shape
+51,450,51.125.4-6,Logroño - San Sebastián,0,51.125.4_shape
+51,451,51.125.4-7,Logroño - San Sebastián,0,51.125.4_shape
+51,452,51.125.4-8,Logroño - San Sebastián,0,51.125.4_shape
+20,453,20.3.2-0,Funes - Calahorra,0,20.3.2_shape
+20,454,20.3.2-1,Funes - Calahorra,0,20.3.2_shape
+20,455,20.1.2-0,Calahorra - Funes,1,20.1.2_shape
+20,456,20.1.2-1,Calahorra - Funes,1,20.1.2_shape
+57,457,57.149.4-18,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+51,458,51.117.4-0,San Sebastián - Logroño,1,51.117.4_shape
+51,459,51.117.4-3,San Sebastián - Logroño,1,51.117.4_shape
+51,460,51.120.4-0,Logroño - San Sebastián - Irún,0,51.120.4_shape
+66,461,66.12.3-5,Pamplona - Cendea de Olza - Etxauri (Primera Mitad),0,66.12.3_shape
+66,462,66.12.3-6,Pamplona - Cendea de Olza - Etxauri (Primera Mitad),0,66.12.3_shape
+66,463,66.12.3-7,Pamplona - Cendea de Olza - Etxauri (Primera Mitad),0,66.12.3_shape
+66,464,66.13.1-5,Etxauri - Pamplona (Segunda Mitad),1,66.13.1_shape
+66,465,66.13.1-6,Etxauri - Pamplona (Segunda Mitad),1,66.13.1_shape
+66,466,66.13.1-7,Etxauri - Pamplona (Segunda Mitad),1,66.13.1_shape
+67,467,67.16.3-10,Pamplona - Cendea de Olza (Primera Mitad),0,67.16.3_shape
+67,468,67.16.3-11,Pamplona - Cendea de Olza (Primera Mitad),0,67.16.3_shape
+67,469,67.16.3-12,Pamplona - Cendea de Olza (Primera Mitad),0,67.16.3_shape
+67,470,67.16.3-13,Pamplona - Cendea de Olza (Primera Mitad),0,67.16.3_shape
+301,471,301.4.1-6,Soria-Pamplona/Iruña (por Cintruénigo y Tafalla),1,301.4.1_shape
+301,472,301.7.1-1,Soria-Pamplona/Iruña (por Cintruénigo),1,301.7.1_shape
+301,473,301.9.1-6,LanzaderaTudela-Cintruénigo,0,301.9.1_shape
+301,474,301.10.1-10,Lanzadera Cintruénigo-Tudela,1,301.10.1_shape
+54,475,54.26.4-3,Pamplona - Ziordia,0,54.26.4_shape
+54,476,54.26.4-4,Pamplona - Ziordia,0,54.26.4_shape
+54,477,54.26.4-5,Pamplona - Ziordia,0,54.26.4_shape
+54,478,54.26.4-6,Pamplona - Ziordia,0,54.26.4_shape
+54,479,54.69.6-0,Pamplona - Vitoria,0,54.69.6_shape
+54,480,54.69.6-5,Pamplona - Vitoria,0,54.69.6_shape
+54,481,54.69.6-6,Pamplona - Vitoria,0,54.69.6_shape
+54,482,54.69.6-7,Pamplona - Vitoria,0,54.69.6_shape
+54,483,54.69.6-8,Pamplona - Vitoria,0,54.69.6_shape
+54,484,54.76.2-0,Ziordia - Pamplona (Hospi  UPNA),1,54.76.2_shape
+54,485,54.77.2-0,Ziordia - Pamplona (Hospitales) (Irurtzun-Pna directo),1,54.77.2_shape
+54,486,54.75.2-2,Ziordia - Pamplona (Hospitales),1,54.75.2_shape
+54,487,54.75.2-4,Ziordia - Pamplona (Hospitales),1,54.75.2_shape
+54,488,54.75.2-5,Ziordia - Pamplona (Hospitales),1,54.75.2_shape
+54,489,54.75.2-6,Ziordia - Pamplona (Hospitales),1,54.75.2_shape
+54,490,54.78.2-1,Vitoria - Pamplona (por pueblos),1,54.78.2_shape
+54,491,54.78.2-3,Vitoria - Pamplona (por pueblos),1,54.78.2_shape
+54,492,54.78.2-4,Vitoria - Pamplona (por pueblos),1,54.78.2_shape
+54,493,54.8.3-0,Ziordia - Pamplona,1,54.8.3_shape
+301,494,301.2.1-7,Pamplona/Iruña-Soria (por Tafalla y Cintruénigo),0,301.2.1_shape
+301,495,301.9.1-7,LanzaderaTudela-Cintruénigo,0,301.9.1_shape
+67,496,67.16.3-14,Pamplona - Cendea de Olza (Primera Mitad),0,67.16.3_shape
+67,497,67.16.3-15,Pamplona - Cendea de Olza (Primera Mitad),0,67.16.3_shape
+67,498,67.16.3-16,Pamplona - Cendea de Olza (Primera Mitad),0,67.16.3_shape
+67,499,67.17.1-10,Cendea de Olza - Pamplona (Segunda Mitad),1,67.17.1_shape
+67,500,67.17.1-11,Cendea de Olza - Pamplona (Segunda Mitad),1,67.17.1_shape
+67,501,67.17.1-12,Cendea de Olza - Pamplona (Segunda Mitad),1,67.17.1_shape
+67,502,67.17.1-13,Cendea de Olza - Pamplona (Segunda Mitad),1,67.17.1_shape
+67,503,67.17.1-14,Cendea de Olza - Pamplona (Segunda Mitad),1,67.17.1_shape
+67,504,67.17.1-15,Cendea de Olza - Pamplona (Segunda Mitad),1,67.17.1_shape
+67,505,67.17.1-16,Cendea de Olza - Pamplona (Segunda Mitad),1,67.17.1_shape
+71,506,71.27.3-5,Pamplona - Etxauri (PrimeraMitad),0,71.27.3_shape
+71,507,71.27.3-6,Pamplona - Etxauri (PrimeraMitad),0,71.27.3_shape
+71,508,71.27.3-7,Pamplona - Etxauri (PrimeraMitad),0,71.27.3_shape
+71,509,71.28.1-5,Etxauri - Pamplona (Segunda Mitad),1,71.28.1_shape
+71,510,71.28.1-6,Etxauri - Pamplona (Segunda Mitad),1,71.28.1_shape
+63,511,63.3.3-3,Pamplona-Ultzama (Primera Mitad),0,63.3.3_shape
+63,512,63.3.3-4,Pamplona-Ultzama (Primera Mitad),0,63.3.3_shape
+63,513,63.5.1-3,Ultzama-Pamplona (Segunda Mitad),1,63.5.1_shape
+63,514,63.5.1-4,Ultzama-Pamplona (Segunda Mitad),1,63.5.1_shape
+78,515,78.10.4-0,Tolosa - Leitza,1,78.10.4_shape
+78,516,78.10.4-1,Tolosa - Leitza,1,78.10.4_shape
+78,517,78.10.4-2,Tolosa - Leitza,1,78.10.4_shape
+78,518,78.10.4-3,Tolosa - Leitza,1,78.10.4_shape
+78,519,78.18.4-0,Leitza - Tolosa,0,78.18.4_shape
+78,520,78.18.4-1,Leitza - Tolosa,0,78.18.4_shape
+78,521,78.18.4-2,Leitza - Tolosa,0,78.18.4_shape
+78,522,78.18.4-3,Leitza - Tolosa,0,78.18.4_shape
+78,523,78.18.4-4,Leitza - Tolosa,0,78.18.4_shape
+78,524,78.18.4-5,Leitza - Tolosa,0,78.18.4_shape
+39,525,39.245.2-0,Novillas-Tudela,0,39.245.2_shape
+14,526,14.70.2-0,Tudela - Novillas,0,14.70.2_shape
+14,527,14.79.3-0,Tudela - Fontellas- Cabanillas-Fustiñana,0,14.79.3_shape
+14,528,14.89.2-0,Tudela - Fustiñana,0,14.89.2_shape
+14,529,14.89.2-1,Tudela - Fustiñana,0,14.89.2_shape
+14,530,14.100.3-0,Novillas - Tudela,1,14.100.3_shape
+14,531,14.96.4-0,Fustiñana - Tudela,1,14.96.4_shape
+14,532,14.101.3-0,Cortes - Tudela,1,14.101.3_shape
+14,533,14.101.3-1,Cortes - Tudela,1,14.101.3_shape
+14,534,14.101.3-2,Cortes - Tudela,1,14.101.3_shape
+14,535,14.101.3-3,Cortes - Tudela,1,14.101.3_shape
+14,536,14.101.3-4,Cortes - Tudela,1,14.101.3_shape
+14,537,14.101.3-5,Cortes - Tudela,1,14.101.3_shape
+14,538,14.101.3-6,Cortes - Tudela,1,14.101.3_shape
+14,539,14.101.3-7,Cortes - Tudela,1,14.101.3_shape
+14,540,14.101.3-8,Cortes - Tudela,1,14.101.3_shape
+14,541,14.101.3-9,Cortes - Tudela,1,14.101.3_shape
+14,542,14.101.3-10,Cortes - Tudela,1,14.101.3_shape
+14,543,14.101.3-11,Cortes - Tudela,1,14.101.3_shape
+14,544,14.101.3-12,Cortes - Tudela,1,14.101.3_shape
+14,545,14.101.3-13,Cortes - Tudela,1,14.101.3_shape
+14,546,14.101.3-14,Cortes - Tudela,1,14.101.3_shape
+14,547,14.118.2-1,Tudela - Cortes,0,14.118.2_shape
+14,548,14.118.2-2,Tudela - Cortes,0,14.118.2_shape
+14,549,14.118.2-3,Tudela - Cortes,0,14.118.2_shape
+14,550,14.118.2-4,Tudela - Cortes,0,14.118.2_shape
+14,551,14.118.2-5,Tudela - Cortes,0,14.118.2_shape
+14,552,14.118.2-6,Tudela - Cortes,0,14.118.2_shape
+14,553,14.118.2-7,Tudela - Cortes,0,14.118.2_shape
+14,554,14.118.2-8,Tudela - Cortes,0,14.118.2_shape
+14,555,14.118.2-9,Tudela - Cortes,0,14.118.2_shape
+14,556,14.118.2-10,Tudela - Cortes,0,14.118.2_shape
+14,557,14.118.2-11,Tudela - Cortes,0,14.118.2_shape
+14,558,14.118.2-12,Tudela - Cortes,0,14.118.2_shape
+14,559,14.129.3-0,Fustiñana - Tudela,1,14.129.3_shape
+61,560,61.31.6-3,Olite-Pamplona,0,61.31.6_shape
+61,561,61.41.7-1,Figarol-Pamplona,0,61.41.7_shape
+61,562,61.25.7-1,Pamplona - Carcastillo (excepto Murillo  Caparroso y Traibuenas),1,61.25.7_shape
+60,563,60.9.1-0,Tafalla-Pamplona,0,60.9.1_shape
+54,564,54.21.3-5,Vitoria - Pamplona Semidirecto (por Irurtzun),1,54.21.3_shape
+54,565,54.38.4-1,Vitoria - Alsasua,1,54.38.4_shape
+54,566,54.21.3-0,Vitoria - Pamplona Semidirecto (por Irurtzun),1,54.21.3_shape
+54,567,54.21.3-1,Vitoria - Pamplona Semidirecto (por Irurtzun),1,54.21.3_shape
+54,568,54.21.3-3,Vitoria - Pamplona Semidirecto (por Irurtzun),1,54.21.3_shape
+54,569,54.21.3-4,Vitoria - Pamplona Semidirecto (por Irurtzun),1,54.21.3_shape
+54,570,54.52.3-1,Vitoria - Salvatierra - Alsasua - Pamplona,1,54.52.3_shape
+54,571,54.52.3-4,Vitoria - Salvatierra - Alsasua - Pamplona,1,54.52.3_shape
+75,572,75.12.1-3,Baraibar - Lekunberri,0,75.12.1_shape
+1,573,1.3.2-0,Zaragoza - Mallen - Tudela - Pamplona,1,1.3.2_shape
+1,574,1.6.2-0,Zaragoza - Tudela - Pamplona,1,1.6.2_shape
+35,575,35.229.3-0,San Sebastián - Pamplona (para en Hospital),1,35.229.3_shape
+35,576,35.229.3-1,San Sebastián - Pamplona (para en Hospital),1,35.229.3_shape
+19,577,19.160.1-0,Villafranca - Tudela (hasta Hospital Reina Sofía),0,19.160.1_shape
+19,578,19.161.1-1,Tudela - Villafranca (desde Hospital Reina Sofía),1,19.161.1_shape
+19,579,19.154.1-5,Villafranca - Tudela,0,19.154.1_shape
+19,580,19.157.2-2,Tudela - Villafranca,1,19.157.2_shape
+19,581,19.162.1-0,Falces - Tudela (hasta Hospital Reina Sofía),0,19.162.1_shape
+19,582,19.156.2-2,Falces - Tudela,0,19.156.2_shape
+19,583,19.163.1-0,Tudela - Falces (desde Hospital Reina Sofía),1,19.163.1_shape
+19,584,19.159.3-2,Tudela - Falces,1,19.159.3_shape
+301,585,301.5.1-3,Pamplona/Iruña-Soria (por Cintruénigo),0,301.5.1_shape
+301,586,301.6.1-2,Soria-Pamplona/Iruña (por Cintruénigo),1,301.6.1_shape
+301,587,301.2.1-3,Pamplona/Iruña-Soria (por Tafalla y Cintruénigo),0,301.2.1_shape
+301,588,301.2.1-4,Pamplona/Iruña-Soria (por Tafalla y Cintruénigo),0,301.2.1_shape
+301,589,301.4.1-2,Soria-Pamplona/Iruña (por Cintruénigo y Tafalla),1,301.4.1_shape
+301,590,301.4.1-3,Soria-Pamplona/Iruña (por Cintruénigo y Tafalla),1,301.4.1_shape
+301,591,301.2.1-5,Pamplona/Iruña-Soria (por Tafalla y Cintruénigo),0,301.2.1_shape
+301,592,301.2.1-6,Pamplona/Iruña-Soria (por Tafalla y Cintruénigo),0,301.2.1_shape
+301,593,301.9.1-4,LanzaderaTudela-Cintruénigo,0,301.9.1_shape
+301,594,301.9.1-5,LanzaderaTudela-Cintruénigo,0,301.9.1_shape
+301,595,301.4.1-4,Soria-Pamplona/Iruña (por Cintruénigo y Tafalla),1,301.4.1_shape
+301,596,301.4.1-5,Soria-Pamplona/Iruña (por Cintruénigo y Tafalla),1,301.4.1_shape
+301,597,301.10.1-8,Lanzadera Cintruénigo-Tudela,1,301.10.1_shape
+301,598,301.10.1-9,Lanzadera Cintruénigo-Tudela,1,301.10.1_shape
+61,599,61.44.2-1,Olite-Pamplona (por Unzué),0,61.44.2_shape
+71,600,71.28.1-7,Etxauri - Pamplona (Segunda Mitad),1,71.28.1_shape
+63,601,63.1.3-6,Pamplona-Ultzama Excepto Suarbe (Primera Mitad),0,63.1.3_shape
+63,602,63.4.1-6,Ultzama-Pamplona Excepto Suarbe (Segunda Mitad),1,63.4.1_shape
+55,603,55.71.10-0,Donosti/San Sebastián - Lesaka,1,55.71.10_shape
+55,604,55.71.10-1,Donosti/San Sebastián - Lesaka,1,55.71.10_shape
+55,605,55.75.8-0,Irún - Pamplona,1,55.75.8_shape
+55,606,55.77.6-0,Irún - Lesaka,1,55.77.6_shape
+55,607,55.77.6-1,Irún - Lesaka,1,55.77.6_shape
+55,608,55.77.6-2,Irún - Lesaka,1,55.77.6_shape
+55,609,55.77.6-3,Irún - Lesaka,1,55.77.6_shape
+55,610,55.78.11-0,Donosti/San Sebastián - Pamplona,1,55.78.11_shape
+55,611,55.80.9-0,Pamplona - Irún,0,55.80.9_shape
+55,612,55.80.9-1,Pamplona - Irún,0,55.80.9_shape
+55,613,55.80.9-2,Pamplona - Irún,0,55.80.9_shape
+55,614,55.82.10-0,Lesaka - Donosti/San Sebastián,0,55.82.10_shape
+55,615,55.86.7-0,Lesaka - Irún,0,55.86.7_shape
+55,616,55.86.7-1,Lesaka - Irún,0,55.86.7_shape
+55,617,55.86.7-2,Lesaka - Irún,0,55.86.7_shape
+55,618,55.86.7-3,Lesaka - Irún,0,55.86.7_shape
+55,619,55.86.7-4,Lesaka - Irún,0,55.86.7_shape
+55,620,55.87.8-0,Donosti/San Sebastián - Lesaka (por Endarlatsa),1,55.87.8_shape
+55,621,55.88.9-0,Lesaka - Donosti/San Sebastián (por Endarlatsa),0,55.88.9_shape
+40,622,40.264.2-12,Zaragoza-Tudela-Pamplona-San Sebastián,1,40.264.2_shape
+40,623,40.264.2-13,Zaragoza-Tudela-Pamplona-San Sebastián,1,40.264.2_shape
+40,624,40.265.2-4,Zaragoza-Pamplona-San Sebastián,1,40.265.2_shape
+40,625,40.268.3-4,Irún - Zaragoza,0,40.268.3_shape
+40,626,40.271.4-1,San Sebastián - Zaragoza (por Berastegi),0,40.271.4_shape
+40,627,40.278.4-1,San Sebastián - Zaragoza (por Tudela),0,40.278.4_shape
+40,628,40.279.4-1,Zaragoza-Pamplona-San Sebastián por Hospital Pamplona,1,40.279.4_shape
+40,629,40.281.2-3,Zaragoza-Irun (sin Tudela),1,40.281.2_shape
+40,630,40.284.1-1,San Sebastián-Pamplona-Tudela-Zaragoza,0,40.284.1_shape
+14,631,14.127.2-0,Cortes - Tudela,1,14.127.2_shape
+14,632,14.128.2-0,Cortes - Tudela,1,14.128.2_shape
+71,633,71.27.3-4,Pamplona - Etxauri (PrimeraMitad),0,71.27.3_shape
+71,634,71.28.1-4,Etxauri - Pamplona (Segunda Mitad),1,71.28.1_shape
+79,635,79.9.2-6,Caseda - Pamplona,0,79.9.2_shape
+31,636,31.198.3-1,Pamplona - Milagro,1,31.198.3_shape
+31,637,31.198.3-2,Pamplona - Milagro,1,31.198.3_shape
+31,638,31.199.3-0,Milagro - Pamplona,0,31.199.3_shape
+31,639,31.197.4-0,Milagro - Pamplona (excepto Falces),0,31.197.4_shape
+6,640,6.30.4-0,Pamplona - Zaragoza (por Ribaforada),0,6.30.4_shape
+6,641,6.30.4-1,Pamplona - Zaragoza (por Ribaforada),0,6.30.4_shape
+6,642,6.31.5-0,Pamplona - Zaragoza (Intercambiador),0,6.31.5_shape
+6,643,6.39.4-0,Pamplona - Aeropuerto Zaragoza,0,6.39.4_shape
+6,644,6.43.4-0,Pamplona - Zaragoza (por Murillo),0,6.43.4_shape
+6,645,6.29.5-0,Zaragoza - Pamplona,1,6.29.5_shape
+6,646,6.38.5-0,Tudela - Pamplona,1,6.38.5_shape
+6,647,6.32.4-0,Pamplona - Tudela,0,6.32.4_shape
+6,648,6.34.4-0,Pamplona - Tudela (paradas UNAV  UPNA),0,6.34.4_shape
+13,649,13.51.6-0,Pamplona - Lodosa,1,13.51.6_shape
+13,650,13.53.5-0,Pamplona - Lodosa por Unzue,1,13.53.5_shape
+13,651,13.50.7-0,Lodosa - Pamplona,0,13.50.7_shape
+40,652,40.246.4-0,Zaragoza-Pamplona Hospital-San Sebastián,1,40.246.4_shape
+40,653,40.251.4-0,San Sebastián-Zaragoza por Hospital Pamplona (excepto Andoain  Lekunberri  Irurzun),0,40.251.4_shape
+40,654,40.263.4-0,Zaragoza-San Sebastián (larga),1,40.263.4_shape
+40,655,40.280.4-1,Aeropuerto Zaragoza-San Sebastián por Universidad,1,40.280.4_shape
+86,656,86.1.1-4,Pamplona - Etxauri (periodo escolar),0,86.1.1_shape
+1002,657,1002.4.2-0,Pamplona (San Juan)-Iza,1,1002.4.2_shape
+1002,658,1002.3.2-0,Iza-Pamplona (San Juan),0,1002.3.2_shape
+1002,659,1002.1.2-0,Arteta-Pamplona (San Juan),0,1002.1.2_shape
+1002,660,1002.1.2-1,Arteta-Pamplona (San Juan),0,1002.1.2_shape
+1002,661,1002.1.2-2,Arteta-Pamplona (San Juan),0,1002.1.2_shape
+1002,662,1002.2.2-0,Pamplona (San Juan)-Arteta,1,1002.2.2_shape
+1002,663,1002.2.2-1,Pamplona (San Juan)-Arteta,1,1002.2.2_shape
+1002,664,1002.2.2-2,Pamplona (San Juan)-Arteta,1,1002.2.2_shape
+68,665,68.129.3-0,Logroño - Estella - Puente la Reina - Zizur - Pamplona,1,68.129.3_shape
+68,666,68.131.3-0,Pamplona-Zizur-Puente La Reina-Estella-Los Arcos-Viana-Logroño (semidirecto),0,68.131.3_shape
+68,667,68.133.3-0,Logroño-Viana-Los Arcos-Estella-Pte-Zizur-Pamplona,1,68.133.3_shape
+68,668,68.135.3-0,Logroño-Pamplona (Línea completa),1,68.135.3_shape
+68,669,68.135.3-1,Logroño-Pamplona (Línea completa),1,68.135.3_shape
+68,670,68.135.3-2,Logroño-Pamplona (Línea completa),1,68.135.3_shape
+47,671,47.91.4-0,Pamplona - Sartaguda (desde pamplona) (excepto Cirauqui y Mañeru),1,47.91.4_shape
+47,672,47.98.4-0,Sartaguda - Pamplona (hasta Pamplona),0,47.98.4_shape
+47,673,47.98.4-1,Sartaguda - Pamplona (hasta Pamplona),0,47.98.4_shape
+47,674,47.99.4-0,Sartaguda - Pamplona (hasta Pamplona) (excepto Cirauqui y Mañeru),0,47.99.4_shape
+47,675,47.100.2-0,Pamplona - Sartaguda (desde Pamplona),1,47.100.2_shape
+47,676,47.100.2-1,Pamplona - Sartaguda (desde Pamplona),1,47.100.2_shape
+68,677,68.144.1-4,Logroño - Estella,1,68.144.1_shape
+68,678,68.147.3-0,Pamplona - Zizur - Puente La Reina - Estella - Logroño,0,68.147.3_shape
+68,679,68.148.3-0,Pamplona - Zizur - Puente La Reina - Estella - Logroño (semidirecto),0,68.148.3_shape
+69,680,69.151.2-0,Estella - Pamplona,1,69.151.2_shape
+69,681,69.151.2-1,Estella - Pamplona,1,69.151.2_shape
+69,682,69.153.2-1,Pamplona - Estella (para en Astráin),0,69.153.2_shape
+69,683,69.153.2-2,Pamplona - Estella (para en Astráin),0,69.153.2_shape
+70,684,70.155.4-0,Estella - Calahorra (enlaza zon Pna-Sartaguda en Estella),1,70.155.4_shape
+70,685,70.157.4-0,Pamplona - Calahorra (completa),1,70.157.4_shape
+70,686,70.157.4-1,Pamplona - Calahorra (completa),1,70.157.4_shape
+70,687,70.158.4-0,Calahorra - Pamplona (excepto Ciraurqui y Mañeru),0,70.158.4_shape
+70,688,70.158.4-1,Calahorra - Pamplona (excepto Ciraurqui y Mañeru),0,70.158.4_shape
+70,689,70.160.4-0,Calahorra - Pamplona (completa),0,70.160.4_shape
+69,690,69.155.1-1,Pamplona - Estella (periodo lectivo),0,69.155.1_shape
+69,691,69.153.2-3,Pamplona - Estella (para en Astráin),0,69.153.2_shape
+65,692,65.8.3-3,Pamplona - Bidaurreta (PrimeraMitad),0,65.8.3_shape
+68,693,68.142.2-0,Pamplona - Logroño (Línea completa),0,68.142.2_shape
+68,694,68.142.2-1,Pamplona - Logroño (Línea completa),0,68.142.2_shape
+68,695,68.142.2-2,Pamplona - Logroño (Línea completa),0,68.142.2_shape
+10,696,10.25.1-24,Alianto - P.Invierno,0,10.25.1_shape
+10,697,10.25.1-25,Alianto - P.Invierno,0,10.25.1_shape
+10,698,10.25.1-26,Alianto - P.Invierno,0,10.25.1_shape
+10,699,10.25.1-27,Alianto - P.Invierno,0,10.25.1_shape
+10,700,10.25.1-28,Alianto - P.Invierno,0,10.25.1_shape
+10,701,10.25.1-29,Alianto - P.Invierno,0,10.25.1_shape
+10,702,10.25.1-30,Alianto - P.Invierno,0,10.25.1_shape
+10,703,10.25.1-31,Alianto - P.Invierno,0,10.25.1_shape
+10,704,10.25.1-32,Alianto - P.Invierno,0,10.25.1_shape
+10,705,10.25.1-33,Alianto - P.Invierno,0,10.25.1_shape
+10,706,10.25.1-34,Alianto - P.Invierno,0,10.25.1_shape
+10,707,10.25.1-35,Alianto - P.Invierno,0,10.25.1_shape
+10,708,10.25.1-36,Alianto - P.Invierno,0,10.25.1_shape
+10,709,10.25.1-37,Alianto - P.Invierno,0,10.25.1_shape
+10,710,10.25.1-38,Alianto - P.Invierno,0,10.25.1_shape
+10,711,10.25.1-39,Alianto - P.Invierno,0,10.25.1_shape
+10,712,10.25.1-40,Alianto - P.Invierno,0,10.25.1_shape
+10,713,10.25.1-41,Alianto - P.Invierno,0,10.25.1_shape
+10,714,10.25.1-42,Alianto - P.Invierno,0,10.25.1_shape
+10,715,10.25.1-43,Alianto - P.Invierno,0,10.25.1_shape
+10,716,10.25.1-44,Alianto - P.Invierno,0,10.25.1_shape
+10,717,10.25.1-45,Alianto - P.Invierno,0,10.25.1_shape
+10,718,10.25.1-46,Alianto - P.Invierno,0,10.25.1_shape
+10,719,10.36.1-2,Alianto - Sangüesa,0,10.36.1_shape
+10,720,10.37.1-2,Alianto - Velilla,0,10.37.1_shape
+18,721,18.14.1-2,Logroño - Lodosa,0,18.14.1_shape
+18,722,18.25.2-3,Logroño - Azagra,0,18.25.2_shape
+54,723,54.40.5-0,Pamplona - Vitoria Semidirecto,0,54.40.5_shape
+54,724,54.40.5-1,Pamplona - Vitoria Semidirecto,0,54.40.5_shape
+54,725,54.40.5-2,Pamplona - Vitoria Semidirecto,0,54.40.5_shape
+54,726,54.40.5-3,Pamplona - Vitoria Semidirecto,0,54.40.5_shape
+54,727,54.40.5-4,Pamplona - Vitoria Semidirecto,0,54.40.5_shape
+54,728,54.40.5-5,Pamplona - Vitoria Semidirecto,0,54.40.5_shape
+54,729,54.40.5-6,Pamplona - Vitoria Semidirecto,0,54.40.5_shape
+58,730,58.166.1-11,Pamplona-Zarautz,0,58.166.1_shape
+58,731,58.166.1-12,Pamplona-Zarautz,0,58.166.1_shape
+58,732,58.165.1-4,Pamplona-Orio-Zarautz,0,58.165.1_shape
+58,733,58.165.1-5,Pamplona-Orio-Zarautz,0,58.165.1_shape
+58,734,58.159.1-4,Zarautz-Orio-Pamplona,1,58.159.1_shape
+58,735,58.159.1-5,Zarautz-Orio-Pamplona,1,58.159.1_shape
+81,736,81.10.1-16,Viana - Logroño,0,81.10.1_shape
+57,737,57.127.3-0,PAMPLONA - Clínica UBARMIN,1,57.127.3_shape
+57,738,57.127.3-1,PAMPLONA - Clínica UBARMIN,1,57.127.3_shape
+57,739,57.127.3-2,PAMPLONA - Clínica UBARMIN,1,57.127.3_shape
+57,740,57.127.3-3,PAMPLONA - Clínica UBARMIN,1,57.127.3_shape
+57,741,57.127.3-4,PAMPLONA - Clínica UBARMIN,1,57.127.3_shape
+57,742,57.127.3-5,PAMPLONA - Clínica UBARMIN,1,57.127.3_shape
+57,743,57.127.3-6,PAMPLONA - Clínica UBARMIN,1,57.127.3_shape
+57,744,57.127.3-7,PAMPLONA - Clínica UBARMIN,1,57.127.3_shape
+57,745,57.127.3-8,PAMPLONA - Clínica UBARMIN,1,57.127.3_shape
+57,746,57.127.3-9,PAMPLONA - Clínica UBARMIN,1,57.127.3_shape
+57,747,57.127.3-10,PAMPLONA - Clínica UBARMIN,1,57.127.3_shape
+57,748,57.127.3-11,PAMPLONA - Clínica UBARMIN,1,57.127.3_shape
+57,749,57.127.3-12,PAMPLONA - Clínica UBARMIN,1,57.127.3_shape
+57,750,57.127.3-13,PAMPLONA - Clínica UBARMIN,1,57.127.3_shape
+57,751,57.127.3-14,PAMPLONA - Clínica UBARMIN,1,57.127.3_shape
+57,752,57.127.3-15,PAMPLONA - Clínica UBARMIN,1,57.127.3_shape
+57,753,57.127.3-16,PAMPLONA - Clínica UBARMIN,1,57.127.3_shape
+120,754,120.2.1-12,Leitza-Goizueta,1,120.2.1_shape
+120,755,120.2.1-13,Leitza-Goizueta,1,120.2.1_shape
+77,756,77.6.2-0,Pamplona - Santesteban,1,77.6.2_shape
+9,757,9.1.2-0,Díaz Bravo-Ermita,0,9.1.2_shape
+9,758,9.9.2-11,Díaz Bravo-R. Argentina,0,9.9.2_shape
+8,759,8.47.3-0,Pamplona - Lodosa,1,8.47.3_shape
+18,760,18.18.1-6,Logroño - Sartaguda,0,18.18.1_shape
+81,761,81.1.1-23,Logroño - Viana,1,81.1.1_shape
+81,762,81.1.1-24,Logroño - Viana,1,81.1.1_shape
+41,763,41.7.4-0,Hospital Estella - Oteiza,1,41.7.4_shape
+41,764,41.7.4-1,Hospital Estella - Oteiza,1,41.7.4_shape
+41,765,41.7.4-2,Hospital Estella - Oteiza,1,41.7.4_shape
+41,766,41.7.4-3,Hospital Estella - Oteiza,1,41.7.4_shape
+41,767,41.7.4-4,Hospital Estella - Oteiza,1,41.7.4_shape
+68,768,68.146.1-7,Pamplona - Estella - Logroño (semidirecto),0,68.146.1_shape
+37,769,37.240.1-9,Tudela - Pamplona,0,37.240.1_shape
+37,770,37.240.1-10,Tudela - Pamplona,0,37.240.1_shape
+37,771,37.239.1-13,Pamplona-Tudela,1,37.239.1_shape
+66,772,66.14.1-5,NOCTURNO_Pamplona - Cendea de Olza - Etxauri-Ibero,0,66.14.1_shape
+301,773,301.9.1-1,LanzaderaTudela-Cintruénigo,0,301.9.1_shape
+301,774,301.9.1-2,LanzaderaTudela-Cintruénigo,0,301.9.1_shape
+301,775,301.10.1-3,Lanzadera Cintruénigo-Tudela,1,301.10.1_shape
+301,776,301.10.1-4,Lanzadera Cintruénigo-Tudela,1,301.10.1_shape
+301,777,301.10.1-5,Lanzadera Cintruénigo-Tudela,1,301.10.1_shape
+301,778,301.5.1-2,Pamplona/Iruña-Soria (por Cintruénigo),0,301.5.1_shape
+66,779,66.14.1-6,NOCTURNO_Pamplona - Cendea de Olza - Etxauri-Ibero,0,66.14.1_shape
+41,780,41.7.4-5,Hospital Estella - Oteiza,1,41.7.4_shape
+41,781,41.7.4-6,Hospital Estella - Oteiza,1,41.7.4_shape
+41,782,41.7.4-7,Hospital Estella - Oteiza,1,41.7.4_shape
+41,783,41.7.4-8,Hospital Estella - Oteiza,1,41.7.4_shape
+120,784,120.2.1-11,Leitza-Goizueta,1,120.2.1_shape
+54,785,54.40.5-7,Pamplona - Vitoria Semidirecto,0,54.40.5_shape
+54,786,54.40.5-8,Pamplona - Vitoria Semidirecto,0,54.40.5_shape
+54,787,54.40.5-9,Pamplona - Vitoria Semidirecto,0,54.40.5_shape
+54,788,54.15.4-0,Vitoria - Pamplona Semidirecto sin Olazagutia,1,54.15.4_shape
+57,789,57.149.4-16,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+57,790,57.149.4-17,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+41,791,41.7.4-9,Hospital Estella - Oteiza,1,41.7.4_shape
+60,792,60.7.2-4,Tafalla - Ujue,1,60.7.2_shape
+60,793,60.7.2-5,Tafalla - Ujue,1,60.7.2_shape
+60,794,60.8.3-4,Ujue - Tafalla,0,60.8.3_shape
+60,795,60.8.3-5,Ujue - Tafalla,0,60.8.3_shape
+35,796,35.228.2-8,Pamplona - San Sebastián (Directo),0,35.228.2_shape
+35,797,35.228.2-9,Pamplona - San Sebastián (Directo),0,35.228.2_shape
+35,798,35.228.2-10,Pamplona - San Sebastián (Directo),0,35.228.2_shape
+35,799,35.228.2-11,Pamplona - San Sebastián (Directo),0,35.228.2_shape
+35,800,35.228.2-12,Pamplona - San Sebastián (Directo),0,35.228.2_shape
+35,801,35.228.2-13,Pamplona - San Sebastián (Directo),0,35.228.2_shape
+41,802,41.34.4-0,Hospital Estella - Villatuerta,1,41.34.4_shape
+41,803,41.34.4-1,Hospital Estella - Villatuerta,1,41.34.4_shape
+35,804,35.228.2-15,Pamplona - San Sebastián (Directo),0,35.228.2_shape
+18,805,18.26.1-2,Azagra - Logroño (por Sartaguda),1,18.26.1_shape
+69,806,69.147.1-1,Estella - Pamplona (directo),1,69.147.1_shape
+50,807,50.113.1-2,Acedo - Estella,0,50.113.1_shape
+50,808,50.111.1-1,Aguilar de Codés - Estella,0,50.111.1_shape
+50,809,50.110.1-1,Estella - Acedo,1,50.110.1_shape
+27,810,27.8.3-0,Goizueta-Hernani,0,27.8.3_shape
+27,811,27.8.3-1,Goizueta-Hernani,0,27.8.3_shape
+27,812,27.8.3-2,Goizueta-Hernani,0,27.8.3_shape
+27,813,27.8.3-3,Goizueta-Hernani,0,27.8.3_shape
+42,814,42.71.1-3,Arroniz - Estella,0,42.71.1_shape
+42,815,42.71.1-4,Arroniz - Estella,0,42.71.1_shape
+68,816,68.134.1-3,Pamplona - Logroño Directo,0,68.134.1_shape
+68,817,68.138.1-5,Logroño - Pamplona (Directo),1,68.138.1_shape
+68,818,68.138.1-6,Logroño - Pamplona (Directo),1,68.138.1_shape
+68,819,68.146.1-5,Pamplona - Estella - Logroño (semidirecto),0,68.146.1_shape
+68,820,68.145.1-3,Logroño - Estella - Pamplona (semidirecto),1,68.145.1_shape
+69,821,69.148.1-3,Estella - Logroño,0,69.148.1_shape
+19,822,19.154.1-4,Villafranca - Tudela,0,19.154.1_shape
+58,823,58.160.1-6,Zarautz-Pamplona,1,58.160.1_shape
+58,824,58.160.1-8,Zarautz-Pamplona,1,58.160.1_shape
+58,825,58.160.1-9,Zarautz-Pamplona,1,58.160.1_shape
+58,826,58.160.1-10,Zarautz-Pamplona,1,58.160.1_shape
+58,827,58.160.1-11,Zarautz-Pamplona,1,58.160.1_shape
+58,828,58.166.1-6,Pamplona-Zarautz,0,58.166.1_shape
+58,829,58.166.1-9,Pamplona-Zarautz,0,58.166.1_shape
+58,830,58.166.1-10,Pamplona-Zarautz,0,58.166.1_shape
+80,831,80.13.1-2,Sangüesa - Tafalla,0,80.13.1_shape
+11,832,11.42.2-0,Diaz Bravo 5- Hospital,0,11.42.2_shape
+11,833,11.38.2-0,Diaz Bravo 5- Arcos,0,11.38.2_shape
+11,834,11.38.2-1,Diaz Bravo 5- Arcos,0,11.38.2_shape
+11,835,11.38.2-2,Diaz Bravo 5- Arcos,0,11.38.2_shape
+11,836,11.38.2-3,Diaz Bravo 5- Arcos,0,11.38.2_shape
+11,837,11.43.2-0,Misericordia - R. Argentina,0,11.43.2_shape
+11,838,11.66.2-0,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,839,11.66.2-1,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,840,11.66.2-2,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,841,11.66.2-3,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,842,11.66.2-4,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,843,11.66.2-5,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,844,11.66.2-6,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,845,11.66.2-7,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,846,11.66.2-8,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,847,11.66.2-9,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,848,11.66.2-10,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,849,11.66.2-11,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,850,11.66.2-12,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,851,11.66.2-13,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,852,11.66.2-14,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,853,11.66.2-15,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,854,11.66.2-16,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,855,11.66.2-17,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,856,11.66.2-18,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,857,11.66.2-19,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,858,11.66.2-20,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,859,11.66.2-21,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,860,11.66.2-22,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,861,11.66.2-23,Diaz Bravo 5 - R. Argentina,0,11.66.2_shape
+11,862,11.38.2-4,Diaz Bravo 5- Arcos,0,11.38.2_shape
+35,863,35.228.2-17,Pamplona - San Sebastián (Directo),0,35.228.2_shape
+14,864,14.110.1-4,Tudela - Cortes (excepto Cabanillas y Fustiñana),0,14.110.1_shape
+35,865,35.219.2-9,San Sebastián - Pamplona (Directo),1,35.219.2_shape
+35,866,35.219.2-10,San Sebastián - Pamplona (Directo),1,35.219.2_shape
+35,867,35.219.2-11,San Sebastián - Pamplona (Directo),1,35.219.2_shape
+35,868,35.219.2-12,San Sebastián - Pamplona (Directo),1,35.219.2_shape
+35,869,35.219.2-13,San Sebastián - Pamplona (Directo),1,35.219.2_shape
+35,870,35.219.2-14,San Sebastián - Pamplona (Directo),1,35.219.2_shape
+35,871,35.219.2-15,San Sebastián - Pamplona (Directo),1,35.219.2_shape
+35,872,35.219.2-16,San Sebastián - Pamplona (Directo),1,35.219.2_shape
+14,873,14.130.1-2,Tudela - Cortes (excepto Cabanillas y Fustiñana),0,14.130.1_shape
+79,874,79.1.2-3,Pamplona - Sangüesa,1,79.1.2_shape
+79,875,79.1.2-4,Pamplona - Sangüesa,1,79.1.2_shape
+8,876,8.48.4-0,Lodosa - Pamplona,0,8.48.4_shape
+41,877,41.34.4-2,Hospital Estella - Villatuerta,1,41.34.4_shape
+41,878,41.34.4-3,Hospital Estella - Villatuerta,1,41.34.4_shape
+41,879,41.34.4-4,Hospital Estella - Villatuerta,1,41.34.4_shape
+41,880,41.34.4-5,Hospital Estella - Villatuerta,1,41.34.4_shape
+41,881,41.34.4-6,Hospital Estella - Villatuerta,1,41.34.4_shape
+41,882,41.34.4-7,Hospital Estella - Villatuerta,1,41.34.4_shape
+41,883,41.34.4-8,Hospital Estella - Villatuerta,1,41.34.4_shape
+41,884,41.34.4-9,Hospital Estella - Villatuerta,1,41.34.4_shape
+41,885,41.34.4-10,Hospital Estella - Villatuerta,1,41.34.4_shape
+41,886,41.34.4-11,Hospital Estella - Villatuerta,1,41.34.4_shape
+41,887,41.34.4-12,Hospital Estella - Villatuerta,1,41.34.4_shape
+41,888,41.34.4-13,Hospital Estella - Villatuerta,1,41.34.4_shape
+41,889,41.34.4-14,Hospital Estella - Villatuerta,1,41.34.4_shape
+41,890,41.34.4-15,Hospital Estella - Villatuerta,1,41.34.4_shape
+41,891,41.36.4-0,Estella - Oteiza,1,41.36.4_shape
+41,892,41.36.4-1,Estella - Oteiza,1,41.36.4_shape
+57,893,57.149.4-13,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+57,894,57.149.4-14,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+79,895,79.6.2-6,Pamplona - Caseda,1,79.6.2_shape
+79,896,79.9.2-3,Caseda - Pamplona,0,79.9.2_shape
+79,897,79.9.2-4,Caseda - Pamplona,0,79.9.2_shape
+1,898,1.8.1-7,Zaragoza - Pamplona (Directo),1,1.8.1_shape
+57,899,57.149.4-15,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+1,900,1.10.1-10,Tudela - Pamplona,1,1.10.1_shape
+6,901,6.28.1-2,Zaragoza - Tudela,1,6.28.1_shape
+36,902,36.231.3-0,San Sebastián - Pamplona (parcial),1,36.231.3_shape
+34,903,34.210.2-0,Lumbier - Pamplona,1,34.210.2_shape
+34,904,34.210.2-1,Lumbier - Pamplona,1,34.210.2_shape
+36,905,36.233.3-0,Pamplona - San Sebastián (parcial),0,36.233.3_shape
+36,906,36.236.4-0,Pamplona - San Sebastián (completa),0,36.236.4_shape
+36,907,36.236.4-1,Pamplona - San Sebastián (completa),0,36.236.4_shape
+6,908,6.42.1-3,Tudela - Zaragoza,0,6.42.1_shape
+300,909,300.1.1-2,Pamplona/Iruña-Soria (por carretera),0,300.1.1_shape
+300,910,300.2.1-3,Soria-Pamplona/Iruña (por carretera),1,300.2.1_shape
+301,911,301.1.1-2,Pamplona/Iruña-Soria (por Tafalla y Tudela),0,301.1.1_shape
+79,912,79.11.1-6,Sangüesa - Pamplona,0,79.11.1_shape
+301,913,301.3.1-4,Soria-Pamplona/Iruña (por Tudela y Tafalla),1,301.3.1_shape
+79,914,79.6.2-8,Pamplona - Caseda,1,79.6.2_shape
+79,915,79.12.1-0,Sangüesa - Pamplona (hasta Salesianos),0,79.12.1_shape
+79,916,79.13.1-0,Pamplona - Sangüesa,1,79.13.1_shape
+34,917,34.210.2-2,Lumbier - Pamplona,1,34.210.2_shape
+34,918,34.215.2-0,Aoiz - Pamplona,1,34.215.2_shape
+57,919,57.149.4-0,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+37,920,37.239.1-10,Pamplona-Tudela,1,37.239.1_shape
+37,921,37.239.1-11,Pamplona-Tudela,1,37.239.1_shape
+37,922,37.239.1-12,Pamplona-Tudela,1,37.239.1_shape
+37,923,37.240.1-8,Tudela - Pamplona,0,37.240.1_shape
+36,924,36.236.4-2,Pamplona - San Sebastián (completa),0,36.236.4_shape
+36,925,36.234.4-0,San Sebastián - Pamplona (completa),1,36.234.4_shape
+57,926,57.149.4-1,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+36,927,36.234.4-1,San Sebastián - Pamplona (completa),1,36.234.4_shape
+57,928,57.149.4-2,Clínica UBARMIN - PAMPLONA,0,57.149.4_shape
+6,929,6.42.1-4,Tudela - Zaragoza,0,6.42.1_shape
+35,930,35.219.2-17,San Sebastián - Pamplona (Directo),1,35.219.2_shape
+35,931,35.219.2-19,San Sebastián - Pamplona (Directo),1,35.219.2_shape
+35,932,35.223.2-2,Pamplona - San Sebastián (Directo  por Berastegi),0,35.223.2_shape
+35,933,35.224.2-3,San Sebastián - Pamplona (por Berástegui  Leitza  Gorriti),1,35.224.2_shape
+35,934,35.219.2-18,San Sebastián - Pamplona (Directo),1,35.219.2_shape
+35,935,35.228.2-18,Pamplona - San Sebastián (Directo),0,35.228.2_shape
+79,936,79.6.2-7,Pamplona - Caseda,1,79.6.2_shape
+51,937,51.120.4-1,Logroño - San Sebastián - Irún,0,51.120.4_shape
+51,938,51.120.4-2,Logroño - San Sebastián - Irún,0,51.120.4_shape
+40,939,40.265.2-2,Zaragoza-Pamplona-San Sebastián,1,40.265.2_shape
+40,940,40.268.3-2,Irún - Zaragoza,0,40.268.3_shape
+54,941,54.52.3-5,Vitoria - Salvatierra - Alsasua - Pamplona,1,54.52.3_shape
+40,942,40.266.3-2,Zaragoza-Irun,1,40.266.3_shape
+51,943,51.125.4-0,Logroño - San Sebastián,0,51.125.4_shape
+62,944,62.45.3-0,Pamplona - Lerín,1,62.45.3_shape
+62,945,62.45.3-1,Pamplona - Lerín,1,62.45.3_shape
+54,946,54.7.2-1,Olazagutia - Pamplona,1,54.7.2_shape
+2,947,2.2.3-0,Tudela - Barillas,1,2.2.3_shape
+2,948,2.2.3-1,Tudela - Barillas,1,2.2.3_shape
+2,949,2.2.3-2,Tudela - Barillas,1,2.2.3_shape
+2,950,2.2.3-3,Tudela - Barillas,1,2.2.3_shape
+2,951,2.10.3-0,Barillas - Tudela,0,2.10.3_shape
+2,952,2.10.3-1,Barillas - Tudela,0,2.10.3_shape
+2,953,2.10.3-2,Barillas - Tudela,0,2.10.3_shape
+2,954,2.10.3-3,Barillas - Tudela,0,2.10.3_shape
+2,955,2.10.3-4,Barillas - Tudela,0,2.10.3_shape
+12,956,12.88.2-5,Hospital - Cervera,1,12.88.2_shape
+12,957,12.75.2-4,Hospital - Aguilar,1,12.75.2_shape
+12,958,12.75.2-5,Hospital - Aguilar,1,12.75.2_shape
+12,959,12.75.2-6,Hospital - Aguilar,1,12.75.2_shape
+12,960,12.75.2-7,Hospital - Aguilar,1,12.75.2_shape
+12,961,12.91.2-4,Cervera - Tudela,0,12.91.2_shape
+12,962,12.91.2-5,Cervera - Tudela,0,12.91.2_shape
+6,963,6.44.1-0,Pamplona-Tafalla-Tudela-Zaragoza,0,6.44.1_shape
+85,964,85.1.1-0,Solape Sseb-Pna-Zza (periodo Verano),0,85.1.1_shape
+6,965,6.28.1-3,Zaragoza - Tudela,1,6.28.1_shape
+85,966,85.2.1-0,Solape Zza-Tudela-Pna-Sseb (periodo Verano),1,85.2.1_shape
+14,967,14.110.1-3,Tudela - Cortes (excepto Cabanillas y Fustiñana),0,14.110.1_shape
+85,968,85.3.1-1,Solape Zza-Pna-Sseb (periodo Verano),1,85.3.1_shape
+81,969,81.1.1-22,Logroño - Viana,1,81.1.1_shape
+58,970,58.160.1-13,Zarautz-Pamplona,1,58.160.1_shape
+58,971,58.166.1-14,Pamplona-Zarautz,0,58.166.1_shape
+50,972,50.111.1-4,Aguilar de Codés - Estella,0,50.111.1_shape
+50,973,50.113.1-4,Acedo - Estella,0,50.113.1_shape
+69,974,69.154.1-0,Pamplona-Puente-Estella,0,69.154.1_shape
+47,975,47.93.2-0,Sartaguda - Pamplona (hasta Estella),0,47.93.2_shape
+42,976,42.74.2-0,Iratxe - Abárzuza,0,42.74.2_shape
+42,977,42.74.2-1,Iratxe - Abárzuza,0,42.74.2_shape
+42,978,42.74.2-2,Iratxe - Abárzuza,0,42.74.2_shape
+42,979,42.74.2-3,Iratxe - Abárzuza,0,42.74.2_shape
+47,980,47.93.2-1,Sartaguda - Pamplona (hasta Estella),0,47.93.2_shape
+47,981,47.96.3-2,Pamplona - Sartaguda (desde Estella),1,47.96.3_shape

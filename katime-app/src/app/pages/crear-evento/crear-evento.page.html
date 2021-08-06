@@ -24,7 +24,7 @@
     </form>
 </div>
 
-<ion-header class="ion-no-border bg-white">
+<ion-header class="ion-no-border bg-white pb-4">
     <app-page-header titulo="Nuevo evento" [goBack]=true>
         <ion-back-button color="primary"></ion-back-button>
         <div class="flex items-center ml-auto mr-8" (click)="createEvento()">
@@ -34,7 +34,7 @@
     </app-page-header>
 </ion-header>
 
-<div class="bg-gray-100 h-full rounded-t-xl mt-4">
+<div class="bg-gray-100 h-full rounded-t-xl">
     <ion-content [scrollEvents]="true">
         <form [formGroup]="eventoForm" class="m-8 flex flex-col">
             <!-- Nombre -->
@@ -88,7 +88,6 @@
                         <ion-datetime display-format="DD MMM, YYYY HH:mm" formControlName="hora_fin" (ionChange)="checkTodoElDia()"></ion-datetime>
                     </ion-item>
                 </div>
-
             </div>
 
             <!-- Repetición -->

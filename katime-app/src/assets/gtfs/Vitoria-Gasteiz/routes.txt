@@ -1,0 +1,26 @@
+﻿route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color
+1,4003,1,Circular,,3,,FFDD00,
+2,4003,2A,Periférica A,,3,,F499C1,
+3,4003,3,Betoño - Zumaquera,,3,,44C7F4,FFFFFF
+4,4003,4,Lakua - Mariturri,,3,,ED1C24,
+5,4003,5,Salburua - Elejalde,,3,,8CC63F,FFFFFF
+6,4003,6,Zabalgana - Arkaiate,,3,,A066AA,
+7,4003,7,Borinbizkarra - Salburua,,3,,A76534,FFFFFF
+8,4003,8,Unibertsitatea,,3,,FAA61A,
+9,4003,9,Gamarra - Zumaquera,,3,,0066B3,FFFFFF
+10,4003,10,Aldaia - Larrein,,3,,00A54F,FFFFFF
+11,4003,E1,Cementerio El Salvador,,3,,,
+21,4003,G1,Lakua - Abetxuko,,3,,FFDD00,
+22,4003,G2,Adurtza - Salburua,,3,,F499C1,
+23,4003,G3,Armentia - Zabalgana,,3,,44C7F4,FFFFFF
+24,4003,G4,Sansomendi - Lakua,,3,,ED1C24,
+26,4003,G6,Salburua - Aranbizkarra,,3,,FAA61A,
+28,4003,E3,Fernando Buesa Arena,,3,,000000,FFFFFF
+29,4003,E4,Fernando Buesa Arena,,3,,000000,FFFFFF
+31,4003,ES,San Prudencio,,3,,000000,FFFFFF
+32,4003,2B,Periférica B,,3,,F499C1,
+33,4003,E7,Abetxuko,,3,,000000,FFFFFF
+35,4003,F,Ferial,,3,,000000,FFFFFF
+36,4003,FN,Ferial Nocturno,,3,,000000,FFFFFF
+40,4003,E5,Especial Alavés A,,3,,000000,FFFFFF
+41,4003,E6,Especial Alavés B,,3,,000000,FFFFFF

@@ -1,0 +1,22 @@
+agency_id,agency_name,agency_url,agency_timezone,agency_phone,agency_lang
+0,GOBIERNO DE NAVARRA/ NAFARROAKO GOBERNUA ,http://www.nbus.navarra.es,Europe/Madrid,,es
+3,AUTOBUSES JIMÉNEZ  S.L.,http://www.autobusesjimenez.com,Europe/Madrid,902202787,es
+17,LA VELOZ SANGÜESINA  S.A.,http://www.nbus.navarra.es,Europe/Madrid,948870209,es
+13,LA ESTELLESA  S.A.,http://www.laestellesa.com,Europe/Madrid,948326509,es
+5,AUTOBUSES PARRA  S.L.,http://www.autobusesparra.com,Europe/Madrid,941131372,es
+12,LA BURUNDESA  S.A.,http://www.laburundesa.com,Europe/Madrid,948303505,es
+14,LA MUGUIROARRA  S.L.,http://www.lamuguiroarra.com,Europe/Madrid,948229459,es
+7,AUTOMÓVILES UREDERRA  S.L.,http://www.autobusesurederra.com,Europe/Madrid,948546214,es
+9,CONDA  S.A.,http://www.conda.es,Europe/Madrid,902422242,es
+1,AUTOMÓVILES RÍO ALHAMA  S.A.,http://www.arasa.es,Europe/Madrid,948820282,es
+2,ATÍVAR  S.L.,http://www.autocaresartieda.com,Europe/Madrid,948300287,es
+18,LA VIANESA  S.L.,http://www.lavianesa.com,Europe/Madrid,948645231,es
+19,LEIZARÁN MARIEZCURRENA Hnos.  S.L.,http://www.autobusesleizaran.net,Europe/Madrid,948224015,es
+11,LA BAZTANESA  S.A.,http://www.labaztanesa.com,Europe/Madrid,948580129,es
+6,AUTOBUSES PINEDO  S.A.,http://www.arriagabus.es,Europe/Madrid,945285000,es
+8,CEFERINO APEZETXEA eta SEMEAK  S.L.L.,http://www.nbus.navarra.es,Europe/Madrid,948514037,es
+16,LA TAFALLESA  S.A.,http://www.conda.es,Europe/Madrid,902422242,es
+22,TAXI,http://www.nbus.navarra.es,Europe/Madrid,,es
+15,AUTOBUSES LA PAMPLONESA  S.A.,http://www.lapamplonesa.com,Europe/Madrid,948188881,es
+4,AUTOBUSES OLLOQUI  S.L.,http://www.autobusesolloqui.es,Europe/Madrid,948754005,es
+10,ALBERTO ELCARTE  S.L.,http://www.autobuseselcarte.com,Europe/Madrid,948813358,es
