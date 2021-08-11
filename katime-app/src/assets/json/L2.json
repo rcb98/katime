@@ -2,6 +2,8 @@
     "id": 1,
     "nombre": "L2 Luceros (Alicante) - Sant Vicent del Raspeig",
     "localidad": "Alicante",
+    "tipo_trans": "Tranvía",
+    "icono": "",
     "direccion": [{
             "nombre": "Sant Vicent del Raspeig",
             "paradas": [{

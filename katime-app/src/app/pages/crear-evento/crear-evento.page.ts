@@ -94,7 +94,7 @@ export class CrearEventoPage implements OnInit {
       return this.presentToast("La fecha de fin debe ser más antigua que la de inicio.");
     }
 
-    if(!this.eventoForm.value. nombre || !this.eventoForm.value.id_categoria || !this.eventoForm.value.hora_ini || !this.eventoForm.value.hora_fin) {
+    if(!this.eventoForm.value.nombre || !this.eventoForm.value.id_categoria || !this.eventoForm.value.hora_ini || !this.eventoForm.value.hora_fin) {
       return this.presentToast("Los campos de nombre, categoría, fecha de inicio y fin son obligatorios.");
     }
 
@@ -328,10 +328,10 @@ export class CrearEventoPage implements OnInit {
             if(data && data.length > 0) {
               this.repeticion = '';
               data.forEach(element => {
-                this.repeticion += element + ", "
+                this.repeticion += element + ","
               });
               // Borramos los dos últimos caracteres
-              this.repeticion = this.repeticion.slice(0, -2);
+              this.repeticion = this.repeticion.slice(0, -1);
               this.dias = this.repeticion;
               this.repeticion += " (Semanalmente)";
             } else {

@@ -46,7 +46,7 @@ export class EventosComponent implements OnInit {
 
         if(data.dias){ // Repetición personalizada
           let i = 0;
-          while(data.dias.split(", ")[i]){
+          while(data.dias.split(",")[i]){
             var dia = this.getDia(data.dias.split(", ")[i]);
             let dias = this.getDiasRepeticion(data.repeticion, new Date(), data.hora_ini, data.hora_fin, dia);
 

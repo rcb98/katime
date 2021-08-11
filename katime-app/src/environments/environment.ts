@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  ciudades: ['Navarra', 'Vitoria-Gasteiz']
+  ciudades: ['Alicante']
 };
 
 /*

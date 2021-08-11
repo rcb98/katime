@@ -1,44 +1,59 @@
 <!-- Modal Localidad -->
-<div class="flex fixed h-screen w-screen z-40" *ngIf="modalLocalidad" (click)="toggleModalLocalidad()">
+<div class="localidad flex fixed h-screen w-screen z-40" *ngIf="modalLocalidad" (click)="clickOut($event)">
     <div class="bg-white fixed bottom-0 w-full h-auto rounded-t-xl z-50">
         <div class="flex pl-8 pt-8">
             <ion-icon color="primary" class="text-2xl" name="arrow-back" (click)="toggleModalLocalidad()"></ion-icon>
         </div>
 
-        <h3 class="my-4 pl-8 text-lg font-semibold">Ciudad/Localidad</h3>
+        <h3 class="my-4 pl-8 text-lg font-semibold">Ciudades/Localidades</h3>
 
-        <ul class="h-64 overflow-y-scroll hide-scroll">
+        <ul class="overflow-y-scroll hide-scroll">
             <li *ngFor="let localidad of localidades" class="border-b border-gray-200 p-4 pl-8" (click)="setLocalidad(localidad)">{{localidad}}</li>
         </ul>
     </div>
 </div>
 
+<!-- Modal Ruta -->
+<div class="ruta flex fixed h-screen w-screen z-40" *ngIf="modalRuta" (click)="clickOut($event)">
+    <div class="bg-white fixed bottom-0 w-full h-auto rounded-t-xl z-50">
+        <div class="flex pl-8 pt-8">
+            <ion-icon color="primary" class="text-2xl" name="arrow-back" (click)="toggleModalRuta()"></ion-icon>
+        </div>
+
+        <h3 class="my-4 pl-8 text-lg font-semibold">Líneas</h3>
+
+        <ul class="overflow-y-scroll hide-scroll">
+            <li *ngFor="let ruta of rutas" class="border-b border-gray-200 p-4 pl-8" (click)="setRuta(ruta)">{{ruta}}</li>
+        </ul>
+    </div>
+</div>
+
 <!-- Modal Origen -->
-<div class="flex fixed h-screen w-screen z-40" *ngIf="modalOrigen" (click)="toggleModalOrigen()">
+<div class="origen flex fixed h-screen w-screen z-40" *ngIf="modalOrigen" (click)="clickOut($event)">
     <div class="bg-white fixed bottom-0 w-full h-auto rounded-t-xl z-50">
         <div class="flex pl-8 pt-8">
             <ion-icon color="primary" class="text-2xl" name="arrow-back" (click)="toggleModalOrigen()"></ion-icon>
         </div>
 
-        <h3 class="my-4 pl-8 text-lg font-semibold">Origen</h3>
+        <h3 class="my-4 pl-8 text-lg font-semibold">Orígenes</h3>
 
-        <ul class="h-64 overflow-y-scroll hide-scroll">
-            <!-- <li *ngFor="let localidad of localidades" class="border-b border-gray-200 p-4 pl-8" (click)="setLocalidad(localidad)">{{localidad}}</li> -->
+        <ul class="h-72 overflow-y-scroll hide-scroll">
+            <li *ngFor="let origen of paradas" class="border-b border-gray-200 p-4 pl-8" (click)="setOrigen(origen)">{{origen}}</li>
         </ul>
     </div>
 </div>
 
 <!-- Modal Destino -->
-<div class="flex fixed h-screen w-screen z-40" *ngIf="modalDestino" (click)="toggleModalDestino()">
+<div class="destino flex fixed h-screen w-screen z-40" *ngIf="modalDestino" (click)="clickOut($event)">
     <div class="bg-white fixed bottom-0 w-full h-auto rounded-t-xl z-50">
         <div class="flex pl-8 pt-8">
             <ion-icon color="primary" class="text-2xl" name="arrow-back" (click)="toggleModalDestino()"></ion-icon>
         </div>
 
-        <h3 class="my-4 pl-8 text-lg font-semibold">Destino</h3>
+        <h3 class="my-4 pl-8 text-lg font-semibold">Destinos</h3>
 
-        <ul class="h-64 overflow-y-scroll hide-scroll">
-            <!-- <li *ngFor="let localidad of localidades" class="border-b border-gray-200 p-4 pl-8" (click)="setLocalidad(localidad)">{{localidad}}</li> -->
+        <ul class="h-72 overflow-y-scroll hide-scroll">
+            <li *ngFor="let destino of paradas" class="border-b border-gray-200 p-4 pl-8" (click)="setDestino(destino)">{{destino}}</li>
         </ul>
     </div>
 </div>
@@ -49,7 +64,7 @@
         <ion-back-button color="primary"></ion-back-button>
         <div class="flex items-center ml-auto mr-8">
             <ion-icon name="checkmark" color="primary" class="mr-1"></ion-icon>
-            <p class="text-purple">Crear transporte</p>
+            <p class="text-purple" (click)="createTransporte()">Crear transporte</p>
         </div>
     </app-page-header>
 </ion-header>
@@ -64,19 +79,25 @@
             </div>
 
             <!-- Transporte -->
-            <div class="m-2 flex flex-col">
+            <!-- <div class="m-2 flex flex-col">
                 <label for="tipo_trans" class="text-gray-600">Transporte</label>
+            </div> -->
+
+            <!-- Linea -->
+            <div class="m-2 flex flex-col" *ngIf="transporteForm.value.localidad">
+                <label for="ruta" class="text-gray-600">Línea</label>
+                <input (click)="toggleModalRuta()" type="text" name="ruta" formControlName="ruta" id="ruta" class="rounded-lg border-none mt-0.5">
             </div>
 
             <!-- Origen & Destino -->
-            <div class="flex items-center justify-between" *ngIf="transporteForm.value.localidad">
+            <div class="flex items-center justify-between" *ngIf="transporteForm.value.localidad && transporteForm.value.ruta">
                 <!-- Origen -->
                 <div class="m-2 flex flex-col w-36">
                     <label for="origen" class="text-gray-600">Origen</label>
                     <input (click)="toggleModalOrigen()" type="text" name="origen" formControlName="origen" id="origen" class="rounded-lg border-none mt-0.5">
                 </div>
 
-                <ion-icon name="swap-horizontal-outline" color="primary" class="text-3xl mt-4"></ion-icon>
+                <ion-icon (click)="swapDireccion()" name="swap-horizontal-outline" color="primary" class="text-3xl mt-4"></ion-icon>
 
                 <!-- Destino -->
                 <div class="m-2 flex flex-col w-36">
@@ -88,6 +109,15 @@
             <!-- Día(s) -->
             <div class="m-2 flex flex-col">
                 <label for="tipo_trans" class="text-gray-600">Días</label>
+                <div class="flex justify-between mt-1">
+                    <div class="day" (click)="toggleDia('Lun')" [ngClass]="{'bg-purple text-white':checkDia('Lun')}">L</div>
+                    <div class="day" (click)="toggleDia('Mar')" [ngClass]="{'bg-purple text-white':checkDia('Mar')}">M</div>
+                    <div class="day" (click)="toggleDia('Mie')" [ngClass]="{'bg-purple text-white':checkDia('Mie')}">X</div>
+                    <div class="day" (click)="toggleDia('Jue')" [ngClass]="{'bg-purple text-white':checkDia('Jue')}">J</div>
+                    <div class="day" (click)="toggleDia('Vie')" [ngClass]="{'bg-purple text-white':checkDia('Vie')}">V</div>
+                    <div class="day" (click)="toggleDia('Sab')" [ngClass]="{'bg-purple text-white':checkDia('Sab')}">S</div>
+                    <div class="day" (click)="toggleDia('Dom')" [ngClass]="{'bg-purple text-white':checkDia('Dom')}">D</div>
+                </div>
             </div>
 
             <!-- Franja horaria -->
@@ -97,19 +127,19 @@
                     <label for="fecha" class="text-gray-600">Franja horaria</label>
                     <div class="ml-auto flex items-center">
                         <ion-label class="text-gray-600 text-sm">Todo el día</ion-label>
-                        <ion-toggle></ion-toggle>
+                        <ion-toggle [checked]="toggleCheck" (ionChange)="toggleTodoElDia()"></ion-toggle>
                     </div>
                 </div>
 
                 <div>
                     <ion-item class="my-2 rounded-lg" lines="none">
                         <ion-label color="medium">Inicio</ion-label>
-                        <ion-datetime display-format="HH:mm" formControlName="hora_ini"></ion-datetime>
+                        <ion-datetime display-format="HH:mm" formControlName="hora_ini" (ionChange)="checkTodoElDia()"></ion-datetime>
                     </ion-item>
 
                     <ion-item class="my-2 rounded-lg" lines="none">
                         <ion-label color="medium">Fin</ion-label>
-                        <ion-datetime display-format="HH:mm" formControlName="hora_fin"></ion-datetime>
+                        <ion-datetime display-format="HH:mm" formControlName="hora_fin" (ionChange)="checkTodoElDia()"></ion-datetime>
                     </ion-item>
                 </div>
             </div>
