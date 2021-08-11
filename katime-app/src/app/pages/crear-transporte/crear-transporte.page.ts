@@ -54,7 +54,7 @@ export class CrearTransportePage implements OnInit {
   }
 
   getOrigenes() {
-    this.fuenteService.getOrigenes(this.transporteForm.value.localidad).subscribe(res => {
+    this.fuenteService.getTransporte().subscribe(res => {
       console.log(res);
 
     })

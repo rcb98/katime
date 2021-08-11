@@ -103,8 +103,8 @@ export class FuenteService {
     return this.FUENTES.asObservable();
   }
 
-  getOrigenes(ciudad:string):Observable<any> {
-    return this.http.get(`./assets/gtfs/${ciudad}/stops.txt`, {responseType: 'text'});
+  getTransporte():Observable<any> {
+    return this.http.get(`./assets/json/L2.json`);
   }
 
   /* POST */
