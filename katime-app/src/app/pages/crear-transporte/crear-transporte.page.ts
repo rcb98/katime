@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { FuenteService } from 'src/app/services/fuente.service';
 import { environment } from 'src/environments/environment';
@@ -22,10 +23,10 @@ export class CrearTransportePage implements OnInit {
     origen: ['', Validators.required],
     destino: ['', Validators.required],
     tipo_trans: ['', Validators.required],
-    duracion: ['', Validators.required],
+    duracion: [''],
     hora_ini: ['', Validators.required],
     hora_fin: ['', Validators.required],
-    icono: ['', Validators.required],
+    icono: [''],
     dias: ['', Validators.required]
   });
 
@@ -55,6 +56,7 @@ export class CrearTransportePage implements OnInit {
   constructor(private datePipe: DatePipe,
               private formBuilder: FormBuilder,
               private fuenteService: FuenteService,
+              private router: Router,
               private toaster: ToastController) {
                 this.fuenteService.databaseConn();
               }
@@ -94,7 +96,13 @@ export class CrearTransportePage implements OnInit {
     this.transporteForm.value.hora_fin = hFin;
     this.transporteForm.value.nombre = this.transporteForm.value.ruta;
     this.transporteForm.value.dias = this.dias.toString();
-    console.log(this.transporteForm.value);
+
+    // console.log(this.transporteForm.value);
+
+    this.fuenteService.createTransporte(this.transporteForm.value).then( res => {
+      this.presentToast("¡Transporte añadido!");
+      this.router.navigateByUrl("/modo-lista");
+    });
   }
 
   checkDireccion() {

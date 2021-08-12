@@ -48,7 +48,14 @@ export class FuenteService {
                   hora_fin DATETIME,
                   recordatorio INT,
                   repeticion VARCHAR(255),
-                  dias VARCHAR(255)
+                  dias VARCHAR(255),
+                  localidad VARCHAR(255),
+                  ruta VARCHAR(255),
+                  origen VARCHAR(255),
+                  destino VARCHAR(255),
+                  tipo_trans VARCHAR(255),
+                  icono VARCHAR(255),
+                  duracion INT
                 )`, [])
               .then((res) => {
                 this.loadAllFuentes();
@@ -108,10 +115,22 @@ export class FuenteService {
   }
 
   /* POST */
-  createFuente(data:Fuente) {
+  createEvento(data:Fuente) {
     return this.dbInstance
       .executeSql(`INSERT INTO ${this.dbTable} (id_categoria, tipo, nombre, descripcion, hora_ini, hora_fin, recordatorio, repeticion, dias)
       VALUES ('${data.id_categoria}', '${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}', '${data.repeticion}', '${data.dias}')`, [])
+      .then(() => {
+        this.loadAllFuentes();
+        this.entradaService.deleteTable(); // Puede que de problemas
+      }, (e) => {
+        alert(JSON.stringify(e.err));
+      });
+  }
+
+  createTransporte(data:Fuente) {
+    return this.dbInstance
+      .executeSql(`INSERT INTO ${this.dbTable} (tipo, nombre, hora_ini, hora_fin, dias, localidad, ruta, origen, destino, tipo_trans, icono, duracion)
+      VALUES ('${data.tipo}', '${data.nombre}', '${data.hora_ini}', '${data.hora_fin}', '${data.dias}', '${data.localidad}', '${data.ruta}', '${data.origen}', '${data.destino}', '${data.tipo_trans}', '${data.icono}', '${data.duracion}')`, [])
       .then(() => {
         this.loadAllFuentes();
         this.entradaService.deleteTable(); // Puede que de problemas
