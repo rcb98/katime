@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FuenteService } from 'src/app/services/fuente.service';
 
 @Component({
   selector: 'app-popover',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PopoverComponent implements OnInit {
 
-  constructor() { }
+  constructor(private fuenteService: FuenteService) { }
 
   ngOnInit() {}
+
+  deleteAll(){
+    this.fuenteService.deleteTable();
+  }
 
 }
