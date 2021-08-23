@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PageHeaderComponent } from '../components/page-header/page-header.component';
 import { PopoverComponent } from '../components/popover/popover.component';
 import { EventosComponent } from '../components/eventos/eventos.component';
+import { TransportesComponent } from '../components/transportes/transportes.component';
 
 @NgModule({
   imports: [
@@ -11,12 +12,14 @@ import { EventosComponent } from '../components/eventos/eventos.component';
   declarations: [
     PageHeaderComponent,
     PopoverComponent,
-    EventosComponent
+    EventosComponent,
+    TransportesComponent
   ],
   exports: [
     PageHeaderComponent,
     PopoverComponent,
-    EventosComponent
+    EventosComponent,
+    TransportesComponent
   ]
 })
 export class ModulesModule { }

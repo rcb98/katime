@@ -20,6 +20,7 @@ export class CrearTransportePage implements OnInit {
     nombre: ['', Validators.required],
     localidad: ['', Validators.required],
     ruta: ['', Validators.required],
+    direccion: ['', Validators.required],
     origen: ['', Validators.required],
     destino: ['', Validators.required],
     tipo_trans: ['', Validators.required],
@@ -86,8 +87,6 @@ export class CrearTransportePage implements OnInit {
       return this.presentToast("Los campos de localidad, línea, origen, destino, días y franja horaria son obligatorios.");
     }
 
-    this.checkDireccion()
-
     // Formateamos la fecha
     let hIni = this.datePipe.transform(this.transporteForm.value.hora_ini, 'yyyy-MM-dd HH:mm');
     let hFin = this.datePipe.transform(this.transporteForm.value.hora_fin, 'yyyy-MM-dd HH:mm');
@@ -97,11 +96,23 @@ export class CrearTransportePage implements OnInit {
     this.transporteForm.value.nombre = this.transporteForm.value.ruta;
     this.transporteForm.value.dias = this.dias.toString();
 
-    // console.log(this.transporteForm.value);
+    var origen = -1,
+        destino = -1;
 
-    this.fuenteService.createTransporte(this.transporteForm.value).then( res => {
-      this.presentToast("¡Transporte añadido!");
-      this.router.navigateByUrl("/modo-lista");
+    this.fuenteService.getTransporte().subscribe(res => {
+      res['direccion'][0]['paradas'].forEach((parada, index) => {
+        if(parada['nombre'] == this.transporteForm.value.origen) origen = index;
+        if(parada['nombre'] == this.transporteForm.value.destino) destino = index;
+      });
+
+      if(origen < destino) this.transporteForm.value.direccion = res['direccion'][0]['nombre'];
+      else this.transporteForm.value.direccion = res['direccion'][1]['nombre'];
+
+      this.fuenteService.createTransporte(this.transporteForm.value).then( res => {
+        this.presentToast("¡Transporte añadido!");
+        this.router.navigateByUrl("/modo-lista");
+      });
+
     });
   }
 
@@ -115,9 +126,9 @@ export class CrearTransportePage implements OnInit {
         if(parada['nombre'] == this.transporteForm.value.destino) destino = index;
       });
 
-      if(origen < destino) this.transporteForm.value.direccion = res['direccion'][0].nombre;
-      else this.transporteForm.value.direccion = res['direccion'][1].nombre;
-    })
+      if(origen < destino) this.transporteForm.value.direccion = res['direccion'][0]['nombre'];
+      else this.transporteForm.value.direccion = res['direccion'][1]['nombre'];
+    });
   }
 
   checkTodoElDia() {

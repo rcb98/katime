@@ -26,8 +26,7 @@ export class EventosComponent implements OnInit {
   constructor(private datePipe: DatePipe,
               private categoriaService: CategoriaService,
               private entradaService: EntradaService,
-              private fuenteService: FuenteService,
-              private toaster: ToastController) {
+              private fuenteService: FuenteService) {
                 this.fuenteService.databaseConn();
                 this.entradaService.databaseConn();
                 this.categoriaService.databaseConn();
@@ -259,16 +258,6 @@ export class EventosComponent implements OnInit {
       }
     }
     return dias
-  }
-
-  async presentToast(msg:string) {
-    const toast = await this.toaster.create({
-      message: msg,
-      duration: 2000,
-      animated: true,
-      color: "primary"
-    });
-    toast.present();
   }
 
 }

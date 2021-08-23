@@ -20,6 +20,7 @@ export class FuenteService {
   readonly dbTable:string = "fuenteTable";
   //FUENTES: Array<Fuente>;
   FUENTES = new BehaviorSubject([]);
+  TRANSPORTES = new BehaviorSubject([]);
 
   constructor(private datePipe: DatePipe,
               private categoriaService: CategoriaService,
@@ -51,6 +52,7 @@ export class FuenteService {
                   dias VARCHAR(255),
                   localidad VARCHAR(255),
                   ruta VARCHAR(255),
+                  direccion VARCHAR(255),
                   origen VARCHAR(255),
                   destino VARCHAR(255),
                   tipo_trans VARCHAR(255),
@@ -59,6 +61,7 @@ export class FuenteService {
                 )`, [])
               .then((res) => {
                 this.loadAllFuentes();
+                this.loadTransportes();
                 // alert(JSON.stringify(res));
               })
               .catch((error) => alert(JSON.stringify(error)));
@@ -106,12 +109,30 @@ export class FuenteService {
     })
   }
 
+  loadTransportes() {
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} where tipo='transporte'`, []).then(res => {
+      let transportes: Fuente[] = [];
+
+      if(res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++)
+          transportes.push(res.rows.item(i));
+      }
+      this.TRANSPORTES.next(transportes);
+    }, (e) => {
+      alert(JSON.stringify("Ha habido un error: ", e.err));
+    })
+  }
+
   getFuentes():Observable<Fuente[]> {
     return this.FUENTES.asObservable();
   }
 
   getTransporte():Observable<any> {
     return this.http.get(`./assets/json/L2.json`);
+  }
+
+  getTransportes():Observable<Fuente[]> {
+    return this.TRANSPORTES.asObservable();
   }
 
   /* POST */
@@ -128,9 +149,10 @@ export class FuenteService {
   }
 
   createTransporte(data:Fuente) {
+    alert(JSON.stringify(data));
     return this.dbInstance
-      .executeSql(`INSERT INTO ${this.dbTable} (tipo, nombre, hora_ini, hora_fin, dias, localidad, ruta, origen, destino, tipo_trans, icono, duracion)
-      VALUES ('${data.tipo}', '${data.nombre}', '${data.hora_ini}', '${data.hora_fin}', '${data.dias}', '${data.localidad}', '${data.ruta}', '${data.origen}', '${data.destino}', '${data.tipo_trans}', '${data.icono}', '${data.duracion}')`, [])
+      .executeSql(`INSERT INTO ${this.dbTable} (tipo, nombre, hora_ini, hora_fin, dias, localidad, ruta, direccion, origen, destino, tipo_trans, icono, duracion)
+      VALUES ('${data.tipo}', '${data.nombre}', '${data.hora_ini}', '${data.hora_fin}', '${data.dias}', '${data.localidad}', '${data.ruta}', '${data.direccion}', '${data.origen}', '${data.destino}', '${data.tipo_trans}', '${data.icono}', '${data.duracion}')`, [])
       .then(() => {
         this.loadAllFuentes();
         this.entradaService.deleteTable(); // Puede que de problemas
