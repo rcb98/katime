@@ -7,7 +7,7 @@ import { DatePipe } from '@angular/common';
 import { EntradaService } from './entrada.service';
 import { CategoriaService } from './categoria.service';
 import { HttpClient } from '@angular/common/http';
-
+import { map, take } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -72,7 +72,7 @@ export class FuenteService {
 
   /* GET (all) */
   loadAllFuentes() {
-    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable}`, []).then(res => {
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} where tipo='evento'`, []).then(res => {
       let fuentes: Fuente[] = [];
 
       if(res.rows.length > 0) {
@@ -154,7 +154,7 @@ export class FuenteService {
       .executeSql(`INSERT INTO ${this.dbTable} (tipo, nombre, hora_ini, hora_fin, dias, localidad, ruta, direccion, origen, destino, tipo_trans, icono, duracion)
       VALUES ('${data.tipo}', '${data.nombre}', '${data.hora_ini}', '${data.hora_fin}', '${data.dias}', '${data.localidad}', '${data.ruta}', '${data.direccion}', '${data.origen}', '${data.destino}', '${data.tipo_trans}', '${data.icono}', '${data.duracion}')`, [])
       .then(() => {
-        this.loadAllFuentes();
+        this.loadTransportes();
         this.entradaService.deleteTable(); // Puede que de problemas
       }, (e) => {
         alert(JSON.stringify(e.err));

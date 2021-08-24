@@ -4,10 +4,12 @@ import { PageHeaderComponent } from '../components/page-header/page-header.compo
 import { PopoverComponent } from '../components/popover/popover.component';
 import { EventosComponent } from '../components/eventos/eventos.component';
 import { TransportesComponent } from '../components/transportes/transportes.component';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    IonicModule
   ],
   declarations: [
     PageHeaderComponent,

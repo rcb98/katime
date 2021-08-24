@@ -1,3 +1,5 @@
-<div class="m-8">
-    transportes works!
-</div>
+<ion-content [scrollEvents]="true">
+    <ul class="ml-8">
+        <li *ngFor="let entrada of entradas">{{entrada.hora_ini}}</li>
+    </ul>
+</ion-content>

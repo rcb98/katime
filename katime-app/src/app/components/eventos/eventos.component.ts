@@ -136,11 +136,13 @@ export class EventosComponent implements OnInit {
       this.entradasProximas = [];
       var hoy:Date = new Date();
       res.forEach(entrada => {
-        var fecha = new Date(entrada.hora_ini);
-        if(fecha.getDate() == hoy.getDate() && fecha.getMonth() == hoy.getMonth() && fecha.getFullYear() == hoy.getFullYear()){
-          this.entradasHoy.push(entrada);
-        } else {
-          this.entradasProximas.push(entrada);
+        if(entrada.tipo == 'evento') {
+          var fecha = new Date(entrada.hora_ini);
+          if(fecha.getDate() == hoy.getDate() && fecha.getMonth() == hoy.getMonth() && fecha.getFullYear() == hoy.getFullYear()){
+            this.entradasHoy.push(entrada);
+          } else {
+            this.entradasProximas.push(entrada);
+          }
         }
       });
     });
