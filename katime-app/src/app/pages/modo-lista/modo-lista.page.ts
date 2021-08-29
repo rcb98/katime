@@ -7,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModoListaPage implements OnInit {
 
+  public toggleTrans:boolean = false;
+  public mostrar:string = "+ Mostrar más";
+
   constructor() {
   }
 
   ngOnInit() {
+  }
+
+  toggleTransportes() {
+    this.toggleTrans = !this.toggleTrans;
+    if(!this.toggleTrans) this.mostrar = "+ Mostrar más";
+    else this.mostrar = "- Mostrar menos";
   }
 
 }

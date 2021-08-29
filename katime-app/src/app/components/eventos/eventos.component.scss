@@ -4,6 +4,12 @@ ion-content {
     --offset-top: -1.5em !important; // Esto es para que se vea el border del <div>
 }
 
+h2,
+h3,
+p {
+    color: #272727;
+}
+
 .hide-scroll::-webkit-scrollbar {
     display: none;
 }

@@ -120,7 +120,7 @@ export class TransportesComponent implements OnInit {
         roundHoras = Math.floor(horas),
         minutos = Math.round((horas - roundHoras) * 60);
 
-    if(roundHoras == 0) return minutos + " min";
+    if(roundHoras == 0) return minutos + "min";
     else if(roundHoras > 0 && minutos > 0) return roundHoras + "h " + minutos + "min";
     else return "Ahora";
   }

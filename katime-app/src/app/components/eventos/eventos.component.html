@@ -13,8 +13,8 @@
             </div>
             <div class="bg-white flex items-center w-full rounded-r-lg px-4 py-3">
                 <div class="flex flex-col">
-                    <h3 class="font-semibold">{{entrada.nombre}}</h3>
-                    <p>{{entrada.hora_ini | date:'HH:mm'}} - {{entrada.hora_fin | date:'HH:mm'}}</p>
+                    <h3>{{entrada.nombre}}</h3>
+                    <h4 class="text-gray-500 font-light text-sm">{{entrada.hora_ini | date:'HH:mm'}} - {{entrada.hora_fin | date:'HH:mm'}}</h4>
                 </div>
                 <div class="flex items-center ml-auto">
                     <ion-icon *ngIf="entrada.recordatorio != 'null'" color="primary" name="alarm" class="mr-1"></ion-icon>
@@ -32,8 +32,8 @@
             </div>
             <div class="bg-white flex items-center w-full rounded-r-lg px-4 py-3">
                 <div class="flex flex-col">
-                    <h3 class="font-semibold">{{entrada.nombre}}</h3>
-                    <p>{{entrada.hora_ini | date:'dd/MM'}} {{entrada.hora_ini | date:'HH:mm'}} - {{entrada.hora_fin | date:'HH:mm'}}</p>
+                    <h3>{{entrada.nombre}}</h3>
+                    <h4 class="text-gray-500 font-light text-sm">{{entrada.hora_ini | date:'dd/MM'}} {{entrada.hora_ini | date:'HH:mm'}} - {{entrada.hora_fin | date:'HH:mm'}}</h4>
                 </div>
                 <ion-icon *ngIf="entrada.recordatorio != 'null'" color="primary" name="alarm" class="ml-auto"></ion-icon>
             </div>
@@ -41,6 +41,6 @@
     </div>
 
     <div class="mx-8 my-2" *ngIf="entradasHoy.length == 0 && entradasProximas.length == 0">
-        <p class="text-gray-400 italic">No hay eventos.</p>
+        <h4 class="text-gray-400 italic">No hay eventos.</h4>
     </div>
 </ion-content>
