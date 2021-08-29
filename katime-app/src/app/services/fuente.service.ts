@@ -85,6 +85,16 @@ export class FuenteService {
     })
   }
 
+  getTransporteId(id): Promise<any> {
+    return this.dbInstance.executeSql(`SELECT nombre, direccion FROM ${this.dbTable} WHERE tipo='transporte' AND id_fuente = ?`, [id])
+    .then((res) => {
+      return {
+        nombre: res.rows.item(0).nombre,
+        direccion: res.rows.item(0).direccion
+      }
+    });
+  }
+
   /* GET (fuentes de los próximos 7 días) */
   loadFuentes() {
     var hoy = new Date(),
@@ -149,7 +159,6 @@ export class FuenteService {
   }
 
   createTransporte(data:Fuente) {
-    alert(JSON.stringify(data));
     return this.dbInstance
       .executeSql(`INSERT INTO ${this.dbTable} (tipo, nombre, hora_ini, hora_fin, dias, localidad, ruta, direccion, origen, destino, tipo_trans, icono, duracion)
       VALUES ('${data.tipo}', '${data.nombre}', '${data.hora_ini}', '${data.hora_fin}', '${data.dias}', '${data.localidad}', '${data.ruta}', '${data.direccion}', '${data.origen}', '${data.destino}', '${data.tipo_trans}', '${data.icono}', '${data.duracion}')`, [])

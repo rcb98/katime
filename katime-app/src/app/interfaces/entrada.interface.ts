@@ -1,9 +1,9 @@
 export interface Entrada {
   // id_entrada:number,
   id_fuente:number,
-  id_categoria?:number,
   tipo:string,
   nombre:string,
+  id_categoria?:number,
   descripcion?:string,
   fecha?:Date,
   hora_ini?:Date,

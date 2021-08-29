@@ -65,8 +65,6 @@ export class CrearTransportePage implements OnInit {
   ngOnInit() {
   }
 
-
-
   createTransporte() {
     /* Validaciones */
     if(this.transporteForm.value.hora_ini > this.transporteForm.value.hora_fin){
@@ -93,13 +91,15 @@ export class CrearTransportePage implements OnInit {
 
     this.transporteForm.value.hora_ini = hIni;
     this.transporteForm.value.hora_fin = hFin;
-    this.transporteForm.value.nombre = this.transporteForm.value.ruta;
+    // this.transporteForm.value.nombre = this.transporteForm.value.ruta;
     this.transporteForm.value.dias = this.dias.toString();
 
     var origen = -1,
         destino = -1;
 
     this.fuenteService.getTransporte().subscribe(res => {
+      this.transporteForm.value.nombre = this.transporteForm.value.origen + " - " + this.transporteForm.value.destino;
+      this.transporteForm.value.icono = res['icono'];
       res['direccion'][0]['paradas'].forEach((parada, index) => {
         if(parada['nombre'] == this.transporteForm.value.origen) origen = index;
         if(parada['nombre'] == this.transporteForm.value.destino) destino = index;

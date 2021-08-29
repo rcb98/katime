@@ -34,9 +34,13 @@ export class EntradaService {
                 tipo VARCHAR(255) NOT NULL,
                 nombre VARCHAR(255) NOT NULL,
                 descripcion VARCHAR(255),
+                localidad VARCHAR(255),
+                icono VARCHAR(255),
+                direccion VARCHAR(255),
                 hora_ini DATETIME,
                 hora_fin DATETIME,
-                recordatorio INT
+                recordatorio INT,
+                duracion INT
               )`, [])
             .then((res) => {
               this.deleteTable(); // Puede que de problemas
@@ -63,8 +67,22 @@ export class EntradaService {
     });
   }
 
+  getEntradasId(id) {
+    return this.dbInstance.executeSql(`SELECT nombre, direccion, hora_ini FROM ${this.dbTable} WHERE id_fuente = ?`, [id])
+    .then((res) => {
+      let entradas: any[] = [];
+
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++)
+          entradas.push(res.rows.item(i));
+      }
+      return entradas;
+    });
+  }
+
   loadEntradasCategoria(id:number) {
-    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE id_categoria = ?`, [id]).then((res) => {
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE id_categoria = ?`, [id])
+    .then((res) => {
       let entradas: Entrada[] = [];
 
       if (res.rows.length > 0) {
@@ -84,8 +102,8 @@ export class EntradaService {
   /* POST */
   createEntrada(data:Entrada) {
     return this.dbInstance
-      .executeSql(`INSERT INTO ${this.dbTable} (id_fuente, id_categoria, tipo, nombre, descripcion, hora_ini, hora_fin, recordatorio)
-      VALUES ('${data.id_fuente}', '${data.id_categoria}', '${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}')`, [])
+      .executeSql(`INSERT INTO ${this.dbTable} (id_fuente, id_categoria, tipo, nombre, descripcion, direccion, localidad, icono, hora_ini, hora_fin, recordatorio, duracion)
+      VALUES ('${data.id_fuente}', '${data.id_categoria}', '${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.direccion}', '${data.localidad}', '${data.icono}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}', '${data.duracion}')`, [])
       .then(() => {
         this.loadEntradas();
       }, (e) => {

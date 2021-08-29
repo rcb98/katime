@@ -13,7 +13,9 @@ import { FuenteService } from 'src/app/services/fuente.service';
 export class TransportesComponent implements OnInit {
 
   public transportes:any[] = [];
+  public fuentes:number[] = [];
   public entradas:Entrada[] = [];
+  public tiemposRestantes:any[] = [];
 
   constructor(private datePipe: DatePipe,
               private entradaService: EntradaService,
@@ -22,22 +24,27 @@ export class TransportesComponent implements OnInit {
 
   async ngOnInit() {
     await this.createEntradas();
-    this.getEntradas();
+    await this.getEntradas();
+    setInterval(() => {
+      this.recalcularTiempo();
+    }, 1000 * 60)
   }
 
   async createEntradas() {
-    var horas,
-        horario = [];
-    //this.transportes = await this.getTransportes();
+    var horas, horario, dias;
+
     this.fuenteService.getTransportes().subscribe(async res => {
+      this.transportes = [];
       this.transportes = res;
 
       if(this.transportes.length > 0) {
         for(let i = 0; i < this.transportes.length; i++) {
-          let dias = this.transportes[i]['dias'].split(",");
+          horario = [];
+          dias = [];
+
+          dias = this.transportes[i]['dias'].split(",");
           for(let j = 0; j < dias.length; j++) {
             horas = await this.getHorarios(this.transportes[i]['direccion'], this.transportes[i]['origen'], dias[j]);
-            // alert(JSON.stringify(horas[0]));
             for(let k = 0; k < horas.length; k++) {
               let hora = new Date(horas[k]),
                   hini = new Date(this.transportes[i]['hora_ini']),
@@ -47,8 +54,6 @@ export class TransportesComponent implements OnInit {
                 horario.push(horas[k]);
               }
             }
-            // alert(JSON.stringify(dias[j]));
-            //alert(JSON.stringify(horario));
 
             horario.forEach(data => {
               var listaDias = this.getDiasRepeticion(new Date(), data, this.getDia(dias[j]));
@@ -60,12 +65,11 @@ export class TransportesComponent implements OnInit {
                   "nombre": this.transportes[i].nombre,
                   "localidad": this.transportes[i].localidad,
                   "direccion": this.transportes[i].direccion,
+                  "icono": this.transportes[i].icono,
                   "hora_ini": d
                 }
-                //alert(JSON.stringify(entrada));
                 this.createEntrada(entrada);
               });
-              //this.entradaService.createEntrada(entrada);
             });
           }
         }
@@ -81,29 +85,49 @@ export class TransportesComponent implements OnInit {
       return this.entradaService.createEntrada(entrada);
   }
 
-  getEntradas() {
-    this.entradaService.getEntradas().subscribe(res => {
+  async getEntradas() {
+    this.entradaService.getEntradas().subscribe(async res => {
       this.entradas = [];
-      res.forEach(entrada => {
-        if(entrada.tipo == 'transporte') {
-            this.entradas.push(entrada);
-        }
-      });
-    })
-    /*this.entradaService.loadEntradas();
-    this.entradaService.getEntradas().subscribe( res => {
+      this.fuentes = [];
       var hoy:Date = new Date();
-      res.forEach(entrada => {
-        if(entrada.tipo == 'transporte') {
-          var fecha = new Date(entrada.hora_ini);
-          if(fecha.getDate() == hoy.getDate() && fecha.getMonth() == hoy.getMonth() && fecha.getFullYear() == hoy.getFullYear()){
-            this.entradas.push(entrada);
-          }
+      res.forEach(async entrada => {
+        if(!this.getIdsFuentes(entrada.id_fuente)) this.fuentes.push(entrada.id_fuente);
+        var fecha = new Date(entrada.hora_ini);
+        if(entrada.tipo == 'transporte' && fecha.getDate() == hoy.getDate() && fecha.getMonth() == hoy.getMonth() && fecha.getFullYear() == hoy.getFullYear()) {
+          this.entradas.push(entrada);
         }
       });
-      alert(JSON.stringify(this.entradas));
-    });*/
+      this.recalcularTiempo();
+    });
+  }
 
+  recalcularTiempo() {
+    if(this.entradas.length > 0) {
+      this.tiemposRestantes = [];
+      this.entradas.forEach(entrada => {
+        let tiempo = this.tiempoRestante(entrada.hora_ini);
+        this.tiemposRestantes.push(tiempo);
+      });
+    }
+  }
+
+  tiempoRestante(hIni:any) {
+    let hora = new Date(hIni),
+        hoy = new Date(),
+        diferencia = hora.getTime() - hoy.getTime(),
+        resultado = Math.round(diferencia / 60000),
+        horas = (resultado / 60),
+        roundHoras = Math.floor(horas),
+        minutos = Math.round((horas - roundHoras) * 60);
+
+    if(roundHoras == 0) return minutos + " min";
+    else if(roundHoras > 0 && minutos > 0) return roundHoras + "h " + minutos + "min";
+    else return "Ahora";
+  }
+
+  getIdsFuentes(id) {
+    if(this.fuentes.includes(id)) return true;
+    return false;
   }
 
   getDiasRepeticion(fecha:Date, hini:any, numDia?:number) {
@@ -135,7 +159,6 @@ export class TransportesComponent implements OnInit {
 
   async getHorarios(direccion:string, origen:string, dia): Promise<Array<Date>> {
     return new Promise((resolve, reject) => {
-
       this.fuenteService.getTransporte().subscribe(res => {
         res['direccion'].forEach(dir => {
           if(dir['nombre'] == direccion) {

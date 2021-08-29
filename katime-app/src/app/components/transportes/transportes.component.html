@@ -1,5 +1,15 @@
 <ion-content [scrollEvents]="true">
-    <ul class="ml-8">
-        <li *ngFor="let entrada of entradas">{{entrada.hora_ini}}</li>
-    </ul>
+    <div class="mx-8">
+        <div *ngFor="let entrada of entradas; let i = index" class="flex items-start my-2">
+            <img class="mr-4 w-6 self-start" src="{{'../../../assets/icon/' + entrada['icono']}}" alt="">
+
+            <div class="w-4/6 mr-1">
+                <h3 class="">{{entrada.nombre}}</h3>
+                <p class="text-gray-500 font-light">{{entrada.direccion}}</p>
+            </div>
+
+            <!-- <span>{{entrada.hora_ini | date:'HH:mm'}}</span> -->
+            <p class="ml-auto self-start font-semibold">{{tiemposRestantes[i]}}</p>
+        </div>
+    </div>
 </ion-content>
