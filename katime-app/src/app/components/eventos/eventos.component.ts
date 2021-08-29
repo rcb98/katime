@@ -18,6 +18,7 @@ export class EventosComponent implements OnInit {
   public entradasHoy: Entrada[] = [];
   public entradasProximas: Entrada[] = [];
   public categorias: Categoria[] = [];
+  public tiemposRestantes:any[] = [];
   public hoy:Date = new Date();
   public idCategoriaActiva:number = 0;
   public color:string = 'bg-pink';
@@ -36,10 +37,13 @@ export class EventosComponent implements OnInit {
     this.filtrarEntradas();
     this.getEntradas();
     this.getCategorias();
+    setInterval(() => {
+      this.recalcularTiempo();
+    }, 1000 * 60)
   }
 
   filtrarEntradas() {
-    this.fuenteService.getFuentes().subscribe( res => {
+    this.fuenteService.getEventos().subscribe( res => {
         res.forEach(data => {
         let entrada:Entrada = null;
 
@@ -117,9 +121,20 @@ export class EventosComponent implements OnInit {
     })
   }
 
+  recalcularTiempo() {
+    if(this.entradasHoy.length > 0) {
+      this.tiemposRestantes = [];
+      this.entradasHoy.forEach(entrada => {
+        let tiempo = this.tiempoRestante(entrada.hora_ini);
+        this.tiemposRestantes.push(tiempo);
+      });
+    }
+  }
+
   tiempoRestante(hIni:any) {
     let hora = new Date(hIni),
-        diferencia = hora.getTime() - this.hoy.getTime(),
+        hoy = new Date(),
+        diferencia = hora.getTime() - hoy.getTime(),
         resultado = Math.round(diferencia / 60000),
         horas = (resultado / 60),
         roundHoras = Math.floor(horas),
@@ -145,6 +160,7 @@ export class EventosComponent implements OnInit {
           }
         }
       });
+      this.recalcularTiempo();
     });
   }
 

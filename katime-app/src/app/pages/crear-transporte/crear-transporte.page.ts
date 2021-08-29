@@ -108,7 +108,7 @@ export class CrearTransportePage implements OnInit {
       if(origen < destino) this.transporteForm.value.direccion = res['direccion'][0]['nombre'];
       else this.transporteForm.value.direccion = res['direccion'][1]['nombre'];
 
-      this.fuenteService.createTransporte(this.transporteForm.value).then( res => {
+      this.fuenteService.createFuente(this.transporteForm.value).then( res => {
         this.presentToast("¡Transporte añadido!");
         this.router.navigateByUrl("/modo-lista");
       });

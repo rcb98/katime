@@ -110,7 +110,7 @@ export class CrearEventoPage implements OnInit {
 
     // alert(JSON.stringify(this.eventoForm.value));
 
-    this.fuenteService.createEvento(this.eventoForm.value).then( res => {
+    this.fuenteService.createFuente(this.eventoForm.value).then( res => {
       this.presentToast("¡Evento creado!");
       this.router.navigateByUrl("/modo-lista");
     });

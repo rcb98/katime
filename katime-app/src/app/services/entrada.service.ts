@@ -81,7 +81,7 @@ export class EntradaService {
   }
 
   loadEntradasCategoria(id:number) {
-    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE id_categoria = ?`, [id])
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE id_categoria = ? OR tipo='transporte'`, [id])
     .then((res) => {
       let entradas: Entrada[] = [];
 
