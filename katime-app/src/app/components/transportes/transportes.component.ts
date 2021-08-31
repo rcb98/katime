@@ -23,7 +23,7 @@ export class TransportesComponent implements OnInit {
 
   async ngOnInit() {
     await this.createEntradas();
-    this.getEntradas();
+    await this.getEntradas();
     setInterval(() => {
       this.recalcularTiempo();
     }, 1000 * 60);
@@ -84,13 +84,13 @@ export class TransportesComponent implements OnInit {
       return this.entradaService.createEntrada(entrada);
   }
 
-  getEntradas() {
-    this.entradaService.getEntradas().subscribe(res => {
+  async getEntradas() {
+    this.entradaService.getTransportes().subscribe(async res => {
       this.entradas = [];
       var hoy:Date = new Date();
-      res.forEach(entrada => {
+      res.forEach(async entrada => {
         var fecha = new Date(entrada.hora_ini);
-        if(entrada.tipo == 'transporte' && fecha.getDate() == hoy.getDate() && fecha.getMonth() == hoy.getMonth() && fecha.getFullYear() == hoy.getFullYear()) {
+        if(fecha.getDate() == hoy.getDate() && fecha.getMonth() == hoy.getMonth() && fecha.getFullYear() == hoy.getFullYear()) {
           this.entradas.push(entrada);
         }
       });
@@ -120,7 +120,7 @@ export class TransportesComponent implements OnInit {
     if(roundHoras == 0) return minutos + "min";
     else if(roundHoras > 0 && minutos <= 0) return roundHoras + "h";
     else if(roundHoras > 0 && minutos > 0) return roundHoras + "h " + minutos + "min";
-    else return "Ahora";
+    else if(roundHoras == 0 && minutos <= 0) return "Ahora";
   }
 
   getDiasRepeticion(fecha:Date, hini:any, numDia?:number) {

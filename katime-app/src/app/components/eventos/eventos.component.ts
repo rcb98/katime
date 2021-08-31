@@ -111,8 +111,8 @@ export class EventosComponent implements OnInit {
 
   filtrarPorCategoria(id:number) {
     this.idCategoriaActiva = id;
-    this.entradaService.loadEntradasCategoria(id).then(() => {
-      this.entradaService.getEntradas().subscribe(res => {
+    this.entradaService.loadEventosCategoria(id).then(() => {
+      this.entradaService.getEventos().subscribe(res => {
         if(res.length <= 0) {
           //this.entradaService.loadEntradas();
           //this.presentToast("No tienes eventos con esa categoría.");
@@ -143,22 +143,20 @@ export class EventosComponent implements OnInit {
     if(roundHoras == 0) return minutos + "min";
     else if(roundHoras > 0 && minutos <= 0) return roundHoras + "h";
     else if(roundHoras > 0 && minutos > 0) return roundHoras + "h " + minutos + "min";
-    else return "Ahora";
+    else if(roundHoras == 0 && minutos <= 0) return "Ahora";
   }
 
   getEntradas() {
-    this.entradaService.getEntradas().subscribe( res => {
+    this.entradaService.getEventos().subscribe( res => {
       this.entradasHoy = [];
       this.entradasProximas = [];
       var hoy:Date = new Date();
       res.forEach(entrada => {
-        if(entrada.tipo == 'evento') {
-          var fecha = new Date(entrada.hora_ini);
-          if(fecha.getDate() == hoy.getDate() && fecha.getMonth() == hoy.getMonth() && fecha.getFullYear() == hoy.getFullYear()){
-            this.entradasHoy.push(entrada);
-          } else {
-            this.entradasProximas.push(entrada);
-          }
+        var fecha = new Date(entrada.hora_ini);
+        if(fecha.getDate() == hoy.getDate() && fecha.getMonth() == hoy.getMonth() && fecha.getFullYear() == hoy.getFullYear()){
+          this.entradasHoy.push(entrada);
+        } else {
+          this.entradasProximas.push(entrada);
         }
       });
       this.recalcularTiempo();
@@ -167,7 +165,7 @@ export class EventosComponent implements OnInit {
 
   getAllEntradas() {
     this.idCategoriaActiva = 0;
-    this.entradaService.loadEntradas();
+    this.entradaService.loadEventos();
   }
 
   getCategorias() {

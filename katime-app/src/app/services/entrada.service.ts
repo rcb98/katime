@@ -12,7 +12,8 @@ export class EntradaService {
   private dbInstance:SQLiteObject;
   readonly dbName:string = "katime-db";
   readonly dbTable:string = "entradaTable";
-  ENTRADAS = new BehaviorSubject([]);
+  EVENTOS = new BehaviorSubject([]);
+  TRANSPORTES = new BehaviorSubject([]);
 
   constructor(private platform: Platform,
               private sqlite: SQLite) {
@@ -44,6 +45,8 @@ export class EntradaService {
               )`, [])
             .then((res) => {
               this.deleteTable(); // Puede que de problemas
+              this.loadEventos();
+              this.loadTransportes();
               // alert(JSON.stringify(res));
             })
             .catch((error) => alert(JSON.stringify(error)));
@@ -53,50 +56,55 @@ export class EntradaService {
   }
 
   /* GET (all) */
-  loadEntradas() {
-    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} ORDER BY hora_ini ASC`, []).then((res) => {
-      let entradas: Entrada[] = [];
+  loadEventos() {
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE tipo = 'evento' ORDER BY hora_ini ASC`, []).then((res) => {
+      let eventos: Entrada[] = [];
 
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++)
-          entradas.push(res.rows.item(i));
+          eventos.push(res.rows.item(i));
       }
-      this.ENTRADAS.next(entradas);
+      this.EVENTOS.next(eventos);
     },(e) => {
       alert(JSON.stringify(e));
     });
   }
 
-  getEntradasId(id) {
-    return this.dbInstance.executeSql(`SELECT nombre, direccion, hora_ini FROM ${this.dbTable} WHERE id_fuente = ? ORDER BY hora_ini ASC`, [id])
-    .then((res) => {
-      let entradas: any[] = [];
+  loadTransportes() {
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE tipo = 'transporte' ORDER BY hora_ini ASC`, []).then((res) => {
+      let transportes: Entrada[] = [];
 
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++)
-          entradas.push(res.rows.item(i));
+          transportes.push(res.rows.item(i));
       }
-      return entradas;
-    });
-  }
-
-  loadEntradasCategoria(id:number) {
-    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE id_categoria = ? OR tipo='transporte' ORDER BY hora_ini ASC`, [id])
-    .then((res) => {
-      let entradas: Entrada[] = [];
-
-      if (res.rows.length > 0) {
-        for (var i = 0; i < res.rows.length; i++)
-          entradas.push(res.rows.item(i));
-      }
-      this.ENTRADAS.next(entradas);
+      this.TRANSPORTES.next(transportes);
     },(e) => {
       alert(JSON.stringify(e));
     });
   }
 
-  getEntradas():Observable<Entrada[]> {
-    return this.ENTRADAS.asObservable();
+  loadEventosCategoria(id:number) {
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE id_categoria = ? AND tipo = 'evento' ORDER BY hora_ini ASC`, [id])
+    .then((res) => {
+      let eventos: Entrada[] = [];
+
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++)
+          eventos.push(res.rows.item(i));
+      }
+      this.EVENTOS.next(eventos);
+    },(e) => {
+      alert(JSON.stringify(e));
+    });
+  }
+
+  getEventos():Observable<Entrada[]> {
+    return this.EVENTOS.asObservable();
+  }
+
+  getTransportes():Observable<Entrada[]> {
+    return this.TRANSPORTES.asObservable();
   }
 
   /* POST */
@@ -105,7 +113,8 @@ export class EntradaService {
       .executeSql(`INSERT INTO ${this.dbTable} (id_fuente, id_categoria, tipo, nombre, descripcion, direccion, localidad, icono, hora_ini, hora_fin, recordatorio, duracion)
       VALUES ('${data.id_fuente}', '${data.id_categoria}', '${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.direccion}', '${data.localidad}', '${data.icono}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}', '${data.duracion}')`, [])
       .then(() => {
-        this.loadEntradas();
+        this.loadEventos();
+        this.loadTransportes();
       }, (e) => {
         alert(JSON.stringify("ESTOY DANDO PROBLEMA", e.err));
       });
