@@ -68,7 +68,7 @@ export class EntradaService {
   }
 
   getEntradasId(id) {
-    return this.dbInstance.executeSql(`SELECT nombre, direccion, hora_ini FROM ${this.dbTable} WHERE id_fuente = ?`, [id])
+    return this.dbInstance.executeSql(`SELECT nombre, direccion, hora_ini FROM ${this.dbTable} WHERE id_fuente = ? ORDER BY hora_ini ASC`, [id])
     .then((res) => {
       let entradas: any[] = [];
 
@@ -81,7 +81,7 @@ export class EntradaService {
   }
 
   loadEntradasCategoria(id:number) {
-    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE id_categoria = ? OR tipo='transporte'`, [id])
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE id_categoria = ? OR tipo='transporte' ORDER BY hora_ini ASC`, [id])
     .then((res) => {
       let entradas: Entrada[] = [];
 

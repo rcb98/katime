@@ -12,9 +12,8 @@ import { FuenteService } from 'src/app/services/fuente.service';
 })
 export class TransportesComponent implements OnInit {
 
-  public transportes:any[] = [];
-  public fuentes:number[] = [];
   public entradas:Entrada[] = [];
+  public transportes:any[] = [];
   public tiemposRestantes:any[] = [];
 
   constructor(private datePipe: DatePipe,
@@ -24,10 +23,10 @@ export class TransportesComponent implements OnInit {
 
   async ngOnInit() {
     await this.createEntradas();
-    await this.getEntradas();
+    this.getEntradas();
     setInterval(() => {
       this.recalcularTiempo();
-    }, 1000 * 60)
+    }, 1000 * 60);
   }
 
   async createEntradas() {
@@ -85,13 +84,11 @@ export class TransportesComponent implements OnInit {
       return this.entradaService.createEntrada(entrada);
   }
 
-  async getEntradas() {
-    this.entradaService.getEntradas().subscribe(async res => {
+  getEntradas() {
+    this.entradaService.getEntradas().subscribe(res => {
       this.entradas = [];
-      this.fuentes = [];
       var hoy:Date = new Date();
-      res.forEach(async entrada => {
-        if(!this.getIdsFuentes(entrada.id_fuente)) this.fuentes.push(entrada.id_fuente);
+      res.forEach(entrada => {
         var fecha = new Date(entrada.hora_ini);
         if(entrada.tipo == 'transporte' && fecha.getDate() == hoy.getDate() && fecha.getMonth() == hoy.getMonth() && fecha.getFullYear() == hoy.getFullYear()) {
           this.entradas.push(entrada);
@@ -124,11 +121,6 @@ export class TransportesComponent implements OnInit {
     else if(roundHoras > 0 && minutos <= 0) return roundHoras + "h";
     else if(roundHoras > 0 && minutos > 0) return roundHoras + "h " + minutos + "min";
     else return "Ahora";
-  }
-
-  getIdsFuentes(id) {
-    if(this.fuentes.includes(id)) return true;
-    return false;
   }
 
   getDiasRepeticion(fecha:Date, hini:any, numDia?:number) {
