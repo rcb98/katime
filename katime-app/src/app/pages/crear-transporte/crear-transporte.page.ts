@@ -20,6 +20,7 @@ export class CrearTransportePage implements OnInit {
     nombre: ['', Validators.required],
     localidad: ['', Validators.required],
     ruta: ['', Validators.required],
+    alias: ['', Validators.required],
     direccion: ['', Validators.required],
     origen: ['', Validators.required],
     destino: ['', Validators.required],
@@ -37,7 +38,7 @@ export class CrearTransportePage implements OnInit {
 
   // Ruta
   public modalRuta:boolean = false;
-  public rutas:string[] = [];
+  public rutas:any[] = [];
 
   // Origen
   public paradas:string[] = [];
@@ -97,7 +98,8 @@ export class CrearTransportePage implements OnInit {
     var origen = -1,
         destino = -1;
 
-    this.fuenteService.getTransporte().subscribe(res => {
+
+    this.fuenteService.getTransporte(this.transporteForm.value.alias).subscribe(res => {
       this.transporteForm.value.nombre = this.transporteForm.value.origen + " - " + this.transporteForm.value.destino;
       this.transporteForm.value.icono = res['icono'];
       res['direccion'][0]['paradas'].forEach((parada, index) => {
@@ -120,7 +122,7 @@ export class CrearTransportePage implements OnInit {
     var origen = -1,
         destino = -1;
 
-    this.fuenteService.getTransporte().subscribe(res => {
+    this.fuenteService.getTransporte(this.transporteForm.value.alias).subscribe(res => {
       res['direccion'][0]['paradas'].forEach((parada, index) => {
         if(parada['nombre'] == this.transporteForm.value.origen) origen = index;
         if(parada['nombre'] == this.transporteForm.value.destino) destino = index;
@@ -161,47 +163,25 @@ export class CrearTransportePage implements OnInit {
     this.checkTodoElDia();
   }
 
-  /*getHorarios() {
-    this.fuenteService.getTransporte().subscribe(res => {
-      res['direccion'].forEach(dir => {
-        if(dir['nombre'] == this.transporteForm.value.direccion) {
-          dir['paradas'].forEach(parada => {
-            if(parada['nombre'] == this.transporteForm.value.origen) {
-              var dias = this.transporteForm.value.dias.split(",");
-              dias.forEach(dia => {
-                if(dia == "Sab" || dia == "Dom") {
-                  console.log("finde");
-                } else {
-                  console.log("no finde");
-
-                }
-              });
-            }
-          });
-        }
-      });
-
-    })
-  }*/
-
   getLocalidades() {
-    let ciudades = environment.ciudades;
+    let ciudades = environment.transportes;
     this.localidades = [];
     ciudades.forEach(ciu => {
-      this.localidades.push(ciu);
+      this.localidades.push(ciu.ciudad);
     });
   }
 
   getRutas() {
-    this.fuenteService.getTransporte().subscribe(res => {
-      this.rutas = [];
-      this.rutas.push(res['nombre']);
-      this.transporteForm.value.tipo_trans = res['tipo_trans'];
-    })
+    this.rutas = [];
+    environment.transportes.forEach(ciu => {
+      ciu.lineas.forEach(lin => {
+        this.rutas.push(lin);
+      });
+    });
   }
 
   getParadas() {
-    this.fuenteService.getTransporte().subscribe(res => {
+    this.fuenteService.getTransporte(this.transporteForm.value.alias).subscribe(res => {
       this.paradas = [];
       res['direccion'][0]['paradas'].forEach(parada => {
         this.paradas.push(parada['nombre']);
@@ -215,8 +195,9 @@ export class CrearTransportePage implements OnInit {
     this.toggleModalLocalidad();
   }
 
-  setRuta(ruta:string) {
-    this.transporteForm.value.ruta = ruta;
+  setRuta(ruta:any) {
+    this.transporteForm.value.ruta = ruta.ruta;
+    this.transporteForm.value.alias = ruta.alias;
     this.reRenderForm();
     this.toggleModalRuta();
   }

@@ -15,6 +15,7 @@ export interface Fuente {
   direccion?:string,
   localidad?:string,
   ruta?:string,
+  alias?:string,
   tipo_trans?:string,
   duracion?:number,
   icono?:string

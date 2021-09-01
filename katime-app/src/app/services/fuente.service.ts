@@ -51,6 +51,7 @@ export class FuenteService {
                   dias VARCHAR(255),
                   localidad VARCHAR(255),
                   ruta VARCHAR(255),
+                  alias VARCHAR(255),
                   direccion VARCHAR(255),
                   origen VARCHAR(255),
                   destino VARCHAR(255),
@@ -105,8 +106,8 @@ export class FuenteService {
     return this.TRANSPORTES.asObservable();
   }
 
-  getTransporte():Observable<any> {
-    return this.http.get(`./assets/json/L2.json`);
+  getTransporte(linea:string):Observable<any> {
+    return this.http.get(`./assets/json/${linea}.json`);
   }
 
   getTransporteId(id): Promise<any> {
@@ -122,8 +123,8 @@ export class FuenteService {
   /* POST */
   createFuente(data:Fuente) {
     return this.dbInstance
-      .executeSql(`INSERT INTO ${this.dbTable} (id_categoria, tipo, nombre, descripcion, hora_ini, hora_fin, recordatorio, repeticion, dias, localidad, ruta, direccion, origen, destino, tipo_trans, icono, duracion)
-      VALUES ('${data.id_categoria}', '${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}', '${data.repeticion}', '${data.dias}', '${data.localidad}', '${data.ruta}', '${data.direccion}', '${data.origen}', '${data.destino}', '${data.tipo_trans}', '${data.icono}', '${data.duracion}')`, [])
+      .executeSql(`INSERT INTO ${this.dbTable} (id_categoria, tipo, nombre, descripcion, hora_ini, hora_fin, recordatorio, repeticion, dias, localidad, ruta, alias, direccion, origen, destino, tipo_trans, icono, duracion)
+      VALUES ('${data.id_categoria}', '${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}', '${data.repeticion}', '${data.dias}', '${data.localidad}', '${data.ruta}', '${data.alias}', '${data.direccion}', '${data.origen}', '${data.destino}', '${data.tipo_trans}', '${data.icono}', '${data.duracion}')`, [])
       .then(() => {
         this.loadEventos();
         this.loadTransportes();

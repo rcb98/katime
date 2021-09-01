@@ -4,7 +4,21 @@
 
 export const environment = {
   production: false,
-  ciudades: ['Alicante']
+  transportes: [
+    {
+      "ciudad":"Alicante",
+      "lineas": [
+        {
+          "alias":"L2",
+          "ruta":"L2 Luceros (Alicante) - Sant Vicent del Raspeig"
+        },
+        {
+          "alias":"L3",
+          "ruta":"L3 Luceros (Alicante) - El Campello"
+        }
+      ]
+    }
+  ]
 };
 
 /*

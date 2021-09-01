@@ -41,8 +41,9 @@ export class TransportesComponent implements OnInit {
           dias = [];
 
           dias = this.transportes[i]['dias'].split(",");
+          let alias = this.transportes[i]['alias'];
           for(let j = 0; j < dias.length; j++) {
-            horas = await this.getHorarios(this.transportes[i]['direccion'], this.transportes[i]['origen'], dias[j]);
+            horas = await this.getHorarios(this.transportes[i]['direccion'], this.transportes[i]['origen'], dias[j], alias);
             horario = [];
             for(let k = 0; k < horas.length; k++) {
               let hora = new Date(horas[k]),
@@ -151,9 +152,9 @@ export class TransportesComponent implements OnInit {
     }
   }
 
-  async getHorarios(direccion:string, origen:string, dia): Promise<Array<Date>> {
+  async getHorarios(direccion:string, origen:string, dia, alias): Promise<Array<Date>> {
     return new Promise((resolve, reject) => {
-      this.fuenteService.getTransporte().subscribe(res => {
+      this.fuenteService.getTransporte(alias).subscribe(res => {
         res['direccion'].forEach(dir => {
           if(dir['nombre'] == direccion) {
               dir['paradas'].forEach(parada => {
