@@ -144,6 +144,7 @@ export class EventosComponent implements OnInit {
     else if(roundHoras > 0 && minutos <= 0) return roundHoras + "h";
     else if(roundHoras > 0 && minutos > 0) return roundHoras + "h " + minutos + "min";
     else if(roundHoras == 0 && minutos <= 0) return "Ahora";
+    else return "Ahora";
   }
 
   getEntradas() {

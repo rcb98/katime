@@ -38,12 +38,12 @@ export class TransportesComponent implements OnInit {
 
       if(this.transportes.length > 0) {
         for(let i = 0; i < this.transportes.length; i++) {
-          horario = [];
           dias = [];
 
           dias = this.transportes[i]['dias'].split(",");
           for(let j = 0; j < dias.length; j++) {
             horas = await this.getHorarios(this.transportes[i]['direccion'], this.transportes[i]['origen'], dias[j]);
+            horario = [];
             for(let k = 0; k < horas.length; k++) {
               let hora = new Date(horas[k]),
                   hini = new Date(this.transportes[i]['hora_ini']),
@@ -121,6 +121,7 @@ export class TransportesComponent implements OnInit {
     else if(roundHoras > 0 && minutos <= 0) return roundHoras + "h";
     else if(roundHoras > 0 && minutos > 0) return roundHoras + "h " + minutos + "min";
     else if(roundHoras == 0 && minutos <= 0) return "Ahora";
+    else return "Ahora";
   }
 
   getDiasRepeticion(fecha:Date, hini:any, numDia?:number) {
