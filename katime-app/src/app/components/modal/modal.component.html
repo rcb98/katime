@@ -1,0 +1,29 @@
+<div class="bg-gray-100 rounded-t-xl h-auto w-full absolute bottom-0">
+    <div class="flex px-8 pt-8">
+        <ion-icon color="primary" class="text-2xl" name="arrow-back" (click)="dismiss()"></ion-icon>
+        <ion-icon class="ml-auto text-2xl text-gray-500" name="trash-bin" (click)="[dismiss(), eliminarEvento()]" *ngIf="accion == 'detalleEvento'"></ion-icon>
+    </div>
+
+    <div *ngIf="accion == 'detalleEvento'">
+        <div class="flex items-start my-4 mx-8">
+            <div class="h-7 w-7 circle my-1 mr-2 border-none" [ngClass]="'bg-' + categoria">&#x200b;</div>
+
+            <div class="">
+                <h3 class="text-lg"><span class="font-semibold">{{detalle.nombre}}</span> {{detalle.hora_ini | date:'HH:mm'}} - {{detalle.hora_fin | date:'HH:mm'}}</h3>
+                <p class="text-sm text-gray-500">{{tiempoRestante}}</p>
+            </div>
+        </div>
+
+        <label class="ml-8 text-gray-600">Descripción</label>
+        <h4 class="bg-white mx-8 my-1 mb-8 rounded-lg px-4 py-3" *ngIf="detalle.descripcion">{{detalle.descripcion}}</h4>
+        <h4 class="bg-white text-gray-400 mx-8 my-1 mb-8 rounded-lg px-4 py-3 italic" *ngIf="!detalle.descripcion">Sin descripción</h4>
+    </div>
+
+    <div *ngIf="accion == 'eliminar'">
+        <h3 class="text-lg my-4 mx-8 font-semibold">¿Qué quieres hacer?</h3>
+        <ul class="overflow-y-scroll mb-8 hide-scroll">
+            <li class="border-b border-gray-200 p-4 pl-8" (click)="deleteEntrada(detalle.id_entrada)">Eliminar este {{tipo}}</li>
+            <li class="border-b p-4 pl-8" (click)="deleteEntradas(detalle.id_fuente)">Eliminar todos los {{tipo}}s de este tipo</li>
+        </ul>
+    </div>
+</div>

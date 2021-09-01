@@ -1,11 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
-import { PopoverController, ToastController } from '@ionic/angular';
+import { ModalController, PopoverController, ToastController } from '@ionic/angular';
 import { Categoria } from 'src/app/interfaces/categoria.interface';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { EntradaService } from 'src/app/services/entrada.service';
 import { FuenteService } from 'src/app/services/fuente.service';
+import { ModalComponent } from '../modal/modal.component';
 import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
@@ -33,6 +34,7 @@ export class EventosComponent implements OnInit {
               private categoriaService: CategoriaService,
               private entradaService: EntradaService,
               private fuenteService: FuenteService,
+              private modalController: ModalController,
               private toaster: ToastController) {
                 this.fuenteService.databaseConn();
                 this.entradaService.databaseConn();
@@ -158,8 +160,8 @@ export class EventosComponent implements OnInit {
       this.detalle = res;
       this.categoriaService.loadCategoria(res['id_categoria']).then(cat => {
         this.categoria = cat['color'];
+        this.detalleEvento();
       })
-      this.toggleModalDetalle();
     })
   }
 
@@ -331,6 +333,22 @@ export class EventosComponent implements OnInit {
       color: "primary"
     });
     toast.present();
+  }
+
+  async detalleEvento() {
+    const modal = await this.modalController.create({
+      component: ModalComponent,
+      cssClass: 'my-modal-class',
+      showBackdrop:true,
+      backdropDismiss: true,
+      componentProps: {
+        'accion': 'detalleEvento',
+        'detalle': this.detalle,
+        'categoria': this.categoria,
+        'tiempoRestante': this.tiempoRestante(this.detalle.hora_ini)
+      }
+    });
+    return await modal.present();
   }
 
 }

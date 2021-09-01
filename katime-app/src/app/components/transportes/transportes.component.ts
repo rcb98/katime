@@ -1,8 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
 import { EntradaService } from 'src/app/services/entrada.service';
 import { FuenteService } from 'src/app/services/fuente.service';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-transportes',
@@ -18,10 +20,19 @@ export class TransportesComponent implements OnInit {
 
   constructor(private datePipe: DatePipe,
               private entradaService: EntradaService,
-              private fuenteService: FuenteService) {
+              private fuenteService: FuenteService,
+              private modalController: ModalController) {
               }
 
   async ngOnInit() {
+    /*let entrada:Entrada;
+    entrada = {
+      "id_fuente": 1,
+      "nombre": "L2",
+      "direccion": "Luceros",
+      "tipo": "transporte"
+    }
+    this.entradas.push(entrada);*/
     await this.createEntradas();
     await this.getEntradas();
     setInterval(() => {
@@ -174,5 +185,18 @@ export class TransportesComponent implements OnInit {
      );
    });
  }
+
+ async presentModal() {
+  const modal = await this.modalController.create({
+    component: ModalComponent,
+    cssClass: 'my-modal-class',
+    componentProps: {
+      'firstName': 'Douglas',
+      'lastName': 'Adams',
+      'middleInitial': 'N'
+    }
+  });
+  return await modal.present();
+}
 
 }

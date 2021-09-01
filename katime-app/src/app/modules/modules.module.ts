@@ -5,6 +5,7 @@ import { PopoverComponent } from '../components/popover/popover.component';
 import { EventosComponent } from '../components/eventos/eventos.component';
 import { TransportesComponent } from '../components/transportes/transportes.component';
 import { IonicModule } from '@ionic/angular';
+import { ModalComponent } from '../components/modal/modal.component';
 
 @NgModule({
   imports: [
@@ -15,13 +16,15 @@ import { IonicModule } from '@ionic/angular';
     PageHeaderComponent,
     PopoverComponent,
     EventosComponent,
-    TransportesComponent
+    TransportesComponent,
+    ModalComponent
   ],
   exports: [
     PageHeaderComponent,
     PopoverComponent,
     EventosComponent,
-    TransportesComponent
+    TransportesComponent,
+    ModalComponent
   ]
 })
 export class ModulesModule { }

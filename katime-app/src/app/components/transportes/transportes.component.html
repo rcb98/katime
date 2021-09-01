@@ -1,6 +1,6 @@
 <ion-content [scrollEvents]="true">
     <div class="mx-8">
-        <div *ngFor="let entrada of entradas; let i = index" class="flex items-start my-2">
+        <div *ngFor="let entrada of entradas; let i = index" class="flex items-start my-2" (click)="presentModal()">
             <img class="mr-4 w-6 self-start" src="{{'../../../assets/icon/' + entrada['icono']}}" alt="">
 
             <div class="w-4/6 self-start mr-1">
