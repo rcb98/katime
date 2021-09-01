@@ -1,3 +1,43 @@
+<!-- Modal detalle -->
+<div class="detalle flex fixed h-screen w-screen z-40" *ngIf="modalDetalle" (click)="clickOut($event)">
+    <div class="bg-white fixed bottom-0 w-full h-auto rounded-t-xl z-50 shadow-top">
+        <div class="flex px-8 pt-8">
+            <ion-icon color="primary" class="text-2xl" name="arrow-back" (click)="toggleModalDetalle()"></ion-icon>
+            <ion-icon class="ml-auto text-2xl text-gray-500" name="trash-bin" (click)="[toggleModalDetalle(), toggleModalBorrar()]"></ion-icon>
+        </div>
+
+        <div class="flex items-start my-4 mx-8">
+            <div class="h-7 w-7 circle my-1 mr-2 border-none" [ngClass]="'bg-' + categoria">&#x200b;</div>
+
+            <div class="">
+                <h3 class="text-lg"><span class="font-semibold">{{detalle.nombre}}</span> {{detalle.hora_ini | date:'HH:mm'}} - {{detalle.hora_fin | date:'HH:mm'}}</h3>
+                <p class="text-sm text-gray-500">{{tiempoRestante(detalle.hora_ini)}}</p>
+            </div>
+        </div>
+
+        <label class="ml-8 text-gray-600">Descripción</label>
+        <h4 class="border border-gray-200 mx-8 my-1 rounded-lg px-4 py-3" *ngIf="detalle.descripcion">{{detalle.descripcion}}</h4>
+        <h4 class="border border-gray-200 text-gray-400 mx-8 my-1 rounded-lg px-4 py-3 italic" *ngIf="!detalle.descripcion">Sin descripción</h4>
+
+        <!-- <p class="ml-8 my-1 text-gray-600 text-sm">Este evento no se repite</p> -->
+    </div>
+</div>
+
+<!-- Modal borrar -->
+<div class="borrar flex fixed h-screen w-screen z-40" *ngIf="modalBorrar" (click)="clickOut($event)">
+    <div class="bg-white fixed bottom-0 w-full h-auto rounded-t-xl z-50 shadow-top">
+        <div class="flex px-8 pt-8">
+            <ion-icon color="primary" class="text-2xl" name="arrow-back" (click)="toggleModalBorrar()"></ion-icon>
+        </div>
+        <h3 class="text-lg my-4 mx-8 font-semibold">¿Qué quieres hacer?</h3>
+        <ul class="overflow-y-scroll hide-scroll">
+            <li class="border-b border-gray-200 p-4 pl-8" (click)="deleteEntrada(detalle.id_entrada)">Eliminar este evento</li>
+            <li class="border-b p-4 pl-8" (click)="deleteEntradas(detalle.id_fuente)">Eliminar todos los eventos de este tipo</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Categorías -->
 <div class="flex ml-8 mt-10 overflow-x-scroll hide-scroll">
     <button (click)="getAllEntradas()" class="mx-1 px-4 border-solid border text-purple border-purple rounded-xl bg-transparent" [ngClass]="{'clicked' : idCategoriaActiva == 0}">Todos</button>
     <button *ngFor="let categoria of categorias" (click)="filtrarPorCategoria(categoria.id_categoria)" class="mx-1 px-4 border-solid border rounded-xl" [ngClass]="getClasesCategoria(categoria.id_categoria)">{{categoria.nombre}}</button>
@@ -6,7 +46,7 @@
 <ion-content [scrollEvents]="true">
     <div class="m-0" *ngIf="entradasHoy.length > 0">
         <h2 class="mx-8 my-2 font-medium">Hoy, <span class="font-light">{{hoy | date:'dd/MM'}}</span></h2>
-        <div *ngFor="let entrada of entradasHoy" class="flex mx-8 my-2">
+        <div *ngFor="let entrada of entradasHoy" class="flex mx-8 my-2" (click)="getEntrada(entrada.id_entrada)">
             <div class="flex h-auto rounded-l-lg px-4 py-3" [ngClass]="getColorCategoria(entrada.id_categoria)">
                 <!-- No me gusta el ngClass -->
                 <span>&#x200b;</span>
@@ -26,7 +66,7 @@
 
     <div class="m-0" *ngIf="entradasProximas.length > 0">
         <h2 class="mx-8 my-2 mt-4 font-medium">Próximos eventos</h2>
-        <div *ngFor="let entrada of entradasProximas" class="flex mx-8 my-2">
+        <div *ngFor="let entrada of entradasProximas" class="flex mx-8 my-2" (click)="getEntrada(entrada.id_entrada)">
             <div class="flex h-auto rounded-l-lg px-4 py-3" [ngClass]="getColorCategoria(entrada.id_categoria)">
                 <span>&#x200b;</span>
             </div>

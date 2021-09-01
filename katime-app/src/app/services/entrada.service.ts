@@ -99,6 +99,13 @@ export class EntradaService {
     });
   }
 
+  getEntrada(id:number): Promise<any> {
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE id_entrada = ?`, [id])
+      .then((res) => {
+        return res.rows.item(0);
+      });
+  }
+
   getEventos():Observable<Entrada[]> {
     return this.EVENTOS.asObservable();
   }
@@ -117,6 +124,30 @@ export class EntradaService {
         this.loadTransportes();
       }, (e) => {
         alert(JSON.stringify("ESTOY DANDO PROBLEMA", e.err));
+      });
+  }
+
+  deleteEntrada(id:number): Promise<any> {
+    return this.dbInstance.executeSql(`
+    DELETE FROM ${this.dbTable} WHERE id_entrada = ${id}`, [])
+      .then(() => {
+        this.loadEventos();
+        this.loadTransportes();
+      })
+      .catch(e => {
+        alert(JSON.stringify(e))
+      });
+  }
+
+  deleteEntradas(id:number): Promise<any> {
+    return this.dbInstance.executeSql(`
+    DELETE FROM ${this.dbTable} WHERE id_fuente = ${id}`, [])
+      .then(() => {
+        //this.loadEventos();
+        //this.loadTransportes();
+      })
+      .catch(e => {
+        alert(JSON.stringify(e))
       });
   }
 

@@ -1,11 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { PopoverController, ToastController } from '@ionic/angular';
 import { Categoria } from 'src/app/interfaces/categoria.interface';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { EntradaService } from 'src/app/services/entrada.service';
 import { FuenteService } from 'src/app/services/fuente.service';
+import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
   selector: 'app-eventos',
@@ -15,6 +16,8 @@ import { FuenteService } from 'src/app/services/fuente.service';
 })
 export class EventosComponent implements OnInit {
 
+  public detalle:Entrada;
+  public categoria:any;
   public entradasHoy: Entrada[] = [];
   public entradasProximas: Entrada[] = [];
   public categorias: Categoria[] = [];
@@ -23,11 +26,14 @@ export class EventosComponent implements OnInit {
   public idCategoriaActiva:number = 0;
   public color:string = 'bg-pink';
   public num:number = 1;
+  public modalDetalle:boolean = false;
+  public modalBorrar:boolean = false;
 
   constructor(private datePipe: DatePipe,
               private categoriaService: CategoriaService,
               private entradaService: EntradaService,
-              private fuenteService: FuenteService) {
+              private fuenteService: FuenteService,
+              private toaster: ToastController) {
                 this.fuenteService.databaseConn();
                 this.entradaService.databaseConn();
                 this.categoriaService.databaseConn();
@@ -145,6 +151,16 @@ export class EventosComponent implements OnInit {
     else if(roundHoras > 0 && minutos > 0) return roundHoras + "h " + minutos + "min";
     else if(roundHoras == 0 && minutos <= 0) return "Ahora";
     else return "Ahora";
+  }
+
+  getEntrada(id:number) {
+    this.entradaService.getEntrada(id).then(res => {
+      this.detalle = res;
+      this.categoriaService.loadCategoria(res['id_categoria']).then(cat => {
+        this.categoria = cat['color'];
+      })
+      this.toggleModalDetalle();
+    })
   }
 
   getEntradas() {
@@ -278,4 +294,45 @@ export class EventosComponent implements OnInit {
     return dias
   }
 
+  deleteEntrada(id:number) {
+    this.entradaService.deleteEntrada(id).then(() => {
+      this.toggleModalBorrar();
+      this.presentToast(`Evento de '${this.detalle.nombre}' eliminad0.`);
+    })
+  }
+
+  deleteEntradas(id:number) {
+    this.entradaService.deleteEntradas(id).then(() => {
+      this.fuenteService.deleteFuente(id).then(() => {
+        this.toggleModalBorrar();
+        this.presentToast(`Eventos de '${this.detalle.nombre}' eliminados.`);
+      })
+    })
+  }
+
+  toggleModalDetalle() {
+    this.modalDetalle = !this.modalDetalle;
+  }
+
+  toggleModalBorrar() {
+    this.modalBorrar = !this.modalBorrar;
+  }
+
+  clickOut($event) {
+    if($event.target.classList.contains("detalle")) this.toggleModalDetalle();
+    if($event.target.classList.contains("borrar")) this.toggleModalDetalle();
+  }
+
+  async presentToast(msg:string) {
+    const toast = await this.toaster.create({
+      message: msg,
+      duration: 3000,
+      animated: true,
+      color: "primary"
+    });
+    toast.present();
+  }
+
 }
+
+
