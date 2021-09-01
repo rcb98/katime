@@ -1,13 +1,12 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, Input } from '@angular/core';
-import { ModalController, PopoverController, ToastController } from '@ionic/angular';
+import { Component, OnInit} from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { Categoria } from 'src/app/interfaces/categoria.interface';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { EntradaService } from 'src/app/services/entrada.service';
 import { FuenteService } from 'src/app/services/fuente.service';
 import { ModalComponent } from '../modal/modal.component';
-import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
   selector: 'app-eventos',
@@ -34,8 +33,7 @@ export class EventosComponent implements OnInit {
               private categoriaService: CategoriaService,
               private entradaService: EntradaService,
               private fuenteService: FuenteService,
-              private modalController: ModalController,
-              private toaster: ToastController) {
+              private modalController: ModalController) {
                 this.fuenteService.databaseConn();
                 this.entradaService.databaseConn();
                 this.categoriaService.databaseConn();
@@ -123,7 +121,6 @@ export class EventosComponent implements OnInit {
       this.entradaService.getEventos().subscribe(res => {
         if(res.length <= 0) {
           //this.entradaService.loadEntradas();
-          //this.presentToast("No tienes eventos con esa categoría.");
         }
       })
     })
@@ -294,45 +291,6 @@ export class EventosComponent implements OnInit {
       }
     }
     return dias
-  }
-
-  deleteEntrada(id:number) {
-    this.entradaService.deleteEntrada(id).then(() => {
-      this.toggleModalBorrar();
-      this.presentToast(`Evento de '${this.detalle.nombre}' eliminad0.`);
-    })
-  }
-
-  deleteEntradas(id:number) {
-    this.entradaService.deleteEntradas(id).then(() => {
-      this.fuenteService.deleteFuente(id).then(() => {
-        this.toggleModalBorrar();
-        this.presentToast(`Eventos de '${this.detalle.nombre}' eliminados.`);
-      })
-    })
-  }
-
-  toggleModalDetalle() {
-    this.modalDetalle = !this.modalDetalle;
-  }
-
-  toggleModalBorrar() {
-    this.modalBorrar = !this.modalBorrar;
-  }
-
-  clickOut($event) {
-    if($event.target.classList.contains("detalle")) this.toggleModalDetalle();
-    if($event.target.classList.contains("borrar")) this.toggleModalDetalle();
-  }
-
-  async presentToast(msg:string) {
-    const toast = await this.toaster.create({
-      message: msg,
-      duration: 3000,
-      animated: true,
-      color: "primary"
-    });
-    toast.present();
   }
 
   async detalleEvento() {
