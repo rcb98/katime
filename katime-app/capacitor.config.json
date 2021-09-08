@@ -8,6 +8,15 @@
             "smallIcon": "ic_stat_icon_config_sample",
             "iconColor": "#9889C2",
             "sound": "beep.wav"
+        },
+        "SplashScreen": {
+            "backgroundColor": "#9889C2",
+            "showSpinner": true,
+            "spinnerColor": "#ffffff",
+            "androidSpinnerStyle": "large",
+            "androidSplashResourceName": "katimesplash",
+            "androidScaleType": "CENTER_CROP",
+            "splashFullScreen": true
         }
     }
 }
