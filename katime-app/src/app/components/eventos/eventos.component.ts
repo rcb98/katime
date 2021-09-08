@@ -7,6 +7,7 @@ import { CategoriaService } from 'src/app/services/categoria.service';
 import { EntradaService } from 'src/app/services/entrada.service';
 import { FuenteService } from 'src/app/services/fuente.service';
 import { ModalComponent } from '../modal/modal.component';
+import { LocalNotifications } from '@capacitor/local-notifications';
 
 @Component({
   selector: 'app-eventos',
@@ -45,7 +46,7 @@ export class EventosComponent implements OnInit {
     this.getCategorias();
     setInterval(() => {
       this.recalcularTiempo();
-    }, 1000 * 60)
+    }, 1000 * 60);
   }
 
   filtrarEntradas() {
@@ -167,10 +168,13 @@ export class EventosComponent implements OnInit {
       this.entradasHoy = [];
       this.entradasProximas = [];
       var hoy:Date = new Date();
-      res.forEach(entrada => {
+      res.forEach((entrada, index) => {
         var fecha = new Date(entrada.hora_ini);
         if(fecha.getDate() == hoy.getDate() && fecha.getMonth() == hoy.getMonth() && fecha.getFullYear() == hoy.getFullYear()){
           this.entradasHoy.push(entrada);
+          if(entrada.recordatorio != undefined) {
+            this.setRecordatorio(entrada.nombre, entrada.hora_ini, entrada.recordatorio, index);
+          }
         } else {
           this.entradasProximas.push(entrada);
         }
@@ -291,6 +295,32 @@ export class EventosComponent implements OnInit {
       }
     }
     return dias
+  }
+
+  setRecordatorio(nombre:string, hini:Date, rec:number, index:number) {
+    let hora = this.datePipe.transform(hini, 'HH:mm'),
+        title = '',
+        recordatorio = new Date(hini);
+
+    if(rec == 1) title = "Queda " + rec + " minuto para " + nombre;
+    else if(rec == 60) title = "Queda 1 hora para " + nombre;
+    else title = "Quedan " + rec + " minutos para " + nombre;
+    recordatorio.setMinutes(recordatorio.getMinutes() - rec);
+
+    LocalNotifications.schedule({
+      notifications: [
+        {
+          title: title,
+          body: nombre + " a las " + hora,
+          id: index,
+          schedule: { at: recordatorio },
+          sound: null,
+          attachments: null,
+          actionTypeId: "",
+          extra: null
+        }
+      ]
+    });
   }
 
   async detalleEvento() {

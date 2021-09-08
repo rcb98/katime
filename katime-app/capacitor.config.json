@@ -1,6 +1,13 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "katime-app",
-	"webDir": "www",
-	"bundledWebRuntime": false
+    "appId": "io.ionic.starter",
+    "appName": "katime",
+    "webDir": "www",
+    "bundledWebRuntime": false,
+    "plugins": {
+        "LocalNotifications": {
+            "smallIcon": "ic_stat_icon_config_sample",
+            "iconColor": "#9889C2",
+            "sound": "beep.wav"
+        }
+    }
 }

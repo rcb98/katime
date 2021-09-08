@@ -1,7 +1,7 @@
 {
-  "name": "katime-app",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
+    "name": "katime",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "angular"
 }
