@@ -27,7 +27,7 @@ export class FuenteService {
               private http: HttpClient,
               private platform: Platform,
               private sqlite: SQLite) {
-                //this.databaseConn();
+                this.databaseConn();
               }
 
   databaseConn() {

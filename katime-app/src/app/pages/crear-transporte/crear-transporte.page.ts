@@ -60,7 +60,6 @@ export class CrearTransportePage implements OnInit {
               private fuenteService: FuenteService,
               private router: Router,
               private toaster: ToastController) {
-                this.fuenteService.databaseConn();
               }
 
   ngOnInit() {

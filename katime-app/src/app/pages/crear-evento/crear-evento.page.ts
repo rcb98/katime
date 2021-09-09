@@ -70,7 +70,6 @@ export class CrearEventoPage implements OnInit {
               private formBuilder: FormBuilder,
               private router: Router,
               private toaster: ToastController) {
-                this.categoriaService.databaseConn();
               }
 
   ngOnInit() {

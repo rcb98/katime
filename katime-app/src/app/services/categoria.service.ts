@@ -15,7 +15,9 @@ export class CategoriaService {
   CATEGORIAS = new BehaviorSubject([]);
 
   constructor(private platform: Platform,
-              private sqlite: SQLite) { }
+              private sqlite: SQLite) {
+                this.databaseConn();
+              }
 
   async databaseConn() {
     await this.platform.ready().then(() => {

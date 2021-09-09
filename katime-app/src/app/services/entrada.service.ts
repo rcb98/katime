@@ -19,7 +19,7 @@ export class EntradaService {
   constructor(private datePipe: DatePipe,
               private platform: Platform,
               private sqlite: SQLite) {
-                //this.databaseConn();
+                this.databaseConn();
               }
 
   async databaseConn() {

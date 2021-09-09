@@ -40,9 +40,6 @@ export class EventosComponent implements OnInit, OnDestroy {
               private entradaService: EntradaService,
               private fuenteService: FuenteService,
               private modalController: ModalController) {
-                this.fuenteService.databaseConn();
-                this.entradaService.databaseConn();
-                this.categoriaService.databaseConn();
               }
 
   ngOnInit() {
