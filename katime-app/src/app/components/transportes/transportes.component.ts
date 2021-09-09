@@ -26,77 +26,11 @@ export class TransportesComponent implements OnInit {
               }
 
   async ngOnInit() {
-    //this.mergeIds()
-    /*let entrada:Entrada;
-    entrada = {
-      "id_fuente": 1,
-      "nombre": "L2",
-      "direccion": "Luceros",
-      "tipo": "transporte"
-    }
-    this.entradas.push(entrada);*/
     await this.createEntradas();
     await this.getEntradas();
     setInterval(() => {
       this.agruparTransportes();
     }, 1000 * 60);
-  }
-
-  mergeIds() {
-    let hora = "2021-08-10 05:35";
-    let e1:any = {
-      "icono":"L2.png",
-      "id_fuente": 1,
-      "nombre": "Sant Vicent del Raspeig - Luceros",
-      "direccion": "Luceros (Alicante",
-      "tipo": "transporte",
-      "horas": [hora]
-    }
-
-    let e2:any = {
-      "icono":"L2.png",
-      "id_fuente": 1,
-      "nombre": "Sant Vicent del Raspeig - Luceros",
-      "direccion": "Luceros (Alicante",
-      "tipo": "transporte",
-      "horas": ["10:26"]
-    }
-
-    let e3:any = {
-      "icono":"L3.png",
-      "id_fuente": 3,
-      "nombre": "Fabraquer - Sangueta",
-      "direccion": "Luceros (Alicante)",
-      "tipo": "transporte",
-      "horas": ["10:26"]
-    }
-    let entr:any[] = [];
-    entr.push(e1, e2, e3);
-
-    const arrayHashmap = entr.reduce((obj, item) => {
-      obj[item.id_fuente] ? obj[item.id_fuente].horas.push(...item.horas) : (obj[item.id_fuente] = { ...item });
-      return obj;
-    }, {});
-
-    /*
-
-    var originalArray = [{
-      id_fuente: 1,
-      horas: ["10:00"]
-    },
-    {
-      id_fuente: 1,
-      horas: ["11:00"]
-    }];
-
-
-
-    const arrayHashmap = originalArray.reduce((obj, item) => {
-      obj[item.id_fuente] ? obj[item.id_fuente].horas.push(...item.horas) : (obj[item.id_fuente] = { ...item });
-      return obj;
-    }, {});
-*/
-    this.entr = Object.values(arrayHashmap);
   }
 
   async createEntradas() {
@@ -167,8 +101,6 @@ export class TransportesComponent implements OnInit {
       });
 
       this.agruparTransportes();
-
-      //this.recalcularTiempo();
     });
   }
 
@@ -194,16 +126,6 @@ export class TransportesComponent implements OnInit {
       }, {});
 
       this.entr = Object.values(arrayHashmap);
-  }
-
-  recalcularTiempo() {
-    if(this.entradas.length > 0) {
-      this.tiemposRestantes = [];
-      this.entradas.forEach(entrada => {
-        let tiempo = this.tiempoRestante(entrada.hora_ini);
-        this.tiemposRestantes.push(tiempo);
-      });
-    }
   }
 
   tiempoRestante(hIni:any) {
