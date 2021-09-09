@@ -15,6 +15,7 @@ import { ModalComponent } from '../modal/modal.component';
 export class TransportesComponent implements OnInit {
 
   public entradas:Entrada[] = [];
+  public entr:any[] = [];
   public transportes:any[] = [];
   public tiemposRestantes:any[] = [];
 
@@ -25,6 +26,7 @@ export class TransportesComponent implements OnInit {
               }
 
   async ngOnInit() {
+    //this.mergeIds()
     /*let entrada:Entrada;
     entrada = {
       "id_fuente": 1,
@@ -36,8 +38,65 @@ export class TransportesComponent implements OnInit {
     await this.createEntradas();
     await this.getEntradas();
     setInterval(() => {
-      this.recalcularTiempo();
+      this.agruparTransportes();
     }, 1000 * 60);
+  }
+
+  mergeIds() {
+    let hora = "2021-08-10 05:35";
+    let e1:any = {
+      "icono":"L2.png",
+      "id_fuente": 1,
+      "nombre": "Sant Vicent del Raspeig - Luceros",
+      "direccion": "Luceros (Alicante",
+      "tipo": "transporte",
+      "horas": [hora]
+    }
+
+    let e2:any = {
+      "icono":"L2.png",
+      "id_fuente": 1,
+      "nombre": "Sant Vicent del Raspeig - Luceros",
+      "direccion": "Luceros (Alicante",
+      "tipo": "transporte",
+      "horas": ["10:26"]
+    }
+
+    let e3:any = {
+      "icono":"L3.png",
+      "id_fuente": 3,
+      "nombre": "Fabraquer - Sangueta",
+      "direccion": "Luceros (Alicante)",
+      "tipo": "transporte",
+      "horas": ["10:26"]
+    }
+    let entr:any[] = [];
+    entr.push(e1, e2, e3);
+
+    const arrayHashmap = entr.reduce((obj, item) => {
+      obj[item.id_fuente] ? obj[item.id_fuente].horas.push(...item.horas) : (obj[item.id_fuente] = { ...item });
+      return obj;
+    }, {});
+
+    /*
+
+    var originalArray = [{
+      id_fuente: 1,
+      horas: ["10:00"]
+    },
+    {
+      id_fuente: 1,
+      horas: ["11:00"]
+    }];
+
+
+
+    const arrayHashmap = originalArray.reduce((obj, item) => {
+      obj[item.id_fuente] ? obj[item.id_fuente].horas.push(...item.horas) : (obj[item.id_fuente] = { ...item });
+      return obj;
+    }, {});
+*/
+    this.entr = Object.values(arrayHashmap);
   }
 
   async createEntradas() {
@@ -106,8 +165,35 @@ export class TransportesComponent implements OnInit {
           this.entradas.push(entrada);
         }
       });
-      this.recalcularTiempo();
+
+      this.agruparTransportes();
+
+      //this.recalcularTiempo();
     });
+  }
+
+  agruparTransportes() {
+    let hoy = new Date();
+    let entrSucio = [];
+      this.entradas.forEach(e => {
+        if(new Date(e.hora_ini) >= hoy){
+          let en:any = {
+            "id_fuente": e.id_fuente,
+            "icono": e.icono,
+            "nombre": e.nombre,
+            "direccion": e.direccion,
+            "horas": [e.hora_ini]
+          }
+          entrSucio.push(en);
+        }
+      });
+
+      const arrayHashmap = entrSucio.reduce((obj, item) => {
+        obj[item.id_fuente] ? obj[item.id_fuente].horas.push(...item.horas) : (obj[item.id_fuente] = { ...item });
+        return obj;
+      }, {});
+
+      this.entr = Object.values(arrayHashmap);
   }
 
   recalcularTiempo() {
@@ -129,7 +215,7 @@ export class TransportesComponent implements OnInit {
         roundHoras = Math.floor(horas),
         minutos = Math.round((horas - roundHoras) * 60);
 
-    if(roundHoras == 0) return minutos + "min";
+    if(roundHoras == 0 && minutos > 0) return minutos + "min";
     else if(roundHoras > 0 && minutos <= 0) return roundHoras + "h";
     else if(roundHoras > 0 && minutos > 0) return roundHoras + "h " + minutos + "min";
     else if(roundHoras == 0 && minutos <= 0) return "Ahora";
