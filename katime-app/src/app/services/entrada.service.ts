@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { Platform } from '@ionic/angular';
@@ -15,7 +16,8 @@ export class EntradaService {
   EVENTOS = new BehaviorSubject([]);
   TRANSPORTES = new BehaviorSubject([]);
 
-  constructor(private platform: Platform,
+  constructor(private datePipe: DatePipe,
+              private platform: Platform,
               private sqlite: SQLite) {
                 //this.databaseConn();
               }

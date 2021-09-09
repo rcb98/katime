@@ -31,6 +31,7 @@
     "@ionic-native/core": "^5.34.0",
     "@ionic-native/sqlite": "^5.34.0",
     "@ionic/angular": "^5.5.2",
+    "@robingenz/capacitor-background-task": "^1.0.0",
     "cordova-sqlite-storage": "^6.0.0",
     "dateformat": "^4.5.1",
     "rxjs": "~6.6.0",

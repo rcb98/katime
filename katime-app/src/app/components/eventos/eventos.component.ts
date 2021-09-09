@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit} from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Categoria } from 'src/app/interfaces/categoria.interface';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
@@ -8,6 +8,9 @@ import { EntradaService } from 'src/app/services/entrada.service';
 import { FuenteService } from 'src/app/services/fuente.service';
 import { ModalComponent } from '../modal/modal.component';
 import { LocalNotifications } from '@capacitor/local-notifications';
+import { PluginListenerHandle } from '@capacitor/core';
+import { BackgroundTask } from '@robingenz/capacitor-background-task';
+import { App } from '@capacitor/app';
 
 @Component({
   selector: 'app-eventos',
@@ -15,7 +18,7 @@ import { LocalNotifications } from '@capacitor/local-notifications';
   styleUrls: ['./eventos.component.scss'],
   providers: [DatePipe]
 })
-export class EventosComponent implements OnInit {
+export class EventosComponent implements OnInit, OnDestroy {
 
   public detalle:Entrada;
   public categoria:any;
@@ -30,6 +33,8 @@ export class EventosComponent implements OnInit {
   public modalDetalle:boolean = false;
   public modalBorrar:boolean = false;
 
+  private appStateChangeListener: PluginListenerHandle | undefined;
+
   constructor(private datePipe: DatePipe,
               private categoriaService: CategoriaService,
               private entradaService: EntradaService,
@@ -41,12 +46,32 @@ export class EventosComponent implements OnInit {
               }
 
   ngOnInit() {
+    this.appStateChangeListener = App.addListener(
+      'appStateChange',
+      async ({ isActive }) => {
+        if (isActive) {
+          return;
+        }
+        const taskId = await BackgroundTask.beforeExit(async () => {
+          if(new Date().getHours() >= 6 && new Date().getHours() <= 12){
+            this.entradaService.deleteTable();
+            this.entradaService.loadEventos();
+            this.entradaService.loadTransportes();
+          }
+          BackgroundTask.finish({ taskId });
+        });
+      },
+    );
     this.filtrarEntradas();
     this.getEntradas();
     this.getCategorias();
     setInterval(() => {
       this.recalcularTiempo();
     }, 1000 * 60);
+  }
+
+  public ngOnDestroy() {
+    this.appStateChangeListener?.remove();
   }
 
   filtrarEntradas() {
