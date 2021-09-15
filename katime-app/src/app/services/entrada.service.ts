@@ -118,9 +118,10 @@ export class EntradaService {
 
   /* POST */
   createEntrada(data:Entrada) {
+    if(!data.recordatorio) data.recordatorio = null;
     return this.dbInstance
       .executeSql(`INSERT INTO ${this.dbTable} (id_fuente, id_categoria, tipo, nombre, descripcion, direccion, localidad, icono, hora_ini, hora_fin, recordatorio, duracion)
-      VALUES ('${data.id_fuente}', '${data.id_categoria}', '${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.direccion}', '${data.localidad}', '${data.icono}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}', '${data.duracion}')`, [])
+      VALUES ('${data.id_fuente}', '${data.id_categoria}', '${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.direccion}', '${data.localidad}', '${data.icono}', '${data.hora_ini}', '${data.hora_fin}', ${data.recordatorio}, '${data.duracion}')`, [])
       .then(() => {
         this.loadEventos();
         this.loadTransportes();
@@ -157,6 +158,16 @@ export class EntradaService {
   deleteTable() {
     this.dbInstance
       .executeSql(`DELETE FROM ${this.dbTable}`, [])
+        .then(() => {
+        })
+        .catch(e => {
+          alert(JSON.stringify(e))
+        });
+  }
+
+  deleteTableTipo(tipo:string) {
+    this.dbInstance
+      .executeSql(`DELETE FROM ${this.dbTable} where tipo='${tipo}'`, [])
         .then(() => {
         })
         .catch(e => {

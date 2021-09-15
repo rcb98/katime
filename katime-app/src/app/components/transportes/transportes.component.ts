@@ -1,10 +1,13 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
 import { EntradaService } from 'src/app/services/entrada.service';
 import { FuenteService } from 'src/app/services/fuente.service';
 import { ModalComponent } from '../modal/modal.component';
+import { PluginListenerHandle } from '@capacitor/core';
+import { BackgroundTask } from '@robingenz/capacitor-background-task';
+import { App } from '@capacitor/app';
 
 @Component({
   selector: 'app-transportes',
@@ -12,12 +15,14 @@ import { ModalComponent } from '../modal/modal.component';
   styleUrls: ['./transportes.component.scss'],
   providers: [DatePipe]
 })
-export class TransportesComponent implements OnInit {
+export class TransportesComponent implements OnInit, AfterViewInit {
 
   public entradas:Entrada[] = [];
   public entr:any[] = [];
   public transportes:any[] = [];
   public tiemposRestantes:any[] = [];
+
+  private appStateChangeListener: PluginListenerHandle | undefined;
 
   constructor(private datePipe: DatePipe,
               private entradaService: EntradaService,
@@ -26,11 +31,32 @@ export class TransportesComponent implements OnInit {
               }
 
   async ngOnInit() {
-    await this.createEntradas();
-    await this.getEntradas();
+    this.appStateChangeListener = App.addListener(
+      'appStateChange',
+      async ({ isActive }) => {
+        if (isActive) {
+          return;
+        }
+        const taskId = await BackgroundTask.beforeExit(async () => {
+          if(new Date().getHours() >= 6){
+            this.entradaService.deleteTableTipo('transporte');
+            this.entradaService.loadTransportes();
+            await this.createEntradas();
+            await this.getEntradas();
+          }
+          BackgroundTask.finish({ taskId });
+        });
+      },
+    );
+
     setInterval(() => {
       this.agruparTransportes();
     }, 1000 * 60);
+  }
+
+  async ngAfterViewInit() {
+    await this.createEntradas();
+    await this.getEntradas();
   }
 
   async createEntradas() {
@@ -105,27 +131,24 @@ export class TransportesComponent implements OnInit {
   }
 
   agruparTransportes() {
-    let hoy = new Date();
-    let entrSucio = [];
-      this.entradas.forEach(e => {
-        if(new Date(e.hora_ini) >= hoy){
-          let en:any = {
-            "id_fuente": e.id_fuente,
-            "icono": e.icono,
-            "nombre": e.nombre,
-            "direccion": e.direccion,
-            "horas": [e.hora_ini]
-          }
-          entrSucio.push(en);
-        }
-      });
+    var agrupacion = this.entradas.reduce(function(obj, item) {
+      var index = obj.reduce(function(n, array, id) {
+        return (array.id_fuente === item.id_fuente) ? id : n;
+      }, -1);
+      if (index < 0) {
+        var arrayFinal = {
+          id_fuente: item.id_fuente,
+          horas: [item.hora_ini],
+          icono: item.icono,
+          nombre: item.nombre,
+          direccion: item.direccion
+        };
+        obj = obj.concat(arrayFinal);
+      } else obj[index].horas = obj[index].horas.concat(item.hora_ini);
+      return obj;
+    }, []);
 
-      const arrayHashmap = entrSucio.reduce((obj, item) => {
-        obj[item.id_fuente] ? obj[item.id_fuente].horas.push(...item.horas) : (obj[item.id_fuente] = { ...item });
-        return obj;
-      }, {});
-
-      this.entr = Object.values(arrayHashmap);
+    this.entr = Object.values(agrupacion);
   }
 
   tiempoRestante(hIni:any) {

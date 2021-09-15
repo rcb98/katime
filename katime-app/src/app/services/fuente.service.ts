@@ -122,13 +122,14 @@ export class FuenteService {
 
   /* POST */
   createFuente(data:Fuente) {
+    if(!data.recordatorio) data.recordatorio = null;
     return this.dbInstance
       .executeSql(`INSERT INTO ${this.dbTable} (id_categoria, tipo, nombre, descripcion, hora_ini, hora_fin, recordatorio, repeticion, dias, localidad, ruta, alias, direccion, origen, destino, tipo_trans, icono, duracion)
-      VALUES ('${data.id_categoria}', '${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', '${data.recordatorio}', '${data.repeticion}', '${data.dias}', '${data.localidad}', '${data.ruta}', '${data.alias}', '${data.direccion}', '${data.origen}', '${data.destino}', '${data.tipo_trans}', '${data.icono}', '${data.duracion}')`, [])
+      VALUES ('${data.id_categoria}', '${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.hora_ini}', '${data.hora_fin}', ${data.recordatorio}, '${data.repeticion}', '${data.dias}', '${data.localidad}', '${data.ruta}', '${data.alias}', '${data.direccion}', '${data.origen}', '${data.destino}', '${data.tipo_trans}', '${data.icono}', '${data.duracion}')`, [])
       .then(() => {
-        this.loadEventos();
-        this.loadTransportes();
-        this.entradaService.deleteTable(); // Puede que de problemas
+        if(data.tipo == 'evento') this.loadEventos();
+        else if (data.tipo == 'transporte') this.loadTransportes();
+        this.entradaService.deleteTableTipo(data.tipo); // Puede que de problemas
       }, (e) => {
         alert(JSON.stringify(e.err));
       });

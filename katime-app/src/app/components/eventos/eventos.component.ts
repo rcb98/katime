@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnDestroy, OnInit} from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Categoria } from 'src/app/interfaces/categoria.interface';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
@@ -18,7 +18,7 @@ import { App } from '@capacitor/app';
   styleUrls: ['./eventos.component.scss'],
   providers: [DatePipe]
 })
-export class EventosComponent implements OnInit, OnDestroy {
+export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public detalle:Entrada;
   public categoria:any;
@@ -50,24 +50,30 @@ export class EventosComponent implements OnInit, OnDestroy {
           return;
         }
         const taskId = await BackgroundTask.beforeExit(async () => {
-          if(new Date().getHours() >= 6 && new Date().getHours() <= 12){
-            this.entradaService.deleteTable();
+          if(new Date().getHours() >= 6){
+            this.entradaService.deleteTableTipo('evento');
             this.entradaService.loadEventos();
-            this.entradaService.loadTransportes();
+            this.filtrarEntradas();
+            this.getEntradas();
+            this.getCategorias();
           }
           BackgroundTask.finish({ taskId });
         });
       },
     );
-    this.filtrarEntradas();
-    this.getEntradas();
-    this.getCategorias();
+
     setInterval(() => {
       this.recalcularTiempo();
     }, 1000 * 60);
   }
 
-  public ngOnDestroy() {
+  ngAfterViewInit() {
+    this.filtrarEntradas();
+    this.getEntradas();
+    this.getCategorias();
+  }
+
+  ngOnDestroy() {
     this.appStateChangeListener?.remove();
   }
 
@@ -194,7 +200,7 @@ export class EventosComponent implements OnInit, OnDestroy {
         var fecha = new Date(entrada.hora_ini);
         if(fecha.getDate() == hoy.getDate() && fecha.getMonth() == hoy.getMonth() && fecha.getFullYear() == hoy.getFullYear()){
           this.entradasHoy.push(entrada);
-          if(entrada.recordatorio != undefined) {
+          if(entrada.recordatorio != undefined && entrada.recordatorio != null) {
             this.setRecordatorio(entrada.nombre, entrada.hora_ini, entrada.recordatorio, index);
           }
         } else {
