@@ -21,7 +21,10 @@ export class PageHeaderComponent implements OnInit {
       component: PopoverComponent,
       cssClass: 'popover_setting',
       event: ev,
-      translucent: true
+      translucent: true,
+      componentProps: {
+        'titulos': ['Editar transportes', 'Editar eventos', 'Editar categorías', 'Actualizar horarios', 'Eliminar horarios']
+      }
     });
     await popover.present();
 

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { EntradaService } from 'src/app/services/entrada.service';
 import { FuenteService } from 'src/app/services/fuente.service';
 
 @Component({
@@ -8,9 +9,27 @@ import { FuenteService } from 'src/app/services/fuente.service';
 })
 export class PopoverComponent implements OnInit {
 
-  constructor(private fuenteService: FuenteService) { }
+  @Input() titulos: string[];
 
-  ngOnInit() {}
+  constructor(private entradaService: EntradaService,
+              private fuenteService: FuenteService) { }
+
+  ngOnInit() {
+  }
+
+  doAction(titulo:string) {
+    switch(titulo) {
+      case "Editar transportes":
+      case "Editar eventos":
+      case "Editar categorías":
+        break;
+      case "Actualizar horarios":
+
+        break;
+      case "Eliminar horarios": this.deleteAll();
+        break;
+    }
+  }
 
   deleteAll(){
     this.fuenteService.deleteTable();

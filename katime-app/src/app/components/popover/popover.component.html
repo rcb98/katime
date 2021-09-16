@@ -1,22 +1,11 @@
-<!-- <ion-list lines="none">
-    <ion-item>
-        <ion-label>Editar transportes</ion-label>
-    </ion-item>
-    <ion-item>
-        <ion-label>Editar eventos</ion-label>
-    </ion-item>
-    <ion-item>
-        <ion-label>Editar categorías</ion-label>
-    </ion-item>
-    <ion-item>
-        <ion-label>Actualizar horarios</ion-label>
-    </ion-item>
-</ion-list> -->
-
-<ul class="rounded-xl p-4">
+<!-- <ul class="rounded-xl p-4">
     <li class="mx-2 my-3"><a>Editar transportes</a></li>
     <li class="mx-2 my-3"><a>Editar eventos</a></li>
     <li class="mx-2 my-3"><a>Editar categorías</a></li>
     <li class="mx-2 my-3"><a>Actualizar horarios</a></li>
     <li class="mx-2 my-3" (click)="deleteAll()"><a>Eliminar horarios</a></li>
+</ul> -->
+
+<ul class="rounded-xl p-4">
+    <li class="mx-2 my-3" *ngFor="let titulo of titulos" (click)="doAction(titulo)">{{titulo}}</li>
 </ul>
