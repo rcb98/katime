@@ -2,12 +2,10 @@
 </app-page-header>
 
 <div class="bg-white h-1/6" [ngClass]="{'relative h-full my-4': toggleTrans}">
-    <!-- <h2 class="p-8 text-gray-800">Transportes</h2> -->
     <app-transportes></app-transportes>
     <button (click)="toggleTransportes()" class="text-purple flex justify-center w-full mb-6">{{mostrar}}</button>
 </div>
 
 <div class="bg-gray-100 h-4/6 rounded-xl mt-4">
-    <!-- <h2 class="p-8 text-gray-800 font-semibold">Eventos</h2> -->
     <app-eventos></app-eventos>
 </div>

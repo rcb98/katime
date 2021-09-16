@@ -46,7 +46,7 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe( res => {
-      this.recalcularTiempo();
+      this.getEntradas();
     });
 
     this.appStateChangeListener = App.addListener(

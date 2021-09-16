@@ -21,5 +21,4 @@ export class ModoListaPage implements OnInit {
     if(!this.toggleTrans) this.mostrar = "+ Mostrar más";
     else this.mostrar = "- Mostrar menos";
   }
-
 }

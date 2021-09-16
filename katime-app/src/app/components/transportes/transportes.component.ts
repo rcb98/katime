@@ -33,10 +33,9 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
               }
 
   async ngOnInit() {
-    this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe( res => {
-      this.agruparTransportes();
+    this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe( async res => {
+      await this.getEntradas();
     });
-
 
     this.appStateChangeListener = App.addListener(
       'appStateChange',
