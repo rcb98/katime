@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
 import { EntradaService } from 'src/app/services/entrada.service';
@@ -8,6 +8,7 @@ import { ModalComponent } from '../modal/modal.component';
 import { PluginListenerHandle } from '@capacitor/core';
 import { BackgroundTask } from '@robingenz/capacitor-background-task';
 import { App } from '@capacitor/app';
+import { ComunicadorService } from 'src/app/services/comunicador.service';
 
 @Component({
   selector: 'app-transportes',
@@ -15,7 +16,7 @@ import { App } from '@capacitor/app';
   styleUrls: ['./transportes.component.scss'],
   providers: [DatePipe]
 })
-export class TransportesComponent implements OnInit, AfterViewInit {
+export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public entradas:Entrada[] = [];
   public entr:any[] = [];
@@ -24,13 +25,19 @@ export class TransportesComponent implements OnInit, AfterViewInit {
 
   private appStateChangeListener: PluginListenerHandle | undefined;
 
-  constructor(private datePipe: DatePipe,
+  constructor(private comunicadorService: ComunicadorService,
+              private datePipe: DatePipe,
               private entradaService: EntradaService,
               private fuenteService: FuenteService,
               private modalController: ModalController) {
               }
 
   async ngOnInit() {
+    this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe( res => {
+      this.agruparTransportes();
+    });
+
+
     this.appStateChangeListener = App.addListener(
       'appStateChange',
       async ({ isActive }) => {
@@ -50,6 +57,10 @@ export class TransportesComponent implements OnInit, AfterViewInit {
     setInterval(() => {
       this.agruparTransportes();
     }, 1000 * 60);
+  }
+
+  ngOnDestroy() {
+    this.comunicadorService.subscripcion.unsubscribe();
   }
 
   async ngAfterViewInit() {

@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
+import { ComunicadorService } from 'src/app/services/comunicador.service';
 import { EntradaService } from 'src/app/services/entrada.service';
 import { FuenteService } from 'src/app/services/fuente.service';
 
@@ -11,8 +13,10 @@ export class PopoverComponent implements OnInit {
 
   @Input() titulos: string[];
 
-  constructor(private entradaService: EntradaService,
-              private fuenteService: FuenteService) { }
+  constructor(private comunicadorService: ComunicadorService,
+              private entradaService: EntradaService,
+              private fuenteService: FuenteService,
+              public popoverController: PopoverController) { }
 
   ngOnInit() {
   }
@@ -23,8 +27,7 @@ export class PopoverComponent implements OnInit {
       case "Editar eventos":
       case "Editar categorías":
         break;
-      case "Actualizar horarios":
-
+      case "Actualizar horarios": this.comunicadorService.ejecutarFuncion("reload");
         break;
       case "Eliminar horarios": this.deleteAll();
         break;
@@ -33,6 +36,10 @@ export class PopoverComponent implements OnInit {
 
   deleteAll(){
     this.fuenteService.deleteTable();
+  }
+
+  async dismiss() {
+    await this.popoverController.dismiss();
   }
 
 }

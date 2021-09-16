@@ -11,6 +11,7 @@ import { LocalNotifications } from '@capacitor/local-notifications';
 import { PluginListenerHandle } from '@capacitor/core';
 import { BackgroundTask } from '@robingenz/capacitor-background-task';
 import { App } from '@capacitor/app';
+import { ComunicadorService } from 'src/app/services/comunicador.service';
 
 @Component({
   selector: 'app-eventos',
@@ -37,12 +38,17 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(private datePipe: DatePipe,
               private categoriaService: CategoriaService,
+              private comunicadorService: ComunicadorService,
               private entradaService: EntradaService,
               private fuenteService: FuenteService,
               private modalController: ModalController) {
               }
 
   ngOnInit() {
+    this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe( res => {
+      this.recalcularTiempo();
+    });
+
     this.appStateChangeListener = App.addListener(
       'appStateChange',
       async ({ isActive }) => {
@@ -73,6 +79,7 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy() {
     this.appStateChangeListener?.remove();
+    this.comunicadorService.subscripcion.unsubscribe();
   }
 
   filtrarEntradas() {

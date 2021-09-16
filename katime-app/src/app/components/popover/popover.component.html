@@ -7,5 +7,5 @@
 </ul> -->
 
 <ul class="rounded-xl p-4">
-    <li class="mx-2 my-3" *ngFor="let titulo of titulos" (click)="doAction(titulo)">{{titulo}}</li>
+    <li class="mx-2 my-3" *ngFor="let titulo of titulos" (click)="[doAction(titulo), dismiss()]">{{titulo}}</li>
 </ul>
