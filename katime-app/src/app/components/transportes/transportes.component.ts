@@ -38,12 +38,10 @@ export class TransportesComponent implements OnInit, AfterViewInit {
           return;
         }
         const taskId = await BackgroundTask.beforeExit(async () => {
-          if(new Date().getHours() >= 6){
-            this.entradaService.deleteTableTipo('transporte');
-            this.entradaService.loadTransportes();
-            await this.createEntradas();
-            await this.getEntradas();
-          }
+          this.entradaService.deleteTableTipo('transporte');
+          this.entradaService.loadTransportes();
+          await this.createEntradas();
+          await this.getEntradas();
           BackgroundTask.finish({ taskId });
         });
       },

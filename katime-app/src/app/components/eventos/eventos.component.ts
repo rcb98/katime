@@ -50,13 +50,11 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
           return;
         }
         const taskId = await BackgroundTask.beforeExit(async () => {
-          if(new Date().getHours() >= 6){
-            this.entradaService.deleteTableTipo('evento');
-            this.entradaService.loadEventos();
-            this.filtrarEntradas();
-            this.getEntradas();
-            this.getCategorias();
-          }
+          this.entradaService.deleteTableTipo('evento');
+          this.entradaService.loadEventos();
+          this.filtrarEntradas();
+          this.getEntradas();
+          this.getCategorias();
           BackgroundTask.finish({ taskId });
         });
       },

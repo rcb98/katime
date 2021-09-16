@@ -60,8 +60,8 @@ export class FuenteService {
                   duracion INT
                 )`, [])
               .then((res) => {
-                this.loadEventos();
-                this.loadTransportes();
+                this.limpiarFuentes();
+
               })
               .catch((error) => alert(JSON.stringify(error)));
           })
@@ -133,6 +133,21 @@ export class FuenteService {
       }, (e) => {
         alert(JSON.stringify(e.err));
       });
+  }
+
+  limpiarFuentes() {
+    var hoy = new Date(),
+        fechaHoy = this.datePipe.transform(hoy, 'yyyy-MM-dd HH:mm');
+
+    this.dbInstance
+      .executeSql(`DELETE FROM ${this.dbTable} WHERE tipo='evento' AND repeticion = 'null' AND hora_fin < '${fechaHoy}'`, [])
+        .then(() => {
+          this.loadEventos();
+          this.loadTransportes();
+        })
+        .catch(e => {
+          alert(JSON.stringify(e))
+        });
   }
 
   deleteFuente(id:number): Promise<any> {
