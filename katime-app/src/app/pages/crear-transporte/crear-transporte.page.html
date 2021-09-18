@@ -75,7 +75,7 @@
             <!-- Ciudad/Localidad -->
             <div class="m-2 flex flex-col">
                 <label for="localidad" class="text-gray-600">Ciudad/Localidad</label>
-                <input (click)="toggleModalLocalidad()" type="text" name="localidad" formControlName="localidad" id="localidad" class="rounded-lg border-none mt-0.5">
+                <input (click)="toggleModalLocalidad()" type="text" readonly name="localidad" formControlName="localidad" id="localidad" class="rounded-lg border-none mt-0.5 px-3 py-2">
             </div>
 
             <!-- Transporte -->
@@ -86,7 +86,7 @@
             <!-- Linea -->
             <div class="m-2 flex flex-col" *ngIf="transporteForm.value.localidad">
                 <label for="ruta" class="text-gray-600">Línea</label>
-                <input (click)="toggleModalRuta()" type="text" name="ruta" formControlName="ruta" id="ruta" class="rounded-lg border-none mt-0.5">
+                <input (click)="toggleModalRuta()" type="text" name="ruta" readonly formControlName="ruta" id="ruta" class="rounded-lg border-none mt-0.5">
             </div>
 
             <!-- Origen & Destino -->
@@ -94,7 +94,7 @@
                 <!-- Origen -->
                 <div class="m-2 flex flex-col w-36">
                     <label for="origen" class="text-gray-600">Origen</label>
-                    <input (click)="toggleModalOrigen()" type="text" name="origen" formControlName="origen" id="origen" class="rounded-lg border-none mt-0.5">
+                    <input (click)="toggleModalOrigen()" type="text" name="origen" readonly formControlName="origen" id="origen" class="rounded-lg border-none mt-0.5">
                 </div>
 
                 <ion-icon (click)="swapDireccion()" name="swap-horizontal-outline" color="primary" class="text-3xl mt-4"></ion-icon>
@@ -102,7 +102,7 @@
                 <!-- Destino -->
                 <div class="m-2 flex flex-col w-36">
                     <label for="destino" class="text-gray-600">Destino</label>
-                    <input (click)="toggleModalDestino()" type="text" name="destino" id="destino" formControlName="destino" class="rounded-lg border-none mt-0.5">
+                    <input (click)="toggleModalDestino()" type="text" name="destino" readonly id="destino" formControlName="destino" class="rounded-lg border-none mt-0.5">
                 </div>
             </div>
 
