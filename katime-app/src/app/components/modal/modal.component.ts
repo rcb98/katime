@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
+import { ComunicadorService } from 'src/app/services/comunicador.service';
 import { EntradaService } from 'src/app/services/entrada.service';
 import { FuenteService } from 'src/app/services/fuente.service';
 
@@ -16,8 +17,12 @@ export class ModalComponent implements OnInit {
   @Input() tipo: string;
   @Input() categoria: string;
   @Input() tiempoRestante: string;
+  @Input() titulos: string[];
+  @Input() valores: any[];
+  public recordatorioChecked:any;
 
-  constructor(private entradaService: EntradaService,
+  constructor(private comunicadorService: ComunicadorService,
+              private entradaService: EntradaService,
               private fuenteService: FuenteService,
               private modalController: ModalController,
               private toaster: ToastController) { }
@@ -26,6 +31,14 @@ export class ModalComponent implements OnInit {
 
   dismiss() {
     this.modalController.dismiss();
+  }
+
+  checkValue(event) {
+    this.recordatorioChecked = event.detail.value;
+  }
+
+  terminar() {
+    this.comunicadorService.ejecutarFuncion(this.recordatorioChecked);
   }
 
   async eliminarEvento() {

@@ -2,6 +2,7 @@
     <div class="flex px-8 pt-8">
         <ion-icon color="primary" class="text-2xl" name="arrow-back" (click)="dismiss()"></ion-icon>
         <ion-icon class="ml-auto text-2xl text-gray-500" name="trash-bin" (click)="[dismiss(), eliminarEvento()]" *ngIf="accion == 'detalleEvento'"></ion-icon>
+        <span *ngIf="accion == 'recordatorio'" class="text-purple ml-auto" (click)="[dismiss(), terminar()]">Terminar</span>
     </div>
 
     <div *ngIf="accion == 'detalleEvento'">
@@ -25,5 +26,17 @@
             <li class="border-b border-gray-200 p-4 pl-8" (click)="deleteEntrada(detalle.id_entrada)">Eliminar este {{tipo}}</li>
             <li class="border-b p-4 pl-8" (click)="deleteEntradas(detalle.id_fuente)">Eliminar todos los {{tipo}}s de este tipo</li>
         </ul>
+    </div>
+
+    <div *ngIf="accion == 'recordatorio'">
+        <h3 class="text-lg my-4 mx-8 font-semibold">Recordatorio</h3>
+        <ion-list lines="none" class="ml-4 bg-transparent">
+            <ion-radio-group class="bg-transparent" (ionChange)="checkValue($event)">
+                <ion-item *ngFor="let item of titulos; let i = index">
+                    <ion-label>{{item}}</ion-label>
+                    <ion-radio slot="start" [value]=valores[i]></ion-radio>
+                </ion-item>
+            </ion-radio-group>
+        </ion-list>
     </div>
 </div>

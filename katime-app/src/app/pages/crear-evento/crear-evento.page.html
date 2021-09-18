@@ -91,27 +91,22 @@
             </div>
 
             <!-- Repetición -->
-            <div class="m-2 flex flex-col">
+            <div class="m-2 flex flex-col" (click)="abrirModal('repeticion', repeticionOptions, repeticionValues)">
                 <div class="flex items-center mb-2">
                     <ion-icon name="reload-outline" class="mr-2" color="primary"></ion-icon>
                     <label for="repeticion" class="text-gray-600">Repetición</label>
-                    <p class="ml-auto text-gray-800 text-right w-4/6" (click)="alertRepeticion()">{{repeticion}}</p>
+                    <p class="ml-auto text-gray-800 text-right w-4/6">{{repeticion}}</p>
                 </div>
             </div>
 
             <!-- Recordatorio -->
-            <div class="m-2 flex flex-col">
+            <div class="m-2 flex flex-col" (click)="abrirModal('recordatorio', recordatorioOptions, recordatorioValues)">
                 <div class="flex items-center mb-2">
                     <ion-icon name="alarm" class="mr-2" color="primary"></ion-icon>
                     <label for="recordatorio" class="text-gray-600">Recordatorio</label>
-                    <p class="ml-auto text-gray-800" (click)="alertRecordatorio()">{{recordatorioOptions[recordatorioIndex]}}</p>
+                    <p class="ml-auto text-gray-800">{{recordatorioOptions[recordatorioIndex]}}</p>
                 </div>
             </div>
-
-            <!-- Eliminar la tabla Fuente entera, boton temporal -->
-            <!-- <ion-button color="danger" expand="block" (click)="deleteEventos()">
-                Eliminar tabla Fuente
-            </ion-button> -->
         </form>
     </ion-content>
 

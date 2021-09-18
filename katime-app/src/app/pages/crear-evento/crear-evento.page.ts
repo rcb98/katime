@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { FuenteService } from 'src/app/services/fuente.service';
 import { DatePipe } from '@angular/common';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { Categoria } from 'src/app/interfaces/categoria.interface';
+import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { ComunicadorService } from 'src/app/services/comunicador.service';
 
 @Component({
   selector: 'app-crear-evento',
@@ -13,7 +15,7 @@ import { Categoria } from 'src/app/interfaces/categoria.interface';
   styleUrls: ['./crear-evento.page.scss'],
   providers: [DatePipe]
 })
-export class CrearEventoPage implements OnInit {
+export class CrearEventoPage implements OnInit, OnDestroy {
 
   // Formulario para crear un Evento
   public eventoForm:FormGroup = this.formBuilder.group({
@@ -65,15 +67,31 @@ export class CrearEventoPage implements OnInit {
 
   constructor(private alertController: AlertController,
               private categoriaService: CategoriaService,
+              private comunicadorService: ComunicadorService,
               private datePipe: DatePipe,
               private fuenteService: FuenteService,
               private formBuilder: FormBuilder,
+              private modalController: ModalController,
               private router: Router,
               private toaster: ToastController) {
               }
 
   ngOnInit() {
+    this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe(res => {
+      for(let i = 0; i < this.recordatorioValues.length; i++) {
+        if(this.recordatorioValues[i] == res) {
+          this.recordatorioIndex = i;
+          break;
+        }
+      }
+
+    })
+
     this.getCategorias();
+  }
+
+  ngOnDestroy() {
+    this.comunicadorService.subscripcion.unsubscribe();
   }
 
   isCategoria(color:string){
@@ -107,12 +125,12 @@ export class CrearEventoPage implements OnInit {
     this.eventoForm.value.recordatorio = this.recordatorioValues[this.recordatorioIndex];
     this.eventoForm.value.dias = this.dias;
 
-    // alert(JSON.stringify(this.eventoForm.value));
+    alert(JSON.stringify(this.eventoForm.value));
 
-    this.fuenteService.createFuente(this.eventoForm.value).then( res => {
+    /*this.fuenteService.createFuente(this.eventoForm.value).then( res => {
       this.presentToast("¡Evento creado!");
       this.router.navigateByUrl("/modo-lista");
-    });
+    });*/
   }
 
   deleteEventos(){
@@ -417,5 +435,24 @@ export class CrearEventoPage implements OnInit {
       color: "primary"
     });
     toast.present();
+  }
+
+  async abrirModal(tipo:string, opciones:string[], valores:any[]) {
+    const modal = await this.modalController.create({
+      component: ModalComponent,
+      cssClass: 'my-modal-class',
+      showBackdrop:true,
+      backdropDismiss: true,
+      componentProps: {
+        'accion': tipo,
+        'titulos': opciones,
+        'valores': valores
+      }
+    });
+    return await modal.present();
+  }
+
+  reRenderForm() {
+    this.categoriaForm.patchValue(this.categoriaForm.value, {onlySelf: false, emitEvent: true}); // Rerender FormGroup
   }
 }
