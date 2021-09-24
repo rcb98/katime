@@ -91,7 +91,7 @@
             </div>
 
             <!-- Repetición -->
-            <div class="m-2 flex flex-col" (click)="abrirModal('repeticion', repeticionOptions, repeticionValues)">
+            <div class="m-2 flex flex-col" (click)="abrirModal('repeticion', repeticionOptions, repeticionValues, repeticionIndex)">
                 <div class="flex items-center mb-2">
                     <ion-icon name="reload-outline" class="mr-2" color="primary"></ion-icon>
                     <label for="repeticion" class="text-gray-600">Repetición</label>
@@ -100,7 +100,7 @@
             </div>
 
             <!-- Recordatorio -->
-            <div class="m-2 flex flex-col" (click)="abrirModal('recordatorio', recordatorioOptions, recordatorioValues)">
+            <div class="m-2 flex flex-col" (click)="abrirModal('recordatorio', recordatorioOptions, recordatorioValues, recordatorioIndex)">
                 <div class="flex items-center mb-2">
                     <ion-icon name="alarm" class="mr-2" color="primary"></ion-icon>
                     <label for="recordatorio" class="text-gray-600">Recordatorio</label>

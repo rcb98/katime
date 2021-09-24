@@ -2,6 +2,20 @@
     border-radius: 50%;
 }
 
+.day {
+    width: 1.75em;
+    height: 1.75em;
+    border-radius: 50%;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 ion-list,
 ion-radio-group,
 ion-item {

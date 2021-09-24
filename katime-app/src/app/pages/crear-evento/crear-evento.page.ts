@@ -43,14 +43,14 @@ export class CrearEventoPage implements OnInit, OnDestroy {
 
   // Repetición
   public repeticionOptions:string[] = ["Sin repetición", "Diariamente", "Semanalmente", "Mensualmente", "Anualmente", "Personalizado"];
-  public repeticionValues:string[] = [null, "diario", "semanal", "mensual", "anual", "personalizado"]
+  public repeticionValues:string[] = ['null', "diario", "semanal", "mensual", "anual", "personalizado"]
   public repeticionIndex:number = 0;
   public repeticion:any = this.repeticionOptions[0];
   public dias:string = '';
 
   // Recordatorio
   public recordatorioOptions:string[] = ["Sin recordatorio", "1 minuto antes", "5 minutos antes", "10 minutos antes", "30 minutos antes", "1 hora antes"];
-  public recordatorioValues:number[] = [null, 1, 5, 10, 30, 60];
+  public recordatorioValues:number[] = [0, 1, 5, 10, 30, 60];
   public recordatorioIndex:number = 0;
 
   // Toggle
@@ -78,8 +78,23 @@ export class CrearEventoPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe(res => {
+      if(res[0] == "#"){
+        this.dias = res.substr(1);
+        this.repeticion = this.dias + " (Semanalmente)";
+      }
+
+      for(let i = 0; i < this.repeticionValues.length; i++) {
+        if(this.repeticionValues[i] == res) {
+          this.dias = null;
+          this.repeticionIndex = i;
+          this.repeticion = this.repeticionOptions[i];
+          break;
+        }
+      }
+
       for(let i = 0; i < this.recordatorioValues.length; i++) {
         if(this.recordatorioValues[i] == res) {
+          this.dias = null;
           this.recordatorioIndex = i;
           break;
         }
@@ -125,12 +140,12 @@ export class CrearEventoPage implements OnInit, OnDestroy {
     this.eventoForm.value.recordatorio = this.recordatorioValues[this.recordatorioIndex];
     this.eventoForm.value.dias = this.dias;
 
-    alert(JSON.stringify(this.eventoForm.value));
+    // alert(JSON.stringify(this.eventoForm.value));
 
-    /*this.fuenteService.createFuente(this.eventoForm.value).then( res => {
+    this.fuenteService.createFuente(this.eventoForm.value).then( res => {
       this.presentToast("¡Evento creado!");
       this.router.navigateByUrl("/modo-lista");
-    });*/
+    });
   }
 
   deleteEventos(){
@@ -437,7 +452,7 @@ export class CrearEventoPage implements OnInit, OnDestroy {
     toast.present();
   }
 
-  async abrirModal(tipo:string, opciones:string[], valores:any[]) {
+  async abrirModal(tipo:string, opciones:string[], valores:any[], index:number) {
     const modal = await this.modalController.create({
       component: ModalComponent,
       cssClass: 'my-modal-class',
@@ -446,7 +461,9 @@ export class CrearEventoPage implements OnInit, OnDestroy {
       componentProps: {
         'accion': tipo,
         'titulos': opciones,
-        'valores': valores
+        'valores': valores,
+        'selected': valores[index],
+        'diasSeleccionados': this.dias
       }
     });
     return await modal.present();

@@ -18,8 +18,13 @@ export class ModalComponent implements OnInit {
   @Input() categoria: string;
   @Input() tiempoRestante: string;
   @Input() titulos: string[];
+  @Input() diasSeleccionados: any;
   @Input() valores: any[];
-  public recordatorioChecked:any;
+  @Input() selected: any;
+  public checkCustom:boolean = false;
+  public checkedOption:any;
+  public dias:string[] = [];
+  public keepDias:any;
 
   constructor(private comunicadorService: ComunicadorService,
               private entradaService: EntradaService,
@@ -27,18 +32,55 @@ export class ModalComponent implements OnInit {
               private modalController: ModalController,
               private toaster: ToastController) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if(this.selected == "personalizado") {
+      this.checkCustom = true;
+      this.checkedOption = this.selected;
+    }
+
+    var dias = this.diasSeleccionados.split(',');
+    dias.forEach(dia => {
+      if(dia != "") this.toggleDia(dia);
+    });
+  }
 
   dismiss() {
     this.modalController.dismiss();
   }
 
   checkValue(event) {
-    this.recordatorioChecked = event.detail.value;
+    this.checkedOption = event.detail.value;
+    if(this.checkedOption == "personalizado") this.checkCustom = true;
+    else this.checkCustom = false;
+  }
+
+  toggleDia(dia:string) {
+    if(!this.checkDia(dia)) {
+      this.dias.push(dia);
+    } else {
+      this.dias.forEach((d, index) => {
+        if(dia == d) this.dias.splice(index, 1);
+      });
+    }
+  }
+
+  checkDia(dia:string) {
+    if(this.dias.includes(dia)) return true;
+    return false;
   }
 
   terminar() {
-    this.comunicadorService.ejecutarFuncion(this.recordatorioChecked);
+    if(this.checkedOption == "personalizado" && this.dias.length <= 0) return this.presentToast("Tienes que seleccionar al menos un día.")
+
+    if(this.checkedOption == undefined && this.accion == "repeticion") this.checkedOption = null;
+    else if(this.checkedOption == undefined && this.accion == "recordatorio") this.checkedOption = 0;
+
+    this.dismiss();
+
+    this.comunicadorService.ejecutarFuncion(this.checkedOption);
+    if((this.checkedOption == "personalizado" || this.accion == "recordatorio") && this.dias.length > 0) {
+      this.comunicadorService.ejecutarFuncion("#" + this.dias.toString());
+    }
   }
 
   async eliminarEvento() {
@@ -59,7 +101,7 @@ export class ModalComponent implements OnInit {
   async presentToast(msg:string) {
     const toast = await this.toaster.create({
       message: msg,
-      duration: 3000,
+      duration: 2000,
       animated: true,
       color: "primary"
     });

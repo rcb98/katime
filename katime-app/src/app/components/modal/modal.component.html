@@ -2,7 +2,7 @@
     <div class="flex px-8 pt-8">
         <ion-icon color="primary" class="text-2xl" name="arrow-back" (click)="dismiss()"></ion-icon>
         <ion-icon class="ml-auto text-2xl text-gray-500" name="trash-bin" (click)="[dismiss(), eliminarEvento()]" *ngIf="accion == 'detalleEvento'"></ion-icon>
-        <span *ngIf="accion == 'recordatorio'" class="text-purple ml-auto" (click)="[dismiss(), terminar()]">Terminar</span>
+        <span *ngIf="accion == 'recordatorio' || accion == 'repeticion' || accion == 'personalizado'" class="text-purple ml-auto" (click)="terminar()">Terminar</span>
     </div>
 
     <div *ngIf="accion == 'detalleEvento'">
@@ -28,15 +28,35 @@
         </ul>
     </div>
 
-    <div *ngIf="accion == 'recordatorio'">
-        <h3 class="text-lg my-4 mx-8 font-semibold">Recordatorio</h3>
+    <div *ngIf="accion == 'repeticion' || accion == 'recordatorio'">
+        <h3 *ngIf="accion == 'repeticion'" class="text-lg my-4 mx-8 font-semibold">Repetición</h3>
+        <h3 *ngIf="accion == 'recordatorio'" class="text-lg my-4 mx-8 font-semibold">Recordatorio</h3>
         <ion-list lines="none" class="ml-4 bg-transparent">
-            <ion-radio-group class="bg-transparent" (ionChange)="checkValue($event)">
+            <ion-radio-group class="bg-transparent" [value]="selected" (ionChange)="checkValue($event)">
                 <ion-item *ngFor="let item of titulos; let i = index">
                     <ion-label>{{item}}</ion-label>
                     <ion-radio slot="start" [value]=valores[i]></ion-radio>
                 </ion-item>
+
+                <div *ngIf="accion == 'repeticion'">
+                    <div class="mx-4 mb-8 p-4 flex flex-col" [ngClass]="{'disabled': !checkCustom, 'bg-gray-200 rounded-lg': checkCustom}">
+                        <label class="font-semibold">Días</label>
+                        <p class="text-gray-600 my-1">Elige los días de la semana que quieres que se repita el evento.</p>
+                        <div class="flex justify-between mt-1">
+                            <div class="day" (click)="toggleDia('Lun')" [ngClass]="{'bg-purple text-white':checkDia('Lun')}">L</div>
+                            <div class="day" (click)="toggleDia('Mar')" [ngClass]="{'bg-purple text-white':checkDia('Mar')}">M</div>
+                            <div class="day" (click)="toggleDia('Mie')" [ngClass]="{'bg-purple text-white':checkDia('Mie')}">X</div>
+                            <div class="day" (click)="toggleDia('Jue')" [ngClass]="{'bg-purple text-white':checkDia('Jue')}">J</div>
+                            <div class="day" (click)="toggleDia('Vie')" [ngClass]="{'bg-purple text-white':checkDia('Vie')}">V</div>
+                            <div class="day" (click)="toggleDia('Sab')" [ngClass]="{'bg-purple text-white':checkDia('Sab')}">S</div>
+                            <div class="day" (click)="toggleDia('Dom')" [ngClass]="{'bg-purple text-white':checkDia('Dom')}">D</div>
+                        </div>
+                    </div>
+                </div>
+
+
             </ion-radio-group>
+
         </ion-list>
     </div>
 </div>

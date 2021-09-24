@@ -87,7 +87,7 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
         res.forEach(data => {
         let entrada:Entrada = null;
 
-        if(data.dias){ // Repetición personalizada
+        if(data.dias && data.dias != 'null'){ // Repetición personalizada
           let i = 0;
           while(data.dias.split(",")[i]){
             var dia = this.getDia(data.dias.split(",")[i]);
@@ -205,7 +205,7 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
         var fecha = new Date(entrada.hora_ini);
         if(fecha.getDate() == hoy.getDate() && fecha.getMonth() == hoy.getMonth() && fecha.getFullYear() == hoy.getFullYear()){
           this.entradasHoy.push(entrada);
-          if(entrada.recordatorio != undefined && entrada.recordatorio != null) {
+          if(entrada.recordatorio != undefined && entrada.recordatorio != null && entrada.recordatorio != 0) {
             this.setRecordatorio(entrada.nombre, entrada.hora_ini, entrada.recordatorio, index);
           }
         } else {
