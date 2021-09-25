@@ -12,6 +12,10 @@ const routes: Routes = [
   },  {
     path: 'crear-transporte',
     loadChildren: () => import('./pages/crear-transporte/crear-transporte.module').then( m => m.CrearTransportePageModule)
+  },
+  {
+    path: 'editar-categorias',
+    loadChildren: () => import('./pages/editar-categorias/editar-categorias.module').then( m => m.EditarCategoriasPageModule)
   }
 
 

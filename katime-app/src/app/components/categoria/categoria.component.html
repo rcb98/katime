@@ -1,0 +1,25 @@
+<div class="modal flex fixed h-screen w-screen z-50" *ngIf="mostrar">
+    <form [formGroup]="categoriaForm" class="bg-gray-100 fixed bottom-0 w-full h-auto rounded-t-xl p-8">
+        <div class="flex">
+            <ion-icon color="primary" class="text-2xl" name="arrow-back" (click)="exitModalCategoria()"></ion-icon>
+            <p class="text-purple ml-auto" (click)="editarCategoria()">Editar categoría</p>
+        </div>
+        <h3 class="my-4 text-lg font-semibold">Categoría {{categoria}}</h3>
+
+        <div class="flex">
+            <input type="radio" name="color" formControlName="color" value="pink" class="bg-pink h-7 w-7 mr-1 border-none" [ngClass]="{ 'disabled': isCategoria('pink') }">
+            <input type="radio" name="color" formControlName="color" value="red" class="bg-red h-7 w-7 mx-1 border-none" [ngClass]="{ 'disabled': isCategoria('red') }">
+            <input type="radio" name="color" formControlName="color" value="orange" class="bg-orange h-7 w-7 mx-1 border-none" [ngClass]="{ 'disabled': isCategoria('orange') }">
+            <input type="radio" name="color" formControlName="color" value="yellow" class="bg-yellow h-7 w-7 mx-1 border-none" [ngClass]="{ 'disabled': isCategoria('yellow') }">
+            <input type="radio" name="color" formControlName="color" value="green" class="bg-green h-7 w-7 mx-1 border-none" [ngClass]="{ 'disabled': isCategoria('green') }">
+            <input type="radio" name="color" formControlName="color" value="blue" class="bg-blue h-7 w-7 mx-1 border-none" [ngClass]="{ 'disabled': isCategoria('blue') }">
+            <input type="radio" name="color" formControlName="color" value="indigo" class="bg-indigo h-7 w-7 mx-1 border-none" [ngClass]="{ 'disabled': isCategoria('indigo') }">
+        </div>
+
+        <!-- Nombre -->
+        <div class="my-4 flex flex-col">
+            <label for="nombreCategoria" class="text-gray-600">Nombre</label>
+            <input type="text" id="nombreCategoria" formControlName="nombre" class="rounded-lg border-none mt-0.5">
+        </div>
+    </form>
+</div>

@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border bg-white pb-4">
+    <app-page-header titulo="Categorías" [goBack]=true>
+        <ion-back-button color="primary"></ion-back-button>
+    </app-page-header>
+</ion-header>
+
+<div class="bg-gray-100 h-full rounded-t-xl">
+    <div class="m-8">
+        <p class="ml-auto text-purple text-right w-4/6 mb-4">+ Nueva categoría</p>
+        <div class="flex flex-col">
+            <div *ngFor="let categoria of categorias" class="my-2 flex items-center">
+                <label for="{{categoria.id_categoria}}" class="flex items-center">
+                  <div name="id_categoria" class="circle h-7 w-7 mr-2 border-none text-transparent" [ngClass]="'bg-' + categoria.color">.</div>
+                  {{categoria.nombre}}
+                </label>
+                <ion-icon id="{{categoria.id_categoria}}" class="ml-auto text-gray-400 text-lg" name="ellipsis-vertical" (click)="presentPopover($event)"></ion-icon>
+            </div>
+
+            <!-- <div class="my-2 flex items-center">
+                <label for="a" class="flex items-center">
+                <div name="id_categoria" class="circle h-7 w-7 mr-2 border-none text-transparent bg-red">.</div>
+                Hola
+              </label>
+                <ion-icon id="a" class="ml-auto text-gray-400 text-lg" name="ellipsis-vertical" (click)="presentPopover($event)"></ion-icon>
+            </div>
+
+            <div class="my-2 flex items-center">
+                <label for="b" class="flex items-center">
+              <div name="id_categoria" class="circle h-7 w-7 mr-2 border-none text-transparent bg-blue">.</div>
+              Hola
+            </label>
+                <ion-icon id="b" class="ml-auto text-gray-400 text-lg" name="ellipsis-vertical" (click)="presentPopover($event)"></ion-icon>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<app-categoria class="h-screen fixed z-50" [mostrar]="showModal" [categoria]="categoria"></app-categoria>
