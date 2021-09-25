@@ -1,8 +1,9 @@
-<div class="modal flex fixed h-screen w-screen z-50" *ngIf="mostrar">
+<div class="modal flex fixed h-screen w-screen z-50" *ngIf="mostrarEditar || mostrarCrear">
     <form [formGroup]="categoriaForm" class="bg-gray-100 fixed bottom-0 w-full h-auto rounded-t-xl p-8">
         <div class="flex">
             <ion-icon color="primary" class="text-2xl" name="arrow-back" (click)="exitModalCategoria()"></ion-icon>
-            <p class="text-purple ml-auto" (click)="editarCategoria()">Editar categoría</p>
+            <p class="text-purple ml-auto" (click)="editarCategoria()" *ngIf="mostrarEditar">Editar categoría</p>
+            <p class="text-purple ml-auto" (click)="crearCategoria()" *ngIf="mostrarCrear">Crear categoría</p>
         </div>
         <h3 class="my-4 text-lg font-semibold">Categoría</h3>
 

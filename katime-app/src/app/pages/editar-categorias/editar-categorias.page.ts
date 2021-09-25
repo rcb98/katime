@@ -13,7 +13,8 @@ import { ComunicadorService } from 'src/app/services/comunicador.service';
 export class EditarCategoriasPage implements OnInit, OnDestroy {
 
   public categorias:Categoria [] = [];
-  public showModal:boolean = false;
+  public showModalEditar:boolean = false;
+  public showModalCrear:boolean = false;
   public categoria:string;
 
   constructor(private categoriaService: CategoriaService,
@@ -22,9 +23,12 @@ export class EditarCategoriasPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe(res => {
-      if(res == "editar") {
-        this.showModal = !this.showModal;
-      }
+      if(res == "editar")
+        this.showModalEditar = !this.showModalEditar;
+
+      if(res == "crear")
+        this.showModalCrear = !this.showModalCrear;
+
     });
     this.getCategorias();
   }
@@ -48,6 +52,10 @@ export class EditarCategoriasPage implements OnInit, OnDestroy {
         this.categorias.push(categoria);
       });
     })
+  }
+
+  openModalCrear() {
+    this.showModalCrear = true;
   }
 
   async presentPopover(ev: any) {

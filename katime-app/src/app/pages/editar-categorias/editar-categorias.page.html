@@ -6,7 +6,7 @@
 
 <div class="bg-gray-100 h-full rounded-t-xl">
     <div class="m-8">
-        <p class="ml-auto text-purple text-right w-4/6 mb-4">+ Nueva categoría</p>
+        <p class="ml-auto text-purple text-right w-4/6 mb-4" (click)="openModalCrear()">+ Nueva categoría</p>
         <div class="flex flex-col">
             <div *ngFor="let categoria of categorias" class="my-2 flex items-center">
                 <label for="{{categoria.id_categoria}}" class="flex items-center">
@@ -35,4 +35,5 @@
     </div>
 </div>
 
-<app-categoria class="h-screen fixed z-50" [mostrar]="showModal" [categoria]="categoria"></app-categoria>
+<app-categoria class="h-screen fixed z-50" [mostrarEditar]="showModalEditar" [categoria]="categoria"></app-categoria>
+<app-categoria class="h-screen fixed z-50" [mostrarCrear]="showModalCrear"></app-categoria>

@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 import { Categoria } from 'src/app/interfaces/categoria.interface';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { ComunicadorService } from 'src/app/services/comunicador.service';
@@ -11,7 +12,8 @@ import { ComunicadorService } from 'src/app/services/comunicador.service';
 })
 export class CategoriaComponent implements OnInit, OnDestroy {
 
-  @Input() mostrar:boolean;
+  @Input() mostrarEditar:boolean;
+  @Input() mostrarCrear:boolean;
   @Input() categoria:any;
   public categorias:Categoria[] = [];
   public originalColor:string;
@@ -24,7 +26,8 @@ export class CategoriaComponent implements OnInit, OnDestroy {
 
   constructor(private categoriaService: CategoriaService,
               private comunicadorService: ComunicadorService,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private toaster: ToastController) { }
 
   ngOnInit() {
     this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe(res => {
@@ -38,7 +41,22 @@ export class CategoriaComponent implements OnInit, OnDestroy {
   }
 
   exitModalCategoria() {
-    this.comunicadorService.ejecutarFuncion("editar")
+    if(this.mostrarEditar)
+      this.comunicadorService.ejecutarFuncion("editar")
+    if(this.mostrarCrear)
+    this.comunicadorService.ejecutarFuncion("crear")
+  }
+
+  crearCategoria() {
+    if(!this.categoriaForm.value.nombre) return this.presentToast("El campo nombre es obligatorio.");
+    if(!this.categoriaForm.value.color) return this.presentToast("Elige un color para la categoría.");
+
+    if(this.categorias.length < 7){
+      this.categoriaService.createCategoria(this.categoriaForm.value).then( res => {
+        this.exitModalCategoria();
+        this.getCategorias();
+      });
+    }
   }
 
   editarCategoria() {
@@ -84,6 +102,16 @@ export class CategoriaComponent implements OnInit, OnDestroy {
       }
     });
     return existe;
+  }
+
+  async presentToast(msg:string) {
+    const toast = await this.toaster.create({
+      message: msg,
+      duration: 2000,
+      animated: true,
+      color: "primary"
+    });
+    toast.present();
   }
 
   reRenderForm() {
