@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, PopoverController, ToastController } from '@ionic/angular';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
 import { ComunicadorService } from 'src/app/services/comunicador.service';
 import { EntradaService } from 'src/app/services/entrada.service';
 import { FuenteService } from 'src/app/services/fuente.service';
+import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
   selector: 'app-modal',
@@ -35,15 +36,14 @@ export class ModalComponent implements OnInit {
               private entradaService: EntradaService,
               private fuenteService: FuenteService,
               private modalController: ModalController,
+              private popoverController: PopoverController,
               private toaster: ToastController) { }
 
   ngOnInit() {
     if(this.detalle) {
       this.fuenteService.getEventoId(this.detalle.id_fuente).then(res => {
-        //if(res.repeticion != "personalizado")
         this.repeticion = res.repeticion;
         this.diasRep = res.dias;
-        // alert(this.repeticion + " - " + this.diasRep)
       })
     }
 
@@ -95,6 +95,22 @@ export class ModalComponent implements OnInit {
     if((this.checkedOption == "personalizado" || this.accion == "recordatorio") && this.dias.length > 0) {
       this.comunicadorService.ejecutarFuncion("#" + this.dias.toString());
     }
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopoverComponent,
+      cssClass: 'popover_setting',
+      event: ev,
+      translucent: true,
+      componentProps: {
+        'titulos': ['Editar evento', 'Eliminar evento', 'Editar categoría'],
+        'valor': this.categoria
+      }
+    });
+    await popover.present();
+
+    const { role } = await popover.onDidDismiss();
   }
 
   async eliminarEvento() {

@@ -42,6 +42,8 @@ export class PopoverComponent implements OnInit {
       case "Eliminar horarios": this.deleteAll();
         break;
       case "Editar categoría":
+        this.modalController.dismiss();
+        this.router.navigateByUrl("editar-categorias");
         this.comunicadorService.ejecutarFuncion("editar");
         this.comunicadorService.ejecutarFuncion("mostrar-categoria")
         break;
