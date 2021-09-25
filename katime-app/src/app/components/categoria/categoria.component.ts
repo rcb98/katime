@@ -44,7 +44,7 @@ export class CategoriaComponent implements OnInit, OnDestroy {
     if(this.mostrarEditar)
       this.comunicadorService.ejecutarFuncion("editar")
     if(this.mostrarCrear)
-    this.comunicadorService.ejecutarFuncion("crear")
+      this.comunicadorService.ejecutarFuncion("crear")
   }
 
   crearCategoria() {

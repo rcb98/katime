@@ -30,16 +30,9 @@ export class CrearEventoPage implements OnInit, OnDestroy {
     dias: ['']
   });
 
-  // Formulario para crear una Categoría
-  public categoriaForm:FormGroup = this.formBuilder.group({
-    nombre: ['', Validators.required],
-    color: ['', Validators.required]
-  });
-
   // Categoría
   public categorias:Categoria[] = [];
-  public modalCategoria:boolean = false;
-  public disableRadio:boolean = true;
+  public showModalCrear:boolean = false;
 
   // Repetición
   public repeticionOptions:string[] = ["Sin repetición", "Diariamente", "Semanalmente", "Mensualmente", "Anualmente", "Personalizado"];
@@ -65,6 +58,7 @@ export class CrearEventoPage implements OnInit, OnDestroy {
   public minDate:string = this.currentYear.toString() + "-" + this.currentMonthSTR + "-" + this.currentDay.toString();
   public maxDate:string = (this.currentYear + 10).toString() + "-" + this.currentMonthSTR + "-" + this.currentDay.toString();
 
+
   constructor(private categoriaService: CategoriaService,
               private comunicadorService: ComunicadorService,
               private datePipe: DatePipe,
@@ -77,6 +71,8 @@ export class CrearEventoPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe(res => {
+      if(res == "crear") this.showModalCrear = !this.showModalCrear;
+
       if(res[0] == "#"){
         this.dias = res.substr(1);
         this.repeticion = this.dias + " (Semanalmente)";
@@ -108,18 +104,7 @@ export class CrearEventoPage implements OnInit, OnDestroy {
     this.comunicadorService.subscripcion.unsubscribe();
   }
 
-  isCategoria(color:string){
-    let existe = false;
-    this.categorias.forEach(cat => {
-      if(cat.color == color) {
-        existe = true;
-      }
-    });
-    return existe;
-  }
-
   createEvento() {
-
     /* Validaciones */
     if(this.eventoForm.value.hora_ini > this.eventoForm.value.hora_fin){
       return this.presentToast("La fecha de fin debe ser más antigua que la de inicio.");
@@ -151,18 +136,6 @@ export class CrearEventoPage implements OnInit, OnDestroy {
     this.fuenteService.deleteTable();
   }
 
-  createCategoria() {
-    if(!this.categoriaForm.value.nombre) return this.presentToast("El campo nombre es obligatorio.");
-    if(!this.categoriaForm.value.color) return this.presentToast("Elige un color para la categoría.");
-
-    if(this.categorias.length < 7){
-      this.categoriaService.createCategoria(this.categoriaForm.value).then( res => {
-        this.exitModalCategoria();
-        this.getCategorias();
-      });
-    }
-  }
-
   getCategorias() {
     this.categoriaService.getCategorias().subscribe(res => {
       this.categorias = [];
@@ -180,19 +153,8 @@ export class CrearEventoPage implements OnInit, OnDestroy {
     })
   }
 
-  toggleModalCategoria() {
-    if(this.categorias.length < 7) {
-      this.categoriaForm.reset(); // Vaciamos el categoriaForm al abrir el modal
-      this.categoriaForm.patchValue(this.categoriaForm.value, {onlySelf: false, emitEvent: true}); // Rerender FormGroup
-      this.modalCategoria = !this.modalCategoria;
-    } else {
-      this.exitModalCategoria();
-      this.presentToast("No puedes crear más de 7 categorías");
-    }
-  }
-
-  exitModalCategoria() {
-    this.modalCategoria = false;
+  openModalCrear() {
+    this.showModalCrear = true;
   }
 
   toggleTodoElDia() {
@@ -250,9 +212,5 @@ export class CrearEventoPage implements OnInit, OnDestroy {
       }
     });
     return await modal.present();
-  }
-
-  reRenderForm() {
-    this.categoriaForm.patchValue(this.categoriaForm.value, {onlySelf: false, emitEvent: true}); // Rerender FormGroup
   }
 }
