@@ -96,6 +96,17 @@ export class CategoriaService {
   }
 
   /* DELETE (all) */
+  deleteCategoria(id:number) {
+    this.dbInstance
+    .executeSql(`DELETE FROM ${this.dbTable} WHERE id_categoria = ${id}`, [])
+      .then(() => {
+        this.loadCategorias();
+      })
+      .catch(e => {
+        alert(JSON.stringify(e))
+      });
+  }
+
   deleteTable() {
     this.dbInstance
       .executeSql(`DELETE FROM ${this.dbTable}`, [])

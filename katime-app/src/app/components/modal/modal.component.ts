@@ -18,8 +18,10 @@ export class ModalComponent implements OnInit {
   @Input() categoria: string;
   @Input() tiempoRestante: string;
   @Input() titulos: string[];
+  @Input() titulo: string;
   @Input() diasSeleccionados: any;
   @Input() valores: any[];
+  @Input() valor: any;
   @Input() selected: any;
   public checkCustom:boolean = false;
   public checkedOption:any;
@@ -106,6 +108,12 @@ export class ModalComponent implements OnInit {
       color: "primary"
     });
     toast.present();
+  }
+
+  deleteCategoria() {
+    this.fuenteService.deleteFuentesCategoria(this.valor).then(() => {
+      this.dismiss();
+    })
   }
 
   deleteEntrada(id:number) {

@@ -163,6 +163,19 @@ export class FuenteService {
       });
   }
 
+  deleteFuentesCategoria(id:number): Promise<any> {
+    return this.dbInstance
+    .executeSql(`DELETE FROM ${this.dbTable} WHERE id_categoria = ${id}`, [])
+      .then(() => {
+        this.loadEventos();
+        this.entradaService.deleteEntradasCategoria(id);
+        this.categoriaService.deleteCategoria(id);
+      })
+      .catch(e => {
+        alert(JSON.stringify(e))
+      });
+  }
+
   /* DELETE (all) */
   deleteTable() {
     this.dbInstance

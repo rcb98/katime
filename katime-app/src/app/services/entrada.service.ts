@@ -4,6 +4,7 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { Platform } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Entrada } from '../interfaces/entrada.interface';
+import { CategoriaService } from './categoria.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class EntradaService {
   EVENTOS = new BehaviorSubject([]);
   TRANSPORTES = new BehaviorSubject([]);
 
-  constructor(private datePipe: DatePipe,
+  constructor(private categoriaService: CategoriaService,
+              private datePipe: DatePipe,
               private platform: Platform,
               private sqlite: SQLite) {
                 this.databaseConn();
@@ -101,6 +103,21 @@ export class EntradaService {
     });
   }
 
+  getCantidadEventosCategoria(id:number) {
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE id_categoria = ? AND tipo = 'evento' ORDER BY hora_ini ASC`, [id])
+    .then((res) => {
+      let eventos: Entrada[] = [];
+
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++)
+          eventos.push(res.rows.item(i));
+      }
+      return eventos.length;
+    },(e) => {
+      alert(JSON.stringify(e));
+    });
+  }
+
   getEntrada(id:number): Promise<any> {
     return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE id_entrada = ?`, [id])
       .then((res) => {
@@ -148,6 +165,17 @@ export class EntradaService {
       .then(() => {
         //this.loadEventos();
         //this.loadTransportes();
+      })
+      .catch(e => {
+        alert(JSON.stringify(e))
+      });
+  }
+
+  deleteEntradasCategoria(id:number): Promise<any> {
+    return this.dbInstance
+    .executeSql(`DELETE FROM ${this.dbTable} WHERE id_categoria = ${id}`, [])
+      .then(() => {
+        this.loadEventos();
       })
       .catch(e => {
         alert(JSON.stringify(e))

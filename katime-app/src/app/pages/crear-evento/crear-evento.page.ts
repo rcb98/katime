@@ -155,6 +155,7 @@ export class CrearEventoPage implements OnInit, OnDestroy {
 
   openModalCrear() {
     this.showModalCrear = true;
+    this.comunicadorService.ejecutarFuncion("crear-categoria");
   }
 
   toggleTodoElDia() {

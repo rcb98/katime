@@ -32,7 +32,13 @@ export class CategoriaComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe(res => {
       if(res == "mostrar-categoria") this.getCategoria();
+      if(res == "crear-categoria") {
+        this.categoriaForm.value.nombre = "";
+        this.categoriaForm.value.color = "";
+        this.reRenderForm();
+      }
     })
+
     this.getCategorias();
   }
 

@@ -56,6 +56,7 @@ export class EditarCategoriasPage implements OnInit, OnDestroy {
 
   openModalCrear() {
     this.showModalCrear = true;
+    this.comunicadorService.ejecutarFuncion("crear-categoria");
   }
 
   async presentPopover(ev: any) {
@@ -66,7 +67,8 @@ export class EditarCategoriasPage implements OnInit, OnDestroy {
       event: ev,
       translucent: true,
       componentProps: {
-        'titulos': ['Editar categoría', 'Eliminar categoría']
+        'titulos': ['Editar categoría', 'Eliminar categoría'],
+        'valor': this.categoria
       }
     });
     await popover.present();
