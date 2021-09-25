@@ -42,7 +42,9 @@ export class CategoriaComponent implements OnInit, OnDestroy {
   }
 
   editarCategoria() {
-
+    this.categoriaService.editCategoria(this.categoria, this.categoriaForm.value).then(res => {
+      this.exitModalCategoria();
+    })
   }
 
   getCategoria() {

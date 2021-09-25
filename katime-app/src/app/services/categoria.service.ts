@@ -85,6 +85,16 @@ export class CategoriaService {
       });
   }
 
+  /* PUT */
+  editCategoria(id:number, data:any) {
+    return this.dbInstance.executeSql(`UPDATE ${this.dbTable} SET nombre = '${data.nombre}', color = '${data.color}' WHERE id_categoria = ${id}`, data)
+    .then(() => {
+      this.loadCategorias();
+    }, (e) => {
+      alert(JSON.stringify(e.err));
+    });
+  }
+
   /* DELETE (all) */
   deleteTable() {
     this.dbInstance
