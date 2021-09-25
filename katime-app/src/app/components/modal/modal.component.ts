@@ -27,6 +27,9 @@ export class ModalComponent implements OnInit {
   public checkedOption:any;
   public dias:string[] = [];
   public keepDias:any;
+  public diasRep:string;
+  public repeticion:string;
+
 
   constructor(private comunicadorService: ComunicadorService,
               private entradaService: EntradaService,
@@ -35,6 +38,15 @@ export class ModalComponent implements OnInit {
               private toaster: ToastController) { }
 
   ngOnInit() {
+    if(this.detalle) {
+      this.fuenteService.getEventoId(this.detalle.id_fuente).then(res => {
+        //if(res.repeticion != "personalizado")
+        this.repeticion = res.repeticion;
+        this.diasRep = res.dias;
+        // alert(this.repeticion + " - " + this.diasRep)
+      })
+    }
+
     if(this.selected == "personalizado") {
       this.checkCustom = true;
       this.checkedOption = this.selected;

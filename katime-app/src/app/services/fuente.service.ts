@@ -102,6 +102,16 @@ export class FuenteService {
     return this.EVENTOS.asObservable();
   }
 
+  getEventoId(id): Promise<any> {
+    return this.dbInstance.executeSql(`SELECT dias, repeticion FROM ${this.dbTable} WHERE tipo='evento' AND id_fuente = ?`, [id])
+    .then((res) => {
+      return {
+        dias: res.rows.item(0).dias,
+        repeticion: res.rows.item(0).repeticion
+      }
+    });
+  }
+
   getTransportes():Observable<Fuente[]> {
     return this.TRANSPORTES.asObservable();
   }

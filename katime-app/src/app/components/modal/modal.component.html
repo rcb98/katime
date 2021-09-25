@@ -16,8 +16,10 @@
         </div>
 
         <label class="ml-8 text-gray-600">Descripción</label>
-        <h4 class="bg-white mx-8 my-1 mb-8 rounded-lg px-4 py-3" *ngIf="detalle.descripcion">{{detalle.descripcion}}</h4>
-        <h4 class="bg-white text-gray-400 mx-8 my-1 mb-8 rounded-lg px-4 py-3 italic" *ngIf="!detalle.descripcion">Sin descripción</h4>
+        <h4 class="bg-white mx-8 my-1 rounded-lg px-4 py-3" *ngIf="detalle.descripcion" [ngClass]="{'mb-8': repeticion == null || repeticion == 'null'}">{{detalle.descripcion}}</h4>
+        <h4 class="bg-white text-gray-400 mx-8 my-1 rounded-lg px-4 py-3 italic" *ngIf="!detalle.descripcion" [ngClass]="{'mb-8': repeticion == null || repeticion == 'null'}">Sin descripción</h4>
+        <p class="mx-8 mb-8 text-gray-600 text-sm" *ngIf="repeticion != null && repeticion != 'null' && repeticion != 'personalizado'">Este evento se repite {{repeticion | lowercase}}mente.</p>
+        <p class="mx-8 mb-8 text-gray-600 text-sm" *ngIf="repeticion == 'personalizado' && diasRep != null && diasRep != undefined && diasRep != ''">Este evento se repite los {{diasRep}}.</p>
     </div>
 
     <div *ngIf="accion == 'eliminar'">
