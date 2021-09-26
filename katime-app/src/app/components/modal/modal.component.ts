@@ -114,21 +114,6 @@ export class ModalComponent implements OnInit {
     const { role } = await popover.onDidDismiss();
   }
 
-  async eliminarEvento() {
-    const modal = await this.modalController.create({
-      component: ModalComponent,
-      cssClass: 'my-modal-class',
-      showBackdrop:true,
-      backdropDismiss: true,
-      componentProps: {
-        'accion': 'eliminar',
-        'tipo': 'evento',
-        'detalle': this.detalle
-      }
-    });
-    return await modal.present();
-  }
-
   async presentToast(msg:string) {
     const toast = await this.toaster.create({
       message: msg,

@@ -47,6 +47,8 @@ export class PopoverComponent implements OnInit {
         this.router.navigateByUrl("editar-evento/" + this.detalle['id_fuente']);
         break;
       case "Eliminar evento":
+        this.modalController.dismiss();
+        this.modalBorrarEvento();
         break;
       case "Editar categoría":
         this.modalController.dismiss();
@@ -88,6 +90,21 @@ export class PopoverComponent implements OnInit {
         'accion': 'eliminarCat',
         'valor': this.valor,
         'titulo': this.nombreCat
+      }
+    });
+    return await modal.present();
+  }
+
+  async modalBorrarEvento() {
+    const modal = await this.modalController.create({
+      component: ModalComponent,
+      cssClass: 'my-modal-class',
+      showBackdrop:true,
+      backdropDismiss: true,
+      componentProps: {
+        'accion': 'eliminar',
+        'tipo': 'evento',
+        'detalle': this.detalle
       }
     });
     return await modal.present();
