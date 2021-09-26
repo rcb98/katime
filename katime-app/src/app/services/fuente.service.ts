@@ -8,6 +8,7 @@ import { EntradaService } from './entrada.service';
 import { CategoriaService } from './categoria.service';
 import { HttpClient } from '@angular/common/http';
 import { map, take } from "rxjs/operators";
+import { ComunicadorService } from './comunicador.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class FuenteService {
 
   constructor(private datePipe: DatePipe,
               private categoriaService: CategoriaService,
+              private comunicadorService: ComunicadorService,
               private entradaService: EntradaService,
               private http: HttpClient,
               private platform: Platform,
@@ -103,12 +105,9 @@ export class FuenteService {
   }
 
   getEventoId(id): Promise<any> {
-    return this.dbInstance.executeSql(`SELECT dias, repeticion FROM ${this.dbTable} WHERE tipo='evento' AND id_fuente = ?`, [id])
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE tipo='evento' AND id_fuente = ?`, [id])
     .then((res) => {
-      return {
-        dias: res.rows.item(0).dias,
-        repeticion: res.rows.item(0).repeticion
-      }
+      return res.rows.item(0);
     });
   }
 
@@ -143,6 +142,17 @@ export class FuenteService {
       }, (e) => {
         alert(JSON.stringify(e.err));
       });
+  }
+
+  /* PUT */
+ editEvento(id:number, data:any):Promise<any> {
+    return this.dbInstance.executeSql(`UPDATE ${this.dbTable}
+    SET nombre = '${data.nombre}', descripcion = '${data.descripcion}', id_categoria = '${data.id_categoria}', hora_ini = '${data.hora_ini}', hora_fin = '${data.hora_fin}',
+    recordatorio = ${data.recordatorio}, repeticion = '${data.repeticion}', dias = '${data.dias}'
+    WHERE id_fuente = ${id} AND tipo = 'evento'`)
+    .then(() => {
+    }, (e) => {
+    });
   }
 
   limpiarFuentes() {

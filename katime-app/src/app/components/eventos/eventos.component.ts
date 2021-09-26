@@ -46,7 +46,8 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe( res => {
-      this.getEntradas();
+      if(res == "crear-eventos") this.filtrarEntradas();
+      else this.getEntradas();
     });
 
     this.appStateChangeListener = App.addListener(
@@ -87,7 +88,7 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
         res.forEach(data => {
         let entrada:Entrada = null;
 
-        if(data.dias && data.dias != 'null'){ // Repetición personalizada
+        if(data.repeticion == "personalizado" && data.dias && data.dias != 'null'){ // Repetición personalizada
           let i = 0;
           while(data.dias.split(",")[i]){
             var dia = this.getDia(data.dias.split(",")[i]);

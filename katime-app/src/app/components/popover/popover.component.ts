@@ -17,6 +17,7 @@ export class PopoverComponent implements OnInit {
 
   @Input() titulos: string[];
   @Input() valor: any;
+  @Input() detalle: any[];
   public nombreCat:string = "";
 
   constructor(private categoriaService: CategoriaService,
@@ -40,6 +41,12 @@ export class PopoverComponent implements OnInit {
       case "Actualizar horarios": this.comunicadorService.ejecutarFuncion("reload");
         break;
       case "Eliminar horarios": this.deleteAll();
+        break;
+      case "Editar evento":
+        this.modalController.dismiss();
+        this.router.navigateByUrl("editar-evento/" + this.detalle['id_fuente']);
+        break;
+      case "Eliminar evento":
         break;
       case "Editar categoría":
         this.modalController.dismiss();

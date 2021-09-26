@@ -1,9 +1,19 @@
-<ion-header class="ion-no-border bg-white pb-4">
+<ion-header class="ion-no-border bg-white pb-4" *ngIf="!edicion">
     <app-page-header titulo="Nuevo evento" [goBack]=true>
         <ion-back-button color="primary"></ion-back-button>
         <div class="flex items-center ml-auto mr-8" (click)="createEvento()">
             <ion-icon name="checkmark" color="primary" class="mr-1"></ion-icon>
             <p class="text-purple">Crear evento</p>
+        </div>
+    </app-page-header>
+</ion-header>
+
+<ion-header class="ion-no-border bg-white pb-4" *ngIf="edicion">
+    <app-page-header titulo="Editar evento" [goBack]=true>
+        <ion-back-button color="primary"></ion-back-button>
+        <div class="flex items-center ml-auto mr-8" (click)="editarEvento()">
+            <ion-icon name="checkmark" color="primary" class="mr-1"></ion-icon>
+            <p class="text-purple">Editar evento</p>
         </div>
     </app-page-header>
 </ion-header>

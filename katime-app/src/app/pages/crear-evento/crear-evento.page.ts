@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
 import { FuenteService } from 'src/app/services/fuente.service';
 import { DatePipe } from '@angular/common';
@@ -8,6 +8,7 @@ import { CategoriaService } from 'src/app/services/categoria.service';
 import { Categoria } from 'src/app/interfaces/categoria.interface';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { ComunicadorService } from 'src/app/services/comunicador.service';
+import { EntradaService } from 'src/app/services/entrada.service';
 
 @Component({
   selector: 'app-crear-evento',
@@ -58,10 +59,15 @@ export class CrearEventoPage implements OnInit, OnDestroy {
   public minDate:string = this.currentYear.toString() + "-" + this.currentMonthSTR + "-" + this.currentDay.toString();
   public maxDate:string = (this.currentYear + 10).toString() + "-" + this.currentMonthSTR + "-" + this.currentDay.toString();
 
+  // Editar
+  public idFuente:number;
+  public edicion:boolean = false;
 
-  constructor(private categoriaService: CategoriaService,
+  constructor(private activatedRoute: ActivatedRoute,
+              private categoriaService: CategoriaService,
               private comunicadorService: ComunicadorService,
               private datePipe: DatePipe,
+              private entradaService: EntradaService,
               private fuenteService: FuenteService,
               private formBuilder: FormBuilder,
               private modalController: ModalController,
@@ -70,6 +76,14 @@ export class CrearEventoPage implements OnInit, OnDestroy {
               }
 
   ngOnInit() {
+    if(this.activatedRoute.snapshot.params['id']) {
+      this.edicion = true;
+      this.idFuente = this.activatedRoute.snapshot.params['id'];
+      this.infoEditarEvento();
+    } else {
+      this.edicion = false;
+    }
+
     this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe(res => {
       if(res == "crear") this.showModalCrear = !this.showModalCrear;
 
@@ -113,16 +127,7 @@ export class CrearEventoPage implements OnInit, OnDestroy {
     if(!this.eventoForm.value.nombre || !this.eventoForm.value.id_categoria || !this.eventoForm.value.hora_ini || !this.eventoForm.value.hora_fin) {
       return this.presentToast("Los campos de nombre, categoría, fecha de inicio y fin son obligatorios.");
     }
-
-    // Formateamos la fecha
-    let hIni = this.datePipe.transform(this.eventoForm.value.hora_ini, 'yyyy-MM-dd HH:mm');
-    let hFin = this.datePipe.transform(this.eventoForm.value.hora_fin, 'yyyy-MM-dd HH:mm');
-
-    this.eventoForm.value.hora_ini = hIni;
-    this.eventoForm.value.hora_fin = hFin;
-    this.eventoForm.value.repeticion = this.repeticionValues[this.repeticionIndex];
-    this.eventoForm.value.recordatorio = this.recordatorioValues[this.recordatorioIndex];
-    this.eventoForm.value.dias = this.dias;
+    this.setValores();
 
     // alert(JSON.stringify(this.eventoForm.value));
 
@@ -130,6 +135,49 @@ export class CrearEventoPage implements OnInit, OnDestroy {
       this.presentToast("¡Evento creado!");
       this.router.navigateByUrl("/modo-lista");
     });
+  }
+
+  editarEvento() {
+    /* Validaciones */
+    if(this.eventoForm.value.hora_ini > this.eventoForm.value.hora_fin){
+      return this.presentToast("La fecha de fin debe ser más antigua que la de inicio.");
+    }
+
+    if(!this.eventoForm.value.nombre || !this.eventoForm.value.id_categoria || !this.eventoForm.value.hora_ini || !this.eventoForm.value.hora_fin) {
+      return this.presentToast("Los campos de nombre, categoría, fecha de inicio y fin son obligatorios.");
+    }
+    this.setValores();
+
+    this.fuenteService.editEvento(this.idFuente, this.eventoForm.value).then(res => {
+      this.fuenteService.loadEventos().then(() => {
+        this.entradaService.deleteTableTipo("evento");
+        this.comunicadorService.ejecutarFuncion("crear-eventos");
+        this.presentToast("¡Evento editado!");
+        this.router.navigateByUrl("modo-lista");
+      })
+    });
+  }
+
+  infoEditarEvento() {
+    this.fuenteService.getEventoId(this.idFuente).then(res => {
+      this.eventoForm.value.nombre = res.nombre;
+      this.eventoForm.value.descripcion = res.descripcion;
+      this.eventoForm.value.id_categoria = res.id_categoria;
+      this.eventoForm.value.hora_ini = res.hora_ini;
+      this.eventoForm.value.hora_fin = res.hora_fin;
+      this.eventoForm.value.dias = res.dias;
+      this.eventoForm.value.repeticion = res.repeticion;
+      this.eventoForm.value.recordatorio = res.recordatorio;
+      if(res.repeticion != null && res.repeticion != "null" && res.repeticion != "") this.comunicadorService.ejecutarFuncion(res.repeticion);
+      if(res.recordatorio != null && res.recordatorio != "") this.comunicadorService.ejecutarFuncion(res.recordatorio);
+      if(res.dias != null && res.dias != "null" && res.dias != "") this.comunicadorService.ejecutarFuncion("#" + res.dias);
+      else this.eventoForm.value.dias = "";
+      let hini = new Date(res.hora_ini),
+          hfin = new Date(res.hora_fin);
+      if(hini.getHours() == 0 && hini.getMinutes() == 0 && hfin.getHours() == 23 && hfin.getMinutes() == 59)
+        this.toggleCheck = true;
+      this.reRenderForm();
+    })
   }
 
   deleteEventos(){
@@ -151,6 +199,18 @@ export class CrearEventoPage implements OnInit, OnDestroy {
         this.categorias.push(categoria);
       });
     })
+  }
+
+  setValores() {
+    // Formateamos la fecha
+    let hIni = this.datePipe.transform(this.eventoForm.value.hora_ini, 'yyyy-MM-dd HH:mm');
+    let hFin = this.datePipe.transform(this.eventoForm.value.hora_fin, 'yyyy-MM-dd HH:mm');
+
+    this.eventoForm.value.hora_ini = hIni;
+    this.eventoForm.value.hora_fin = hFin;
+    this.eventoForm.value.repeticion = this.repeticionValues[this.repeticionIndex];
+    this.eventoForm.value.recordatorio = this.recordatorioValues[this.recordatorioIndex];
+    this.eventoForm.value.dias = this.dias;
   }
 
   openModalCrear() {
@@ -184,7 +244,7 @@ export class CrearEventoPage implements OnInit, OnDestroy {
 
       this.eventoForm.value.hora_ini = newHIni.toString();
       this.eventoForm.value.hora_fin = newHFin.toString();
-      this.eventoForm.patchValue(this.eventoForm.value, {onlySelf: false, emitEvent: true}); // Rerender FormGroup
+      this.reRenderForm(); // Rerender FormGroup
     }
   }
 
@@ -199,6 +259,7 @@ export class CrearEventoPage implements OnInit, OnDestroy {
   }
 
   async abrirModal(tipo:string, opciones:string[], valores:any[], index:number) {
+    if(this.edicion) this.dias = this.eventoForm.value.dias;
     const modal = await this.modalController.create({
       component: ModalComponent,
       cssClass: 'my-modal-class',
@@ -213,5 +274,9 @@ export class CrearEventoPage implements OnInit, OnDestroy {
       }
     });
     return await modal.present();
+  }
+
+  reRenderForm() {
+    this.eventoForm.patchValue(this.eventoForm.value, {onlySelf: false, emitEvent: true});
   }
 }

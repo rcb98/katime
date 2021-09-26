@@ -105,7 +105,8 @@ export class ModalComponent implements OnInit {
       translucent: true,
       componentProps: {
         'titulos': ['Editar evento', 'Eliminar evento', 'Editar categoría'],
-        'valor': this.categoria
+        'valor': this.categoria,
+        'detalle': this.detalle
       }
     });
     await popover.present();

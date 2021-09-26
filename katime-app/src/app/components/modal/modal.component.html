@@ -2,7 +2,7 @@
     <div class="flex px-8 pt-8">
         <ion-icon color="primary" class="text-2xl" name="arrow-back" (click)="dismiss()"></ion-icon>
         <!-- <ion-icon class="ml-auto text-2xl text-gray-500" name="trash-bin" (click)="[dismiss(), eliminarEvento()]" *ngIf="accion == 'detalleEvento'"></ion-icon> -->
-        <ion-icon class="ml-auto text-gray-400 text-lg" name="ellipsis-vertical" (click)="presentPopover($event)"></ion-icon>
+        <ion-icon class="ml-auto text-gray-400 text-lg" name="ellipsis-vertical" *ngIf="accion == 'detalleEvento'" (click)="presentPopover($event)"></ion-icon>
 
         <span *ngIf="accion == 'recordatorio' || accion == 'repeticion' || accion == 'personalizado'" class="text-purple ml-auto" (click)="terminar()">Terminar</span>
     </div>
