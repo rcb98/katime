@@ -175,13 +175,13 @@ export class FuenteService {
         });
   }
 
-  deleteFuente(id:number): Promise<any> {
+  deleteFuente(id:number, tipo): Promise<any> {
     return this.dbInstance.executeSql(`
     DELETE FROM ${this.dbTable} WHERE id_fuente = ${id}`, [])
       .then(() => {
-        this.entradaService.deleteTable();
-        this.loadEventos();
-        this.loadTransportes();
+        this.entradaService.deleteTableTipo(tipo);
+        if(tipo == 'evento') this.loadEventos();
+        else if(tipo == 'transporte') this.loadTransportes();
       })
       .catch(e => {
         alert(JSON.stringify(e))

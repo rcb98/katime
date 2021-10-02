@@ -46,8 +46,10 @@
     <div *ngIf="accion == 'eliminar'">
         <h3 class="text-lg my-4 mx-8 font-semibold">¿Qué quieres hacer?</h3>
         <ul class="overflow-y-scroll mb-8 hide-scroll">
-            <li class="border-b border-gray-200 p-4 pl-8" (click)="deleteEntrada(detalle.id_entrada)">Eliminar este {{tipo}}</li>
-            <li class="border-b p-4 pl-8" (click)="deleteEntradas(detalle.id_fuente)">Eliminar todos los {{tipo}}s de este tipo</li>
+            <li class="border-b border-gray-200 p-4 pl-8" (click)="dismiss()">Cancelar</li>
+            <li class="border-b border-gray-200 p-4 pl-8" (click)="deleteEntrada(detalle.id_entrada)" *ngIf="tipo == 'evento'">Eliminar este evento</li>
+            <li class="border-b p-4 pl-8" (click)="deleteEntradas(detalle.id_fuente)" *ngIf="tipo == 'evento'">Eliminar todos los eventos de este tipo</li>
+            <li class="border-b p-4 pl-8" (click)="deleteEntradas(detalle.id_fuente)" *ngIf="tipo == 'transporte'">Eliminar esta ruta</li>
         </ul>
     </div>
 

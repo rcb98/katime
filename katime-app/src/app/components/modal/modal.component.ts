@@ -163,10 +163,13 @@ export class ModalComponent implements OnInit, AfterViewInit {
   }
 
   deleteEntradas(id:number) {
+    let mensaje = `Eventos de '${this.detalle.nombre}' eliminados.`;
+    if(this.tipo == "transporte") mensaje =`Ruta '${this.detalle.nombre}' eliminada.`;
+
     this.entradaService.deleteEntradas(id).then(() => {
-      this.fuenteService.deleteFuente(id).then(() => {
+      this.fuenteService.deleteFuente(id, this.tipo).then(() => {
         this.dismiss();
-        this.presentToast(`Eventos de '${this.detalle.nombre}' eliminados.`);
+        this.presentToast(mensaje);
       })
     })
   }

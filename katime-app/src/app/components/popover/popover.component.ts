@@ -48,7 +48,7 @@ export class PopoverComponent implements OnInit {
         break;
       case "Eliminar evento":
         this.modalController.dismiss();
-        this.modalBorrarEvento();
+        this.modalBorrar('evento');
         break;
       case "Editar categoría":
         this.modalController.dismiss();
@@ -58,6 +58,12 @@ export class PopoverComponent implements OnInit {
         break;
       case "Eliminar categoría":
         this.getInfo();
+        break;
+      case "Editar transporte":
+        break;
+      case "Eliminar transporte":
+        this.modalController.dismiss();
+        this.modalBorrar('transporte')
         break;
     }
   }
@@ -95,7 +101,7 @@ export class PopoverComponent implements OnInit {
     return await modal.present();
   }
 
-  async modalBorrarEvento() {
+  async modalBorrar(tipo:string) {
     const modal = await this.modalController.create({
       component: ModalComponent,
       cssClass: 'my-modal-class',
@@ -103,7 +109,7 @@ export class PopoverComponent implements OnInit {
       backdropDismiss: true,
       componentProps: {
         'accion': 'eliminar',
-        'tipo': 'evento',
+        'tipo': tipo,
         'detalle': this.detalle
       }
     });
