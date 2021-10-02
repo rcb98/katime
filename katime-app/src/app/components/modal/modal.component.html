@@ -1,8 +1,8 @@
 <div class="bg-gray-100 rounded-t-xl h-auto w-full absolute bottom-0">
     <div class="flex px-8 pt-8">
         <ion-icon color="primary" class="text-2xl" name="arrow-back" (click)="dismiss()"></ion-icon>
-        <!-- <ion-icon class="ml-auto text-2xl text-gray-500" name="trash-bin" (click)="[dismiss(), eliminarEvento()]" *ngIf="accion == 'detalleEvento'"></ion-icon> -->
-        <ion-icon class="ml-auto text-gray-400 text-lg" name="ellipsis-vertical" *ngIf="accion == 'detalleEvento'" (click)="presentPopover($event)"></ion-icon>
+        <ion-icon class="ml-auto text-gray-400 text-lg" name="ellipsis-vertical" *ngIf="accion == 'detalleEvento'" (click)="presentPopoverEvento($event)"></ion-icon>
+        <ion-icon class="ml-auto text-gray-400 text-lg" name="ellipsis-vertical" *ngIf="accion == 'detalleTransporte'" (click)="presentPopoverTransporte($event)"></ion-icon>
 
         <span *ngIf="accion == 'recordatorio' || accion == 'repeticion' || accion == 'personalizado'" class="text-purple ml-auto" (click)="terminar()">Terminar</span>
     </div>
@@ -22,6 +22,25 @@
         <h4 class="bg-white text-gray-400 mx-8 my-1 rounded-lg px-4 py-3 italic" *ngIf="!detalle.descripcion" [ngClass]="{'mb-8': repeticion == null || repeticion == 'null'}">Sin descripción</h4>
         <p class="mx-8 mb-8 text-gray-600 text-sm" *ngIf="repeticion != null && repeticion != 'null' && repeticion != 'personalizado'">Este evento se repite {{repeticion | lowercase}}mente.</p>
         <p class="mx-8 mb-8 text-gray-600 text-sm" *ngIf="repeticion == 'personalizado' && diasRep != null && diasRep != undefined && diasRep != ''">Este evento se repite los {{diasRep}}.</p>
+    </div>
+
+    <div *ngIf="accion == 'detalleTransporte'">
+        <div class="flex items-start my-4 mx-8">
+            <img class="mr-4 mt-1 w-6 self-start" src="{{'../../../assets/icon/' + detalle['icono']}}" alt="">
+            <div class="fle flex-col">
+                <h3 class="text-lg font-semibold">{{detalle['nombre']}}</h3>
+                <p class="text-sm text-gray-500">{{detalle['localidad']}}</p>
+            </div>
+        </div>
+
+        <div class="flex items-center pb-4 border-b border-gray-200 pl-8">
+            <ion-icon name="time-outline" class="text-purple text-lg"></ion-icon>
+            <h4 class="text-lg ml-2">Salidas</h4>
+        </div>
+        <ul class="h-96 overflow-y-scroll hide-scroll pl-4">
+            <li *ngFor="let valor of valores; let i = index" id="{{valor | date:'HH:mm'}}" class="border-b border-gray-200 p-4">{{valor | date:'HH:mm'}}</li>
+        </ul>
+
     </div>
 
     <div *ngIf="accion == 'eliminar'">

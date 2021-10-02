@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController, PopoverController, ToastController } from '@ionic/angular';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
 import { ComunicadorService } from 'src/app/services/comunicador.service';
@@ -11,7 +12,7 @@ import { PopoverComponent } from '../popover/popover.component';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent implements OnInit, AfterViewInit {
 
   @Input() detalle: Entrada;
   @Input() accion: string;
@@ -23,6 +24,7 @@ export class ModalComponent implements OnInit {
   @Input() diasSeleccionados: any;
   @Input() valores: any[];
   @Input() valor: any;
+  @Input() actual: any;
   @Input() selected: any;
   public checkCustom:boolean = false;
   public checkedOption:any;
@@ -31,12 +33,12 @@ export class ModalComponent implements OnInit {
   public diasRep:string;
   public repeticion:string;
 
-
   constructor(private comunicadorService: ComunicadorService,
               private entradaService: EntradaService,
               private fuenteService: FuenteService,
               private modalController: ModalController,
               private popoverController: PopoverController,
+              private router: Router,
               private toaster: ToastController) { }
 
   ngOnInit() {
@@ -56,6 +58,13 @@ export class ModalComponent implements OnInit {
     dias.forEach(dia => {
       if(dia != "") this.toggleDia(dia);
     });
+  }
+
+  ngAfterViewInit() {
+    if(this.accion == "detalleTransporte"){
+      document.getElementById(this.actual).style.color = "#9889C2";
+      document.getElementById(this.actual).style.fontWeight = "bold";
+    }
   }
 
   dismiss() {
@@ -97,7 +106,7 @@ export class ModalComponent implements OnInit {
     }
   }
 
-  async presentPopover(ev: any) {
+  async presentPopoverEvento(ev: any) {
     const popover = await this.popoverController.create({
       component: PopoverComponent,
       cssClass: 'popover_setting',
@@ -106,6 +115,22 @@ export class ModalComponent implements OnInit {
       componentProps: {
         'titulos': ['Editar evento', 'Eliminar evento', 'Editar categoría'],
         'valor': this.categoria,
+        'detalle': this.detalle
+      }
+    });
+    await popover.present();
+
+    const { role } = await popover.onDidDismiss();
+  }
+
+  async presentPopoverTransporte(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopoverComponent,
+      cssClass: 'popover_setting',
+      event: ev,
+      translucent: true,
+      componentProps: {
+        'titulos': ['Editar transporte', 'Eliminar transporte'],
         'detalle': this.detalle
       }
     });
@@ -145,5 +170,4 @@ export class ModalComponent implements OnInit {
       })
     })
   }
-
 }

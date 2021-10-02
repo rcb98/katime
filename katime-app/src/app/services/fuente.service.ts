@@ -120,11 +120,16 @@ export class FuenteService {
   }
 
   getTransporteId(id): Promise<any> {
-    return this.dbInstance.executeSql(`SELECT nombre, direccion FROM ${this.dbTable} WHERE tipo='transporte' AND id_fuente = ?`, [id])
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE tipo='transporte' AND id_fuente = ?`, [id])
     .then((res) => {
       return {
+        id_fuente: res.rows.item(0).id_fuente,
+        alias: res.rows.item(0).alias,
         nombre: res.rows.item(0).nombre,
-        direccion: res.rows.item(0).direccion
+        direccion: res.rows.item(0).direccion,
+        icono: res.rows.item(0).icono,
+        localidad: res.rows.item(0).localidad,
+        origen: res.rows.item(0).origen
       }
     });
   }

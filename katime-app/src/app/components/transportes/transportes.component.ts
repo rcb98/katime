@@ -22,6 +22,8 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
   public entr:any[] = [];
   public transportes:any[] = [];
   public tiemposRestantes:any[] = [];
+  public detalle: any [] = [];
+  public valores: any [] = [];
 
   private appStateChangeListener: PluginListenerHandle | undefined;
 
@@ -138,6 +140,13 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
+  async getTransporte(id:number) {
+    this.fuenteService.getTransporteId(id).then( async res => {
+      this.detalle = res;
+      this.valores = await this.getHorarios(res.direccion, res.origen, this.getDiaSTR(new Date().getDay()), res.alias);
+    }).then(() => this.presentModal())
+  }
+
   agruparTransportes() {
     var agrupacion = this.entradas.reduce(function(obj, item) {
       var index = obj.reduce(function(n, array, id) {
@@ -202,6 +211,18 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  getDiaSTR(dia:number) {
+    switch(dia){
+      case 1: return 'Lun';
+      case 2: return 'Mar';
+      case 3: return 'Mie';
+      case 4: return 'Jue';
+      case 5: return 'Vie';
+      case 6: return 'Sab';
+      case 0: return 'Dom';
+    }
+  }
+
   async getHorarios(direccion:string, origen:string, dia, alias): Promise<Array<Date>> {
     return new Promise((resolve, reject) => {
       this.fuenteService.getTransporte(alias).subscribe(res => {
@@ -230,9 +251,10 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
     component: ModalComponent,
     cssClass: 'my-modal-class',
     componentProps: {
-      'firstName': 'Douglas',
-      'lastName': 'Adams',
-      'middleInitial': 'N'
+      "accion": "detalleTransporte",
+      "detalle": this.detalle,
+      "valores": this.valores,
+      "actual": this.datePipe.transform(this.entr[0].horas[0], 'HH:mm')
     }
   });
   return await modal.present();
