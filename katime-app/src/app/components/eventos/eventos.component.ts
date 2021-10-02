@@ -145,7 +145,7 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
   createEntrada(entrada: Entrada) {
     let hoy = new Date();
     let fecha = new Date(entrada.hora_fin);
-    let maxDate = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate() + 14); // Tiene que ser 7
+    let maxDate = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate() + 7); // Tiene que ser 7
     if((fecha >= hoy) && (fecha <= maxDate))
       return this.entradaService.createEntrada(entrada);
   }
@@ -279,7 +279,7 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
   getDiasRepeticion(tipo:string, fecha:Date, hini:Date, hfin:Date, numDia?:number) {
     var fechaIni:Date = new Date(hini),
         fechaFin:Date = new Date(hfin),
-        numDias:number = 14,
+        numDias:number = 7,
         dias:any[] = [];
 
     for(let i = 0; i < numDias; i++) {

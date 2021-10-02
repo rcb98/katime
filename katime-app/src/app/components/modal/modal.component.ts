@@ -43,7 +43,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     if(this.detalle) {
-      this.fuenteService.getEventoId(this.detalle.id_fuente).then(res => {
+      this.fuenteService.getFuenteId(this.detalle.id_fuente, 'evento').then(res => {
         this.repeticion = res.repeticion;
         this.diasRep = res.dias;
       })
@@ -63,7 +63,6 @@ export class ModalComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     if(this.accion == "detalleTransporte"){
       document.getElementById(this.actual).style.color = "#9889C2";
-      document.getElementById(this.actual).style.fontWeight = "bold";
     }
   }
 

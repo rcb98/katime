@@ -21,9 +21,11 @@ const routes: Routes = [
   {
     path: 'editar-evento/:id',
     loadChildren: () => import('./pages/crear-evento/crear-evento.module').then( m => m.CrearEventoPageModule)
+  },
+  {
+    path: 'editar-transporte/:id',
+    loadChildren: () => import('./pages/crear-transporte/crear-transporte.module').then( m => m.CrearTransportePageModule)
   }
-
-
 ];
 @NgModule({
   imports: [

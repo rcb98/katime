@@ -59,12 +59,22 @@
 </div>
 
 <!-- Página -->
-<ion-header class="ion-no-border bg-white pb-4">
+<ion-header class="ion-no-border bg-white pb-4" *ngIf="!edicion">
     <app-page-header titulo="Nuevo transporte" [goBack]=true>
         <ion-back-button color="primary"></ion-back-button>
         <div class="flex items-center ml-auto mr-8">
             <ion-icon name="checkmark" color="primary" class="mr-1"></ion-icon>
             <p class="text-purple" (click)="createTransporte()">Crear transporte</p>
+        </div>
+    </app-page-header>
+</ion-header>
+
+<ion-header class="ion-no-border bg-white pb-4" *ngIf="edicion">
+    <app-page-header titulo="Editar transporte" [goBack]=true>
+        <ion-back-button color="primary"></ion-back-button>
+        <div class="flex items-center ml-auto mr-8">
+            <ion-icon name="checkmark" color="primary" class="mr-1"></ion-icon>
+            <p class="text-purple" (click)="editarTransporte()">Editar transporte</p>
         </div>
     </app-page-header>
 </ion-header>

@@ -1,8 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { ComunicadorService } from 'src/app/services/comunicador.service';
+import { EntradaService } from 'src/app/services/entrada.service';
 import { FuenteService } from 'src/app/services/fuente.service';
 import { environment } from 'src/environments/environment';
 
@@ -55,7 +57,16 @@ export class CrearTransportePage implements OnInit {
   // Franja
   public toggleCheck:boolean = false;
 
-  constructor(private datePipe: DatePipe,
+  // Editar
+  public idFuente:number;
+  public edicion:boolean = false;
+  public rutaInicial:string;
+
+
+  constructor(private activatedRoute: ActivatedRoute,
+              private comunicadorService: ComunicadorService,
+              private datePipe: DatePipe,
+              private entradaService: EntradaService,
               private formBuilder: FormBuilder,
               private fuenteService: FuenteService,
               private router: Router,
@@ -63,6 +74,13 @@ export class CrearTransportePage implements OnInit {
               }
 
   ngOnInit() {
+    if(this.activatedRoute.snapshot.params['id']) {
+      this.edicion = true;
+      this.idFuente = this.activatedRoute.snapshot.params['id'];
+      this.infoEditarTransporte();
+    } else {
+      this.edicion = false;
+    }
   }
 
   createTransporte() {
@@ -85,18 +103,10 @@ export class CrearTransportePage implements OnInit {
       return this.presentToast("Los campos de localidad, línea, origen, destino, días y franja horaria son obligatorios.");
     }
 
-    // Formateamos la fecha
-    let hIni = this.datePipe.transform(this.transporteForm.value.hora_ini, 'yyyy-MM-dd HH:mm');
-    let hFin = this.datePipe.transform(this.transporteForm.value.hora_fin, 'yyyy-MM-dd HH:mm');
-
-    this.transporteForm.value.hora_ini = hIni;
-    this.transporteForm.value.hora_fin = hFin;
-    // this.transporteForm.value.nombre = this.transporteForm.value.ruta;
-    this.transporteForm.value.dias = this.dias.toString();
+    this.setValores();
 
     var origen = -1,
         destino = -1;
-
 
     this.fuenteService.getTransporte(this.transporteForm.value.alias).subscribe(res => {
       this.transporteForm.value.nombre = this.transporteForm.value.origen + " - " + this.transporteForm.value.destino;
@@ -115,6 +125,87 @@ export class CrearTransportePage implements OnInit {
       });
 
     });
+  }
+
+  editarTransporte() {
+    /* Validaciones */
+    if(this.transporteForm.value.hora_ini > this.transporteForm.value.hora_fin){
+      return this.presentToast("La hora de fin debe ser más antigua que la de inicio.");
+    }
+
+    if(!this.transporteForm.value.localidad) {
+      return this.presentToast("Introduce la localidad para poder rellenar los campos de línea, origen y destino.");
+    }
+
+    if(!this.transporteForm.value.ruta) {
+      return this.presentToast("Introduce la línea para poder rellenar los campos de origen y destino.");
+    }
+
+    if(!this.transporteForm.value.localidad || !this.transporteForm.value.ruta || !this.transporteForm.value.origen ||
+      !this.transporteForm.value.destino || !this.dias || !this.transporteForm.value.hora_ini ||
+      !this.transporteForm.value.hora_fin) {
+      return this.presentToast("Los campos de localidad, línea, origen, destino, días y franja horaria son obligatorios.");
+    }
+
+    this.setValores();
+
+    var origen = -1,
+        destino = -1;
+
+    this.fuenteService.getTransporte(this.transporteForm.value.alias).subscribe(res => {
+      this.transporteForm.value.nombre = this.transporteForm.value.origen + " - " + this.transporteForm.value.destino;
+      this.transporteForm.value.icono = res['icono'];
+      res['direccion'][0]['paradas'].forEach((parada, index) => {
+        if(parada['nombre'] == this.transporteForm.value.origen) origen = index;
+        if(parada['nombre'] == this.transporteForm.value.destino) destino = index;
+      });
+
+      if(origen < destino) this.transporteForm.value.direccion = res['direccion'][0]['nombre'];
+      else this.transporteForm.value.direccion = res['direccion'][1]['nombre'];
+
+      this.fuenteService.editTransporte(this.idFuente, this.transporteForm.value).then( res => {
+        this.fuenteService.loadTransportes().then(() => {
+          this.entradaService.deleteTableTipo("transporte");
+          this.presentToast("¡Transporte editado!");
+          this.router.navigateByUrl("/modo-lista");
+        })
+
+      });
+
+    });
+  }
+
+  setValores() {
+    // Formateamos la fecha
+    let hIni = this.datePipe.transform(this.transporteForm.value.hora_ini, 'yyyy-MM-dd HH:mm');
+    let hFin = this.datePipe.transform(this.transporteForm.value.hora_fin, 'yyyy-MM-dd HH:mm');
+
+    this.transporteForm.value.hora_ini = hIni;
+    this.transporteForm.value.hora_fin = hFin;
+    // this.transporteForm.value.nombre = this.transporteForm.value.ruta;
+    this.transporteForm.value.dias = this.dias.toString();
+  }
+
+  infoEditarTransporte() {
+    this.fuenteService.getFuenteId(this.idFuente, 'transporte').then(res => {
+      this.transporteForm.value.localidad = res.localidad;
+      this.transporteForm.value.ruta = res.ruta;
+      this.transporteForm.value.origen = res.origen;
+      this.transporteForm.value.destino = res.destino;
+      this.transporteForm.value.alias = res.alias;
+      this.transporteForm.value.dias = res.dias;
+      this.transporteForm.value.hora_ini = res.hora_ini;
+      this.transporteForm.value.hora_fin = res.hora_fin;
+      let dias = res.dias.split(",");
+      dias.forEach(d => {
+        this.toggleDia(d);
+      });
+      let hini = new Date(res.hora_ini),
+          hfin = new Date(res.hora_fin);
+      if(hini.getHours() == 0 && hini.getMinutes() == 0 && hfin.getHours() == 23 && hfin.getMinutes() == 59)
+        this.toggleCheck = !this.toggleCheck;
+      this.reRenderForm();
+    })
   }
 
   checkDireccion() {
@@ -157,6 +248,11 @@ export class CrearTransportePage implements OnInit {
     }
   }
 
+  checkOrDes() {
+    this.transporteForm.value.origen = "";
+    this.transporteForm.value.destino = "";
+  }
+
   toggleTodoElDia() {
     this.toggleCheck = !this.toggleCheck;
     this.checkTodoElDia();
@@ -195,6 +291,7 @@ export class CrearTransportePage implements OnInit {
   }
 
   setRuta(ruta:any) {
+    if(ruta.ruta != this.transporteForm.value.ruta) this.checkOrDes();
     this.transporteForm.value.ruta = ruta.ruta;
     this.transporteForm.value.alias = ruta.alias;
     this.reRenderForm();

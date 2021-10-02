@@ -60,6 +60,8 @@ export class PopoverComponent implements OnInit {
         this.getInfo();
         break;
       case "Editar transporte":
+        this.modalController.dismiss();
+        this.router.navigateByUrl("editar-transporte/" + this.detalle['id_fuente']);
         break;
       case "Eliminar transporte":
         this.modalController.dismiss();

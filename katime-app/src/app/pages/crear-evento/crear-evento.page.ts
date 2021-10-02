@@ -159,7 +159,7 @@ export class CrearEventoPage implements OnInit, OnDestroy {
   }
 
   infoEditarEvento() {
-    this.fuenteService.getEventoId(this.idFuente).then(res => {
+    this.fuenteService.getFuenteId(this.idFuente, 'evento').then(res => {
       this.eventoForm.value.nombre = res.nombre;
       this.eventoForm.value.descripcion = res.descripcion;
       this.eventoForm.value.id_categoria = res.id_categoria;
@@ -175,7 +175,7 @@ export class CrearEventoPage implements OnInit, OnDestroy {
       let hini = new Date(res.hora_ini),
           hfin = new Date(res.hora_fin);
       if(hini.getHours() == 0 && hini.getMinutes() == 0 && hfin.getHours() == 23 && hfin.getMinutes() == 59)
-        this.toggleCheck = true;
+        this.toggleCheck = !this.toggleCheck;
       this.reRenderForm();
     })
   }

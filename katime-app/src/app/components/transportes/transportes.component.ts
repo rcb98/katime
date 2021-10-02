@@ -36,6 +36,7 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   async ngOnInit() {
     this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe( async res => {
+
       await this.getEntradas();
     });
 
@@ -71,6 +72,7 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   async createEntradas() {
     var horas, horario, dias;
+    this.entradas = [];
 
     this.fuenteService.getTransportes().subscribe(async res => {
       this.transportes = [];
@@ -120,7 +122,7 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
   createEntrada(entrada: Entrada) {
     let hoy = new Date();
     let fecha = new Date(entrada.hora_ini);
-    let maxDate = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate() + 14); // Tiene que ser 7
+    let maxDate = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate() + 7); // Tiene que ser 7
     if((fecha >= hoy) && (fecha <= maxDate))
       return this.entradaService.createEntrada(entrada);
   }
@@ -141,7 +143,7 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   async getTransporte(id:number) {
-    this.fuenteService.getTransporteId(id).then( async res => {
+    this.fuenteService.getFuenteId(id, 'transporte').then( async res => {
       this.detalle = res;
       this.valores = await this.getHorarios(res.direccion, res.origen, this.getDiaSTR(new Date().getDay()), res.alias);
     }).then(() => this.presentModal())
@@ -186,7 +188,7 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getDiasRepeticion(fecha:Date, hini:any, numDia?:number) {
     var fechaIni:Date = new Date(hini),
-        numDias:number = 14,
+        numDias:number = 7,
         dias:any[] = [];
 
     for(let i = 0; i < numDias; i++) {

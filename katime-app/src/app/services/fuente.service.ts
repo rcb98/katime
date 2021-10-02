@@ -100,15 +100,15 @@ export class FuenteService {
     })
   }
 
-  getEventos():Observable<Fuente[]> {
-    return this.EVENTOS.asObservable();
-  }
-
-  getEventoId(id): Promise<any> {
-    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE tipo='evento' AND id_fuente = ?`, [id])
+  getFuenteId(id, tipo):Promise<any> {
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE tipo='${tipo}' AND id_fuente = ?`, [id])
     .then((res) => {
       return res.rows.item(0);
     });
+  }
+
+  getEventos():Observable<Fuente[]> {
+    return this.EVENTOS.asObservable();
   }
 
   getTransportes():Observable<Fuente[]> {
@@ -117,21 +117,6 @@ export class FuenteService {
 
   getTransporte(linea:string):Observable<any> {
     return this.http.get(`./assets/json/${linea}.json`);
-  }
-
-  getTransporteId(id): Promise<any> {
-    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE tipo='transporte' AND id_fuente = ?`, [id])
-    .then((res) => {
-      return {
-        id_fuente: res.rows.item(0).id_fuente,
-        alias: res.rows.item(0).alias,
-        nombre: res.rows.item(0).nombre,
-        direccion: res.rows.item(0).direccion,
-        icono: res.rows.item(0).icono,
-        localidad: res.rows.item(0).localidad,
-        origen: res.rows.item(0).origen
-      }
-    });
   }
 
   /* POST */
@@ -155,6 +140,16 @@ export class FuenteService {
     SET nombre = '${data.nombre}', descripcion = '${data.descripcion}', id_categoria = '${data.id_categoria}', hora_ini = '${data.hora_ini}', hora_fin = '${data.hora_fin}',
     recordatorio = ${data.recordatorio}, repeticion = '${data.repeticion}', dias = '${data.dias}'
     WHERE id_fuente = ${id} AND tipo = 'evento'`)
+    .then(() => {
+    }, (e) => {
+    });
+  }
+
+  editTransporte(id:number, data:any):Promise<any> {
+    return this.dbInstance.executeSql(`UPDATE ${this.dbTable}
+    SET nombre = '${data.nombre}', direccion = '${data.direccion}', localidad = '${data.localidad}', hora_ini = '${data.hora_ini}', hora_fin = '${data.hora_fin}',
+    ruta = '${data.ruta}', alias = '${data.alias}', dias = '${data.dias}', icono = '${data.icono}', origen = '${data.origen}', destino = '${data.destino}'
+    WHERE id_fuente = ${id} AND tipo = 'transporte'`)
     .then(() => {
     }, (e) => {
     });
