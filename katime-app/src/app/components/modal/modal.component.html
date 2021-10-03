@@ -63,10 +63,10 @@
 
     <div *ngIf="accion == 'eliminarCat'">
         <h3 class="text-lg mt-4 mb-1 mx-8 font-semibold">¿Estás segur@?</h3>
-        <p class="text-gray-600 px-8">Si eliminas la categoría {{titulo}}, perderás todas las entradas etiquetadas con esta categoría.</p>
+        <p class="text-gray-600 px-8">Si eliminas la categoría {{titulo}}, perderás todos los eventos etiquetados con esta categoría.</p>
         <ul class="overflow-y-scroll mb-8 hide-scroll">
             <li class="border-b border-gray-200 p-4 pl-8" (click)="dismiss()">Cancelar</li>
-            <li class="border-b p-4 pl-8" (click)="deleteCategoria()">Eliminar categoría</li>
+            <li class="border-b p-4 pl-8" (click)="deleteCategoria()">Eliminar categoría y todos sus eventos</li>
         </ul>
     </div>
 
