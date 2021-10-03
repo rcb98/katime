@@ -1,0 +1,39 @@
+<ion-header class="ion-no-border bg-white pb-4">
+    <app-page-header titulo="Transportes" [goBack]=true>
+        <ion-back-button color="primary"></ion-back-button>
+    </app-page-header>
+</ion-header>
+
+
+<div class="bg-gray-100 h-full rounded-t-xl">
+    <div *ngIf="transportes.length <= 0"><span>&#x200b;</span></div>
+    <div class="flex items-center px-8 pt-8" *ngIf="transportes.length > 0">
+        <div class="flex items-center" (click)="eliminarTransportes()">
+            <ion-icon name="trash-bin" class="text-2xl text-gray-400" [ngClass]="{'text-purple': seleccionados}"></ion-icon>
+            <p *ngIf="seleccionados" class="text-purple text-sm ml-2">Eliminar</p>
+        </div>
+        <a (click)="seleccionarTodos()" class="text-purple text-sm ml-auto" *ngIf="!todos">Seleccionar todos</a>
+        <a (click)="deseleccionarTodos()" class="text-purple text-sm ml-auto" *ngIf="todos">Deseleccionar todos</a>
+    </div>
+
+    <ion-content [scrollEvents]="true">
+        <ion-list class="bg-gray-100" lines="none" (ionChange)="checkValue($event)">
+            <ion-item *ngFor="let transporte of transportes; let i = index" class="my-2">
+                <div class="flex items-start my-2 justify-evely w-full">
+                    <img class="mr-4 mt-1 w-6 self-start" src="{{'../../../assets/icon/' + transporte['icono']}}" alt="">
+
+                    <div class="self-start mr-1">
+                        <h3 class="self-start">{{transporte.nombre}}</h3>
+                        <h4 class="text-gray-400 font-light text-sm">{{transporte.direccion}}</h4>
+                    </div>
+                </div>
+                <ion-checkbox class="ml-3.5" mode="ios" slot="start" [(ngModel)]="transporte.isChecked"></ion-checkbox>
+                <ion-icon class="p-4 pl-6 text-gray-400 text-lg z-50" name="ellipsis-vertical" (click)="getTransporte($event, transporte)"></ion-icon>
+            </ion-item>
+        </ion-list>
+
+        <div class="mx-8 my-2" *ngIf="transportes.length <= 0">
+            <h4 class="text-gray-400 italic">No hay eventos.</h4>
+        </div>
+    </ion-content>
+</div>

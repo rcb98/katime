@@ -1,7 +1,7 @@
 <!-- Categorías -->
 <div class="flex ml-8 mt-10 overflow-x-scroll hide-scroll">
-    <button (click)="getAllEntradas()" class="mx-1 px-4 border-solid border text-purple border-purple rounded-xl bg-transparent" [ngClass]="{'clicked' : idCategoriaActiva == 0}">Todos</button>
-    <button *ngFor="let categoria of categorias" (click)="filtrarPorCategoria(categoria.id_categoria)" class="mx-1 px-4 border-solid border rounded-xl" [ngClass]="getClasesCategoria(categoria.id_categoria)">{{categoria.nombre}}</button>
+    <button (click)="getAllEntradas()" class="mx-1 px-4 border-solid border text-purple border-purple rounded-xl bg-transparent categorias" [ngClass]="{'clicked' : idCategoriaActiva == 0}">Todos</button>
+    <button *ngFor="let categoria of categorias" (click)="filtrarPorCategoria(categoria.id_categoria)" class="mx-1 px-4 border-solid border rounded-xl categorias" [ngClass]="getClasesCategoria(categoria.id_categoria)">{{categoria.nombre}}</button>
 </div>
 
 <ion-content [scrollEvents]="true">

@@ -16,6 +16,7 @@ import { ModalComponent } from '../modal/modal.component';
 export class PopoverComponent implements OnInit {
 
   @Input() titulos: string[];
+  @Input() valores: any[];
   @Input() valor: any;
   @Input() detalle: any[];
   @Input() categoria: string;
@@ -36,6 +37,7 @@ export class PopoverComponent implements OnInit {
   async doAction(titulo:string) {
     switch(titulo) {
       case "Transportes":
+        this.router.navigateByUrl("editar-transportes");
         break;
       case "Eventos":
         this.router.navigateByUrl("editar-eventos");
@@ -73,6 +75,9 @@ export class PopoverComponent implements OnInit {
         break;
       case "Detalle evento":
         await this.detalleEvento();
+        break;
+      case "Detalle transporte":
+        await this.detalleTransporte();
         break;
     }
   }
@@ -122,6 +127,19 @@ export class PopoverComponent implements OnInit {
         'detalle': this.detalle,
         'categoria': this.categoria,
         'tiempoRestante': this.getTiempoRestante(this.detalle['hora_ini'])
+      }
+    });
+    return await modal.present();
+  }
+
+  async detalleTransporte() {
+    const modal = await this.modalController.create({
+      component: ModalComponent,
+      cssClass: 'my-modal-class',
+      componentProps: {
+        "accion": "detalleTransporte",
+        "detalle": this.detalle,
+        "valores": this.valores
       }
     });
     return await modal.present();

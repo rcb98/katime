@@ -28,6 +28,10 @@ const routes: Routes = [
   },  {
     path: 'editar-eventos',
     loadChildren: () => import('./pages/editar-eventos/editar-eventos.module').then( m => m.EditarEventosPageModule)
+  },
+  {
+    path: 'editar-transportes',
+    loadChildren: () => import('./pages/editar-transportes/editar-transportes.module').then( m => m.EditarTransportesPageModule)
   }
 
 ];

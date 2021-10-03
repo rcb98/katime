@@ -1,0 +1,12 @@
+* {
+    transition: all .2s ease-in-out;
+}
+
+ion-content {
+    --background: #f4f4f5;
+    // --offset-top: -1.5em !important; // Esto es para que se vea el border del <div>
+}
+
+ion-item {
+    --background: #f4f4f5 !important;
+}

@@ -178,7 +178,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
       this.entradaService.deleteEntradas(ev.id_fuente).then(() => {
         this.fuenteService.deleteFuente(ev.id_fuente, this.tipo).then(() => {
           this.dismiss();
-          this.presentToast("Eventos eliminados");
+          this.presentToast(`${this.tipo.charAt(0).toUpperCase() + this.tipo.slice(1)}s eliminados`);
         })
       })
     });
