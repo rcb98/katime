@@ -172,6 +172,25 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   tiempoRestante(hIni:any) {
+    /*var hora = new Date(hIni);
+    var hoy = new Date();
+
+    var s = Math.floor((hora.getTime() - (hoy.getTime())) / 1000);
+    var m = Math.floor(s / 60);
+    var h = Math.floor(m / 60);
+    var d = Math.floor(h / 24);
+
+    h = h - (d * 24);
+    m = m - (d * 24 * 60) - (h * 60);
+
+    if(d <= 0 && h <= 0 && m <= 0) return "Ahora"
+    else if(d > 0 && h > 0 && m > 0) return d + "d " + h + "h " + m + "min" ;
+    else if(d <= 0 && h > 0 && m > 0) return h + "h " + m + "min";
+    else if(d > 0 && h <= 0 && m <= 0) return d + "d";
+    else if(d <= 0 && h > 0 && m <= 0) return h + "h";
+    else if(d <= 0 && h <= 0 && m > 0) return m + "min";
+    else return "Ahora";*/
+
     let hora = new Date(hIni),
         hoy = new Date(),
         diferencia = hora.getTime() - hoy.getTime(),

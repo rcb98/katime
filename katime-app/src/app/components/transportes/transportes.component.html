@@ -1,5 +1,5 @@
 <ion-content [scrollEvents]="true">
-    <div class="mx-8">
+    <div class="mx-8" *ngIf="entr.length > 0">
         <div *ngFor="let entrada of entr; let i = index" class="flex items-start my-2 justify-evely" (click)="getTransporte(entrada.id_fuente)">
             <img class="mr-4 w-6 self-start" src="{{'../../../assets/icon/' + entrada['icono']}}" alt="">
 
@@ -12,5 +12,9 @@
                 <p class="font-semibold text-sm text-right w-20">{{tiempoRestante(entrada.horas[1])}}</p>
             </div>
         </div>
+    </div>
+
+    <div *ngIf="entr.length <= 0" class="m-8">
+        <h3 class="text-gray-400 italic">No hay transportes.</h3>
     </div>
 </ion-content>
