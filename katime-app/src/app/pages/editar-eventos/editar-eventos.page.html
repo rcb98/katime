@@ -1,0 +1,50 @@
+<ion-header class="ion-no-border bg-white pb-4">
+    <app-page-header titulo="Eventos" [goBack]=true>
+        <ion-back-button color="primary"></ion-back-button>
+    </app-page-header>
+</ion-header>
+
+<div class="bg-gray-100 h-full rounded-t-xl">
+
+    <!-- Categorías -->
+    <div class="flex ml-8 mt-10 overflow-x-scroll hide-scroll">
+        <button (click)="allEventos()" class="mx-1 px-4 border-solid border text-purple border-purple rounded-xl bg-transparent" [ngClass]="{'clicked' : idCategoriaActiva == 0}">Todos</button>
+        <button *ngFor="let categoria of categorias" (click)="filtrarPorCategoria(categoria.id_categoria)" class="mx-1 px-4 border-solid border rounded-xl" [ngClass]="getClasesCategoria(categoria.id_categoria)">{{categoria.nombre}}</button>
+    </div>
+
+    <div class="flex items-center px-8 pt-8" *ngIf="eventos.length > 0">
+        <div class="flex items-center" (click)="eliminarEventos()">
+            <ion-icon name="trash-bin" class="text-2xl text-gray-400" [ngClass]="{'text-purple': seleccionados}"></ion-icon>
+            <p *ngIf="seleccionados" class="text-purple text-sm ml-2">Eliminar</p>
+        </div>
+        <a (click)="seleccionarTodos()" class="text-purple text-sm ml-auto" *ngIf="!todos">Seleccionar todos</a>
+        <a (click)="deseleccionarTodos()" class="text-purple text-sm ml-auto" *ngIf="todos">Deseleccionar todos</a>
+    </div>
+
+    <ion-content [scrollEvents]="true">
+        <ion-list class="bg-gray-100" lines="none" (ionChange)="checkValue($event)">
+            <ion-item *ngFor="let evento of eventos" class="my-2">
+                <div class="flex w-full">
+                    <div class="flex h-auto rounded-l-lg px-4 py-3" [ngClass]="getColorCategoria(evento.id_categoria)">
+                        <span>&#x200b;</span>
+                    </div>
+                    <div class="bg-white flex items-center w-full rounded-r-lg px-4 py-3">
+                        <div class="flex flex-col">
+                            <h3>{{evento.nombre}}</h3>
+                            <h4 class="text-gray-500 font-light text-sm">{{evento.hora_ini | date:'HH:mm'}} - {{evento.hora_fin | date:'HH:mm'}}</h4>
+                        </div>
+                        <div class="flex items-center ml-auto">
+                            <ion-icon *ngIf="evento.recordatorio != 0 && evento.recordatorio != null" color="primary" name="alarm" class="mr-1"></ion-icon>
+                        </div>
+                    </div>
+                </div>
+                <ion-checkbox class="ml-3.5" mode="ios" slot="start" [(ngModel)]="evento.isChecked"></ion-checkbox>
+                <ion-icon class="p-4 pl-6 text-gray-400 text-lg z-50" name="ellipsis-vertical" (click)="getCategoria($event, evento)"></ion-icon>
+            </ion-item>
+        </ion-list>
+
+        <div class="mx-8 my-2" *ngIf="eventos.length <= 0">
+            <h4 class="text-gray-400 italic">No hay eventos.</h4>
+        </div>
+    </ion-content>
+</div>

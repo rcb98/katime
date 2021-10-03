@@ -4,14 +4,11 @@
 
 ion-content {
     --background: #f4f4f5;
-    --offset-bottom: -6em !important; // Esto es para que se vea el border del <div>
-    --offset-top: -1.5em !important; // Esto es para que se vea el border del <div>
+    // --offset-top: -1.5em !important; // Esto es para que se vea el border del <div>
 }
 
-h2,
-h3,
-p {
-    color: #272727;
+ion-item {
+    --background: #f4f4f5 !important;
 }
 
 .hide-scroll::-webkit-scrollbar {
@@ -28,8 +25,4 @@ p {
 .clicked {
     background-color: rgba(152, 137, 194);
     color: white !important;
-}
-
-.circle {
-    border-radius: 50%;
 }

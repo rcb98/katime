@@ -18,6 +18,8 @@ export class PopoverComponent implements OnInit {
   @Input() titulos: string[];
   @Input() valor: any;
   @Input() detalle: any[];
+  @Input() categoria: string;
+  @Input() tiempoRestante: string;
   public nombreCat:string = "";
 
   constructor(private categoriaService: CategoriaService,
@@ -31,12 +33,14 @@ export class PopoverComponent implements OnInit {
   ngOnInit() {
   }
 
-  doAction(titulo:string) {
+  async doAction(titulo:string) {
     switch(titulo) {
-      case "Editar transportes":
-      case "Editar eventos":
+      case "Transportes":
         break;
-      case "Editar categorías": this.router.navigateByUrl("editar-categorias");
+      case "Eventos":
+        this.router.navigateByUrl("editar-eventos");
+        break;
+      case "Categorías": this.router.navigateByUrl("editar-categorias");
         break;
       case "Actualizar horarios": this.comunicadorService.ejecutarFuncion("reload");
         break;
@@ -67,6 +71,9 @@ export class PopoverComponent implements OnInit {
         this.modalController.dismiss();
         this.modalBorrar('transporte')
         break;
+      case "Detalle evento":
+        await this.detalleEvento();
+        break;
     }
   }
 
@@ -86,6 +93,38 @@ export class PopoverComponent implements OnInit {
 
   deleteAll(){
     this.fuenteService.deleteTable();
+  }
+
+  getTiempoRestante(hIni:any) {
+    let hora = new Date(hIni),
+        hoy = new Date(),
+        diferencia = hora.getTime() - hoy.getTime(),
+        resultado = Math.round(diferencia / 60000),
+        horas = (resultado / 60),
+        roundHoras = Math.floor(horas),
+        minutos = Math.round((horas - roundHoras) * 60);
+
+    if(roundHoras == 0) return minutos + "min";
+    else if(roundHoras > 0 && minutos <= 0) return roundHoras + "h";
+    else if(roundHoras > 0 && minutos > 0) return roundHoras + "h " + minutos + "min";
+    else if(roundHoras == 0 && minutos <= 0) return "Ahora";
+    else return "Ahora";
+  }
+
+  async detalleEvento() {
+    const modal = await this.modalController.create({
+      component: ModalComponent,
+      cssClass: 'my-modal-class',
+      showBackdrop:true,
+      backdropDismiss: true,
+      componentProps: {
+        'accion': 'detalleEvento',
+        'detalle': this.detalle,
+        'categoria': this.categoria,
+        'tiempoRestante': this.getTiempoRestante(this.detalle['hora_ini'])
+      }
+    });
+    return await modal.present();
   }
 
   async modalBorrarCategoria() {

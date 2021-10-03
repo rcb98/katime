@@ -197,6 +197,8 @@ export class EntradaService {
     this.dbInstance
       .executeSql(`DELETE FROM ${this.dbTable} where tipo='${tipo}'`, [])
         .then(() => {
+          if(tipo == 'evento') this.loadEventos();
+          else if(tipo == 'transporte') this.loadTransportes();
         })
         .catch(e => {
           alert(JSON.stringify(e))

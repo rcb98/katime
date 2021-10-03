@@ -172,4 +172,15 @@ export class ModalComponent implements OnInit, AfterViewInit {
       })
     })
   }
+
+  deleteEventos() {
+    this.valores.forEach(ev => {
+      this.entradaService.deleteEntradas(ev.id_fuente).then(() => {
+        this.fuenteService.deleteFuente(ev.id_fuente, this.tipo).then(() => {
+          this.dismiss();
+          this.presentToast("Eventos eliminados");
+        })
+      })
+    });
+  }
 }

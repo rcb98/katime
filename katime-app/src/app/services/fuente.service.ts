@@ -74,6 +74,7 @@ export class FuenteService {
   /* GET methods */
   loadEventos() {
     return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} where tipo='evento'`, []).then(res => {
+      this.entradaService.deleteTableTipo('evento');
       let eventos: Fuente[] = [];
 
       if(res.rows.length > 0) {
@@ -84,6 +85,21 @@ export class FuenteService {
     }, (e) => {
       alert(JSON.stringify("Ha habido un error cargando eventos: ", e.err));
     })
+  }
+
+  loadEventosCategoria(id:number):Promise<any> {
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE id_categoria = ? AND tipo = 'evento' ORDER BY hora_ini ASC`, [id])
+    .then((res) => {
+      let eventos: Fuente[] = [];
+      // this.entradaService.deleteTableTipo('evento');
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++)
+          eventos.push(res.rows.item(i));
+      }
+      return eventos;
+    },(e) => {
+      alert(JSON.stringify(e));
+    });
   }
 
   loadTransportes() {

@@ -25,7 +25,11 @@ const routes: Routes = [
   {
     path: 'editar-transporte/:id',
     loadChildren: () => import('./pages/crear-transporte/crear-transporte.module').then( m => m.CrearTransportePageModule)
+  },  {
+    path: 'editar-eventos',
+    loadChildren: () => import('./pages/editar-eventos/editar-eventos.module').then( m => m.EditarEventosPageModule)
   }
+
 ];
 @NgModule({
   imports: [
