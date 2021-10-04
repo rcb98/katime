@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController, PopoverController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, PopoverController, ToastController } from '@ionic/angular';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
 import { ComunicadorService } from 'src/app/services/comunicador.service';
 import { EntradaService } from 'src/app/services/entrada.service';
@@ -36,6 +36,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
   constructor(private comunicadorService: ComunicadorService,
               private entradaService: EntradaService,
               private fuenteService: FuenteService,
+              private loadingController: LoadingController,
               private modalController: ModalController,
               private popoverController: PopoverController,
               private router: Router,
@@ -148,10 +149,11 @@ export class ModalComponent implements OnInit, AfterViewInit {
     toast.present();
   }
 
-  deleteCategoria() {
-    this.fuenteService.deleteFuentesCategoria(this.valor).then(() => {
+  async deleteCategoria() {
+    this.presentLoading();
+    this.fuenteService.deleteFuentesCategoria(this.valor).then(async() => {
       this.dismiss();
-    })
+    }).then(async() => {await this.loadingController.dismiss();})
   }
 
   deleteEntrada(id:number) {
@@ -182,5 +184,16 @@ export class ModalComponent implements OnInit, AfterViewInit {
         })
       })
     });
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'custom-loading',
+      //duration: 5000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 }
