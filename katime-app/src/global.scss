@@ -66,3 +66,11 @@
     --background: transparent;
     //--max-height: 40%;
 }
+
+ion-loading.custom-loading {
+    .loading-wrapper {
+        background: transparent;
+        box-shadow: none;
+        --spinner-color: white;
+    }
+}

@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular';
 import { Categoria } from 'src/app/interfaces/categoria.interface';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
 import { CategoriaService } from 'src/app/services/categoria.service';
@@ -41,10 +41,12 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
               private comunicadorService: ComunicadorService,
               private entradaService: EntradaService,
               private fuenteService: FuenteService,
+              private loadingController: LoadingController,
               private modalController: ModalController) {
               }
 
   ngOnInit() {
+    //this.presentLoading();
     this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe( res => {
       if(res == "crear-eventos") this.filtrarEntradas();
       else this.getEntradas();
@@ -206,14 +208,14 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
     else return "Ahora";
   }
 
-  getEntrada(id:number) {
-    this.entradaService.getEntrada(id).then(res => {
+  async getEntrada(id:number) {
+    this.presentLoading();
+    this.entradaService.getEntrada(id).then(async res => {
       this.detalle = res;
-      this.categoriaService.loadCategoria(res['id_categoria']).then(cat => {
+      await this.categoriaService.loadCategoria(res['id_categoria']).then(async cat => {
         this.categoria = cat['color'];
-        this.detalleEvento();
       })
-    })
+    }).then(async () => {await this.detalleEvento();})
   }
 
   getEntradas() {
@@ -389,9 +391,20 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
         'tiempoRestante': this.tiempoRestante(this.detalle.hora_ini)
       }
     });
+    await this.loadingController.dismiss();
     return await modal.present();
   }
 
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'custom-loading',
+      //duration: 5000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
 }
 
 

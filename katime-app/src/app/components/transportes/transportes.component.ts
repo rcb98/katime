@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
 import { EntradaService } from 'src/app/services/entrada.service';
 import { FuenteService } from 'src/app/services/fuente.service';
@@ -31,12 +31,12 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
               private datePipe: DatePipe,
               private entradaService: EntradaService,
               private fuenteService: FuenteService,
+              private loadingController: LoadingController,
               private modalController: ModalController) {
               }
 
   async ngOnInit() {
     this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe( async res => {
-
       await this.getEntradas();
     });
 
@@ -143,10 +143,11 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   async getTransporte(id:number) {
+    this.presentLoading();
     this.fuenteService.getFuenteId(id, 'transporte').then( async res => {
       this.detalle = res;
       this.valores = await this.getHorarios(res.direccion, res.origen, this.getDiaSTR(new Date().getDay()), res.alias);
-    }).then(() => this.presentModal())
+    }).then(async () => await this.presentModal())
   }
 
   agruparTransportes() {
@@ -258,8 +259,20 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
       "valores": this.valores,
       "actual": this.datePipe.transform(this.entr[0].horas[0], 'HH:mm')
     }
-  });
-  return await modal.present();
-}
+    });
+    await this.loadingController.dismiss();
+    return await modal.present();
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'custom-loading',
+      //duration: 5000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
 
 }
