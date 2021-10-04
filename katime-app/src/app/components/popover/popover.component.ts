@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController, PopoverController } from '@ionic/angular';
+import { LoadingController, ModalController, PopoverController } from '@ionic/angular';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { ComunicadorService } from 'src/app/services/comunicador.service';
 import { EntradaService } from 'src/app/services/entrada.service';
@@ -27,6 +27,7 @@ export class PopoverComponent implements OnInit {
               private comunicadorService: ComunicadorService,
               private entradaService: EntradaService,
               private fuenteService: FuenteService,
+              private loadingController: LoadingController,
               private modalController: ModalController,
               public popoverController: PopoverController,
               public router: Router) { }
@@ -177,6 +178,17 @@ export class PopoverComponent implements OnInit {
 
   async dismiss() {
     await this.popoverController.dismiss();
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'custom-loading',
+      //duration: 5000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 
 }
