@@ -74,3 +74,12 @@ ion-loading.custom-loading {
         --spinner-color: white;
     }
 }
+
+ion-button {
+    white-space: pre-line !important;
+}
+
+.ripple-parent {
+    position: relative;
+    overflow: hidden;
+}

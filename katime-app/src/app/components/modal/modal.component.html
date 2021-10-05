@@ -64,10 +64,21 @@
     <div *ngIf="accion == 'eliminarCat'">
         <h3 class="text-lg mt-4 mb-1 mx-8 font-semibold">¿Estás segur@?</h3>
         <p class="text-gray-600 px-8">Si eliminas la categoría {{titulo}}, perderás todos los eventos etiquetados con esta categoría.</p>
-        <ul class="overflow-y-scroll mb-8 hide-scroll">
+        <!-- <ul class="overflow-y-scroll mb-8 hide-scroll">
             <li class="border-b border-gray-200 p-4 pl-8" (click)="dismiss()">Cancelar</li>
             <li class="border-b p-4 pl-8" (click)="deleteCategoria()">Eliminar categoría y todos sus eventos</li>
-        </ul>
+        </ul> -->
+
+        <div class="mx-4 my-8 flex ion-activatable ripple-parent">
+            <ion-button class="text-gray-400" (click)="dismiss()" mode="ios" fill="clear">
+                <ion-label class="self-start">Cancelar</ion-label>
+                <ion-ripple-effect></ion-ripple-effect>
+            </ion-button>
+            <ion-button (click)="deleteCategoria()" fill="clear" mode="ios">
+                <ion-label class="self-start">Eliminar categoría y todos sus eventos</ion-label>
+                <ion-ripple-effect></ion-ripple-effect>
+            </ion-button>
+        </div>
     </div>
 
     <div *ngIf="accion == 'repeticion' || accion == 'recordatorio'">

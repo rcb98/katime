@@ -12,7 +12,7 @@ import { ComunicadorService } from 'src/app/services/comunicador.service';
 })
 export class EditarCategoriasPage implements OnInit, OnDestroy {
 
-  public categorias:Categoria [] = [];
+  public categorias:any [] = [];
   public showModalEditar:boolean = false;
   public showModalCrear:boolean = false;
   public categoria:string;

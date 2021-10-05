@@ -7,7 +7,7 @@
 <ion-content [scrollEvents]="true">
     <div class="m-0" *ngIf="entradasHoy.length > 0">
         <h2 class="mx-8 my-2 font-medium">Hoy, <span class="font-light">{{hoy | date:'dd/MM'}}</span></h2>
-        <div *ngFor="let entrada of entradasHoy" class="flex mx-8 my-2" (click)="getEntrada(entrada.id_entrada)">
+        <div *ngFor="let entrada of entradasHoy" class="flex mx-8 my-2 ion-activatable ripple-parent" (click)="getEntrada(entrada.id_entrada)">
             <div class="flex h-auto rounded-l-lg px-4 py-3" [ngClass]="getColorCategoria(entrada.id_categoria)">
                 <!-- No me gusta el ngClass -->
                 <span>&#x200b;</span>
@@ -22,12 +22,13 @@
                     <p class="font-semibold">{{tiempoRestante(entrada.hora_ini)}}</p>
                 </div>
             </div>
+            <ion-ripple-effect></ion-ripple-effect>
         </div>
     </div>
 
     <div class="m-0" *ngIf="entradasProximas.length > 0">
         <h2 class="mx-8 my-2 mt-4 font-medium">Próximos eventos</h2>
-        <div *ngFor="let entrada of entradasProximas" class="flex mx-8 my-2" (click)="getEntrada(entrada.id_entrada)">
+        <div *ngFor="let entrada of entradasProximas" class="flex mx-8 my-2 ion-activatable ripple-parent" (click)="getEntrada(entrada.id_entrada)">
             <div class="flex h-auto rounded-l-lg px-4 py-3" [ngClass]="getColorCategoria(entrada.id_categoria)">
                 <span>&#x200b;</span>
             </div>
@@ -38,6 +39,7 @@
                 </div>
                 <ion-icon *ngIf="entrada.recordatorio != 0 && entrada.recordatorio != null" color="primary" name="alarm" class="ml-auto"></ion-icon>
             </div>
+            <ion-ripple-effect></ion-ripple-effect>
         </div>
     </div>
 
