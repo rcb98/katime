@@ -28,16 +28,6 @@ export class EditarEventosPage implements OnInit {
               private popoverController: PopoverController) { }
 
   ngOnInit() {
-    /*let a = {
-      "nombre": "Hola"
-    };
-    let b = {
-      "nombre": "Adios"
-    }
-    this.eventos.push(a, b);
-    this.eventos.forEach(function (element) {
-      element.isChecked = false;
-    });*/
     this.getEventos();
     this.getCategorias();
   }

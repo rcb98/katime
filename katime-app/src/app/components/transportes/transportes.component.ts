@@ -144,7 +144,7 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   async getTransporte(id:number) {
     this.presentLoading();
-    this.fuenteService.getFuenteId(id, 'transporte').then( async res => {
+    await this.fuenteService.getFuenteId(id, 'transporte').then( async res => {
       this.detalle = res;
       this.valores = await this.getHorarios(res.direccion, res.origen, this.getDiaSTR(new Date().getDay()), res.alias);
     }).then(async () => await this.presentModal())

@@ -156,11 +156,12 @@ export class ModalComponent implements OnInit, AfterViewInit {
     }).then(async() => {await this.loadingController.dismiss();})
   }
 
-  deleteEntrada(id:number) {
-    this.entradaService.deleteEntrada(id).then((res) => {
+  async deleteEntrada(id:number) {
+    this.presentLoading();
+    await this.entradaService.deleteEntrada(id).then(async(res) => {
         this.dismiss();
         this.presentToast(`Evento de '${this.detalle.nombre}' eliminado.`);
-    })
+    }).then(async() => await this.loadingController.dismiss())
   }
 
   async deleteEntradas(id:number) {
@@ -172,25 +173,25 @@ export class ModalComponent implements OnInit, AfterViewInit {
       await this.fuenteService.deleteFuente(id, this.tipo).then(async() => {
         this.dismiss();
         this.presentToast(mensaje);
-      }).then(async() => {await this.loadingController.dismiss()})
-    })
+      })
+    }).then(async() => {await this.loadingController.dismiss()})
   }
 
-  deleteEventos() {
-    this.valores.forEach(ev => {
-      this.entradaService.deleteEntradas(ev.id_fuente).then(() => {
-        this.fuenteService.deleteFuente(ev.id_fuente, this.tipo).then(() => {
+  async deleteEventos() {
+    this.presentLoading();
+    this.valores.forEach(async ev => {
+      await this.entradaService.deleteEntradas(ev.id_fuente).then(async() => {
+        await this.fuenteService.deleteFuente(ev.id_fuente, this.tipo).then(async() => {
           this.dismiss();
           this.presentToast(`${this.tipo.charAt(0).toUpperCase() + this.tipo.slice(1)}s eliminados`);
         })
-      })
+      }).then(async() => {await this.loadingController.dismiss()})
     });
   }
 
   async presentLoading() {
     const loading = await this.loadingController.create({
       cssClass: 'custom-loading',
-      //duration: 5000
     });
     await loading.present();
 

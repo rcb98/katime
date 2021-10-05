@@ -46,7 +46,6 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
               }
 
   ngOnInit() {
-    //this.presentLoading();
     this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe( res => {
       if(res == "crear-eventos") this.filtrarEntradas();
       else this.getEntradas();
@@ -210,7 +209,7 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   async getEntrada(id:number) {
     this.presentLoading();
-    this.entradaService.getEntrada(id).then(async res => {
+    await this.entradaService.getEntrada(id).then(async res => {
       this.detalle = res;
       await this.categoriaService.loadCategoria(res['id_categoria']).then(async cat => {
         this.categoria = cat['color'];
