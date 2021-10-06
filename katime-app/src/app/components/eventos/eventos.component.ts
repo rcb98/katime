@@ -284,6 +284,18 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
     return color;
   }
 
+  getTextColorCategoria(id:number) {
+    var color:string = '';
+    this.categoriaService.getCategorias().subscribe( res => {
+      res.forEach(cat => {
+        if(cat.id_categoria == id) {
+          color = "text-" + cat.color;
+        }
+      });
+    })
+    return color;
+  }
+
   getDia(diaSTR:string) {
     switch(diaSTR){
       case 'Lun': return 1;
@@ -396,8 +408,7 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   async presentLoading() {
     const loading = await this.loadingController.create({
-      cssClass: 'custom-loading',
-      //duration: 5000
+      cssClass: 'custom-loading'
     });
     await loading.present();
 

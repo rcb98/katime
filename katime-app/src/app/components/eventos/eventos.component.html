@@ -7,7 +7,7 @@
 <ion-content [scrollEvents]="true">
     <div class="m-0" *ngIf="entradasHoy.length > 0">
         <h2 class="mx-8 my-2 font-medium">Hoy, <span class="font-light">{{hoy | date:'dd/MM'}}</span></h2>
-        <div *ngFor="let entrada of entradasHoy" class="flex ion-activatable ripple-parent w-full px-8 py-1" (click)="getEntrada(entrada.id_entrada)">
+        <div *ngFor="let entrada of entradasHoy" [ngClass]="getTextColorCategoria(entrada.id_categoria)" class="flex ion-activatable ripple-parent w-full px-8 py-1 text-purple" (click)="getEntrada(entrada.id_entrada)">
             <div class="flex h-auto rounded-l-lg px-4 py-3" [ngClass]="getColorCategoria(entrada.id_categoria)">
                 <!-- No me gusta el ngClass -->
                 <span>&#x200b;</span>
@@ -28,7 +28,7 @@
 
     <div class="m-0" *ngIf="entradasProximas.length > 0">
         <h2 class="mx-8 my-2 mt-4 font-medium">Próximos eventos</h2>
-        <div *ngFor="let entrada of entradasProximas" class="flex ion-activatable ripple-parent w-full px-8 py-1" (click)="getEntrada(entrada.id_entrada)">
+        <div *ngFor="let entrada of entradasProximas" [ngClass]="getTextColorCategoria(entrada.id_categoria)" class="flex ion-activatable ripple-parent w-full px-8 py-1" (click)="getEntrada(entrada.id_entrada)">
             <div class="flex h-auto rounded-l-lg px-4 py-3" [ngClass]="getColorCategoria(entrada.id_categoria)">
                 <span>&#x200b;</span>
             </div>

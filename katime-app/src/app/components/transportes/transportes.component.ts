@@ -266,8 +266,7 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   async presentLoading() {
     const loading = await this.loadingController.create({
-      cssClass: 'custom-loading',
-      //duration: 5000
+      cssClass: 'custom-loading'
     });
     await loading.present();
 
