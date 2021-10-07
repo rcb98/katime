@@ -8,12 +8,21 @@
 <div class="bg-gray-100 h-full rounded-t-xl">
     <div *ngIf="transportes.length <= 0"><span>&#x200b;</span></div>
     <div class="flex items-center px-8 pt-8" *ngIf="transportes.length > 0">
-        <div class="flex items-center" (click)="eliminarTransportes()">
+        <div class="flex items-center ion-activatable ripple-parent" (click)="eliminarTransportes()">
             <ion-icon name="trash-bin" class="text-2xl text-gray-400" [ngClass]="{'text-purple': seleccionados}"></ion-icon>
-            <p *ngIf="seleccionados" class="text-purple text-sm ml-2">Eliminar</p>
+            <p *ngIf="seleccionados" class="text-purple text-sm ml-2">
+                Eliminar
+                <ion-ripple-effect></ion-ripple-effect>
+            </p>
         </div>
-        <a (click)="seleccionarTodos()" class="text-purple text-sm ml-auto" *ngIf="!todos">Seleccionar todos</a>
-        <a (click)="deseleccionarTodos()" class="text-purple text-sm ml-auto" *ngIf="todos">Deseleccionar todos</a>
+        <p (click)="seleccionarTodos()" class="text-purple text-sm ml-auto ion-activatable ripple-parent" *ngIf="!todos">
+            Seleccionar todos
+            <ion-ripple-effect></ion-ripple-effect>
+        </p>
+        <p (click)="deseleccionarTodos()" class="text-purple text-sm ml-auto ion-activatable ripple-parent" *ngIf="todos">
+            Deseleccionar todos
+            <ion-ripple-effect></ion-ripple-effect>
+        </p>
     </div>
 
     <ion-content [scrollEvents]="true">

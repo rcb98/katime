@@ -153,7 +153,7 @@ export class CrearTransportePage implements OnInit {
         destino = -1;
 
     this.fuenteService.getTransporte(this.transporteForm.value.alias).subscribe(res => {
-      this.transporteForm.value.nombre = this.transporteForm.value.origen + " - " + this.transporteForm.value.destino;
+      //this.transporteForm.value.nombre = this.transporteForm.value.origen + " - " + this.transporteForm.value.destino;
       this.transporteForm.value.icono = res['icono'];
       res['direccion'][0]['paradas'].forEach((parada, index) => {
         if(parada['nombre'] == this.transporteForm.value.origen) origen = index;
@@ -175,6 +175,11 @@ export class CrearTransportePage implements OnInit {
     });
   }
 
+  getOriginalName() {
+    this.transporteForm.value.nombre = this.transporteForm.value.origen + " - " + this.transporteForm.value.destino;
+    this.reRenderForm();
+  }
+
   setValores() {
     // Formateamos la fecha
     let hIni = this.datePipe.transform(this.transporteForm.value.hora_ini, 'yyyy-MM-dd HH:mm');
@@ -189,6 +194,7 @@ export class CrearTransportePage implements OnInit {
   infoEditarTransporte() {
     this.fuenteService.getFuenteId(this.idFuente, 'transporte').then(res => {
       this.transporteForm.value.localidad = res.localidad;
+      this.transporteForm.value.nombre = res.nombre;
       this.transporteForm.value.ruta = res.ruta;
       this.transporteForm.value.origen = res.origen;
       this.transporteForm.value.destino = res.destino;

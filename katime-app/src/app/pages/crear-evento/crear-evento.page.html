@@ -1,9 +1,11 @@
 <ion-header class="ion-no-border bg-white pb-4" *ngIf="!edicion">
     <app-page-header titulo="Nuevo evento" [goBack]=true>
         <ion-back-button color="primary"></ion-back-button>
-        <div class="flex items-center ml-auto mr-8" (click)="createEvento()">
+        <div class="flex items-center ml-auto mr-8 ion-activatable ripple-parent" (click)="createEvento()">
             <ion-icon name="checkmark" color="primary" class="mr-1"></ion-icon>
-            <p class="text-purple">Crear evento</p>
+            <p class="text-purple">Crear evento
+                <ion-ripple-effect></ion-ripple-effect>
+            </p>
         </div>
     </app-page-header>
 </ion-header>
@@ -11,9 +13,11 @@
 <ion-header class="ion-no-border bg-white pb-4" *ngIf="edicion">
     <app-page-header titulo="Editar evento" [goBack]=true>
         <ion-back-button color="primary"></ion-back-button>
-        <div class="flex items-center ml-auto mr-8" (click)="editarEvento()">
+        <div class="flex items-center ml-auto mr-8 ion-activatable ripple-parent" (click)="editarEvento()">
             <ion-icon name="checkmark" color="primary" class="mr-1"></ion-icon>
-            <p class="text-purple">Editar evento</p>
+            <p class="text-purple">Editar evento
+                <ion-ripple-effect></ion-ripple-effect>
+            </p>
         </div>
     </app-page-header>
 </ion-header>
@@ -38,7 +42,10 @@
                 <div class="flex items-center mb-2">
                     <ion-icon name="grid" class="mr-2" color="primary"></ion-icon>
                     <label for="categoria" class="text-gray-600">Categoría</label>
-                    <p class="ml-auto text-purple text-right w-4/6" (click)="openModalCrear()">+ Nueva categoría</p>
+                    <p class="ml-auto text-purple text-right w-4/6 ion-activatable ripple-parent" (click)="openModalCrear()">
+                        + Nueva categoría
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </p>
                 </div>
                 <div class="flex flex-col">
                     <div *ngFor="let categoria of categorias" class="my-1">

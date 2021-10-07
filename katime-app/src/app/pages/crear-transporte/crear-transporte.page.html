@@ -62,9 +62,12 @@
 <ion-header class="ion-no-border bg-white pb-4" *ngIf="!edicion">
     <app-page-header titulo="Nuevo transporte" [goBack]=true>
         <ion-back-button color="primary"></ion-back-button>
-        <div class="flex items-center ml-auto mr-8">
+        <div class="flex items-center ml-auto mr-8 ion-activatable ripple-parent">
             <ion-icon name="checkmark" color="primary" class="mr-1"></ion-icon>
-            <p class="text-purple" (click)="createTransporte()">Crear transporte</p>
+            <p class="text-purple" (click)="createTransporte()">
+                Crear transporte
+                <ion-ripple-effect></ion-ripple-effect>
+            </p>
         </div>
     </app-page-header>
 </ion-header>
@@ -72,9 +75,12 @@
 <ion-header class="ion-no-border bg-white pb-4" *ngIf="edicion">
     <app-page-header titulo="Editar transporte" [goBack]=true>
         <ion-back-button color="primary"></ion-back-button>
-        <div class="flex items-center ml-auto mr-8">
+        <div class="flex items-center ml-auto mr-8 ion-activatable ripple-parent">
             <ion-icon name="checkmark" color="primary" class="mr-1"></ion-icon>
-            <p class="text-purple" (click)="editarTransporte()">Editar transporte</p>
+            <p class="text-purple" (click)="editarTransporte()">
+                Editar transporte
+                <ion-ripple-effect></ion-ripple-effect>
+            </p>
         </div>
     </app-page-header>
 </ion-header>
@@ -82,6 +88,19 @@
 <div class="bg-gray-100 h-full rounded-t-xl">
     <ion-content [scrollEvents]="true">
         <form [formGroup]="transporteForm" class="m-8 flex flex-col">
+
+            <!-- Nombre -->
+            <div class="p-2 flex flex-col" *ngIf="edicion">
+                <div class="flex">
+                    <label for="nombre" class="text-gray-600">Nombre</label>
+                    <p class="ml-auto text-purple text-sm ion-activatable ripple-parent" (click)="getOriginalName()">
+                        Reestablecer
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </p>
+                </div>
+                <input type="text" name="nombre" formControlName="nombre" id="nombre" class="rounded-lg border-none mt-0.5 px-3 py-2">
+            </div>
+
             <!-- Ciudad/Localidad -->
             <div class="m-2 flex flex-col">
                 <label for="localidad" class="text-gray-600">Ciudad/Localidad</label>
