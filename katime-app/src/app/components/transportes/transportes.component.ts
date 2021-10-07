@@ -91,8 +91,12 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
               let hora = new Date(horas[k]),
                   hini = new Date(this.transportes[i]['hora_ini']),
                   hfin = new Date(this.transportes[i]['hora_fin']);
-              if((hora.getHours() >= hini.getHours() && hora.getMinutes() >= hini.getMinutes())
-              && (hora.getHours() <= hfin.getHours())) { // (!) ESTO ESTÁ MAL, HAY QUE TENER EN CUENTA QUE SE PERMANEZCA EN LA FRANJA
+
+                  hora.setDate(hini.getDate());
+                  hora.setFullYear(hini.getFullYear());
+                  hora.setMonth(hini.getMonth());
+
+              if(hora >= hini && hora <= hfin) {
                 horario.push(horas[k]);
               }
             }
