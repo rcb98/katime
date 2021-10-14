@@ -1,11 +1,14 @@
 <app-page-header class="bg-white" titulo="Mis transportes y eventos">
 </app-page-header>
 
-<div class="bg-white h-1/6" [ngClass]="{'relative h-full my-4': toggleTrans}">
+<div class="bg-white h-1/6 mt-4" [ngClass]="{'h-full relative': toggleTrans, 'h-1/12': !showMostrar}">
     <app-transportes></app-transportes>
-    <button (click)="toggleTransportes()" class="text-purple flex justify-center w-full mb-6">{{mostrar}}</button>
+    <button (click)="toggleTransportes()" *ngIf="showMostrar" class="text-purple flex justify-center w-full ion-activatable ripple-parent">
+      {{mostrar}}
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
 </div>
 
-<div class="bg-gray-100 h-4/6 rounded-xl mt-4">
+<div class="bg-gray-100 h-4/6 rounded-xl mt-4" [ngClass]="{'h-5/6': !showMostrar, 'mt-6': toggleTrans}">
     <app-eventos></app-eventos>
 </div>

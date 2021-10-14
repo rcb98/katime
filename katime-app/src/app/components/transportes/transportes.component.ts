@@ -155,6 +155,7 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   agruparTransportes() {
+    let aux = this.entr.length;
     var agrupacion = this.entradas.reduce(function(obj, item) {
       var index = obj.reduce(function(n, array, id) {
         return (array.id_fuente === item.id_fuente) ? id : n;
@@ -173,6 +174,9 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
     }, []);
 
     this.entr = Object.values(agrupacion);
+
+    if(this.entr.length != aux)
+      this.comunicadorService.ejecutarFuncion('%' + this.entr.length.toString());
   }
 
   tiempoRestante(hIni:any) {
