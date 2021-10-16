@@ -193,12 +193,12 @@ export class EntradaService {
         });
   }
 
-  deleteTableTipo(tipo:string) {
-    this.dbInstance
+  async deleteTableTipo(tipo:string) {
+    await this.dbInstance
       .executeSql(`DELETE FROM ${this.dbTable} where tipo='${tipo}'`, [])
-        .then(() => {
-          if(tipo == 'evento') this.loadEventos();
-          else if(tipo == 'transporte') this.loadTransportes();
+        .then(async () => {
+          /*if(tipo == 'evento') await this.loadEventos();
+          else if(tipo == 'transporte') await this.loadTransportes();*/
         })
         .catch(e => {
           alert(JSON.stringify(e))

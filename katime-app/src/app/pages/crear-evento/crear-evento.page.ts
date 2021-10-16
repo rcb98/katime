@@ -148,10 +148,8 @@ export class CrearEventoPage implements OnInit, OnDestroy {
     }
     this.setValores();
 
-    this.fuenteService.editEvento(this.idFuente, this.eventoForm.value).then(res => {
-      this.fuenteService.loadEventos().then(() => {
-        this.entradaService.deleteTableTipo("evento");
-        this.comunicadorService.ejecutarFuncion("crear-eventos");
+    this.fuenteService.editEvento(this.idFuente, this.eventoForm.value).then(async res => {
+      await this.fuenteService.loadEventos().then(async() => {
         this.presentToast("¡Evento editado!");
         this.router.navigateByUrl("modo-lista");
       })

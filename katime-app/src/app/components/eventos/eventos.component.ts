@@ -45,12 +45,7 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
               private modalController: ModalController) {
               }
 
-  ngOnInit() {
-    this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe( res => {
-      if(res == "crear-eventos") this.filtrarEntradas();
-      else this.getEntradas();
-    });
-
+  async ngOnInit() {
     this.appStateChangeListener = App.addListener(
       'appStateChange',
       async ({ isActive }) => {
@@ -58,11 +53,11 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
           return;
         }
         const taskId = await BackgroundTask.beforeExit(async () => {
-          this.entradaService.deleteTableTipo('evento');
-          this.entradaService.loadEventos();
-          this.filtrarEntradas();
-          this.getEntradas();
-          this.getCategorias();
+          //await this.entradaService.deleteTableTipo('evento');
+          //await this.entradaService.loadEventos();
+          await this.filtrarEntradas();
+          await this.getEntradas();
+          await this.getCategorias();
           BackgroundTask.finish({ taskId });
         });
       },
@@ -73,10 +68,10 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
     }, 1000 * 60);
   }
 
-  ngAfterViewInit() {
-    this.filtrarEntradas();
-    this.getEntradas();
-    this.getCategorias();
+  async ngAfterViewInit() {
+    await this.filtrarEntradas();
+    await this.getEntradas();
+    await this.getCategorias();
   }
 
   ngOnDestroy() {
@@ -84,18 +79,19 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.comunicadorService.subscripcion.unsubscribe();
   }
 
-  filtrarEntradas() {
-    this.fuenteService.getEventos().subscribe( res => {
-        res.forEach(data => {
+  async filtrarEntradas() {
+    this.fuenteService.getEventos().subscribe( async res => {
+      res.forEach(async data => {
         let entrada:Entrada = null;
 
         if(data.repeticion == "personalizado" && data.dias && data.dias != 'null'){ // Repetición personalizada
           let i = 0;
           while(data.dias.split(",")[i]){
             var dia = this.getDia(data.dias.split(",")[i]);
-            let dias = this.getDiasRepeticion(data.repeticion, new Date(), data.hora_ini, data.hora_fin, dia);
+            let dias = await this.getDiasRepeticion(data.repeticion, new Date(), data.hora_ini, data.hora_fin, dia);
 
-            dias.forEach(fecha => {
+
+            dias.forEach(async fecha => {
               entrada = {
                 "id_fuente": data.id_fuente,
                 "id_categoria": data.id_categoria,
@@ -106,14 +102,14 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
                 "hora_fin": fecha.fechaFormateadaFin,
                 "recordatorio": data.recordatorio
               }
-              this.createEntrada(entrada);
+              await this.createEntrada(entrada);
             });
 
             i++;
           }
         } else if(data.repeticion != 'null' && data.repeticion != 'personalizado') { // Resto de repeticiones
-          let dias = this.getDiasRepeticion(data.repeticion, new Date(), data.hora_ini, data.hora_fin);
-          dias.forEach(fecha => {
+          let dias = await this.getDiasRepeticion(data.repeticion, new Date(), data.hora_ini, data.hora_fin);
+          dias.forEach(async fecha => {
             entrada = {
               "id_fuente": data.id_fuente,
               "id_categoria": data.id_categoria,
@@ -124,7 +120,7 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
               "hora_fin": fecha.fechaFormateadaFin,
               "recordatorio": data.recordatorio
             }
-            this.createEntrada(entrada);
+            await this.createEntrada(entrada);
           });
         } else { // Sin repetición
           entrada = {
@@ -137,18 +133,18 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
             "hora_fin": data.hora_fin,
             "recordatorio": data.recordatorio
           }
-          this.createEntrada(entrada);
+          await this.createEntrada(entrada);
         }
       });
     })
   }
 
-  createEntrada(entrada: Entrada) {
+  async createEntrada(entrada: Entrada) {
     let hoy = new Date();
     let fecha = new Date(entrada.hora_fin);
     let maxDate = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate() + 7); // Tiene que ser 7
     if((fecha >= hoy) && (fecha <= maxDate))
-      return this.entradaService.createEntrada(entrada);
+      return await this.entradaService.createEntrada(entrada);
   }
 
   filtrarPorCategoria(id:number) {
@@ -199,12 +195,12 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
     }).then(async () => {await this.detalleEvento();})
   }
 
-  getEntradas() {
-    this.entradaService.getEventos().subscribe( res => {
+  async getEntradas() {
+    this.entradaService.getEventos().subscribe(async res => {
       this.entradasHoy = [];
       this.entradasProximas = [];
       var hoy:Date = new Date();
-      res.forEach((entrada, index) => {
+      res.forEach(async(entrada, index) => {
         var fecha = new Date(entrada.hora_ini);
         if(fecha.getDate() == hoy.getDate() && fecha.getMonth() == hoy.getMonth() && fecha.getFullYear() == hoy.getFullYear()){
           this.entradasHoy.push(entrada);
@@ -224,10 +220,10 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.entradaService.loadEventos();
   }
 
-  getCategorias() {
-    this.categoriaService.getCategorias().subscribe( res => {
+  async getCategorias() {
+    this.categoriaService.getCategorias().subscribe(async res => {
       this.categorias = [];
-      res.forEach(cat => {
+      res.forEach(async cat => {
         let categoria:Categoria = {
           "id_categoria": cat.id_categoria,
           "nombre": cat.nombre,
@@ -290,7 +286,7 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  getDiasRepeticion(tipo:string, fecha:Date, hini:Date, hfin:Date, numDia?:number) {
+  async getDiasRepeticion(tipo:string, fecha:Date, hini:Date, hfin:Date, numDia?:number) {
     var fechaIni:Date = new Date(hini),
         fechaFin:Date = new Date(hfin),
         numDias:number = 7,
