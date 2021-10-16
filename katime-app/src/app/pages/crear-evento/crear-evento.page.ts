@@ -156,6 +156,7 @@ export class CrearEventoPage implements OnInit, OnDestroy {
 
     await this.fuenteService.editEvento(this.idFuente, this.eventoForm.value).then(async res => {
       await this.fuenteService.loadEventos().then(async() => {
+        if(this.routerService.getUrlAnterior() == "/modo-diario") await this.entradaService.deleteTableTipo("transporte");
         this.presentToast("¡Evento editado!");
         this.router.navigateByUrl(this.routerService.getUrlAnterior());
       })
