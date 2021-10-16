@@ -83,3 +83,42 @@ ion-button {
     position: relative;
     overflow: hidden;
 }
+
+.calendar-hour-column,
+.dayview-allday-label {
+    width: 5em !important;
+    background-color: white;
+    border-left: none !important;
+    border-bottom: none !important;
+    padding: .5em;
+    // display: none !important;
+}
+
+.slide-container {
+    background-color: rgba(152, 137, 194, 0.25);
+    border-radius: 0 25px 25px 0;
+}
+
+.scroll-content {
+    border-radius: 0 25px 25px 0;
+}
+
+.calendar-event-inner {
+    background-color: transparent;
+    height: 100%;
+    display: flex;
+}
+
+tbody,
+table {
+    border: none !important;
+}
+
+td {
+    border: none !important;
+}
+
+tr {
+    border: none;
+    border-bottom: 1px dotted #d4d4d8 !important;
+}

@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ComunicadorService } from 'src/app/services/comunicador.service';
+import { RouterService } from 'src/app/services/router.service';
 
 @Component({
   selector: 'app-modo-lista',
@@ -12,7 +13,8 @@ export class ModoListaPage implements OnInit, OnDestroy {
   public mostrar:string = "+ Mostrar más";
   public showMostrar:boolean = false;
 
-  constructor(private comunicadorService: ComunicadorService) {
+  constructor(private comunicadorService: ComunicadorService,
+              private routerService: RouterService) {
   }
 
   ngOnInit() {

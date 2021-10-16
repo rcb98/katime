@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { ComunicadorService } from 'src/app/services/comunicador.service';
 import { EntradaService } from 'src/app/services/entrada.service';
 import { FuenteService } from 'src/app/services/fuente.service';
+import { RouterService } from 'src/app/services/router.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -64,12 +65,12 @@ export class CrearTransportePage implements OnInit {
 
 
   constructor(private activatedRoute: ActivatedRoute,
-              private comunicadorService: ComunicadorService,
               private datePipe: DatePipe,
               private entradaService: EntradaService,
               private formBuilder: FormBuilder,
               private fuenteService: FuenteService,
               private router: Router,
+              private routerService: RouterService,
               private toaster: ToastController) {
               }
 
@@ -121,13 +122,13 @@ export class CrearTransportePage implements OnInit {
 
       this.fuenteService.createFuente(this.transporteForm.value).then( res => {
         this.presentToast("¡Transporte añadido!");
-        this.router.navigateByUrl("/modo-lista");
+        this.router.navigateByUrl(this.routerService.getUrlAnterior());
       });
 
     });
   }
 
-  editarTransporte() {
+  async editarTransporte() {
     /* Validaciones */
     if(this.transporteForm.value.hora_ini > this.transporteForm.value.hora_fin){
       return this.presentToast("La hora de fin debe ser más antigua que la de inicio.");
@@ -152,7 +153,7 @@ export class CrearTransportePage implements OnInit {
     var origen = -1,
         destino = -1;
 
-    this.fuenteService.getTransporte(this.transporteForm.value.alias).subscribe(res => {
+    this.fuenteService.getTransporte(this.transporteForm.value.alias).subscribe(async res => {
       //this.transporteForm.value.nombre = this.transporteForm.value.origen + " - " + this.transporteForm.value.destino;
       this.transporteForm.value.icono = res['icono'];
       res['direccion'][0]['paradas'].forEach((parada, index) => {
@@ -163,11 +164,10 @@ export class CrearTransportePage implements OnInit {
       if(origen < destino) this.transporteForm.value.direccion = res['direccion'][0]['nombre'];
       else this.transporteForm.value.direccion = res['direccion'][1]['nombre'];
 
-      this.fuenteService.editTransporte(this.idFuente, this.transporteForm.value).then( res => {
-        this.fuenteService.loadTransportes().then(() => {
-          this.entradaService.deleteTableTipo("transporte");
+      await this.fuenteService.editTransporte(this.idFuente, this.transporteForm.value).then(async res => {
+        await this.fuenteService.loadTransportes().then(async() => {
           this.presentToast("¡Transporte editado!");
-          this.router.navigateByUrl("/modo-lista");
+          this.router.navigateByUrl(this.routerService.getUrlAnterior());
         })
 
       });

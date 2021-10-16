@@ -1,1 +1,67 @@
 <app-page-header class="bg-white" titulo="Mis transportes y eventos"></app-page-header>
+
+<div class="bg-white h-1/6 mt-4" [ngClass]="{'h-full relative': toggleTrans, 'h-1/12': !showMostrar}">
+    <app-transportes></app-transportes>
+    <button (click)="toggleTransportes()" *ngIf="showMostrar" class="text-purple flex justify-center w-full ion-activatable ripple-parent">
+    {{mostrar}}
+    <ion-ripple-effect></ion-ripple-effect>
+  </button>
+</div>
+
+<!-- Modo diario -->
+<div class="h-4/6 mt-4" [ngClass]="{'h-5/6': !showMostrar, 'mt-6': toggleTrans}">
+
+    <!-- Cambio de día -->
+    <div class="flex justify-between items-center mx-4 mb-2">
+        <ion-button fill="clear" (click)="back()">
+            <ion-icon name="arrow-back" slot="icon-only" [ngClass]="{'text-gray-300': lockSwipeToPrev}"></ion-icon>
+        </ion-button>
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-md capitalize">{{viewTitle}}</h2>
+            <h4 (click)="goToday()" *ngIf="!isToday" class="text-purple text-sm ion-activatable ripple-parent w-full text-center">
+                Hoy
+                <ion-ripple-effect></ion-ripple-effect>
+            </h4>
+        </div>
+
+        <ion-button fill="clear" (click)="next()">
+            <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+        </ion-button>
+    </div>
+    <ion-content>
+        <calendar class="flex-col" [dayviewAllDayEventTemplate]="allDayTemplate" [dayviewNormalEventTemplate]="normalTemplate" allDayLabel="Todo el día" [locale]="calendar.locale" [eventSource]="eventSource" calendarMode="day" [currentDate]="calendar.currentDate"
+            [step]="calendar.step" [lockSwipeToPrev]="lockSwipeToPrev" [scrollToHour]="calendar.scrollToHour" [preserveScrollPosition]=true (onEventSelected)="onEventSelected($event)" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onTitleChanged)="onViewTitleChanged($event)">
+        </calendar>
+    </ion-content>
+</div>
+<!-- Templates -->
+<ng-template #allDayTemplate let-displayEvent="displayEvent">
+    <div class="calendar-event-inner too-long m-1 mr-2 ion-activatable ripple-parent" [ngClass]="getTextColorCategoria(displayEvent.event.id_categoria)">
+        <div class="flex h-auto rounded-l-lg px-4 py-3 bg-purple" [ngClass]="getColorCategoria(displayEvent.event.id_categoria)">
+            <span>&#x200b;</span>
+        </div>
+        <div class="bg-white flex items-center w-full rounded-r-lg px-4">
+            <div class="flex items-center">
+                <h3 class="text-start mr-2">{{displayEvent.event.title}}</h3>
+                <!-- <h4 class="text-gray-500 font-light text-sm ">{{displayEvent.event.startTime | date: 'HH:mm'}} - {{displayEvent.event.endTime | date: 'HH:mm'}}</h4> -->
+            </div>
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+    </div>
+</ng-template>
+
+<ng-template #normalTemplate let-displayEvent="displayEvent">
+    <div class="calendar-event-inner too-long mx-1 ion-activatable ripple-parent" [ngClass]="getTextColorCategoria(displayEvent.event.id_categoria)">
+        <div class="flex h-auto rounded-l-lg px-4 py-3 bg-purple" [ngClass]="getColorCategoria(displayEvent.event.id_categoria)">
+            <span>&#x200b;</span>
+        </div>
+        <div class="bg-white flex items-start w-full rounded-r-lg px-4 py-1">
+            <div class="flex flex-col items-start pt-1">
+                <h3 class="text-start mr-2">{{displayEvent.event.title}}</h3>
+                <h4 class="text-gray-500 font-light text-sm ">{{displayEvent.event.startTime | date: 'HH:mm'}} - {{displayEvent.event.endTime | date: 'HH:mm'}}</h4>
+            </div>
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+    </div>
+</ng-template>

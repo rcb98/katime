@@ -1,0 +1,18 @@
+* {
+    transition: all .2s ease-in-out;
+}
+
+h2,
+h3,
+p {
+    color: #272727;
+}
+
+.text-start {
+    text-align: start !important;
+}
+
+.too-long {
+    min-height: 2em;
+    overflow-y: hidden;
+}

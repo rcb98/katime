@@ -9,6 +9,7 @@ import { Categoria } from 'src/app/interfaces/categoria.interface';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { ComunicadorService } from 'src/app/services/comunicador.service';
 import { EntradaService } from 'src/app/services/entrada.service';
+import { RouterService } from 'src/app/services/router.service';
 
 @Component({
   selector: 'app-crear-evento',
@@ -63,6 +64,8 @@ export class CrearEventoPage implements OnInit, OnDestroy {
   public idFuente:number;
   public edicion:boolean = false;
 
+  public goTo:string;
+
   constructor(private activatedRoute: ActivatedRoute,
               private categoriaService: CategoriaService,
               private comunicadorService: ComunicadorService,
@@ -72,7 +75,9 @@ export class CrearEventoPage implements OnInit, OnDestroy {
               private formBuilder: FormBuilder,
               private modalController: ModalController,
               private router: Router,
+              private routerService: RouterService,
               private toaster: ToastController) {
+
               }
 
   ngOnInit() {
@@ -83,6 +88,7 @@ export class CrearEventoPage implements OnInit, OnDestroy {
     } else {
       this.edicion = false;
     }
+
 
     this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe(res => {
       if(res == "crear") this.showModalCrear = !this.showModalCrear;
@@ -118,7 +124,7 @@ export class CrearEventoPage implements OnInit, OnDestroy {
     this.comunicadorService.subscripcion.unsubscribe();
   }
 
-  createEvento() {
+  async createEvento() {
     /* Validaciones */
     if(this.eventoForm.value.hora_ini > this.eventoForm.value.hora_fin){
       return this.presentToast("La fecha de fin debe ser más antigua que la de inicio.");
@@ -131,13 +137,13 @@ export class CrearEventoPage implements OnInit, OnDestroy {
 
     // alert(JSON.stringify(this.eventoForm.value));
 
-    this.fuenteService.createFuente(this.eventoForm.value).then( res => {
+    await this.fuenteService.createFuente(this.eventoForm.value).then(async res => {
       this.presentToast("¡Evento creado!");
-      this.router.navigateByUrl("/modo-lista");
+      this.router.navigateByUrl(this.routerService.getUrlAnterior());
     });
   }
 
-  editarEvento() {
+  async editarEvento() {
     /* Validaciones */
     if(this.eventoForm.value.hora_ini > this.eventoForm.value.hora_fin){
       return this.presentToast("La fecha de fin debe ser más antigua que la de inicio.");
@@ -148,10 +154,10 @@ export class CrearEventoPage implements OnInit, OnDestroy {
     }
     this.setValores();
 
-    this.fuenteService.editEvento(this.idFuente, this.eventoForm.value).then(async res => {
+    await this.fuenteService.editEvento(this.idFuente, this.eventoForm.value).then(async res => {
       await this.fuenteService.loadEventos().then(async() => {
         this.presentToast("¡Evento editado!");
-        this.router.navigateByUrl("modo-lista");
+        this.router.navigateByUrl(this.routerService.getUrlAnterior());
       })
     });
   }
