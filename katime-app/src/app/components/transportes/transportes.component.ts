@@ -9,7 +9,6 @@ import { PluginListenerHandle } from '@capacitor/core';
 import { BackgroundTask } from '@robingenz/capacitor-background-task';
 import { App } from '@capacitor/app';
 import { ComunicadorService } from 'src/app/services/comunicador.service';
-import { RouterService } from 'src/app/services/router.service';
 
 @Component({
   selector: 'app-transportes',
@@ -33,11 +32,14 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
               private entradaService: EntradaService,
               private fuenteService: FuenteService,
               private loadingController: LoadingController,
-              private modalController: ModalController,
-              private routerService: RouterService) {
+              private modalController: ModalController) {
               }
 
   async ngOnInit() {
+    this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe( async res => {
+      await this.getEntradas();
+    });
+
     this.appStateChangeListener = App.addListener(
       'appStateChange',
       async ({ isActive }) => {
@@ -45,8 +47,8 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
           return;
         }
         const taskId = await BackgroundTask.beforeExit(async () => {
-          await this.entradaService.deleteTableTipo('transporte');
-          await this.entradaService.loadTransportes();
+          this.entradaService.deleteTableTipo('transporte');
+          this.entradaService.loadTransportes();
           await this.createEntradas();
           await this.getEntradas();
           BackgroundTask.finish({ taskId });
@@ -99,9 +101,9 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
               }
             }
 
-            horario.forEach(async data => {
+            horario.forEach(data => {
               var listaDias = this.getDiasRepeticion(new Date(), data, this.getDia(dias[j]));
-              listaDias.forEach(async d => {
+              listaDias.forEach(d => {
                 let entrada:Entrada;
                 entrada = {
                   "id_fuente": this.transportes[i].id_fuente,
@@ -112,7 +114,7 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
                   "icono": this.transportes[i].icono,
                   "hora_ini": d
                 }
-                await this.createEntrada(entrada);
+                this.createEntrada(entrada);
               });
             });
           }
@@ -121,12 +123,12 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  async createEntrada(entrada: Entrada) {
+  createEntrada(entrada: Entrada) {
     let hoy = new Date();
     let fecha = new Date(entrada.hora_ini);
     let maxDate = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate() + 7); // Tiene que ser 7
     if((fecha >= hoy) && (fecha <= maxDate))
-      return await this.entradaService.createEntrada(entrada);
+      return this.entradaService.createEntrada(entrada);
   }
 
   async getEntradas() {
@@ -153,7 +155,6 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   agruparTransportes() {
-    this.entr = [];
     let aux = this.entr.length;
     var agrupacion = this.entradas.reduce(function(obj, item) {
       var index = obj.reduce(function(n, array, id) {
