@@ -135,7 +135,8 @@ export class EntradaService {
 
   /* POST */
   async createEntrada(data:Entrada) {
-    await this.deleteTableTipo("transporte");
+    if(data.tipo == "transporte")
+      await this.deleteTableTipo("transporte");
     if(!data.recordatorio) data.recordatorio = null;
     return this.dbInstance
       .executeSql(`INSERT INTO ${this.dbTable} (id_fuente, id_categoria, tipo, nombre, descripcion, direccion, localidad, icono, hora_ini, hora_fin, recordatorio, duracion)
