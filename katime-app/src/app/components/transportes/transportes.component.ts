@@ -9,6 +9,7 @@ import { PluginListenerHandle } from '@capacitor/core';
 import { BackgroundTask } from '@robingenz/capacitor-background-task';
 import { App } from '@capacitor/app';
 import { ComunicadorService } from 'src/app/services/comunicador.service';
+import { RouterService } from 'src/app/services/router.service';
 
 @Component({
   selector: 'app-transportes',
@@ -32,7 +33,8 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
               private entradaService: EntradaService,
               private fuenteService: FuenteService,
               private loadingController: LoadingController,
-              private modalController: ModalController) {
+              private modalController: ModalController,
+              private routerService: RouterService) {
               }
 
   async ngOnInit() {
@@ -66,7 +68,8 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   async ngAfterViewInit() {
-    await this.createEntradas();
+    if(this.routerService.getUrlActual() == "/modo-lista")
+      await this.createEntradas();
     await this.getEntradas();
   }
 

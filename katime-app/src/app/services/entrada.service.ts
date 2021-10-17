@@ -140,7 +140,7 @@ export class EntradaService {
     return this.dbInstance
       .executeSql(`INSERT INTO ${this.dbTable} (id_fuente, id_categoria, tipo, nombre, descripcion, direccion, localidad, icono, hora_ini, hora_fin, recordatorio, duracion)
       VALUES ('${data.id_fuente}', '${data.id_categoria}', '${data.tipo}', '${data.nombre}', '${data.descripcion}', '${data.direccion}', '${data.localidad}', '${data.icono}', '${data.hora_ini}', '${data.hora_fin}', ${data.recordatorio}, '${data.duracion}')`, [])
-      .then(() => {
+      .then(async() => {
         this.loadEventos();
         this.loadTransportes();
       }, (e) => {

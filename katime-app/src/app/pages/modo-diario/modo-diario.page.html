@@ -1,18 +1,18 @@
 <app-page-header class="bg-white" titulo="Mis transportes y eventos"></app-page-header>
 
-<!-- <div class="bg-white h-1/6 mt-4" [ngClass]="{'h-full relative': toggleTrans, 'h-1/12': !showMostrar}">
+<div class="bg-white h-1/6 mt-4" [ngClass]="{'h-full relative': toggleTrans, 'h-1/12': !showMostrar}">
     <app-transportes></app-transportes>
     <button (click)="toggleTransportes()" *ngIf="showMostrar" class="text-purple flex justify-center w-full ion-activatable ripple-parent">
     {{mostrar}}
     <ion-ripple-effect></ion-ripple-effect>
   </button>
-</div> -->
+</div>
 
 <!-- Modo diario -->
 <!-- <div class="h-4/6 mt-4" [ngClass]="{'h-5/6': !showMostrar, 'mt-6': toggleTrans}"> -->
 
 <!-- Cambio de día -->
-<div class="flex justify-between items-center mx-4 mb-2">
+<div class="flex justify-between items-center mx-4 my-2">
     <ion-button fill="clear" (click)="back()">
         <ion-icon name="arrow-back" slot="icon-only" [ngClass]="{'text-gray-300': lockSwipeToPrev}"></ion-icon>
     </ion-button>
