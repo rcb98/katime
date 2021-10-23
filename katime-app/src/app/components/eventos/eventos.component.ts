@@ -326,6 +326,7 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
       backdropDismiss: true,
       componentProps: {
         'accion': 'detalleEvento',
+        "tipo": "evento",
         'detalle': this.detalle,
         'categoria': this.categoria,
         'tiempoRestante': this.tiempoRestante(this.detalle.hora_ini)

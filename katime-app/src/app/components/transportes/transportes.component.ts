@@ -283,6 +283,7 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
     cssClass: 'my-modal-class',
     componentProps: {
       "accion": "detalleTransporte",
+      "tipo": "transporte",
       "detalle": this.detalle,
       "valores": this.valores,
       "actual": this.datePipe.transform(this.entr[0].horas[0], 'HH:mm')

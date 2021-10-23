@@ -9,7 +9,7 @@
             </div>
             <div class="ml-auto flex text-right justify-content-end">
                 <p class="font-semibold text-sm text-right w-20">{{tiempoRestante(entrada.horas[0])}}</p>
-                <p class="font-semibold text-sm text-right w-20">{{tiempoRestante(entrada.horas[1])}}</p>
+                <p class="font-semibold text-sm text-right w-20" *ngIf="entrada.horas[1]">{{tiempoRestante(entrada.horas[1])}}</p>
             </div>
             <ion-ripple-effect></ion-ripple-effect>
         </div>

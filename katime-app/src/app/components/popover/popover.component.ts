@@ -125,6 +125,7 @@ export class PopoverComponent implements OnInit {
       backdropDismiss: true,
       componentProps: {
         'accion': 'detalleEvento',
+        'tipo': 'evento',
         'detalle': this.detalle,
         'categoria': this.categoria,
         'tiempoRestante': this.getTiempoRestante(this.detalle['hora_ini'])
@@ -139,6 +140,7 @@ export class PopoverComponent implements OnInit {
       cssClass: 'my-modal-class',
       componentProps: {
         "accion": "detalleTransporte",
+        'tipo': 'transporte',
         "detalle": this.detalle,
         "valores": this.valores
       }

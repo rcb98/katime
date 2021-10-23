@@ -44,7 +44,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     if(this.detalle) {
-      this.fuenteService.getFuenteId(this.detalle.id_fuente, 'evento').then(res => {
+      this.fuenteService.getFuenteId(this.detalle.id_fuente, this.tipo).then(res => {
         this.repeticion = res.repeticion;
         this.diasRep = res.dias;
       })

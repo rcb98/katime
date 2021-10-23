@@ -29,7 +29,9 @@
             <img class="mr-4 mt-1 w-6 self-start" src="{{'../../../assets/icon/' + detalle['icono']}}" alt="">
             <div class="fle flex-col">
                 <h3 class="text-lg font-semibold">{{detalle['nombre']}}</h3>
-                <p class="text-sm text-gray-500">{{detalle['localidad']}}</p>
+                <p class="text-sm">Este transporte se repite los {{diasRep}}</p>
+                <p class="text-sm">{{detalle['hora_ini'] | date:'HH:mm'}} - {{detalle['hora_fin'] | date:'HH:mm'}}</p>
+                <p class="text-sm text-gray-500">{{detalle['direccion']}}</p>
             </div>
         </div>
 
