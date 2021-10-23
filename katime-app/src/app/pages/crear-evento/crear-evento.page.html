@@ -71,12 +71,12 @@
                 <div>
                     <ion-item class="my-2 rounded-lg" lines="none">
                         <ion-label color="medium">Inicio</ion-label>
-                        <ion-datetime display-format="DD MMM, YYYY HH:mm" formControlName="hora_ini" (ionChange)="checkTodoElDia()"></ion-datetime>
+                        <ion-datetime display-format="DD MMM, YYYY HH:mm" formControlName="hora_ini" doneText="Terminar" cancelText="Cancelar" (ionChange)="checkTodoElDia()"></ion-datetime>
                     </ion-item>
 
                     <ion-item class="my-2 rounded-lg" lines="none">
                         <ion-label color="medium">Fin</ion-label>
-                        <ion-datetime display-format="DD MMM, YYYY HH:mm" formControlName="hora_fin" (ionChange)="checkTodoElDia()"></ion-datetime>
+                        <ion-datetime display-format="DD MMM, YYYY HH:mm" formControlName="hora_fin" doneText="Terminar" cancelText="Cancelar" (ionChange)="checkTodoElDia()"></ion-datetime>
                     </ion-item>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { PopoverComponent } from 'src/app/components/popover/popover.component';
@@ -18,7 +19,8 @@ export class EditarTransportesPage implements OnInit {
 
   constructor(private fuenteService: FuenteService,
               private modalController: ModalController,
-              private popoverController: PopoverController) { }
+              private popoverController: PopoverController,
+              private router: Router) { }
 
   ngOnInit() {
   /*let a = {
@@ -126,6 +128,10 @@ export class EditarTransportesPage implements OnInit {
       ev.isChecked = false;
     });
     this.todos = false;
+  }
+
+  nuevoTransporte() {
+    this.router.navigateByUrl("crear-transporte");
   }
 
   async presentPopover(ev: any, evento:any) {

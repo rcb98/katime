@@ -75,6 +75,17 @@ ion-loading.custom-loading {
     }
 }
 
+.picker-wrapper.sc-ion-picker-md {
+    border-radius: 25px 25px 0 0 !important;
+    padding: 1em 2rem !important;
+}
+
+.picker-button.sc-ion-picker-md,
+.picker-button.ion-activated.sc-ion-picker-md {
+    text-transform: capitalize;
+    font-size: 16px;
+}
+
 ion-button {
     white-space: pre-line !important;
 }

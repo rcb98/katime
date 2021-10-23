@@ -6,8 +6,12 @@
 
 
 <div class="bg-gray-100 h-full rounded-t-xl">
-    <div *ngIf="transportes.length <= 0"><span>&#x200b;</span></div>
-    <div class="flex items-center px-8 pt-8" *ngIf="transportes.length > 0">
+    <!-- <div *ngIf="transportes.length <= 0"><span>&#x200b;</span> -->
+    <p class="ml-auto text-purple text-right mb-4 pr-8 mt-8 ion-activatable ripple-parent" (click)="nuevoTransporte()">
+        + Nuevo transporte
+        <ion-ripple-effect></ion-ripple-effect>
+    </p>
+    <div class="flex items-center px-8 pt-2" *ngIf="transportes.length > 0">
         <div class="flex items-center ion-activatable ripple-parent" (click)="eliminarTransportes()">
             <ion-icon name="trash-bin" class="text-2xl text-gray-400" [ngClass]="{'text-purple': seleccionados}"></ion-icon>
             <p *ngIf="seleccionados" class="text-purple text-sm ml-2">
@@ -42,7 +46,7 @@
         </ion-list>
 
         <div class="mx-8 my-2" *ngIf="transportes.length <= 0">
-            <h4 class="text-gray-400 italic">No hay eventos.</h4>
+            <h3 class="text-gray-500 italic"><b>Oops!</b> Parece que no tienes ningún transporte todavía, pulsa en <span class="text-purple not-italic" (click)="nuevoTransporte()">+ Nuevo transporte</span> para añadir tu primer transporte.</h3>
         </div>
     </ion-content>
 </div>

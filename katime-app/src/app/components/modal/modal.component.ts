@@ -113,7 +113,8 @@ export class ModalComponent implements OnInit, AfterViewInit {
       event: ev,
       translucent: true,
       componentProps: {
-        'titulos': ['Editar evento', 'Eliminar evento', 'Editar categoría'],
+        'titulos': ['Editar evento', 'Eliminar evento'],
+        // 'titulos': ['Editar evento', 'Eliminar evento', 'Editar categoría'],
         'valor': this.categoria,
         'detalle': this.detalle
       }

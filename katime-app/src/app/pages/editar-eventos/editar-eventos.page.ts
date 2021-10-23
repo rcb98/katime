@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { PopoverComponent } from 'src/app/components/popover/popover.component';
 import { Categoria } from 'src/app/interfaces/categoria.interface';
-import { Fuente } from 'src/app/interfaces/fuente.interface';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { FuenteService } from 'src/app/services/fuente.service';
-import { RouterService } from 'src/app/services/router.service';
 
 @Component({
   selector: 'app-editar-eventos',
@@ -27,7 +26,7 @@ export class EditarEventosPage implements OnInit {
               private fuenteService: FuenteService,
               private modalController: ModalController,
               private popoverController: PopoverController,
-              private routerService: RouterService) { }
+              private router: Router) { }
 
   ngOnInit() {
     this.getEventos();
@@ -154,6 +153,10 @@ export class EditarEventosPage implements OnInit {
 
     if(this.seleccionados) this.todos = true;
     else this.todos = false;
+  }
+
+  nuevoEvento() {
+    this.router.navigateByUrl("crear-evento");
   }
 
   async presentPopover(ev: any, evento:any) {
