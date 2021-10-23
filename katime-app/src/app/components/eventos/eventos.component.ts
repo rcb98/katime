@@ -25,7 +25,6 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
   public categoria:any;
   public entradasHoy: Entrada[] = [];
   public entradasProximas: Entrada[] = [];
-  public categorias: Categoria[] = [];
   public tiemposRestantes:any[] = [];
   public hoy:Date = new Date();
   public idCategoriaActiva:number = 0;
@@ -57,7 +56,6 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
           await this.entradaService.loadEventos();
           await this.filtrarEntradas();
           await this.getEntradas();
-          await this.getCategorias();
           BackgroundTask.finish({ taskId });
         });
       },
@@ -71,7 +69,6 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
   async ngAfterViewInit() {
     await this.filtrarEntradas();
     await this.getEntradas();
-    await this.getCategorias();
   }
 
   ngOnDestroy() {
@@ -147,17 +144,6 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
       return await this.entradaService.createEntrada(entrada);
   }
 
-  filtrarPorCategoria(id:number) {
-    this.idCategoriaActiva = id;
-    this.entradaService.loadEventosCategoria(id).then(() => {
-      this.entradaService.getEventos().subscribe(res => {
-        if(res.length <= 0) {
-          //this.entradaService.loadEntradas();
-        }
-      })
-    })
-  }
-
   recalcularTiempo() {
     if(this.entradasHoy.length > 0) {
       this.tiemposRestantes = [];
@@ -213,41 +199,6 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
       });
       this.recalcularTiempo();
     });
-  }
-
-  getAllEntradas() {
-    this.idCategoriaActiva = 0;
-    this.entradaService.loadEventos();
-  }
-
-  async getCategorias() {
-    this.categoriaService.getCategorias().subscribe(async res => {
-      this.categorias = [];
-      res.forEach(async cat => {
-        let categoria:Categoria = {
-          "id_categoria": cat.id_categoria,
-          "nombre": cat.nombre,
-          "color": cat.color
-        }
-        this.categorias.push(categoria);
-      });
-    })
-  }
-
-  getClasesCategoria(id:number) {
-    var clases:any;
-    this.categoriaService.getCategorias().subscribe( res => {
-      res.forEach(cat => {
-        if(cat.id_categoria == id) {
-          if(this.idCategoriaActiva == id){ // Está seleccionada
-            clases = ['bg-' + cat.color, 'border-' + cat.color, 'text-white'];
-          } else { // No está seleccionada
-            clases = ['bg-transparent', 'border-' + cat.color, 'text-' + cat.color];
-          }
-        }
-      });
-    })
-    return clases;
   }
 
   getColorCategoria(id:number) {
@@ -394,5 +345,3 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log('Loading dismissed!');
   }
 }
-
-
