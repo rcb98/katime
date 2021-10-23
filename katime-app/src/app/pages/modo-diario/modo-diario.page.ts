@@ -110,26 +110,37 @@ export class ModoDiarioPage implements OnInit, OnDestroy {
     var events = [];
     let e1 = {
       title: "Cumpleaños Paula",
-      startTime: new Date("2021-10-16 00:00"),
-      endTime: new Date("2021-10-16 23:59"),
+      startTime: new Date("2021-10-23 00:00"),
+      endTime: new Date("2021-10-23 23:59"),
+      short: false,
       allDay: true
     }
 
     let e2 = {
       title: "Eventito",
-      startTime: new Date("2021-10-16 01:00"),
-      endTime: new Date("2021-10-16 05:00"),
+      startTime: new Date("2021-10-23 01:00"),
+      endTime: new Date("2021-10-23 05:00"),
+      short: false,
       allDay: false
     }
 
     let e3 = {
-      title: "Tomar pastilla del médico",
-      startTime: new Date("2021-10-16 01:00"),
-      endTime: new Date("2021-10-16 01:05"),
+      title: "Tomar pastilla",
+      startTime: new Date("2021-10-23 01:00"),
+      endTime: new Date("2021-10-23 01:05"),
+      short: true,
       allDay: false
     }
 
-    events.push(e1, e2, e3);
+    let e4 = {
+      title: "Pasear",
+      startTime: new Date("2021-10-23 01:00"),
+      endTime: new Date("2021-10-23 02:00"),
+      short: true,
+      allDay: false
+    }
+
+    events.push(e1, e2, e3, e4);
     this.eventSource = events;
   }
 
@@ -139,14 +150,17 @@ export class ModoDiarioPage implements OnInit, OnDestroy {
       res.forEach(entrada => {
         let hini = new Date(entrada.hora_ini),
             hfin = new Date(entrada.hora_fin),
-            allDay = false;
+            allDay = false,
+            short = false;
         if(hini.getHours() == 0 && hini.getMinutes() == 0 && hfin.getHours() == 23 && hfin.getMinutes() == 59) allDay = true;
+        if((hfin.getTime() - hini.getTime()) / 60000 <= 60) short = true;
         let e = {
           title: entrada.nombre,
           id_entrada: entrada.id_entrada,
           id_categoria: entrada.id_categoria,
           startTime: new Date(entrada.hora_ini),
           endTime: new Date(entrada.hora_fin),
+          short: short,
           allDay: allDay
         }
         this.eventSource.push(e);
