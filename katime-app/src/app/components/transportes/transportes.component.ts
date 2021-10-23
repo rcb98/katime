@@ -159,6 +159,22 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   agruparTransportes() {
+    /*this.entradas.push({
+      "id_fuente": 1,
+      "tipo": "transporte",
+      "nombre": "L2",
+      "icono": "L2.png",
+      "direccion": "Alicante"
+    },
+    {
+      "id_fuente": 2,
+      "tipo": "transporte",
+      "nombre": "L3",
+      "icono": "L3.png",
+      "direccion": "Alicante"
+    })*/
+
+
     let aux = this.entr.length;
     var agrupacion = this.entradas.reduce(function(obj, item) {
       var index = obj.reduce(function(n, array, id) {

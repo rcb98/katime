@@ -1,6 +1,6 @@
 <app-page-header class="bg-white" titulo="Mis transportes y eventos"></app-page-header>
 
-<div class="bg-white h-1/6 mt-4" *ngIf="isToday" [ngClass]="{'h-3/6 relative': toggleTrans, 'h-1/12': !showMostrar}">
+<div class="h-1/6 mt-4" *ngIf="isToday" [ngClass]="{'h-3/6 relative': toggleTrans}">
     <app-transportes></app-transportes>
     <button (click)="toggleTransportes()" *ngIf="showMostrar" class="text-purple flex justify-center w-full ion-activatable ripple-parent">
     {{mostrar}}
@@ -9,37 +9,37 @@
 </div>
 
 <!-- Modo diario -->
-<!-- <div class="h-4/6 mt-4" [ngClass]="{'h-5/6': !showMostrar, 'mt-6': toggleTrans}"> -->
+<div class="h-4/6 mt-4" [ngClass]="{'h-full': !showMostrar || !isToday, 'mt-6': toggleTrans}">
 
-<!-- Cambio de día -->
-<div class="flex justify-between items-center mx-4 mb-2 mt-4">
-    <ion-button fill="clear" (click)="back()">
-        <ion-icon name="arrow-back" slot="icon-only" [ngClass]="{'text-gray-300': lockSwipeToPrev}"></ion-icon>
-    </ion-button>
+    <!-- Cambio de día -->
+    <div class="flex justify-between items-center mx-4 mb-2 mt-4">
+        <ion-button fill="clear" (click)="back()">
+            <ion-icon name="arrow-back" slot="icon-only" [ngClass]="{'text-gray-300': lockSwipeToPrev}"></ion-icon>
+        </ion-button>
 
-    <div class="flex flex-col items-center">
-        <h2 class="text-md capitalize">{{viewTitle}}</h2>
-        <h4 (click)="goToday()" *ngIf="!isToday" class="text-purple text-sm ion-activatable ripple-parent w-full text-center">
-            Hoy
-            <ion-ripple-effect></ion-ripple-effect>
-        </h4>
+        <div class="flex flex-col items-center">
+            <h2 class="text-md capitalize">{{viewTitle}}</h2>
+            <h4 (click)="goToday()" *ngIf="!isToday" class="text-purple text-sm ion-activatable ripple-parent w-full text-center">
+                Hoy
+                <ion-ripple-effect></ion-ripple-effect>
+            </h4>
+        </div>
+
+        <ion-button fill="clear" (click)="next()">
+            <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+        </ion-button>
     </div>
 
-    <ion-button fill="clear" (click)="next()">
-        <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
-    </ion-button>
-</div>
+    <div class="mt-2 mb-4">
+        <app-filtro-eventos></app-filtro-eventos>
+    </div>
 
-<div class="mt-2 mb-4">
-    <app-filtro-eventos></app-filtro-eventos>
+    <ion-content>
+        <calendar class="flex-col" [dayviewAllDayEventTemplate]="allDayTemplate" [dayviewNormalEventTemplate]="normalTemplate" allDayLabel="Todo el día" [locale]="calendar.locale" [eventSource]="eventSource" calendarMode="day" [currentDate]="calendar.currentDate"
+            [step]="calendar.step" [lockSwipeToPrev]="lockSwipeToPrev" [scrollToHour]="calendar.scrollToHour" [preserveScrollPosition]=true (onEventSelected)="onEventSelected($event)" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onTitleChanged)="onViewTitleChanged($event)">
+        </calendar>
+    </ion-content>
 </div>
-
-<ion-content>
-    <calendar class="flex-col" [dayviewAllDayEventTemplate]="allDayTemplate" [dayviewNormalEventTemplate]="normalTemplate" allDayLabel="Todo el día" [locale]="calendar.locale" [eventSource]="eventSource" calendarMode="day" [currentDate]="calendar.currentDate"
-        [step]="calendar.step" [lockSwipeToPrev]="lockSwipeToPrev" [scrollToHour]="calendar.scrollToHour" [preserveScrollPosition]=true (onEventSelected)="onEventSelected($event)" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onTitleChanged)="onViewTitleChanged($event)">
-    </calendar>
-</ion-content>
-<!-- </div> -->
 
 
 <!-- Templates -->
