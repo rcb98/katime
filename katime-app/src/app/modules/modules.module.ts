@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { ModalComponent } from '../components/modal/modal.component';
 import { CategoriaComponent } from '../components/categoria/categoria.component';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FiltroEventosComponent } from '../components/filtro-eventos/filtro-eventos.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
     EventosComponent,
     TransportesComponent,
     ModalComponent,
-    CategoriaComponent
+    CategoriaComponent,
+    FiltroEventosComponent
   ],
   exports: [
     PageHeaderComponent,
@@ -30,7 +32,8 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
     EventosComponent,
     TransportesComponent,
     ModalComponent,
-    CategoriaComponent
+    CategoriaComponent,
+    FiltroEventosComponent
   ]
 })
 export class ModulesModule { }

@@ -12,6 +12,7 @@ export class CategoriaService {
   private dbInstance:SQLiteObject;
   readonly dbName:string = "katime-db";
   readonly dbTable:string = "categoriaTable";
+  public categoriaId:number;
   CATEGORIAS = new BehaviorSubject([]);
 
   constructor(private platform: Platform,
@@ -125,5 +126,13 @@ export class CategoriaService {
         .catch(e => {
           alert(JSON.stringify(e))
         });
+  }
+
+  setCategoria(id:number) {
+    this.categoriaId = id;
+  }
+
+  getCategoria() {
+    return this.categoriaId;
   }
 }

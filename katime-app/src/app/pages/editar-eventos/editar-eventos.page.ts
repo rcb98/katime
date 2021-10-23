@@ -6,6 +6,7 @@ import { Categoria } from 'src/app/interfaces/categoria.interface';
 import { Fuente } from 'src/app/interfaces/fuente.interface';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { FuenteService } from 'src/app/services/fuente.service';
+import { RouterService } from 'src/app/services/router.service';
 
 @Component({
   selector: 'app-editar-eventos',
@@ -25,7 +26,8 @@ export class EditarEventosPage implements OnInit {
   constructor(private categoriaService: CategoriaService,
               private fuenteService: FuenteService,
               private modalController: ModalController,
-              private popoverController: PopoverController) { }
+              private popoverController: PopoverController,
+              private routerService: RouterService) { }
 
   ngOnInit() {
     this.getEventos();

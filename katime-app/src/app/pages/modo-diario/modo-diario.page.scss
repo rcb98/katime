@@ -16,3 +16,14 @@ p {
     min-height: 2.25em;
     overflow-y: hidden;
 }
+
+.hide-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scroll {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}

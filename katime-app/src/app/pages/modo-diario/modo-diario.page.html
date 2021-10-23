@@ -29,6 +29,11 @@
         <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
     </ion-button>
 </div>
+
+<div class="mt-2 mb-4">
+    <app-filtro-eventos></app-filtro-eventos>
+</div>
+
 <ion-content>
     <calendar class="flex-col" [dayviewAllDayEventTemplate]="allDayTemplate" [dayviewNormalEventTemplate]="normalTemplate" allDayLabel="Todo el día" [locale]="calendar.locale" [eventSource]="eventSource" calendarMode="day" [currentDate]="calendar.currentDate"
         [step]="calendar.step" [lockSwipeToPrev]="lockSwipeToPrev" [scrollToHour]="calendar.scrollToHour" [preserveScrollPosition]=true (onEventSelected)="onEventSelected($event)" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onTitleChanged)="onViewTitleChanged($event)">
