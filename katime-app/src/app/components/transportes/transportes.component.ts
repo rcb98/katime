@@ -51,8 +51,8 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
         const taskId = await BackgroundTask.beforeExit(async () => {
           this.entradaService.deleteTableTipo('transporte');
           this.entradaService.loadTransportes();
-          /*if(this.routerService.getUrlActual() == "/modo-lista")
-            await this.createEntradas();*/
+          // if(this.routerService.getUrlActual() == "/modo-lista")
+          await this.createEntradas();
           await this.getEntradas();
           BackgroundTask.finish({ taskId });
         });
