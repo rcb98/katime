@@ -4,6 +4,7 @@ import { ModalController, PopoverController } from '@ionic/angular';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { PopoverComponent } from 'src/app/components/popover/popover.component';
 import { Categoria } from 'src/app/interfaces/categoria.interface';
+import { Fuente } from 'src/app/interfaces/fuente.interface';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { FuenteService } from 'src/app/services/fuente.service';
 
@@ -16,6 +17,7 @@ export class EditarEventosPage implements OnInit {
 
   public eventos:any[] = [];
   public categorias: Categoria[] = [];
+  public fuentes: Fuente[] = [];
   public categoria:string;
   public idCategoriaActiva:number = 0;
   public seleccionados:boolean = false;
@@ -29,6 +31,7 @@ export class EditarEventosPage implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.getFuentes();
     this.getEventos();
     this.getCategorias();
   }
@@ -157,6 +160,15 @@ export class EditarEventosPage implements OnInit {
 
   nuevoEvento() {
     this.router.navigateByUrl("crear-evento");
+  }
+
+  getFuentes() {
+    this.fuenteService.getEventos().subscribe(res => {
+      this.fuentes = [];
+      res.forEach(f => {
+        this.fuentes.push(f);
+      });
+    })
   }
 
   async presentPopover(ev: any, evento:any) {

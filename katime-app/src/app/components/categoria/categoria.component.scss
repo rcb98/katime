@@ -10,3 +10,8 @@
 .circle {
     border-radius: 50%;
 }
+
+input:focus,
+textarea:focus {
+    --tw-ring-color: #9889C2 !important;
+}

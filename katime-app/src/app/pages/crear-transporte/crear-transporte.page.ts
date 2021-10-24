@@ -129,8 +129,12 @@ export class CrearTransportePage implements OnInit {
   }
 
   async editarTransporte() {
+
+    this.setValores();
+
     /* Validaciones */
     if(this.transporteForm.value.hora_ini > this.transporteForm.value.hora_fin){
+      alert(JSON.stringify(this.transporteForm.value.hora_ini + ", " + this.transporteForm.value.hora_fin));
       return this.presentToast("La hora de fin debe ser más antigua que la de inicio.");
     }
 
@@ -147,8 +151,6 @@ export class CrearTransportePage implements OnInit {
       !this.transporteForm.value.hora_fin) {
       return this.presentToast("Los campos de localidad, línea, origen, destino, días y franja horaria son obligatorios.");
     }
-
-    this.setValores();
 
     var origen = -1,
         destino = -1;

@@ -9,6 +9,8 @@ import { DatePipe } from '@angular/common';
 import { Entrada } from 'src/app/interfaces/entrada.interface';
 import { RouterService } from 'src/app/services/router.service';
 import { ComunicadorService } from 'src/app/services/comunicador.service';
+import { FuenteService } from 'src/app/services/fuente.service';
+import { Fuente } from 'src/app/interfaces/fuente.interface';
 
 @Component({
   selector: 'app-modo-diario',
@@ -20,6 +22,7 @@ export class ModoDiarioPage implements OnInit, OnDestroy {
 
   public eventSource = [];
   public detalle:Entrada;
+  public fuentes:Fuente[] = [];
   public categoria:any;
   public viewTitle:string = '';
   public now:number;
@@ -43,6 +46,7 @@ export class ModoDiarioPage implements OnInit, OnDestroy {
               private comunicadorService: ComunicadorService,
               private datePipe: DatePipe,
               private entradaService: EntradaService,
+              private fuenteService: FuenteService,
               private loadingController: LoadingController,
               private modalController: ModalController,
               private routerService: RouterService) { }
@@ -59,6 +63,7 @@ export class ModoDiarioPage implements OnInit, OnDestroy {
     this.now = new Date().getHours();
     //this.setEvents();
     this.getEventos();
+    this.getFuentes();
   }
 
   ngOnDestroy() {
@@ -142,6 +147,15 @@ export class ModoDiarioPage implements OnInit, OnDestroy {
 
     events.push(e1, e2, e3, e4);
     this.eventSource = events;
+  }
+
+  getFuentes() {
+    this.fuenteService.getEventos().subscribe(res => {
+      this.fuentes = [];
+      res.forEach(f => {
+        this.fuentes.push(f);
+      });
+    })
   }
 
   getEventos() {

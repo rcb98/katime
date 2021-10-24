@@ -16,6 +16,6 @@
     </div>
 
     <div *ngIf="entr.length <= 0" class="m-8">
-        <h4 class="text-gray-400 italic">No hay transportes.</h4>
+        <h4 class="text-gray-500 italic"><b>Oops!</b> Parece que no tienes ningún transporte todavía, pulsa <span class="text-purple not-italic" (click)="nuevoTransporte()">aquí</span> para añadir tu primer transporte o selecciona el icono del <span class="text-purple not-italic">+</span>.</h4>
     </div>
 </ion-content>

@@ -1,5 +1,5 @@
 <!-- Categorías -->
-<div class="mt-10">
+<div class="mt-10" *ngIf="fuentes.length > 0">
     <app-filtro-eventos></app-filtro-eventos>
 </div>
 
@@ -42,7 +42,10 @@
         </div>
     </div>
 
-    <div class="mx-8 my-2" *ngIf="entradasHoy.length == 0 && entradasProximas.length == 0">
+    <div class="mx-8 my-2" *ngIf="fuentes.length == 0">
+        <h4 class="text-gray-500 italic"><b>Oops!</b> Parece que no tienes ningún evento todavía, pulsa <span class="text-purple not-italic" (click)="nuevoEvento()">aquí</span> para añadir tu primer evento o selecciona el icono del <span class="text-purple not-italic">+</span>.</h4>
+    </div>
+    <div class="mx-8 my-2" *ngIf="entradasHoy.length == 0 && entradasProximas.length == 0 && fuentes.length > 0">
         <h4 class="text-gray-400 italic">No hay eventos.</h4>
     </div>
 </ion-content>

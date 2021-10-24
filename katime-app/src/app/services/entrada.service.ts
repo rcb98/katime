@@ -165,8 +165,8 @@ export class EntradaService {
     return this.dbInstance.executeSql(`
     DELETE FROM ${this.dbTable} WHERE id_fuente = ${id}`, [])
       .then(() => {
-        //this.loadEventos();
-        //this.loadTransportes();
+        this.loadEventos();
+        this.loadTransportes();
       })
       .catch(e => {
         alert(JSON.stringify(e))

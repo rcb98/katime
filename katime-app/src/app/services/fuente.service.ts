@@ -116,9 +116,9 @@ export class FuenteService {
     })
   }
 
-  getFuenteId(id, tipo):Promise<any> {
-    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE tipo='${tipo}' AND id_fuente = ?`, [id])
-    .then((res) => {
+  async getFuenteId(id, tipo):Promise<any> {
+    return await this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE tipo='${tipo}' AND id_fuente = ?`, [id])
+    .then(async(res) => {
       return res.rows.item(0);
     });
   }

@@ -10,6 +10,7 @@ import { BackgroundTask } from '@robingenz/capacitor-background-task';
 import { App } from '@capacitor/app';
 import { ComunicadorService } from 'src/app/services/comunicador.service';
 import { RouterService } from 'src/app/services/router.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transportes',
@@ -34,6 +35,7 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
               private fuenteService: FuenteService,
               private loadingController: LoadingController,
               private modalController: ModalController,
+              private router: Router,
               private routerService: RouterService) {
               }
 
@@ -49,10 +51,10 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
           return;
         }
         const taskId = await BackgroundTask.beforeExit(async () => {
-          this.entradaService.deleteTableTipo('transporte');
+          /*this.entradaService.deleteTableTipo('transporte');
           this.entradaService.loadTransportes();
-          // if(this.routerService.getUrlActual() == "/modo-lista")
-          await this.createEntradas();
+          if(this.routerService.getUrlActual() == "/modo-lista")
+            await this.createEntradas();*/
           await this.getEntradas();
           BackgroundTask.finish({ taskId });
         });
@@ -155,7 +157,11 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
     await this.fuenteService.getFuenteId(id, 'transporte').then( async res => {
       this.detalle = res;
       this.valores = await this.getHorarios(res.direccion, res.origen, this.getDiaSTR(new Date().getDay()), res.alias);
-    }).then(async () => await this.presentModal())
+    }).then(async () => {await this.presentModal(); await this.loadingController.dismiss();})
+  }
+
+  nuevoTransporte() {
+    this.router.navigateByUrl("crear-transporte");
   }
 
   agruparTransportes() {
@@ -289,7 +295,6 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
       "actual": this.datePipe.transform(this.entr[0].horas[0], 'HH:mm')
     }
     });
-    await this.loadingController.dismiss();
     return await modal.present();
   }
 

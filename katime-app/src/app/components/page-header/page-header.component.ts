@@ -23,7 +23,8 @@ export class PageHeaderComponent implements OnInit {
       event: ev,
       translucent: true,
       componentProps: {
-        'titulos': ['Transportes', 'Eventos', 'Categorías', 'Actualizar horarios', 'Eliminar horarios']
+        'titulos': ['Transportes', 'Eventos', 'Categorías', 'Actualizar horarios']
+        // 'titulos': ['Transportes', 'Eventos', 'Categorías', 'Actualizar horarios', 'Eliminar horarios']
       }
     });
     await popover.present();

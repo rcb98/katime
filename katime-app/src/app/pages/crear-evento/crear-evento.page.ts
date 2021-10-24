@@ -89,7 +89,6 @@ export class CrearEventoPage implements OnInit, OnDestroy {
       this.edicion = false;
     }
 
-
     this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe(res => {
       if(res == "crear") this.showModalCrear = !this.showModalCrear;
 
@@ -144,6 +143,7 @@ export class CrearEventoPage implements OnInit, OnDestroy {
   }
 
   async editarEvento() {
+    this.setValores();
     /* Validaciones */
     if(this.eventoForm.value.hora_ini > this.eventoForm.value.hora_fin){
       return this.presentToast("La fecha de fin debe ser más antigua que la de inicio.");
@@ -152,7 +152,6 @@ export class CrearEventoPage implements OnInit, OnDestroy {
     if(!this.eventoForm.value.nombre || !this.eventoForm.value.id_categoria || !this.eventoForm.value.hora_ini || !this.eventoForm.value.hora_fin) {
       return this.presentToast("Los campos de nombre, categoría, fecha de inicio y fin son obligatorios.");
     }
-    this.setValores();
 
     await this.fuenteService.editEvento(this.idFuente, this.eventoForm.value).then(async res => {
       await this.fuenteService.loadEventos().then(async() => {

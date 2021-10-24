@@ -59,9 +59,9 @@ export class CategoriaService {
   }
 
   /* GET (by Id) */
-  loadCategoria(id:number):Promise<Categoria> {
-    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE id_categoria = ?`, [id])
-      .then((res) => {
+  async loadCategoria(id:number):Promise<Categoria> {
+    return await this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE id_categoria = ?`, [id])
+      .then(async(res) => {
         return {
           id_categoria: res.rows.item(0).id_categoria,
           nombre: res.rows.item(0).nombre,

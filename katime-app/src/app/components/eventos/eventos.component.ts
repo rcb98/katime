@@ -12,6 +12,8 @@ import { PluginListenerHandle } from '@capacitor/core';
 import { BackgroundTask } from '@robingenz/capacitor-background-task';
 import { App } from '@capacitor/app';
 import { ComunicadorService } from 'src/app/services/comunicador.service';
+import { Router } from '@angular/router';
+import { Fuente } from 'src/app/interfaces/fuente.interface';
 
 @Component({
   selector: 'app-eventos',
@@ -25,6 +27,7 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
   public categoria:any;
   public entradasHoy: Entrada[] = [];
   public entradasProximas: Entrada[] = [];
+  public fuentes: Fuente[] = [];
   public tiemposRestantes:any[] = [];
   public hoy:Date = new Date();
   public idCategoriaActiva:number = 0;
@@ -41,7 +44,8 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
               private entradaService: EntradaService,
               private fuenteService: FuenteService,
               private loadingController: LoadingController,
-              private modalController: ModalController) {
+              private modalController: ModalController,
+              private router: Router) {
               }
 
   async ngOnInit() {
@@ -69,11 +73,21 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
   async ngAfterViewInit() {
     await this.filtrarEntradas();
     await this.getEntradas();
+    this.getFuentes();
   }
 
   ngOnDestroy() {
     this.appStateChangeListener?.remove();
     this.comunicadorService.subscripcion.unsubscribe();
+  }
+
+  getFuentes() {
+    this.fuenteService.getEventos().subscribe(res => {
+      this.fuentes = [];
+      res.forEach(f => {
+        this.fuentes.push(f);
+      });
+    })
   }
 
   async filtrarEntradas() {
@@ -178,7 +192,7 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
       await this.categoriaService.loadCategoria(res['id_categoria']).then(async cat => {
         this.categoria = cat['color'];
       })
-    }).then(async () => {await this.detalleEvento();})
+    }).then(async () => {await this.detalleEvento(); await this.loadingController.dismiss()})
   }
 
   async getEntradas() {
@@ -292,6 +306,10 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
     return dias
   }
 
+  nuevoEvento() {
+    this.router.navigateByUrl("crear-evento");
+  }
+
   setRecordatorio(nombre:string, hini:Date, rec:number, index:number) {
     let hora = this.datePipe.transform(hini, 'HH:mm'),
         title = '',
@@ -332,7 +350,6 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
         'tiempoRestante': this.tiempoRestante(this.detalle.hora_ini)
       }
     });
-    await this.loadingController.dismiss();
     return await modal.present();
   }
 
