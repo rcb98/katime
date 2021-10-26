@@ -9,8 +9,7 @@
 </div>
 
 <!-- Modo diario -->
-<div class="h-4/6 mt-4" [ngClass]="{'h-full': !showMostrar || !isToday, 'mt-6': toggleTrans}">
-
+<div class="h-4/6 mt-4" [ngClass]="{'h-full': !isToday || (!showMostrar && hayFuentes), 'mt-6': toggleTrans}">
     <!-- Cambio de día -->
     <div class="flex justify-between items-center mx-4 mb-2 mt-4">
         <ion-button fill="clear" (click)="back()">

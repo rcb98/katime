@@ -42,10 +42,15 @@
         </div>
     </div>
 
-    <div class="mx-8 my-2" *ngIf="fuentes.length == 0">
-        <h4 class="text-gray-500 italic"><b>Oops!</b> Parece que no tienes ningún evento todavía, pulsa <span class="text-purple not-italic" (click)="nuevoEvento()">aquí</span> para añadir tu primer evento o selecciona el icono del <span class="text-purple not-italic">+</span>.</h4>
+    <div class="mx-8 my-2 px-1 py-2 flex bubble" *ngIf="fuentes.length == 0">
+        <!-- <h4 class="text-gray-500 italic"><b>Oops!</b> Parece que no tienes ningún evento todavía, pulsa <span class="text-purple not-italic" (click)="nuevoEvento()">aquí</span> para añadir tu primer evento o selecciona el icono del <span class="text-purple not-italic">+</span>.</h4> -->
+        <ion-icon name="information-circle" color="primary" class="w-24 text-2xl"></ion-icon>
+        <h4 class="text-gray-500">Esta es tu sección de <b>eventos</b>. Aquí podrás encontrar todos tus eventos de los próximos <b>siete días</b>. ¡Añade uno pulsando <span class="text-purple font-semibold" (click)="nuevoEvento()">aquí</span>!</h4>
     </div>
     <div class="mx-8 my-2" *ngIf="entradasHoy.length == 0 && entradasProximas.length == 0 && fuentes.length > 0">
         <h4 class="text-gray-400 italic">No hay eventos.</h4>
+    </div>
+    <div class="flex justify-center" *ngIf="fuentes.length == 0">
+        <img class="w-8/12 mt-8" src="../../../assets/icon/time_management.svg" alt="Ilustración de una mujer y un reloj">
     </div>
 </ion-content>

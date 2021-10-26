@@ -2,3 +2,25 @@ h3,
 p {
     color: #272727;
 }
+
+.bubble {
+    position: relative;
+    background: rgba(152, 137, 194, 0.25);
+    // border: 2px solid #9889C2;
+    border-radius: .4em;
+}
+
+.bubble:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top-color: rgba(152, 137, 194, 0.25);
+    border-bottom: 0;
+    border-right: 0;
+    margin-left: -10px;
+    margin-bottom: -20px;
+}

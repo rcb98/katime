@@ -66,6 +66,7 @@ export class EventosComponent implements OnInit, OnDestroy, AfterViewInit {
     );
 
     setInterval(() => {
+      this.getFuentes();
       this.recalcularTiempo();
     }, 1000 * 60);
   }

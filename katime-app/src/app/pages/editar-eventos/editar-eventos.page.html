@@ -57,6 +57,9 @@
 
         <div class="mx-8 my-2" *ngIf="fuentes.length == 0">
             <h3 class="text-gray-500 italic"><b>Oops!</b> Parece que no tienes ningún evento todavía, pulsa en <span class="text-purple not-italic" (click)="nuevoEvento()">+ Nuevo evento</span> para añadir tu primer evento.</h3>
+            <div class="flex justify-center">
+                <img class="w-8/12 mt-8" src="../../../assets/icon/events.svg" alt="Mujer organizando calendario">
+            </div>
         </div>
 
         <div class="mx-8 my-2" *ngIf="eventos.length == 0 && fuentes.length > 0">

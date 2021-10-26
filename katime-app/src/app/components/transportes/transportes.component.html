@@ -15,7 +15,13 @@
         </div>
     </div>
 
-    <div *ngIf="entr.length <= 0" class="m-8">
-        <h4 class="text-gray-500 italic"><b>Oops!</b> Parece que no tienes ningún transporte todavía, pulsa <span class="text-purple not-italic" (click)="nuevoTransporte()">aquí</span> para añadir tu primer transporte o selecciona el icono del <span class="text-purple not-italic">+</span>.</h4>
+    <div class="mx-8 my-2 px-1 py-2 flex bubble" *ngIf="fuentes.length == 0">
+        <ion-icon name="information-circle" color="primary" class="w-24 text-2xl"></ion-icon>
+        <h4 class="text-gray-500">Esta es tu sección de <b>transportes</b>. Aquí recibirás información únicamente de tus salidas del día de <b>hoy</b>. ¡Añade uno pulsando <span class="text-purple font-semibold" (click)="nuevoTransporte()">aquí</span>!</h4>
+    </div>
+
+    <div *ngIf="entr.length <= 0 && fuentes.length > 0" class="m-8">
+        <!-- <h4 class="text-gray-500 italic"><b>Oops!</b> Parece que no tienes ningún transporte todavía, pulsa <span class="text-purple not-italic" (click)="nuevoTransporte()">aquí</span> para añadir tu primer transporte o selecciona el icono del <span class="text-purple not-italic">+</span>.</h4> -->
+        <h4 class="text-gray-400 italic">No tienes más salidas para el día de hoy.</h4>
     </div>
 </ion-content>

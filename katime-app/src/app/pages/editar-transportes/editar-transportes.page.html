@@ -47,6 +47,9 @@
 
         <div class="mx-8 my-2" *ngIf="transportes.length <= 0">
             <h3 class="text-gray-500 italic"><b>Oops!</b> Parece que no tienes ningún transporte todavía, pulsa en <span class="text-purple not-italic" (click)="nuevoTransporte()">+ Nuevo transporte</span> para añadir tu primer transporte.</h3>
+            <div class="flex justify-center">
+                <img class="w-8/12 mt-8" src="../../../assets/icon/transports.svg" alt="Ilustración de una mujer en transporte público">
+            </div>
         </div>
     </ion-content>
 </div>

@@ -11,6 +11,7 @@ import { App } from '@capacitor/app';
 import { ComunicadorService } from 'src/app/services/comunicador.service';
 import { RouterService } from 'src/app/services/router.service';
 import { Router } from '@angular/router';
+import { Fuente } from 'src/app/interfaces/fuente.interface';
 
 @Component({
   selector: 'app-transportes',
@@ -21,6 +22,7 @@ import { Router } from '@angular/router';
 export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public entradas:Entrada[] = [];
+  public fuentes:Fuente[] = [];
   public entr:any[] = [];
   public transportes:any[] = [];
   public tiemposRestantes:any[] = [];
@@ -40,6 +42,7 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
               }
 
   async ngOnInit() {
+    this.getFuentes();
     this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe( async res => {
       await this.getEntradas();
     });
@@ -51,10 +54,10 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
           return;
         }
         const taskId = await BackgroundTask.beforeExit(async () => {
-          /*this.entradaService.deleteTableTipo('transporte');
+          this.entradaService.deleteTableTipo('transporte');
           this.entradaService.loadTransportes();
-          if(this.routerService.getUrlActual() == "/modo-lista")
-            await this.createEntradas();*/
+          if(this.routerService.getUrlActual() != "/modo-diario")
+            await this.createEntradas();
           await this.getEntradas();
           BackgroundTask.finish({ taskId });
         });
@@ -62,6 +65,7 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
     );
 
     setInterval(() => {
+      this.getFuentes();
       this.agruparTransportes();
     }, 1000 * 60);
   }
@@ -150,6 +154,15 @@ export class TransportesComponent implements OnInit, OnDestroy, AfterViewInit {
 
       this.agruparTransportes();
     });
+  }
+
+  getFuentes() {
+    this.fuenteService.getTransportes().subscribe(res => {
+      this.fuentes = [];
+      res.forEach(f => {
+        this.fuentes.push(f);
+      });
+    })
   }
 
   async getTransporte(id:number) {
