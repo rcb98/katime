@@ -48,9 +48,12 @@
                     </p>
                 </div>
                 <div class="flex flex-col">
+                    <div class="px-4 py-1 mb-0.5 flex bubble" *ngIf="categorias.length > 0 && !hayCat">
+                        <h4 class="text-gray-500 text-sm">Selecciona una categoría</h4>
+                    </div>
                     <div *ngFor="let categoria of categorias" class="my-1">
                         <label for="{{categoria.id_categoria}}">
-                    <input id="{{categoria.id_categoria}}" [value]='categoria.id_categoria' type="radio" name="id_categoria" formControlName="id_categoria" class="h-7 w-7 mr-2 border-none" [ngClass]="'bg-' + categoria.color">
+                    <input (click)="checkCategoria()" id="{{categoria.id_categoria}}" [value]='categoria.id_categoria' type="radio" name="id_categoria" formControlName="id_categoria" class="h-7 w-7 mr-2 border-none" [ngClass]="'bg-' + categoria.color">
                     {{categoria.nombre}}
                   </label>
                     </div>

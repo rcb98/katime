@@ -75,22 +75,22 @@ export class CategoriaService {
   }
 
   /* POST */
-  createCategoria(data:Categoria) {
-    return this.dbInstance
+  async createCategoria(data:Categoria) {
+    return await this.dbInstance
       .executeSql(`INSERT INTO ${this.dbTable} (nombre, color)
       VALUES ('${data.nombre}', '${data.color}')`, [])
-      .then(() => {
-        this.loadCategorias();
+      .then(async() => {
+        await this.loadCategorias();
       }, (e) => {
         alert(JSON.stringify("ESTOY DANDO PROBLEMA", e.err));
       });
   }
 
   /* PUT */
-  editCategoria(id:number, data:any) {
-    return this.dbInstance.executeSql(`UPDATE ${this.dbTable} SET nombre = '${data.nombre}', color = '${data.color}' WHERE id_categoria = ${id}`, data)
-    .then(() => {
-      this.loadCategorias();
+  async editCategoria(id:number, data:any) {
+    return await this.dbInstance.executeSql(`UPDATE ${this.dbTable} SET nombre = '${data.nombre}', color = '${data.color}' WHERE id_categoria = ${id}`, data)
+    .then(async () => {
+      await this.loadCategorias();
     }, (e) => {
       alert(JSON.stringify(e.err));
     });

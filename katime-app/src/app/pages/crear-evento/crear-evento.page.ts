@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { FuenteService } from 'src/app/services/fuente.service';
 import { DatePipe } from '@angular/common';
 import { CategoriaService } from 'src/app/services/categoria.service';
@@ -65,14 +65,15 @@ export class CrearEventoPage implements OnInit, OnDestroy {
   public edicion:boolean = false;
 
   public goTo:string;
+  public hayCat:boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private categoriaService: CategoriaService,
               private comunicadorService: ComunicadorService,
               private datePipe: DatePipe,
-              private entradaService: EntradaService,
               private fuenteService: FuenteService,
               private formBuilder: FormBuilder,
+              private loadingController: LoadingController,
               private modalController: ModalController,
               private router: Router,
               private routerService: RouterService,
@@ -85,8 +86,10 @@ export class CrearEventoPage implements OnInit, OnDestroy {
       this.edicion = true;
       this.idFuente = this.activatedRoute.snapshot.params['id'];
       this.infoEditarEvento();
+      this.hayCat = true;
     } else {
       this.edicion = false;
+      this.hayCat = false;
     }
 
     this.comunicadorService.subscripcion = this.comunicadorService.comunicador.subscribe(res => {
@@ -132,14 +135,18 @@ export class CrearEventoPage implements OnInit, OnDestroy {
     if(!this.eventoForm.value.nombre || !this.eventoForm.value.id_categoria || !this.eventoForm.value.hora_ini || !this.eventoForm.value.hora_fin) {
       return this.presentToast("Los campos de nombre, categoría, fecha de inicio y fin son obligatorios.");
     }
+
+    this.presentLoading();
+
     this.setValores();
 
     // alert(JSON.stringify(this.eventoForm.value));
 
     await this.fuenteService.createFuente(this.eventoForm.value).then(async res => {
-      this.presentToast("¡Evento creado!");
+      await this.loadingController.dismiss();
+      this.presentToast("¡Evento creado!", 2000);
       this.router.navigateByUrl(this.routerService.getUrlAnterior());
-    });
+    }).then(async() => await this.loadingController.dismiss());
   }
 
   async editarEvento() {
@@ -153,11 +160,14 @@ export class CrearEventoPage implements OnInit, OnDestroy {
       return this.presentToast("Los campos de nombre, categoría, fecha de inicio y fin son obligatorios.");
     }
 
+    this.presentLoading();
+
     await this.fuenteService.editEvento(this.idFuente, this.eventoForm.value).then(async res => {
       await this.fuenteService.loadEventos().then(async() => {
-        this.presentToast("¡Evento editado!");
+      await this.loadingController.dismiss();
+      this.presentToast("¡Evento editado!", 2000);
         this.router.navigateByUrl(this.routerService.getUrlAnterior());
-      })
+      }).then(async() => await this.loadingController.dismiss());
     });
   }
 
@@ -251,14 +261,29 @@ export class CrearEventoPage implements OnInit, OnDestroy {
     }
   }
 
-  async presentToast(msg:string) {
+  checkCategoria() {
+    this.hayCat = true;
+  }
+
+  async presentToast(msg:string, time?:number) {
+    if(!time) time = 5000;
     const toast = await this.toaster.create({
       message: msg,
-      duration: 2000,
+      duration: time,
       animated: true,
       color: "primary"
     });
     toast.present();
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'custom-loading'
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 
   async abrirModal(tipo:string, opciones:string[], valores:any[], index:number) {

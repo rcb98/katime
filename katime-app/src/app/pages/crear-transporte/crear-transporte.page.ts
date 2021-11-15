@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { ComunicadorService } from 'src/app/services/comunicador.service';
 import { EntradaService } from 'src/app/services/entrada.service';
 import { FuenteService } from 'src/app/services/fuente.service';
@@ -66,9 +66,9 @@ export class CrearTransportePage implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private datePipe: DatePipe,
-              private entradaService: EntradaService,
               private formBuilder: FormBuilder,
               private fuenteService: FuenteService,
+              private loadingController: LoadingController,
               private router: Router,
               private routerService: RouterService,
               private toaster: ToastController) {
@@ -84,7 +84,7 @@ export class CrearTransportePage implements OnInit {
     }
   }
 
-  createTransporte() {
+  async createTransporte() {
     /* Validaciones */
     if(this.transporteForm.value.hora_ini > this.transporteForm.value.hora_fin){
       return this.presentToast("La hora de fin debe ser más antigua que la de inicio.");
@@ -106,10 +106,12 @@ export class CrearTransportePage implements OnInit {
 
     this.setValores();
 
+    this.presentLoading();
+
     var origen = -1,
         destino = -1;
 
-    this.fuenteService.getTransporte(this.transporteForm.value.alias).subscribe(res => {
+    this.fuenteService.getTransporte(this.transporteForm.value.alias).subscribe(async res => {
       this.transporteForm.value.nombre = this.transporteForm.value.origen + " - " + this.transporteForm.value.destino;
       this.transporteForm.value.icono = res['icono'];
       res['direccion'][0]['paradas'].forEach((parada, index) => {
@@ -120,10 +122,11 @@ export class CrearTransportePage implements OnInit {
       if(origen < destino) this.transporteForm.value.direccion = res['direccion'][0]['nombre'];
       else this.transporteForm.value.direccion = res['direccion'][1]['nombre'];
 
-      this.fuenteService.createFuente(this.transporteForm.value).then( res => {
+      await this.fuenteService.createFuente(this.transporteForm.value).then( async res => {
+        await this.loadingController.dismiss();
         this.presentToast("¡Transporte añadido!");
         this.router.navigateByUrl(this.routerService.getUrlAnterior());
-      });
+      }).then(async () => await this.loadingController.dismiss());
 
     });
   }
@@ -152,6 +155,8 @@ export class CrearTransportePage implements OnInit {
       return this.presentToast("Los campos de localidad, línea, origen, destino, días y franja horaria son obligatorios.");
     }
 
+    this.presentLoading();
+
     var origen = -1,
         destino = -1;
 
@@ -168,9 +173,10 @@ export class CrearTransportePage implements OnInit {
 
       await this.fuenteService.editTransporte(this.idFuente, this.transporteForm.value).then(async res => {
         await this.fuenteService.loadTransportes().then(async() => {
+          await this.loadingController.dismiss();
           this.presentToast("¡Transporte editado!");
           this.router.navigateByUrl(this.routerService.getUrlAnterior());
-        })
+        }).then(async () => await this.loadingController.dismiss());
 
       });
 
@@ -381,5 +387,15 @@ export class CrearTransportePage implements OnInit {
       color: "primary"
     });
     toast.present();
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'custom-loading'
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 }

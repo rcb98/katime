@@ -155,6 +155,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
     this.fuenteService.deleteFuentesCategoria(this.valor).then(async() => {
       this.dismiss();
     }).then(async() => {await this.loadingController.dismiss();})
+    await this.loadingController.dismiss();
   }
 
   async deleteEntrada(id:number) {
@@ -163,6 +164,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
         this.dismiss();
         this.presentToast(`Evento de '${this.detalle.nombre}' eliminado.`);
     }).then(async() => await this.loadingController.dismiss())
+    await this.loadingController.dismiss();
   }
 
   async deleteEntradas(id:number) {
@@ -176,6 +178,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
         this.presentToast(mensaje);
       })
     }).then(async() => {await this.loadingController.dismiss()})
+    await this.loadingController.dismiss();
   }
 
   async deleteEventos() {

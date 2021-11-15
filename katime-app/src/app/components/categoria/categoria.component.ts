@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { Categoria } from 'src/app/interfaces/categoria.interface';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { ComunicadorService } from 'src/app/services/comunicador.service';
@@ -27,6 +27,7 @@ export class CategoriaComponent implements OnInit, OnDestroy {
   constructor(private categoriaService: CategoriaService,
               private comunicadorService: ComunicadorService,
               private formBuilder: FormBuilder,
+              private loadingController: LoadingController,
               private toaster: ToastController) { }
 
   ngOnInit() {
@@ -53,22 +54,27 @@ export class CategoriaComponent implements OnInit, OnDestroy {
       this.comunicadorService.ejecutarFuncion("crear")
   }
 
-  crearCategoria() {
+  async crearCategoria() {
     if(!this.categoriaForm.value.nombre) return this.presentToast("El campo nombre es obligatorio.");
     if(!this.categoriaForm.value.color) return this.presentToast("Elige un color para la categoría.");
 
+    this.presentLoading();
+
     if(this.categorias.length < 7){
-      this.categoriaService.createCategoria(this.categoriaForm.value).then( res => {
+      await this.categoriaService.createCategoria(this.categoriaForm.value).then(async res => {
+        await this.loadingController.dismiss();
         this.exitModalCategoria();
         this.getCategorias();
-      });
+      }).then(async() => await this.loadingController.dismiss());
     }
   }
 
-  editarCategoria() {
-    this.categoriaService.editCategoria(this.categoria, this.categoriaForm.value).then(res => {
+  async editarCategoria() {
+    this.presentLoading();
+    await this.categoriaService.editCategoria(this.categoria, this.categoriaForm.value).then(async res => {
+      await this.loadingController.dismiss()
       this.exitModalCategoria();
-    })
+    }).then(async() => await this.loadingController.dismiss());
   }
 
   getCategoria() {
@@ -118,6 +124,16 @@ export class CategoriaComponent implements OnInit, OnDestroy {
       color: "primary"
     });
     toast.present();
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'custom-loading'
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 
   reRenderForm() {
