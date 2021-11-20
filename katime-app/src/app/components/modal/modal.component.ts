@@ -32,6 +32,43 @@ export class ModalComponent implements OnInit, AfterViewInit {
   public keepDias:any;
   public diasRep:string;
   public repeticion:string;
+  public arrayDias:any[] = [
+    {
+      "nombre": "Lun",
+      "alias": "L",
+      "valor": false
+    },
+    {
+      "nombre": "Mar",
+      "alias": "M",
+      "valor": false
+    },
+    {
+      "nombre": "Mie",
+      "alias": "X",
+      "valor": false
+    },
+    {
+      "nombre": "Jue",
+      "alias": "J",
+      "valor": false
+    },
+    {
+      "nombre": "Vie",
+      "alias": "V",
+      "valor": false
+    },
+    {
+      "nombre": "Sab",
+      "alias": "S",
+      "valor": false
+    },
+    {
+      "nombre": "Dom",
+      "alias": "D",
+      "valor": false
+    }
+  ]
 
   constructor(private comunicadorService: ComunicadorService,
               private entradaService: EntradaService,
@@ -78,27 +115,34 @@ export class ModalComponent implements OnInit, AfterViewInit {
   }
 
   toggleDia(dia:string) {
-    if(!this.checkDia(dia)) {
-      this.dias.push(dia);
-    } else {
-      this.dias.forEach((d, index) => {
-        if(dia == d) this.dias.splice(index, 1);
-      });
-    }
+    this.arrayDias.forEach(d => {
+      if(dia == d.nombre) {
+        if(!d.valor) d.valor = true;
+        else d.valor = false;
+      }
+    });
   }
 
-  checkDia(dia:string) {
-    if(this.dias.includes(dia)) return true;
-    return false;
+  checkDiaSeleccionado() {
+    let haySeleccionado = false;
+    this.arrayDias.forEach(d => {
+      if(d.valor == true) haySeleccionado = true;
+    });
+    return haySeleccionado;
   }
 
   terminar() {
-    if(this.checkedOption == "personalizado" && this.dias.length <= 0) return this.presentToast("Tienes que seleccionar al menos un día.")
+    if(this.checkedOption == "personalizado" && !this.checkDiaSeleccionado()) return this.presentToast("Tienes que seleccionar al menos un día.")
 
     if(this.checkedOption == undefined && this.accion == "repeticion") this.checkedOption = null;
     else if(this.checkedOption == undefined && this.accion == "recordatorio") this.checkedOption = 0;
 
     this.dismiss();
+
+    this.dias = [];
+    this.arrayDias.forEach(d => {
+      if(d.valor) this.dias.push(d.nombre);
+    });
 
     this.comunicadorService.ejecutarFuncion(this.checkedOption);
     if((this.checkedOption == "personalizado" || this.accion == "recordatorio") && this.dias.length > 0) {

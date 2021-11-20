@@ -107,13 +107,7 @@
                         <label class="font-semibold">Días</label>
                         <p class="text-gray-600 my-1">Elige los días de la semana que quieres que se repita el evento.</p>
                         <div class="flex justify-between mt-1">
-                            <div class="day" (click)="toggleDia('Lun')" [ngClass]="{'bg-purple text-white':checkDia('Lun')}">L</div>
-                            <div class="day" (click)="toggleDia('Mar')" [ngClass]="{'bg-purple text-white':checkDia('Mar')}">M</div>
-                            <div class="day" (click)="toggleDia('Mie')" [ngClass]="{'bg-purple text-white':checkDia('Mie')}">X</div>
-                            <div class="day" (click)="toggleDia('Jue')" [ngClass]="{'bg-purple text-white':checkDia('Jue')}">J</div>
-                            <div class="day" (click)="toggleDia('Vie')" [ngClass]="{'bg-purple text-white':checkDia('Vie')}">V</div>
-                            <div class="day" (click)="toggleDia('Sab')" [ngClass]="{'bg-purple text-white':checkDia('Sab')}">S</div>
-                            <div class="day" (click)="toggleDia('Dom')" [ngClass]="{'bg-purple text-white':checkDia('Dom')}">D</div>
+                            <div *ngFor="let dia of arrayDias" class="day" (click)="toggleDia(dia.nombre)" [ngClass]="{'bg-purple text-white': dia.valor}">{{dia.alias}}</div>
                         </div>
                     </div>
                 </div>
